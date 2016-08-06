@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jQuery_图片滑动切换</title>
+	<script src="js/jquery.min.js"></script>
+</head>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		#banner-show{
+			margin: 0 auto;
+			position: relative;
+			width: 100%;
+			height: 400px;
+			overflow: hidden;
+		}
+		#banner-container{
+			width: 9600px;
+			position: absolute;
+			left: 0;
+			top: 0;
+		}
+		#banner-container ul{
+			list-style-type: none;
+			float: left;
+		}
+		#banner-container ul li{
+			float: left;
+			max-width:1920px;
+			height: 400px;
+		}
+		#banner-container img{
+			max-width: 1920px;
+			width: 100%;
+			/*min-width: 1000px;*/
+		}
+		.control{
+			position: absolute;
+			left: 50%;
+			margin-left: -65px;
+			top: 350px;
+		}
+		.control-btn{
+			float: left;
+			width: 13px;
+			height: 13px;
+			margin-left: 13px;
+			border: 1px solid transparent;
+			border-radius: 50%; 
+			background: white;
+		}
+		.control-btn:hover{
+
+		}
+		.focus{
+			background: blue;
+		}
+	</style>
+<body>
+	<div id="banner-show">
+		<div id="banner-container">
+			<ul>
+				<li index="0"><img src="images/banner.png" alt=""></li>
+				<li index="1"><img src="images/banner3.png" alt=""></li>
+				<li index="2"><img src="images/banner2.png" alt=""></li>
+				<li index="3"><img src="images/banner.png" alt=""></li>
+				<li index="4"><img src="images/banner3.png" alt=""></li>
+			</ul>
+		</div>
+		<div class="control">
+			<div class="control-btn"></div>
+			<div class="control-btn"></div>
+			<div class="control-btn"></div>
+			<div class="control-btn"></div>
+			<div class="control-btn"></div>
+		</div>
+		
+	</div>
+	<script>
+		$(function(){
+			function nextImg () {
+				var container = $('#banner-container');
+				var moveWidth = ($("#banner-container li").width())*-1;
+				console.log(moveWidth);
+				container.stop().animate({left:moveWidth},'slow',function(){
+					var firstImg = $('#banner-container ul li').first();
+					container.find("ul").append(firstImg);
+					$(this).css('left',"0px");
+				});
+				 btnCircle();
+			}
+			function btnCircle(){
+				var btnNum = $('#banner-container ul li').first().attr("index");
+				$(".control .control-btn").siblings().removeClass("focus");
+				$(".control .control-btn").eq(btnNum).addClass("focus");
+			}
+			setInterval(nextImg,2000);
+
+			var animateEnd = 1;
+			$('.control-btn').mouseover(function(){
+				$(this).addClass('focus').siblings().removeClass('focus');
+				var nextImg = $(this)
+			});
+		});
+	</script>
+</body>
+</html>

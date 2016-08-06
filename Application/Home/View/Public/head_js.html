@@ -1,0 +1,50 @@
+<script>
+	$(".navtext").hide()
+	$(".navlist").mouseenter(
+		function(){
+			$(this).children().first().addClass("navbackground")
+			$(".navtext").eq($(this).index()).show()	
+		}
+	).mouseleave(
+		function(){
+			$(this).children().first().removeClass("navbackground")
+			$(".navtext").eq($(this).index()).hide()	
+		}
+	)
+	$(".smallnav a").mouseenter(
+		function(){
+			$(this).css("color","#999")
+		}
+	).mouseleave(
+		function(){
+			$(this).css("color","#6f6f6f")
+		}
+	)
+	$(".footerlist a p").mouseenter(
+		function(){
+			$(this).css("color","#999")
+		}
+	).mouseleave(
+		function(){
+			$(this).css("color","#666")
+		}
+	)
+	$(".footerlist a h1").mouseenter(
+		function(){
+			$(this).css("color","#999")
+		}
+	).mouseleave(
+		function(){
+			$(this).css("color","#666")
+		}
+	)
+	$(".rightmaintitleright a").mouseenter(
+			function(){
+			$(this).css("color","#ccc")
+		}
+	).mouseleave(
+		function(){
+			$(this).css("color","#999")
+		}
+	)
+</script>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>企业注册</title>
+    <script src="__PUBLIC__/js/jquery.min.js"></script>
+    <script src="__PUBLIC__/js/signup.js"></script>
+    <link rel="stylesheet" href="__PUBLIC__/css/signup.css">  
+    <link rel="stylesheet" href="__PUBLIC__/css/nav.css">
+    
+    
+</head>
+<body>
+    <include file = "Public/nav"/>
+    <form id="company" action="{:U('Signup/do_signup_company')}" method="post" enctype="multipart/form-data">
+        <div class="main">
+            <div class="line">
+                <label for="logo">上传头像</label>
+                <input type="file" id="logo" name="img" accept="image/*">
+                <div class="upload"><img id="preview" src="" alt=""></div>
+            </div>
+            <div class="line">
+                <label for="username">用户名</label>
+                <input type="text" class="line-input" required id="username" name="username" ><span class="must">*</span>
+            </div>
+            <div class="line">
+                <label for="pwd">密码</label>
+                <input type="password" class="line-input" required id="pwd" name="pwd"><span class="must">*</span>
+            </div>
+            <div class="line">
+                <label for="sure_pwd">确认密码</label>
+                <input type="password" class="line-input" required id="sure_pwd"><span id="pwdError" class="must">*</span>
+            </div>
+            <div class="line">
+                <label for="com_name">企业名</label>
+                <input type="text" class="line-input" required id="com_name" name="com_name"><span class="must">*</span>
+            </div>
+            <div class="line">
+                <label for="website">企业官网</label>
+                <input type="text" class="line-input" id="website" name="website">
+            </div>
+            <div class="line">
+                <label for="com_phone">企业电话</label>
+                <input type="text" class="line-input" id="com_phone" name="com_phone" placeholder="例:0516-65415487"><span id="com_phoneError" class="must"></span>
+            </div>
+             <div class="line">
+                <label for="email">企业邮箱</label>
+                <input type="email" class="line-input" required id="email" name="email"><span class="must">*</span>
+            </div>
+            <div class="line">
+                <label for="company_type">企业标签</label>
+                <input type="text" class="line-input" id="company_type" name="company_type" maxlength="50" placeholder="例：互联网公司、创业公司、民营企业"><span class="must">20字以内</span>
+            </div>
+            <div class="line">
+                <label for="jobtype">所在城市</label>
+                <select class="line-input" name="city" id="city">
+                    <option value="1">上海</option>
+                    <option value="2">南京</option>
+                    <option value="3">北京</option>
+                </select><span class="must">*</span>
+            </div>
+            <div class="line">
+                <label for="address">具体地址</label>
+                <input type="text" class="line-input" required id="address" name="address"><span class="must">*</span>
+            </div>        
+            <div class="line">
+                <label for="research" style="float:left;">经营方向</label>
+                 <input type="checkbox" name="research" value="1">电子信息
+                <input type="checkbox" name="research" value="2">机械设计与制造
+                <input type="checkbox" name="research" value="3">新能源与环保<br>
+                <input type="checkbox" name="research" value="4">生物技术与医药
+                <input type="checkbox" name="research" value="5">新材料
+                <input type="checkbox" name="research" value="6">现代农业
+                <input type="checkbox" name="research" value="7">其他 <span id="" class="must">*</span>
+            </div>
+            <div class="line">
+                <label for="linkman">联系人</label>
+                <input type="text" class="line-input" id="linkman" name="linkman">
+            </div>
+            <div class="line">
+                <label for="jobname">联系人职务</label>
+                <input type="text" class="line-input" id="jobname" name="jobname" placeholder="例：项目经理">
+            </div>
+             <div class="line">
+                <label for="phone">手机号码</label>
+                <input type="text" class="line-input" required id="phone" name="phone" placeholder="例:13866665666"><span id="phoneError" class="must">*</span>
+            </div>
+            <div class="line">
+                <label for="linkEmail">联系人邮箱</label>
+                <input type="email" class="line-input" id="linkEmail" name="linkEmail">
+            </div>
+           
+            <div class="line textarea">
+                <label for="info">企业简介</label>
+                <textarea name="info" id="info"></textarea>
+            </div>
+            <div class="sub">
+                <input type="submit" value="提交" onsubmit="onsub()">
+            </div>
+        </div>
+    </form>
+    <include file = "Public/footer"/>
+    <script>
+        $(function() {
+            $('#username').change(function(event){
+                if($('#username').val().trim() != ""){
+                    var un = $('#username').val();
+                    $.ajax({
+                        type:"post",
+                        url:"__ROOT__/index.php/Signup/checkName",
+                        dataType:'json',
+                        data:{username:un}
+                        })
+                    .done(function(data) {
+                        console.log("success",data);
+                        if(data.code == 0){
+                            $('#nameError').html("*");
+                        }else{
+                            $("#nameError").html("用户名已存在");
+                        }
+                    })
+                    .fail(function(XMLHttpRequest, textStatus, errorThrown){
+                        $('#pwdError').html("error");  
+                        console.log("status = "+XMLHttpRequest.status);  // 200
+                        console.log("readyState = "+XMLHttpRequest.readyState); //4
+                        console.log("textStatus = "+textStatus);  //parsererror
+                    })
+                    .always(function() {
+                        console.log("complete");
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

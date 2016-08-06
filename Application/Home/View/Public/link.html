@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>张家港工程项目协同创新服务平台档</title>
+	<link rel="stylesheet" href="__PUBLIC__/css/nav.css">
+	<style>
+		.main{
+		    width:600px;
+		    margin:0 auto;
+		    background-color: white;
+		}
+		.line{
+		    margin-bottom:5px;
+		}
+		.line input{
+			width: 400px;
+			height: 20px;
+			border-width: 2px;
+			padding: 2px;
+		}
+		span{
+		    width:100px;
+		    font-size:14px;
+		    
+		}
+		b{
+			display:inline-block;
+			margin-left: 15px;
+			margin-bottom: 20px;
+		}
+		.textarea{
+		    position: relative;
+		}
+		.textarea span{
+		    position: absolute;
+		    top: 50%;
+		    margin-top: -16px;
+		}
+		.textarea textarea{
+		    width:400px;
+		    height:120px;
+		    margin-left:108px;
+		    border-width: 2px;
+		}
+		.sub{
+		    width:400px;
+		    margin-top:10px;
+		    text-align:center;
+		}
+		.sub input{
+		    font-size:20px;
+		    padding:5px 10px;
+		}
+	</style>
+</head>
+<body>
+	<include file="Public/nav"/>
+	<div class="main">
+		<h2>对接类型</h2>
+		<form action="#" method="post">
+			<div class="line">
+				<span for="title">对接技术需求</span>
+				<b>技术需求标题技术需求标题技术需求标题技术需求标</b>
+				[<a href="#">详情</a>]
+			</div>
+			<div class="textarea">
+				<span for="content">对接缘由说明</span>
+				<textarea name="content" id="content"></textarea>
+			</div>
+			<div class="textarea">
+				<span for="remark">备注</span>
+				<textarea name="remark" id="remark"></textarea>
+			</div>
+			<div class="sub">
+				<input type="submit" value="确认连接">
+			</div>
+		</form>
+	</div>
+	<include file="Public/footer"/>
+</body>
+</html>

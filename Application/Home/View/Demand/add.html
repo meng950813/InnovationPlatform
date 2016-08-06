@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>张家港工程项目协同创新服务平台</title>
+    <link rel="stylesheet" href="__PUBLIC__/css/signup.css">
+    <link rel="stylesheet" href="__PUBLIC__/css/nav.css">
+    <script src="__PUBLIC__/js/jquery.min.js"></script>
+</head>
+<body>
+    <include file="Public/nav" />
+    
+    <div class="main">
+        <form id="demand_form" action="{:U('Demand/addDemand')}" method="get" enctype="multipart/form-data">
+            <div class="line">
+                <label for="demand_title">需求标题 </label>
+                <input class="line-input" type="text" id="demand_title" name="demand_title" required><span class="must">*</span>
+            </div>
+            <div class="line">
+                <label for="demand_type" style="float:left;">需求类型</label>
+                <input type="checkbox" name="demand_type" value="1">电子信息
+                <input type="checkbox" name="demand_type" value="2">机械设计与制造
+                <input type="checkbox" name="demand_type" value="3">新能源与环保<br/>
+                <input type="checkbox" name="demand_type" value="4">生物技术与医药
+                <input type="checkbox" name="demand_type" value="5">新材料
+                <input type="checkbox" name="demand_type" value="6">现代农业
+                <input type="checkbox" name="demand_type" value="7">其他
+                <span class="must">*</span>
+            </div>
+            <div class="line">
+                <label for="end_time">截止日期 </label>
+                <input class="line-input" type="text" placeholder="示例：2016-08-15" id="end_time" name="end_time">
+            </div>
+            <div class="line" style="text-align:center">
+                <p>需求标题图片 (建议尺寸： 456 × 342 像素 仅限上传一张)</p>
+                <input type="file" name="img" id="logo" accept="image/*" />
+                <div class="upload">
+                    <img id="preview" src="" alt="">
+                </div>
+            </div>
+            <div class="line textarea">
+                <label for="totalInfo">综合介绍</label>
+                <textarea name="total_info" id="totalInfo"></textarea>
+            </div>
+            <div class="line textarea">
+                <label for="techTarget">技术指标</label>
+                <textarea name="tech_target" id="techTarget"></textarea>
+            </div>
+            <div class="line textarea">
+                <label for="otherInfo">其他介绍</label>
+                <textarea name="other_info" id="otherInfo"></textarea>
+            </div>
+            <div class="sub" >
+                <input type="submit" value="提交" />
+            </div>
+        </form>
+    </div>
+
+    <include file="Public/footer" />
+</body>
+<script>
+    $(function($){
+        $('#logo').change(function(event) {
+            event.preventDefault();
+            var $file = $(this);
+            var fileObj = $file[0];
+            var windowURL = window.URL || window.webkitURL;
+            console.log("logo ");
+            if(fileObj && fileObj.files && fileObj.files[0]){
+                var path = windowURL.createObjectURL(fileObj.files[0]);
+                console.log(path);
+                $('#preview').attr('src',path);
+            }else{
+                console.log($file.val());
+                var dataURL = $file.val();
+                var imgObj = document.getElementById("preview");
+                // 两个坑:
+                // 1、在设置filter属性时，元素必须已经存在在DOM树中，动态创建的Node，也需要在设置属性前加入到DOM中，先设置属性在加入，无效；
+                // 2、src属性需要像下面的方式添加，上面的两种方式添加，无效；
+                imgObj.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);max-width:200px;";
+                imgObj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
+            }
+        });
+    });
+</script>
+</html>

@@ -1,0 +1,230 @@
+<!doctype html>
+<html>
+<head>
+    <script src="__PUBLIC__/js/jquery.js"></script>
+    <link href="__PUBLIC__/css/css.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="__PUBLIC__/css/nav.css">
+    <meta charset="utf-8">
+    <title>张家港工程项目协同创新服务平台</title>
+</head>
+
+<body>
+    <include file = "Public/nav"/>
+    <div class="indexbannerbox">
+    	<div class="banner">
+        	<div class="longbanner">
+        		<img src="__PUBLIC__/images/banner.png">
+                <img src="__PUBLIC__/images/banner2.png">
+                <img src="__PUBLIC__/images/banner3.png">
+            </div>
+        </div>
+        <div class="btnbox">
+        	<div class="btn"></div>
+            <div class="btn"></div>
+            <div class="btn"></div>
+        </div>
+    </div>
+    <div class="newsbox">
+    	<div class="news">
+            <div class="newstitle">新闻动态：</div>
+            <div class="newstext">
+            	<p><a href="">浙江惊现连体巨无霸建筑 型如UFO</a></p>
+                <p><a href="">第六届全国中、高等院校“斯维尔杯”BIM大赛总决赛圆满落幕</a></p>
+                <p><a href="">是什么推动了螺旋钢管市场的回暖？</a></p>
+                <p><a href="">再制造为锤式破碎机厂带来的发展机遇</a></p>
+                <p><a href="">【广州幕墙展】2016工程设计热点话题，你不可不知！</a></p>
+            </div>
+       	</div>
+    </div>
+    <div class="columnbox">
+    	<div class="column">
+        	<div class="columntitlebox">
+            	<div class="columntitle">新闻动态</div>
+                <div class="columntitle">新品展示</div>
+                <div class="columntitle">典型案例</div>
+                <div class="columntitle">下载中心</div>
+            </div>
+            <div class="columnmain">
+    			<div class="columntext">
+                	<h1>创建科技 • • • • • • • • • • • •</h1>
+                    <a href="news.html"><img src="__PUBLIC__/images/more.png"></a>
+                </div>
+                <div class="columnline"><img src="__PUBLIC__/images/line2.png"></div>
+                <div class="columntext">
+                	<h1>行业新闻 • • • • • • • • • • • •</h1>
+                    <a href=""><img src="__PUBLIC__/images/more.png"></a>
+                </div>
+                <div class="columnline"><img src="__PUBLIC__/images/line2.png"></div>
+                <div class="columnpicture">
+                	<span>
+                    	<img src="__PUBLIC__/images/column.png">
+                    	<img src="__PUBLIC__/images/column2.png">
+                    	<img src="__PUBLIC__/images/column3.png">
+                    </span>
+                    <div class="columnbtnbox">
+                    	<div class="columnbtn">1</div>
+                        <div class="columnbtn">2</div>
+                        <div class="columnbtn">3</div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="columnmain">2</div>
+            <div class="columnmain">3</div>
+            <div class="columnmain">4</div>
+
+        </div>
+    </div>
+    <include file = "Public/footer"/>
+
+    <script>
+        $(".columnpicture img").hide().first().fadeIn()
+        $(".columnbtn").first().css("background-color","red")
+        var y=0
+        var z=setInterval(function(){
+            y=y+1;
+            if(y==3){y=0;}
+            $(".columnpicture img").eq(y).fadeIn().siblings().fadeOut()
+            $(".columnbtn").eq(y).css("background-color","red").siblings().css("background-color","rgba(0,0,0,0.8)")
+        },5000)
+        $(".columnbtn").mouseenter(
+            function(){
+                    $(this).css("background-color","red").siblings().css("background-color","rgba(0,0,0,0.8)")
+                }
+        )
+        $(".columnbtn").mouseenter(
+            function(){
+                    y=$(this).index();
+                    $(".columnpicture img").eq(y).fadeIn().siblings().fadeOut();
+                }
+        )
+        $(".columnpicture").mouseenter(
+            function(){
+                clearInterval(z);
+            }
+        ).mouseleave(
+            function(){
+            z=setInterval(function(){
+            y=y+1;
+            if(y==3){y=0;}
+            $(".columnpicture img").eq(y).fadeIn().siblings().fadeOut()
+            $(".columnbtn").eq(y).css("background-color","red").siblings().css("background-color","rgba(0,0,0,0.8)")
+        },5000)
+            }
+        )
+
+
+        $(".newsbox").mouseenter(
+            function(){
+                $(".newstext p a").css("color","#999")  
+            }
+        ).mouseleave(
+            function(){
+                $(".newstext p a").css("color","#666")  
+            }
+        )
+        var i=0
+        var m=setInterval(function(){
+            i=i+1;
+            if(i==$(".newstext p").length){
+                i=1;
+                $(".newstext").css("margin-top","0")
+                $(".newstext").animate({marginTop:-37*i},1000)
+            }
+            $(".newstext").animate({marginTop:-37*i},1000)
+        },5000)
+        $(".news").mouseenter(
+            function(){
+                clearInterval(m);
+            }
+        ).mouseleave(
+            function(){
+                m=setInterval(function(){
+            i=i+1;
+            if(i==$(".newstext p").length){
+                i=1;
+                $(".newstext").css("margin-top","0")
+                $(".newstext").animate({marginTop:-37*i},1000)
+            }
+            $(".newstext").animate({marginTop:-37*i},1000)
+        },5000)
+            }
+        )
+
+
+
+        var n=0;
+        $(".btn:first").addClass("btn2")
+        $(".btn").mouseenter(
+            function(){
+                    $(this).css("background-image","url(__PUBLIC__/images/btn2.png)").siblings().css("background-image","url(__PUBLIC__/images/btn.png)")
+                }
+        )
+        $(".btn").mouseenter(
+            function(){
+                    n=$(this).index();
+                    $(".longbanner").stop().animate({marginLeft:-1920*n});
+                }
+            );
+            var t=setInterval(function(){
+                n=n+1;
+                if(n==$(".longbanner img").length){n=0}
+                $(".btn").eq(n).css("background-image","url(__PUBLIC__/images/btn2.png)").siblings().css("background-image","url(__PUBLIC__/images/btn.png)");
+                $(".longbanner").animate({marginLeft:-1920*n},2000)
+                
+            },5000);
+        $(".longbanner").mouseenter(
+            function(){
+                clearInterval(t);
+            }
+            ).mouseleave(
+                function(){
+                t=setInterval(function(){
+                n=n+1;
+                if(n==$(".longbanner img").length){n=0}
+                $(".btn").eq(n).css("background-image","url(__PUBLIC__/images/btn2.png)").siblings().css("background-image","url(__PUBLIC__/images/btn.png)");
+                $(".longbanner").animate({marginLeft:-1920*n},2000)
+                
+            },5000)
+                }
+        );
+
+
+        $(".columnmain").hide().first().show()
+        $(".columntitle").first().addClass("columntitleclick")
+        $(".columntitle").mouseenter(
+            function(){
+                $(this).addClass("columntitlemouseenter")
+            }
+        ).mouseleave(
+            function(){
+                $(this).removeClass("columntitlemouseenter")
+            }
+        )
+        $(".columntitle").click(
+            function(){
+                $(this).addClass("columntitleclick").siblings().removeClass("columntitleclick")
+                $(".columnmain").hide().eq($(this).index()).show()
+            }
+        )
+        $(".columntext p a").mouseenter(
+            function(){
+                $(this).css("color","#666")
+            }
+        ).mouseleave(
+            function(){
+                $(this).css("color","#333")
+            }
+        )
+        $(".smallnav a").mouseenter(
+            function(){
+                $(this).css("color","#999")
+            }
+        ).mouseleave(
+            function(){
+                $(this).css("color","#6f6f6f")
+            }
+        )
+    </script>
+</body>
+</html>

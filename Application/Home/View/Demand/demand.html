@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="__PUBLIC__/css/research.css">
+    <link rel="stylesheet" href="__PUBLIC__/css/nav.css">
+    <title>张家港工程项目协同创新服务平台</title>
+</head>
+<body>
+    <include file="Public/nav"/>
+    <div class="main">
+        <img src="__PUBLIC__/images/download_06.png">
+        <span>您的位置：</span>
+        <a href="index.html">首页</a>
+        <span>></span>
+        <a href="">企业需求</a>
+        <span>></span>
+        <a href="">需求详情</a>
+        <h3 class="caption">需求名 >> <sapn class="research_title">{$demandInfo.title}</sapn></h3>
+        <table>
+            <tr>
+                <td class="logo" rowspan="8">
+                    <img src="{$demandInfo.demand_logo}" alt="">
+                </td>
+                <td colspan="2" height="40px" style="text-align:center;"><b class="research_title">{$demandInfo.title}</b></td>
+            </tr>
+            <tr>
+                <td class="tip">发布企业</td>
+                <td class="content">{$comInfo.realname}</td>
+            </tr>
+            <tr>
+                <td class="tip">需求类型</td>
+                <td class="content">{$demandInfo.demand_type}</td>
+            </tr>
+            <tr>
+                <td class="tip">发布时间</td>
+                <td class="content">{$demandInfo.publish_time}</td>
+            </tr>
+            <tr>
+                <td class="tip">截止时间</td>
+                <td class="content">{$demandInfo.end_time}</td>
+            </tr>
+             <tr>
+                <td class="tip">企业标签</td>
+                <td  class="content">{$comInfo.company_type}</td>
+            </tr>
+             
+             <tr>
+                <td class="tip">主营方向</td>
+                <td class="content">{$comInfo.research}</td>
+            </tr>
+             
+            <tr>
+                <td colspan="2" class="link_img">
+                    <!-- <a href=""><img src="__PUBLIC/images/" alt="点击收藏"></a> -->
+                    <img src="__PUBLIC__/images/linkbutton.jpg" alt="我要联系">
+                </td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td class="tip" rowspan="3">需求简介</td>
+                <td class="tip">综合介绍</td>
+                <td class="research_info">
+                    {$demandInfo.total_info}
+                </td>
+            </tr>
+            <tr>
+                <td class="tip">技术指标</td>
+                <td class="research_info">
+                   {$demandInfo.tech_target}
+                </td>
+            </tr>
+            <tr>
+                <td class="tip">其他说明</td>
+                <td class="research_info">
+                    {$demandInfo.other_info}
+                </td>
+            </tr>
+        </table>
+        <h3 class="caption">企业联系方式</h3>
+        <table>
+            <tr>
+                <td class="tip">企业电话</td>
+                <td class="owner_info">{$comInfo.mobile_phone}</td>
+                <td class="tip">企业邮箱</td>
+                <td class="owner_info">{$comInfo.email}</td>
+            </tr>
+            <tr>
+                <td class="tip">企业官网</td>
+                <td class="owner_info">{$comInfo.website}</td>
+                <td class="tip">企业地址</td>
+                <td class="owner_info">{$comInfo.area}</td>
+            </tr>
+        </table>
+        <h3 class="caption">企业联系人</h3>
+        <table>
+            <tr>
+                <td class="tip">姓名</td>
+                <td class="owner_info">{$comInfo.linkman}</td>
+                <td class="tip">职务</td>
+                <td class="owner_info">{$comInfo.jobname}</td>
+            </tr>
+            <tr>
+                <td class="tip">联系方式</td>
+                <td class="owner_info">{$comInfo.link_phone}</td>
+                <td class="tip">E-mail</td>
+                <td class="owner_info">{$comInfo.linkEmail}</td>
+            </tr>
+        </table>
+    </div>
+    <include file="Public/footer"/>
+</body>
+</html>

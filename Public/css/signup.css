@@ -1,0 +1,52 @@
+.main{
+    width:600px;
+    margin:0 auto;
+    padding-top: 25px;
+    padding-bottom: 30px;
+    background-color: white;
+}
+.line{
+    margin-bottom:5px;
+}
+label{
+    width:100px;
+    padding:5px 10px;
+    font-size:20px;
+    display:inline-block;
+}
+.line-input{
+    width:300px;
+    height:30px;
+}
+.upload{
+    width:400px;
+    margin:0 auto;
+}
+.upload img{
+    max-width:400px;
+}
+.must{
+    color:red;
+    margin-left:10px; 
+}
+.textarea{
+    position: relative;
+}
+.textarea label{
+    position: absolute;
+    top: 50%;
+    margin-top: -16px;
+}
+.textarea textarea{
+    width:380px;
+    height:100px;
+    margin-left:128px;
+}
+.sub{
+    margin-top:10px;
+    text-align:center;
+}
+.sub input{
+    font-size:20px;
+    padding:5px 10px;
+}

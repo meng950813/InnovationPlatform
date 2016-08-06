@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>张家港工程项目协同创新服务平台</title>  
+    <link rel="stylesheet" href="__PUBLIC__/css/nav.css">
+    <style>
+        .main{
+            width:350px;
+            margin:0 auto;
+        }
+        .line{
+            text-align:center;
+        }
+        label{
+            width:100px;
+            padding:5px 10px;
+            font-size:20px;
+            display:inline-block;
+        }
+        .line-input{
+            width:200px;
+            height:20px;
+        }
+        .next{
+            text-align:right;
+            font-size:16px;
+        }
+        a{
+            text-decoration: none;
+            color:black;
+            float:left;
+        }
+        .next input{
+            margin-right:20px;
+            margin-bottom:10px;
+            font-size:16px;
+        }
+    </style>
+</head>
+<body>
+    <include file = "Public/nav"/>
+    <form action="{:U('Signup/do_forgetPwd_step3')}" method="post">
+        <div class="main">
+            <div class="line">
+                <label for="newPwd">新密码</label>
+                <input class="line-input" type="password" id="newPwd" name="newPwd" required>
+            </div>
+            <div class="line">
+                <label for="sure_pwd">确定密码</label>
+                <input class="line-input" type="password" id="sure_pwd" name="sure_pwd" required >
+            </div>
+            <input type="hidden" name="username" value="{$username}">
+            <br>
+            <div class="next">
+                <a href="#">返回登录</a>
+                <input type="submit" value="确定">
+            </div>
+        </div>
+    </form>
+    <include file = "Public/footer"/>
+</body>
+</html>

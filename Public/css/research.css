@@ -1,0 +1,64 @@
+body{
+    background-color: #eef7fa;
+}
+.main{
+    width: 1000px;
+    border: 1px solid #64b748;
+    margin: 0 auto;
+    background-color: white;
+}
+.caption{
+    background-color: #69e2f8;
+    color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 5px 35px;
+}
+.research_title{
+    color: black;
+    font-size: 18px;
+}
+table{
+    width: 1100px;
+    border: 1px solid #64b748;
+    border-spacing: 0px;
+}
+tr{
+     border: 1px solid #64b748;
+}
+td{
+    border-right: 1px solid #64b748;
+    border-bottom: 1px solid #64b748;
+    padding-left: 10px;
+    vertical-align: middle;
+}
+.logo{
+    width: 490px;
+    height: 400px;
+    background-color: #e8eef0;
+}
+.logo img{
+    max-width: 400px;
+}
+.tip{
+    text-align: center;
+    width: 100px;
+    height: 40px;
+}
+.content{
+    font-size: 14px;
+}
+.link_img{
+    width: 490px;
+}
+.link_img img{
+    max-width: 200px;
+}
+.research_info{
+    width: 600px;
+    font-size: 14px;
+    padding: 10px 0;
+}
+.owner_info{
+    width: 400px;
+}

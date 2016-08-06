@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人注册</title>
+    <script src="__PUBLIC__/js/jquery.min.js"></script>
+    <script src="__PUBLIC__/js/signup.js"></script>
+    <link rel="stylesheet" href="__PUBLIC__/css/signup.css">
+    <link rel="stylesheet" href="__PUBLIC__/css/nav.css">
+</head>
+<body>
+    <include file = "Public/nav"/>
+    <form id="person" action="{:U('Signup/do_signup_person')}" method="post">
+        <div class="main">
+             <div class="line">
+                <label for="logo">上传头像</label>
+                <input type="file" id="logo" name="img" accept="image/*">
+                <div class="upload"><img id="preview" src="" alt=""></div>
+            </div>
+            <div class="line">
+                <label for="username">用户名</label>
+                <input type="text" required id="username" name="username" ><span class="must">*</span>
+            </div>
+            <div class="line">
+                <label for="pwd">密码</label>
+                <input type="password" required id="pwd" name="pwd"><span class="must">*</span>
+            </div>
+             <div class="line">
+                <label for="sure_pwd">确认密码</label>
+                <input type="password" required id="sure_pwd"><span id="pwdError" class="must">*</span>
+            </div>
+            <div class="line">
+                <label for="realname">真实姓名</label>
+                <input type="text" required id="realname" name="realname"><span class="must">*</span>
+            </div>
+             <div class="line">
+                <label for="phone">手机号</label>
+                <input type="text" required id="phone" name="phone" placeholder="例:13866665666"><span id="phoneError" class="must">*</span>
+            </div>
+            <div class="line">
+                <label for="realname">邮箱</label>
+                <input type="email" required id="realname" name="realname"><span class="must">*</span>
+            </div>
+            <div class="sub">
+                <input type="submit" value="提交">
+            </div>
+        </div>
+    </form>
+    <include file = "Public/footer"/>
+    <script>
+        $(function() {
+            $('#username').change(function(event){
+                if($('#username').val().trim() != ""){
+                    var un = $('#username').val();
+                    $.ajax({
+                        type:"post",
+                        url:"__ROOT__/index.php/Signup/checkName",
+                        dataType:'json',
+                        data:{username:un}
+                        })
+                    .done(function(data) {
+                        console.log("success",data);
+                        if(data.code == 0){
+                            $('#nameError').html("*");
+                        }else{
+                            $("#nameError").html("用户名已存在");
+                        }
+                    })
+                    .fail(function(XMLHttpRequest, textStatus, errorThrown){
+                        $('#pwdError').html("error");  
+                        console.log("status = "+XMLHttpRequest.status);  // 200
+                        console.log("readyState = "+XMLHttpRequest.readyState); //4
+                        console.log("textStatus = "+textStatus);  //parsererror
+                    })
+                    .always(function() {
+                        console.log("complete");
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
