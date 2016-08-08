@@ -1,38 +1,85 @@
 <!doctype html>
 <html>
 <head>
+    <meta charset="utf-8"> 
     <script src="__PUBLIC__/js/jquery.js"></script>
     <link href="__PUBLIC__/css/css.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="__PUBLIC__/css/nav.css">
-    <meta charset="utf-8">
     <title>张家港工程项目协同创新服务平台</title>
+    <style>
+        #banner-show{
+            margin: 0 auto;
+            position: relative;
+            top: -3px;
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+        }
+        #banner-container{
+            width: 9600px;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        #banner-container ul{
+            list-style-type: none;
+            float: left;
+        }
+        #banner-container ul li{
+            float: left;
+            max-width:1920px;
+            height: 400px;
+        }
+        #banner-container img{
+            max-width: 1920px;
+            width: 100%;
+        }
+        .control{
+            position: absolute;
+            left: 50%;
+            margin-left: -65px;
+            top: 350px;
+        }
+        .control-btn{
+            float: left;
+            width: 13px;
+            height: 13px;
+            margin-left: 13px;
+            border: 1px solid transparent;
+            border-radius: 50%; 
+            background: white;
+        }
+        .focus{
+            background: blue;
+        }
+    </style>
 </head>
 
 <body>
     <include file = "Public/nav"/>
-    <div class="indexbannerbox">
-    	<div class="banner">
-        	<div class="longbanner">
-        		<img src="__PUBLIC__/images/banner.png">
-                <img src="__PUBLIC__/images/banner2.png">
-                <img src="__PUBLIC__/images/banner3.png">
-            </div>
+    <div id="banner-show">
+        <div id="banner-container">
+            <ul>
+                <li index="0"><img src="__PUBLIC__/images/banner.png" alt=""></li>
+                <li index="1"><img src="__PUBLIC__/images/banner2.png" alt=""></li>
+                <li index="2"><img src="__PUBLIC__/images/banner3.png" alt=""></li>
+            </ul>
         </div>
-        <div class="btnbox">
-        	<div class="btn"></div>
-            <div class="btn"></div>
-            <div class="btn"></div>
+        <div class="control">
+            <div class="control-btn focus"></div>
+            <div class="control-btn"></div>
+            <div class="control-btn"></div>
         </div>
     </div>
     <div class="newsbox">
     	<div class="news">
             <div class="newstitle">新闻动态：</div>
             <div class="newstext">
-            	<p><a href="">浙江惊现连体巨无霸建筑 型如UFO</a></p>
-                <p><a href="">第六届全国中、高等院校“斯维尔杯”BIM大赛总决赛圆满落幕</a></p>
-                <p><a href="">是什么推动了螺旋钢管市场的回暖？</a></p>
-                <p><a href="">再制造为锤式破碎机厂带来的发展机遇</a></p>
-                <p><a href="">【广州幕墙展】2016工程设计热点话题，你不可不知！</a></p>
+            	<p><a href="#">浙江惊现连体巨无霸建筑 型如UFO</a></p>
+                <p><a href="#">第六届全国中、高等院校“斯维尔杯”BIM大赛总决赛圆满落幕</a></p>
+                <p><a href="#">是什么推动了螺旋钢管市场的回暖？</a></p>
+                <p><a href="#">再制造为锤式破碎机厂带来的发展机遇</a></p>
+                <p><a href="#">【广州幕墙展】2016工程设计热点话题，你不可不知！</a></p>
             </div>
        	</div>
     </div>
@@ -78,52 +125,112 @@
     <include file = "Public/footer"/>
 
     <script>
-        $(".columnpicture img").hide().first().fadeIn()
-        $(".columnbtn").first().css("background-color","red")
+    $(function(){
+        function nextImg () {
+            var container = $('#banner-container');
+            var moveWidth = ($("#banner-container li").width())*-1;
+            container.stop().animate({left:moveWidth},'slow',function(){
+                var firstImg = $('#banner-container ul li').first();
+                container.find("ul").append(firstImg);
+                $(this).css('left',"0px");
+            });
+             btnCircle();
+        }
+        function btnCircle(){
+            var btnNum = $('#banner-container ul li').first().attr("index");
+            $(".control .control-btn").siblings().removeClass("focus");
+            $(".control .control-btn").eq((btnNum+1)%3).addClass("focus");
+        }
+        setInterval(nextImg,4000);
+
+        var animateEnd = 1;
+        $('.control-btn').click(function(){
+            if(animateEnd == 1){ // 表示图片不在切换
+                $(this).addClass('focus').siblings().removeClass('focus');
+                var nextIndex = $(this).index();
+                console.log("nextIndex = "+nextIndex);
+                // 获取当前显示图片序列
+                var currentIndex = $('#banner-container li').first().attr('index');
+                // 保存当前图片
+                var curr = $("#banner-container li").first().clone();
+                if(currentIndex < nextIndex){
+                    for(var i=0; i<nextIndex-currentIndex;i++){
+                        var firstImg = $('#banner-container li').first();
+                        // 将目标图片之前的图片加到后面
+                        $('#banner-container ul').append(firstImg);
+                    }
+                    // 结束循环，当前效果
+                    // console.log("结束循环 ："+animateEnd);
+                    $("#banner-container ul").prepend(curr);
+                    var moveWidth = ($('#banner-container li').width())*-1;
+                    if(animateEnd == 1){    
+                        animateEnd = 0;//表示开始切换，期间不允许再次切换
+                        $('#banner-container').stop().animate({left:moveWidth},"slow",function(){
+                            $("#banner-container ul li").first().remove();
+                            $("#banner-container").css("left","0px");
+                            animateEnd = 1;
+                        });
+                    }
+                }
+                else{
+                    // 保存最后一张图片
+                    var curt = $("#banner-container li").last().clone();
+                    for(var i = 0; i < currentIndex - nextIndex;i++){
+                        var lastItem = $("#banner-container li").last();
+                        $("#banner-container ul").prepend(lastItem);
+                    }
+                    $("#banner-container ul").append(curt);
+                    var moveWidth = ($("#banner-container li").width())*-1;
+                    $("#banner-container").css("left",moveWidth);
+                    if(animateEnd = 1){
+                        $("#banner-container ul li").last().remove();
+                        animateEnd = 0;
+                        $("#banner-container").stop().animate({left:"0px"},"slow",function(){
+                            animateEnd = 1;
+                        });
+                    }
+                }
+            }
+        });
+    });
+    $(function(){
+        $(".columnpicture img").hide().first().fadeIn();
+        $(".columnbtn").first().css("background-color","red");
         var y=0
         var z=setInterval(function(){
             y=y+1;
             if(y==3){y=0;}
-            $(".columnpicture img").eq(y).fadeIn().siblings().fadeOut()
+            $(".columnpicture img").eq(y).fadeIn().siblings().fadeOut();
             $(".columnbtn").eq(y).css("background-color","red").siblings().css("background-color","rgba(0,0,0,0.8)")
-        },5000)
-        $(".columnbtn").mouseenter(
-            function(){
-                    $(this).css("background-color","red").siblings().css("background-color","rgba(0,0,0,0.8)")
-                }
-        )
-        $(".columnbtn").mouseenter(
-            function(){
-                    y=$(this).index();
-                    $(".columnpicture img").eq(y).fadeIn().siblings().fadeOut();
-                }
-        )
-        $(".columnpicture").mouseenter(
-            function(){
-                clearInterval(z);
-            }
-        ).mouseleave(
-            function(){
+        },5000);
+        $(".columnbtn").mouseenter( function(){
+            $(this).css("background-color","red").siblings().css("background-color","rgba(0,0,0,0.8)")
+        });
+        $(".columnbtn").mouseenter( function(){
+            y=$(this).index();
+            $(".columnpicture img").eq(y).fadeIn().siblings().fadeOut();
+        });
+        $(".columnpicture").mouseenter(function(){
+            clearInterval(z);
+        })
+        .mouseleave(function(){
             z=setInterval(function(){
-            y=y+1;
-            if(y==3){y=0;}
-            $(".columnpicture img").eq(y).fadeIn().siblings().fadeOut()
-            $(".columnbtn").eq(y).css("background-color","red").siblings().css("background-color","rgba(0,0,0,0.8)")
-        },5000)
-            }
-        )
+                y=y+1;
+                if(y==3){y=0;}
+                $(".columnpicture img").eq(y).fadeIn().siblings().fadeOut();
+                $(".columnbtn").eq(y).css("background-color","red").siblings().css("background-color","rgba(0,0,0,0.8)");
+            },5000);
+        });
 
 
-        $(".newsbox").mouseenter(
-            function(){
-                $(".newstext p a").css("color","#999")  
-            }
-        ).mouseleave(
-            function(){
-                $(".newstext p a").css("color","#666")  
-            }
-        )
-        var i=0
+
+        $(".newsbox").mouseenter(function(){
+            $(".newstext p a").css("color","#999")  
+        })
+        .mouseleave(function(){
+            $(".newstext p a").css("color","#666")  
+        });
+        var i=0;
         var m=setInterval(function(){
             i=i+1;
             if(i==$(".newstext p").length){
@@ -132,99 +239,52 @@
                 $(".newstext").animate({marginTop:-37*i},1000)
             }
             $(".newstext").animate({marginTop:-37*i},1000)
-        },5000)
+        },5000);
+
         $(".news").mouseenter(
             function(){
                 clearInterval(m);
-            }
-        ).mouseleave(
-            function(){
-                m=setInterval(function(){
-            i=i+1;
-            if(i==$(".newstext p").length){
-                i=1;
-                $(".newstext").css("margin-top","0")
-                $(".newstext").animate({marginTop:-37*i},1000)
-            }
-            $(".newstext").animate({marginTop:-37*i},1000)
-        },5000)
-            }
-        )
-
-
-
-        var n=0;
-        $(".btn:first").addClass("btn2")
-        $(".btn").mouseenter(
-            function(){
-                    $(this).css("background-image","url(__PUBLIC__/images/btn2.png)").siblings().css("background-image","url(__PUBLIC__/images/btn.png)")
+        })
+        .mouseleave(function(){
+            m=setInterval(function(){
+                i=i+1;
+                if(i==$(".newstext p").length){
+                    i=1;
+                    $(".newstext").css("margin-top","0");
+                    $(".newstext").animate({marginTop:-37*i},1000);
                 }
-        )
-        $(".btn").mouseenter(
-            function(){
-                    n=$(this).index();
-                    $(".longbanner").stop().animate({marginLeft:-1920*n});
-                }
-            );
-            var t=setInterval(function(){
-                n=n+1;
-                if(n==$(".longbanner img").length){n=0}
-                $(".btn").eq(n).css("background-image","url(__PUBLIC__/images/btn2.png)").siblings().css("background-image","url(__PUBLIC__/images/btn.png)");
-                $(".longbanner").animate({marginLeft:-1920*n},2000)
-                
-            },5000);
-        $(".longbanner").mouseenter(
-            function(){
-                clearInterval(t);
-            }
-            ).mouseleave(
-                function(){
-                t=setInterval(function(){
-                n=n+1;
-                if(n==$(".longbanner img").length){n=0}
-                $(".btn").eq(n).css("background-image","url(__PUBLIC__/images/btn2.png)").siblings().css("background-image","url(__PUBLIC__/images/btn.png)");
-                $(".longbanner").animate({marginLeft:-1920*n},2000)
-                
+                $(".newstext").animate({marginTop:-37*i},1000);
             },5000)
-                }
-        );
+        });
 
 
-        $(".columnmain").hide().first().show()
-        $(".columntitle").first().addClass("columntitleclick")
-        $(".columntitle").mouseenter(
-            function(){
-                $(this).addClass("columntitlemouseenter")
-            }
-        ).mouseleave(
-            function(){
-                $(this).removeClass("columntitlemouseenter")
-            }
-        )
-        $(".columntitle").click(
-            function(){
-                $(this).addClass("columntitleclick").siblings().removeClass("columntitleclick")
-                $(".columnmain").hide().eq($(this).index()).show()
-            }
-        )
-        $(".columntext p a").mouseenter(
-            function(){
-                $(this).css("color","#666")
-            }
-        ).mouseleave(
-            function(){
-                $(this).css("color","#333")
-            }
-        )
-        $(".smallnav a").mouseenter(
-            function(){
-                $(this).css("color","#999")
-            }
-        ).mouseleave(
-            function(){
-                $(this).css("color","#6f6f6f")
-            }
-        )
+
+        $(".columnmain").hide().first().show();
+        $(".columntitle").first().addClass("columntitleclick");
+        $(".columntitle").mouseenter(function(){
+            $(this).addClass("columntitlemouseenter")
+        })
+        .mouseleave(function(){
+            $(this).removeClass("columntitlemouseenter");
+        });
+        $(".columntitle").click(function(){
+            $(this).addClass("columntitleclick").siblings().removeClass("columntitleclick")
+            $(".columnmain").hide().eq($(this).index()).show()
+        });
+        $(".columntext p a").mouseenter(function(){
+            $(this).css("color","#666")
+        })
+        .mouseleave(function(){
+            $(this).css("color","#333")
+        });
+        $(".smallnav a").mouseenter(function(){
+            $(this).css("color","#999");
+        })
+        .mouseleave(function(){
+            $(this).css("color","#6f6f6f")
+        });
+    });
+       
     </script>
 </body>
 </html>

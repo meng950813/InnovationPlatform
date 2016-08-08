@@ -12,21 +12,17 @@ class DemandController extends Controller {
 	 */
     public function demandlist(){
         $where['status']=1;
-        // echo "string".$_GET['type'];
         if(isset($_GET['type'])){
             echo "string";
             $type = getResearchType($_GET['type']);
             $where['demand_type'] = array("like","%".$type);
         }
-        $list = M('Demand')->where($where)->order('sort desc')->page($_GET['p'].',20')->select();
-        // $list = D('ComDemandListView')->where($where)->order('sort desc')->page($_GET['p'].',20')->select();
-        // $count = D('ComDemandListView')->where($where)->count();
+        $list = M('Demand')->where($where)->order('sort desc')->page($_GET['p'].',20')->select();;
         $count = M('Demand')->where($where)->count();
         $page = new \Think\Page($count,20);
         $show = $page->show();
         $this->assign('list',$list);
         $this->assign('page',$show);
-
     	$this->display();
     }
 
@@ -46,14 +42,15 @@ class DemandController extends Controller {
                 // 不是发布者本身查看
                 if (session('uid') != I('get.com')) {
                      // isLinked函数，判断双方是否已建立联系
-                    if(!isLinked(session('uid'),$info['uid'])){
-                        // 若当前用户与企业未建立联系，将联系信息置位 ******
+                    if(!isLinked(session('uid'),$info['uid'],3)){
+                        // 若当前用户与企业未建立联系，将联系信息置为 ******
                         $comInfo['mobile_phone']    = "********";
                         $comInfo['email']           = "********";
                         $comInfo['website']         = "********";
                         $comInfo['area']            = "********";
                         $comInfo['linkman']         = "********";
                         $comInfo['link_phone']      = "********";
+                        $comInfo['linkEmail']       = "********";
                         $comInfo['jobname']         = "********";
                     }
                 }
@@ -66,10 +63,12 @@ class DemandController extends Controller {
                 $comInfo['area']            = "********";
                 $comInfo['linkman']         = "********";
                 $comInfo['link_phone']      = "********";
+                $comInfo['linkEmail']       = "********";
                 $comInfo['jobname']         = "********";
             }
             $this->assign("comInfo",$comInfo);
             $this->assign("demandInfo",$demandInfo);
+
         }
     	$this->display();
     }

@@ -12,7 +12,8 @@ use Think\Model\ViewModel;
 class TeamInfoViewModel extends ViewModel {
 	public $viewFields = array(	
 		'expert_team'=>array('teamid', 'teamname','team_logo', 'teamleader','team_research','teaminfo'),
-		// 'team_member'=>array('teamid','uid','_on'=>'expert_team.teamid = team_member.teamid'),
+		'team_member'=>array('teamid','uid','_on'=>'expert_team.teamid = team_member.teamid'),
+		'expert_user'=>array('uid'=>'expert_id','level','_on'=>'uid = expert_id')
 		);
 }
 ?>

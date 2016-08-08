@@ -7,10 +7,14 @@
 	<script src="__PUBLIC__/js/signup.js"></script>
 	<link rel="stylesheet" href="__PUBLIC__/css/signup.css">  
 	<link rel="stylesheet" href="__PUBLIC__/css/nav.css">
-    
+    <style>
+		input[type=radio]{
+			width: 20px;
+		}
+    </style>
 </head>
 <body>
-	<incude file="Public/nav" />
+	<include file="Public/nav" />
 	<form id="expert" action="{:U('Signup/do_signup_expert')}" method="post" enctype="multipart/form-data">
 		<div class="main">
 			 <div class="line">
@@ -35,10 +39,29 @@
 				<input type="text" class="line-input" required id="realname" name="realname"><span class="must">*</span>
 			</div>
 			<div class="line">
+				<label for="gender">性别</label>
+				<input type="radio" name="gender" value="1" checked>男&nbsp;&nbsp;
+				<input type="radio" name="gender" value="0">女
+				<span class="must">*</span>
+			</div>
+			<div class="line">
+				<label for="birthday">出生日期</label>
+				<input type="text" class="line-input" required id="birthday" name="birthday"><span class="must">*</span>
+			</div>
+			<div class="line">
 				<label for="identify">身份证号</label>
 				<input type="text" class="line-input" required id="identify" name="identify"><span id="idError" class="must">*</span>
 			</div>
-
+			<div class="line">
+				<label for="political_status">政治面貌</label>
+				<select class="line-input" name="political_status" id="political_status">
+					<option value="党员">党员</option>
+					<option value="预备党员">预备党员</option>
+					<option value="其他党派人士">其他党派人士</option>
+					<option value="无党派人士">无党派人士</option>
+					<option value="其他">其他</option>
+				</select><span class="must">*</span>
+			</div>
 			<div class="line">
 				<label for="jobtype">职称</label>
 				<select class="line-input" name="level" id="jobtype">
@@ -47,11 +70,12 @@
 					<option value="3">研究员</option>
 					<option value="4">副研究员</option>
 					<option value="5">高级工程师</option>
-					<option value="6">其他类正高级</option>
-					<option value="7">其他类副高级</option>
-					<option value="8">中级</option>
-					<option value="9">初级及以下</option>
-				</select><span id="idError" class="must">*</span>
+					<option value="6">讲师</option>
+					<option value="7">其他类正高级</option>
+					<option value="8">其他类副高级</option>
+					<option value="9">中级</option>
+					<option value="10">初级及以下</option>
+				</select><span class="must">*</span>
 			</div>
 			<div class="line">
 				<label for="research" style="float:left;">研究方向</label>
@@ -63,6 +87,10 @@
 				<input type="checkbox" name="research" value="6">现代农业
 				<input type="checkbox" name="research" value="7">其他 <span id="" class="must">*</span>
 			</div>
+			<div class="line textarea">
+				<label for="research_content">研究内容</label>
+				<textarea name="research_content" id="research_content"></textarea>
+			</div>
 			 <div class="line">
 				<label for="college">院校名称</label>
 				<input type="text" class="line-input" id="college" name="college">
@@ -71,9 +99,13 @@
 				<label for="jobname">职务</label>
 				<input type="text" class="line-input" id="jobname" name="jobname">
 			</div>
-			 <div class="line">
-				<label for="phone">手机号</label>
-				<input type="text" class="line-input" required id="phone" name="phone" placeholder="例:13866665666"><span id="phoneError" class="must">*</span>
+			<div class="line">
+				<label for="mobile-phone">手机号</label>
+				<input type="text" class="line-input" required id="mobile-phone" name="mobile_phone" placeholder="例:13866665666"><span id="phoneError" class="must">*</span>
+			</div>
+			<div class="line">
+				<label for="telphone">办公室电话</label>
+				<input type="text" class="line-input" required id="telphone" name="telphone" placeholder="例:0516-12345678"><span id="telphoneError" class="must">*</span>
 			</div>
 			<div class="line">
 				<label for="email">邮箱</label>

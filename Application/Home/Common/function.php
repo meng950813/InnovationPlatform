@@ -62,9 +62,12 @@
 					$jobtype = "高级工程师";
 					break;
 				case 6:
-					$jobtype = "其他类正高级";
+					$jobtype = "讲师";
 					break;
 				case 7:
+					$jobtype = "其他类正高级";
+					break;
+				case 8:
 					$jobtype = "其他类副高级";
 					break;
 				case 9:
@@ -103,19 +106,22 @@
 	 * 判断双方是否已建立联系
 	 *
 	 * @param [type] $require 用户1
-	 *
-	 * @return [type] $request 用户2
+	 * @param [type] $request 用户2
+	 * @param [type] $type  被联系人的类型，个人->1, 团队->2, 企业->3
+	 * @return [type] 
 	 */
-	function isLinked($require,$request){
+	function isLinked($require,$request,$type){
 		$where = array(
 				array(
 					'require_id' => $require,
 					'request_id' => $request,
+					'request_type' =>$type,
 					'_logic'=>'and'
 					),
 				array(
 					'require_id' => $request,
 					'request_id' => $require,
+					'request_type' =>$type,
 					'_logic'=>'and'
 					),
 				'_logic'=>'or'

@@ -20,28 +20,10 @@ input{outline:none; color:#666; line-height:25px;}
 .smallnav a{color:#6f6f6f;}
 
 
-.indexbannerbox{ height:400px; position:relative;}
-.banner{position:relative; left:50%; margin-left:-960px;top:0; overflow: ; width:1920px;}
-.btn{ width:13px; height:13px; background-image:url(../images/btn.png); float:left; margin:5px;}
-.btnbox{ position:absolute; bottom:10px; left:50%; margin-left:-34px;}
-.longbanner{float:left; width:5760px;}
-.longbanner img{float:left;}
 .btn2{background-image:url(../images/btn2.png);}
-.bannerbox{ position:relative;}
 
-.main{width:1000px; margin:0 auto; padding-top:40px; padding-bottom:100px; overflow:hidden;}
-.leftmain{width:210px; float:left; background-image:url(../images/leftmain.png);}
-.mainlefttitle{ margin-bottom:48px;}
-.mainbtn{ margin-bottom:4px}
-.srevices{ margin-top:24px; margin-bottom:6px;}
-.rightmain{padding-left:22px; border-left:#fafafa 2px solid; float:left; width:766px;}
-.rightmaintitleleft{float:left;}
-.rightmaintitleleft *,.rightmaintitleright *{float:left;}
-.rightmaintitleright{float:right}
-.rightmaintitleleft h1{font-size:16px; color:#0193c2;}
-.rightmaintitleleft img{ margin-top:2px; margin-right:4px;}
+
 .mainimage{clear:both; float:left; margin-right:27px; margin-bottom:23px;}
-.line2{ width:758px; height:1px; background-color:#CCC; margin-top:9px; margin-bottom:9px; float:left;}
 .maintext{ margin-bottom:; line-height:24px; margin-bottom:24px; color:#666666;}
 .rightmaintitleright p,.rightmaintitleright a{ color:#999;}
 .maintext p{line-height:24px;}
@@ -55,8 +37,6 @@ input{outline:none; color:#666; line-height:25px;}
 .imagebox{width:353px; height:293px; float:left; margin-bottom:26px;}
 .imagebox p{width:353px; text-align:center; line-height:50px; color:#666;}
 .mainimage{overflow:hidden}
-.mainbottom *{color:#666;float:left; margin-left:5px}
-.mainbottom{ width:230px; margin-left:auto; margin-right:auto; clear:both; margin-top:430px;}
 .mainbanner *{float:left;}
 .mainbanner{overflow:hidden; clear:both}
 .mainbanner img{margin-right:20px}
@@ -70,12 +50,14 @@ input{outline:none; color:#666; line-height:25px;}
 
 
 .newsbox{background-color:#fafafa;}
-.news{margin-left:auto; margin-right:auto; width:1000px; line-height:37px; overflow:hidden;}
+.news{margin:0 auto; width:1000px; line-height:37px; overflow:hidden;}
 .newstitle{color:#0095b9; font-size:14px; font-weight:bold;}
 .newstext{ height:37px;}
 .news *{float:left}
 .newstext p{float:left; clear:left;}
 .newstext p a{color:#666;}
+
+.srevices{ margin-top:24px; margin-bottom:6px;}
 
 .column{ margin-left:auto; margin-right:auto; width:1000px; height:333px; position:relative;padding-top:29px;}
 .columntitle{ font-size:18px; line-height:35px; background-image:url(../images/columnbackground_05.png); width:156px; border:2px #fff solid; color:#0395c4; font-family:"微软雅黑"; text-align:center;border-radius:10px; height:45px;box-shadow: 0px 1px 20px #ccc; float:left; margin-right:7px;cursor: pointer;}
@@ -92,13 +74,6 @@ input{outline:none; color:#666; line-height:25px;}
 .columnbtnbox{position:relative;top:133px;left:154px; width:75px; height:25px; z-index:3;}
 .columnbtn{width:25px; height:25px; background-color:rgba(0,0,0,0.8); float:left; line-height:25px; text-align:center; color:#fff; font-weight:bold;}
 
-
-.footerbox{ background-image:url(../images/footerbackground.png);}
-.footerlist{ width:126px; height:217px; float:left;}
-.footer{width:1000px; margin-left:auto; margin-right:auto; overflow:hidden;}
-.footerlist a h1{ font-size:16px; font-family:"微软雅黑"; color:#666; margin-top:30px; margin-bottom:20px; line-height:16px;}
-.footerlist a p{font-family:"微软雅黑"; color:#666; line-height:22px;}
-.footer img{ margin-top:27px; float:right; margin-left:15px;}
 
 .bottombox{background-image:url(../images/bottombackground.png)}
 .bottom{ width:1000px; margin-left:auto; margin-right:auto; padding-top:18px; padding-bottom:18px; overflow:hidden;}

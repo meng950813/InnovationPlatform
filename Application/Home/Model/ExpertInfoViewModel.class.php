@@ -12,7 +12,7 @@ use Think\Model\ViewModel;
  */
 class ExpertInfoViewModel extends ViewModel {
 	public $viewFields = array(
-		'login'=>array('id','username','logo', 'realname','type','mobile_phone','email','_on'=>'type = 1'),
+		'login'=>array('id','username','logo', 'realname','type','mobile_phone','email'),
 		'expert_user'=>array('uid','id_number', 'work_college','level','research','info', '_on'=>'id=uid')
 		);
 }

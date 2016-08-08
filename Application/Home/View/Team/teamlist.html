@@ -1,47 +1,72 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="__PUBLIC__/js/jquery.min.js"></script>
-<link href="__PUBLIC__/css/css.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="__PUBLIC__/css/nav.css">
-
-</style>
-<meta charset="utf-8">
-<title>张家港工程项目协同创新服务平台</title>
+    <meta charset="utf-8">
+    <script src="__PUBLIC__/js/jquery.min.js"></script>
+    <!-- <link rel="stylesheet" href="__PUBLIC__/css/css.css" type="text/css"> -->
+    <link rel="stylesheet" href="__PUBLIC__/css/nav.css" type="text/css">
+    <link rel="stylesheet" href="__PUBLIC__/css/listpage.css" type="text/css">
+    
+    <title>张家港工程项目协同创新服务平台</title>
 </head>
 
 <body>
     <include file="Public/nav" />
     <div class="bannerbox">
-    	<div class="banner">
-        	<img src="__PUBLIC__/images/科技团队bk.png">   
-        </div>
+        <img src="__PUBLIC__/images/科技团队bk.png"> 
     </div>
-    <div class="mainbox">
-    	<div class="main">
-            <div class="leftmain">
-                <div class="mainlefttitle"><img src="__PUBLIC__/images/科技团队.png"></div>
-                <div class="mainbtn"></div>
-            </div>
-            <div class="rightmain">
-            	<div class="rightmaintitle">
-                	<div class="rightmaintitleleft">
-                        <img src="__PUBLIC__/images/download_09.png">团队信息</div>
-                    <div class="rightmaintitleright">
-                    	<img src="__PUBLIC__/images/download_06.png">
-                        <p>您的位置：</p>
-                        <a href="index.html">首页</a>
-                        <p>&nbsp;>&nbsp;</p>
-                        <a href="">专家团队</a>
-                        <p>&nbsp;>&nbsp;</p>
-                        <a href="">团队信息</a>
-                    </div>
+    <div class="infolist-main">
+        <div class="leftmain">
+            <div class="mainlefttitle"><img src="__PUBLIC__/images/科技团队.png"></div>
+            <div class="mainbtn">
+                <div class="navlist active">
+                    <a href="{:U('Team/teamlist')}">专家团队</a>
                 </div>
-                <div class="line2"></div>
-                <div class="line2"></div>
-                <div class="mainbottom"></div>
+                 <div class="navlist">
+                    <a href="{:U('Expert/expertlist')}">专家信息</a>
+                </div>
             </div>
-    	</div>
+        </div>
+        <div class="rightmain">
+        	<div class="top-tip">
+            	<div id="page-title">
+                    <img src="__PUBLIC__/images/download_09.png">团队信息</div>
+                <div id="position">
+                    <a href="#">专家团队</a>
+                     <span>&nbsp;>&nbsp;</span>
+                     <a href="__ROOT__">首页</a>
+                    <p>您的位置：</p>
+                    <img src="__PUBLIC__/images/download_06.png">
+                </div>
+            </div>
+            <div class="info-type">
+                <span style="font-size:16px;">研究领域：</span>
+                <a href="{:U('Team/teamlist')}">全部</a>&nbsp;&nbsp;
+                <a href="{:U('Team/teamlist',array('type' => 1))}">电子信息</a>&nbsp;&nbsp;
+                <a href="{:U('Team/teamlist',array('type' => 2))}">机械设计与制造</a>&nbsp;&nbsp;
+                <a href="{:U('Team/teamlist',array('type' => 3))}">新能源与环保</a>&nbsp;&nbsp;
+                <a href="{:U('Team/teamlist',array('type' => 4))}">生物技术与医药</a>&nbsp;&nbsp;
+                <a href="{:U('Team/teamlist',array('type' => 5))}">新材料</a>&nbsp;&nbsp;
+                <a href="{:U('Team/teamlist',array('type' => 6))}">现代农业</a>&nbsp;&nbsp;
+                <a href="{:U('Team/teamlist',array('type' => 1))}">其他</a>
+            </div>
+            <hr />
+            <div class="info-list <?php if($i % 2 == 0) echo ' grey';?>">
+               <div class="info-title">
+                    <span>
+                        <a href="#">
+                          团队名 &nbsp;&nbsp;
+                        </a>
+                    </span>
+                    <span>&nbsp;</span>
+                    <a href="{:U('Public/link')}">
+                        <img id="linkbutton" src="__PUBLIC__/images/linkbutton.jpg">
+                    </a>
+                </div>                           
+            </div>     
+            </div>
+            <div id="paging"></div>
+        </div>
     </div>
     <include file="Public/footer" />
 

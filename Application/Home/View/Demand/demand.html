@@ -4,25 +4,29 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="__PUBLIC__/css/research.css">
     <link rel="stylesheet" href="__PUBLIC__/css/nav.css">
+    <script src="__PUBLIC__/js/jquery.min.js"></script>
     <title>张家港工程项目协同创新服务平台</title>
 </head>
 <body>
     <include file="Public/nav"/>
     <div class="main">
-        <img src="__PUBLIC__/images/download_06.png">
-        <span>您的位置：</span>
-        <a href="index.html">首页</a>
-        <span>></span>
-        <a href="">企业需求</a>
-        <span>></span>
-        <a href="">需求详情</a>
+        <div>
+            <img src="__PUBLIC__/images/download_06.png">
+            <span>您的位置：</span>
+            <a href="__ROOT__">首页</a>
+            <span>></span>
+            <a href="{:U('Demand/demandlist')}">企业需求</a>
+            <span>></span>
+            <a href="#">需求详情</a>
+        </div>
+       
         <h3 class="caption">需求名 >> <sapn class="research_title">{$demandInfo.title}</sapn></h3>
         <table>
             <tr>
                 <td class="logo" rowspan="8">
-                    <img src="{$demandInfo.demand_logo}" alt="">
+                    <img src="__ROOT__/{$demandInfo.demand_logo}" alt="">
                 </td>
-                <td colspan="2" height="40px" style="text-align:center;"><b class="research_title">{$demandInfo.title}</b></td>
+                <td colspan="2" style="text-align:center;"><b class="research_title">{$demandInfo.title}</b></td>
             </tr>
             <tr>
                 <td class="tip">发布企业</td>
@@ -57,7 +61,7 @@
                 </td>
             </tr>
         </table>
-        <table>
+        <table class="table-fixed">
             <tr>
                 <td class="tip" rowspan="3">需求简介</td>
                 <td class="tip">综合介绍</td>
@@ -79,7 +83,7 @@
             </tr>
         </table>
         <h3 class="caption">企业联系方式</h3>
-        <table>
+        <table class="table-fixed">
             <tr>
                 <td class="tip">企业电话</td>
                 <td class="owner_info">{$comInfo.mobile_phone}</td>
@@ -94,7 +98,7 @@
             </tr>
         </table>
         <h3 class="caption">企业联系人</h3>
-        <table>
+        <table class="table-fixed">
             <tr>
                 <td class="tip">姓名</td>
                 <td class="owner_info">{$comInfo.linkman}</td>

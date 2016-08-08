@@ -11,6 +11,9 @@ class TeamController extends Controller {
 	 *
 	 */
     public function teamlist(){
+        echo "string";
+        $list['info'] = 1;
+        $this->assign("list",$list);
     	$this->display();
     }
 

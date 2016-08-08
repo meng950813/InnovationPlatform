@@ -12,8 +12,8 @@ use Think\Model\ViewModel;
  */
 class ComInfoViewModel extends ViewModel {
 	public $viewFields = array(
-		'login'=>array('id','logo','type','realname','mobile_phone','email','_on'=>'type = 2'),
-		'company_user'=>array('uid','area','company_type', 'research','info','linkman','jobname','link_phone','website', '_on'=>'id=uid')
+		'login'=>array('id','logo','type','realname','mobile_phone','email'),
+		'company_user'=>array('uid','area','company_type', 'research','info','linkman','jobname','link_phone','website', '_on'=>'id = uid')
 		);
 }
 ?>

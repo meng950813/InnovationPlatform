@@ -2,10 +2,18 @@ body{
     background-color: #eef7fa;
 }
 .main{
-    width: 1000px;
+    width: 1098px;
     border: 1px solid #64b748;
     margin: 0 auto;
     background-color: white;
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+#position{
+    padding:10px 5px;
+}
+#position *{
+    color: grey;
 }
 .caption{
     background-color: #69e2f8;
@@ -18,13 +26,16 @@ body{
     color: black;
     font-size: 18px;
 }
-table{
-    width: 1100px;
-    border: 1px solid #64b748;
-    border-spacing: 0px;
+.research_info{
+    width: 600px;
+    font-size: 14px;
 }
-tr{
-     border: 1px solid #64b748;
+table{
+    width: 1099px;
+    border-top: 1px solid #64b748;
+    border-left: 1px solid #64b748;
+    border-spacing: 0px;
+    padding: 0;
 }
 td{
     border-right: 1px solid #64b748;
@@ -32,9 +43,16 @@ td{
     padding-left: 10px;
     vertical-align: middle;
 }
+h3{
+    margin-top: 15px;
+}
+.table-fixed{
+    table-layout:fixed;
+}
 .logo{
     width: 490px;
     height: 400px;
+    text-align: center;
     background-color: #e8eef0;
 }
 .logo img{
@@ -42,23 +60,22 @@ td{
 }
 .tip{
     text-align: center;
-    width: 100px;
+    width: 120px;
     height: 40px;
 }
 .content{
     font-size: 14px;
+    padding-left: 5px;
 }
 .link_img{
     width: 490px;
+    text-align: center;
 }
 .link_img img{
     max-width: 200px;
 }
-.research_info{
-    width: 600px;
-    font-size: 14px;
-    padding: 10px 0;
-}
+
 .owner_info{
     width: 400px;
+    padding: 5px 0 5px 10px;
 }

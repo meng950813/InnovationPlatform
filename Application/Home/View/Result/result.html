@@ -4,23 +4,26 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="__PUBLIC__/css/research.css">
     <link rel="stylesheet" href="__PUBLIC__/css/nav.css">
+    <script src="__PUBLIC__/js/jquery.min.js"></script>
     <title>张家港工程项目协同创新服务平台</title>
 </head>
 <body>
     <include file ="Public/nav"/>
     <div class="main">
-        <img src="__PUBLIC__/images/download_06.png">
-        <span>您的位置：</span>
-        <a href="index.html">首页</a>
-        <span>></span>
-        <a href="">科技成果</a>
-        <span>>&nbsp;科技成果详情</span>
+        <div id="position">
+            <img src="__PUBLIC__/images/download_06.png">
+            <span>您的位置：</span>
+            <a href="__ROOT__">首页</a>
+            <span>></span>
+            <a href="{:U('Result/resultlist')}">科技成果</a>
+            <span>>&nbsp;科技成果详情</span>
+        </div>
         
         <h3 class="caption">科技成果名称 >> <sapn class="research_title">科技成果标题</sapn></h3>
         <table>
             <tr>
                 <td class="logo" rowspan="8">
-                    <img src="" alt="">
+                    <img src="__ROOT__/Public/images/demand_default.png" alt="">
                 </td>
                 <td colspan="2" height="40px" style="text-align:center;"><b class="research_title">科技成果标题</b></td>
             </tr>
@@ -50,12 +53,12 @@
             </tr>
             <tr>
                 <td colspan="2" class="link_img">
-                    <img src="/" alt="点击收藏">
-                    <img src="/" alt="我要联系">
+                    <!-- <img src="/" alt="点击收藏"> -->
+                    <img src="__PUBLIC__/images/linkbutton.jpg" alt="我要联系">
                 </td>
             </tr>
         </table>
-        <table>
+        <table class="table-fixed">
             <tr>
                 <td class="tip" rowspan="3">成果简介</td>
                 <td class="tip">综合介绍</td>
@@ -81,23 +84,20 @@
             <table>
                 <tr>
                     <td class="tip">队长</td>
-                    <td class="owner_info">********</td>
-                    <td class="tip">职称</td>
-                    <td class="owner_info">********</td>
+                    <td class="owner_info">{$team.teamleader}</td>
+                    <td class="tip" rowspan="{$team.teamNum}+1">职称</td>
+                    <td class="owner_info">教授</td>
                 </tr>
                 <tr>
-                     <td class="tip" rowspan="5">队员</td>
+                     <td class="tip" rowspan="{$team.teamNum}">队员</td>
                 </tr>
-                <tr>
-                    <td class="owner_info">********</td>
-                    <td class="tip">职称</td>
-                    <td class="owner_info">********</td>
-                </tr> 
-                <tr>
-                    <td class="owner_info">********</td>
-                    <td class="tip">职称</td>
-                    <td class="owner_info">********</td>
-                </tr>
+                <volist id="list" name="list">
+                    <tr>
+                        <td class="owner_info">{$list.realname}</td>
+                        <td class="owner_info">{$list.type}</td>
+                    </tr>
+                </volist>
+                
             </table>
         <?php else: ?>
             <h3 class="caption">完成人</h3>
@@ -108,18 +108,12 @@
                     <td class="tip">职称</td>
                     <td class="owner_info">********</td>
                 </tr>
-                <tr>
-                    <td class="tip">联系方式</td>
-                    <td class="owner_info">********</td>
-                    <td class="tip">E-mail</td>
-                    <td class="owner_info">********</td>
-                </tr>
             </table> 
         <?php endif ?>
         
         
         <h3 class="caption">联系人</h3>
-        <table>
+        <table class="table-fixed">
             <tr>
                 <td class="tip">姓名</td>
                 <td class="owner_info">********</td>
@@ -141,6 +135,5 @@
         </table>
     </div>
     <include file ="Public/footer"/>
-    
 </body>
 </html>
