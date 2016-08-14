@@ -2,9 +2,159 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>个人中心</title>
+    <link rel="stylesheet" href="__PUBLIC__/css/personal.css">
+    <title>张家港工程项目协同创新服务平台档-个人中心</title>
+    <style>
+		.lf{
+			margin-top:20px; 
+			float: left;
+		}
+		#todo{
+			width: 500px;
+		}
+		#system_message{
+			width: 400px;
+			margin-left: 50px;
+		}
+		.require_list{
+			height: 40px;
+			line-height: 40px;
+			border-bottom: 2px dotted #52A8DE;
+		}
+		.require_list  a{
+			color: #1B8DEF;
+		}
+		.require_list > a{
+			float: right;
+		}
+		#system_message{
+			float: left;
+			width: 45%;
+		}
+    </style>
 </head>
 <body>
-    
+	<div id="header">
+    	<div id="header_box">
+    		<a href="__ROOT__">
+    			<img src="__PUBLIC__/images/背景.png" alt="">
+    		</a>
+    		<a class="index" href="__ROOT__">回到首页</a>
+    	</div>
+    </div>
+    <div id="nav">
+    	<div id="nav_box">
+    		<ul>
+    			<li class="focus">
+    				<a href="{:U('Personal/index')}">个人中心</a>
+    			</li>
+    			<?php if(session('uid') && session('type') == 1) :?>
+	    			<li>
+	    				<a href="{:U('Personal/my_team')}">我的团队</a>
+	    			</li>
+	    		<?php endif?>
+    			<li>
+    				<a href="{:U('Personal/my_research')}">研究成果</a>
+    			</li>
+    			<li>
+    				<a href="{:U('Personal/my_award')}">我的成就</a>
+    			</li>
+    			<li>
+    				<a href="{:U('Personal/my_info')}">个人信息</a>
+    			</li>
+    			<?php if(session('type') != 0):?>
+	    			<li>
+	    				<a href="{:U('Personal/detail_info')}">详细信息</a>
+	    			</li>
+	    		<?php endif?>
+    		</ul>
+  			
+    	</div>
+    </div>
+    <div id="link_img">
+		<!-- 各种找专家，找团队的图片链接 -->
+		<ul>
+			<li>
+				<a href="{:U('Expert/expertlist')}">
+					找专家	
+				</a>
+			</li>
+			<li>
+				<a href="{:U('Team/teamlist')}">
+					找专家团队	
+				</a>
+			</li>
+			<li>
+				<a href="{:U('Result/resultlist')}">
+					找科技成果	
+				</a>
+			</li>
+			<li>
+				<a href="{:U('Demand/demandlist')}">
+					找企业需求	
+				</a>
+			</li>
+			<?php if (session('type') == 1): ?>
+				<li>
+					<a href="{:U('Team/add')}">
+						组建团队	
+					</a>
+				</li>
+			<?php endif ?>
+			<li>
+				<a href="{:U('Result/add')}">
+					发布科技成果	
+				</a>
+			</li>
+			<?php if (session('type') == 2): ?>
+				<li>
+					<a href="{:U('Demand/add')}">
+						发布企业需求	
+					</a>
+				</li>
+			<?php endif ?>
+		</ul>
+    </div>
+    <div id="body">
+    	<!-- 待办事项 居左浮动，50%-->
+    	<div id="todo" class="lf">
+    		<img src="__PUBLIC__/images/todo.png" alt="">
+
+    		<volist name="list" id="list">
+    			<div class="require_list">
+	    			<span>
+	    				<?php if ($list['type'] == 1): ?>
+	    					<!-- 专家用户 -->
+	    					<a href="{:U('Expert/expert',array('id'=>$list['request_id']))}">发信人</a>
+	    				<?php else: ?>
+	    					<?php if($list['type'] == 2): ?>
+	    						<!-- 企业用户，详细信息 -->
+	    						<a href="#">发信人</a>
+	    					<?php else: ?>
+	    						<!-- 个人用户 -->
+	    						<a href="#">发信人</a>
+	    					<?php endif ?>
+	    				<?php endif ?>
+	    			</span>
+	    			给你发来一条信息
+	    			<a href="{:U('Personal/link_info',array('id'=>$list['link_id']))}">[详情]</a>
+	    		</div>
+	    	</volist>
+    		<?php if ($link_info == null && $no_link != null): ?>
+    			<div class="require_list">
+	    			<h3>暂无联系消息</h3>
+	    		</div>
+    		<?php endif ?>
+    		
+    	</div>
+    	<!-- 系统信息 居右浮动 -->
+    	<div id="system_message" class="lf">
+    		<img src="__PUBLIC__/images/system_message.png" alt="">
+    		<div class="require_list">
+    			<h3>暂无系统消息</h3>
+    		</div>
+    	</div>
+    </div>
+    <include file="Public/footer" />
 </body>
 </html>

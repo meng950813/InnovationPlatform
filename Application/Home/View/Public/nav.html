@@ -7,12 +7,11 @@
                 <span>丨</span>
                 <a href="{:U('Signup/signup')}">注册</a>
             <?php }else{ ?>
-                欢迎你，<?php echo session('realname');?>
-                <span>丨</span>
-                <a href="{:U('Personal/index')}" style="color:blue;">
+               <span style="font-size:16px;">欢迎你，</span>
+               <span style="font-size:16px;color:#0749E2;"> <?php echo session('realname');?></span>  |
+                <a href="{:U('Personal/index')}" style="color:#0749E2;">
                    个人中心 
-                </a>
-                <span>丨</span>
+                </a>|
                 <a href="{:U('Public/logout')}">退出</a>
             <?php }?>
         </div>
@@ -47,9 +46,6 @@
             <div class="nav-list">
                 <p>
                     <a href="{:U('Expert/expertlist')}">专家信息</a>
-                </p> 
-                <p>
-                    <a href="{:U('Team/teamlist')}">研发团队</a>
                 </p>
             </div>
         </div>  

@@ -46,11 +46,21 @@
 			</div>
 			<div class="line">
 				<label for="birthday">出生日期</label>
-				<input type="text" class="line-input" required id="birthday" name="birthday"><span class="must">*</span>
+				<input type="text" class="line-input" required placeholder="例：1987-08-19" id="birthday" name="birthday"><span class="must">*</span>
 			</div>
 			<div class="line">
 				<label for="identify">身份证号</label>
 				<input type="text" class="line-input" required id="identify" name="identify"><span id="idError" class="must">*</span>
+			</div>
+			<div class="line">
+				<label for="degree">学位</label>
+				<select class="line-input" name="degree" id="degree">
+					<option value="博士后">博士后</option>
+					<option value="博士">博士</option>
+					<option value="硕士">硕士</option>
+					<option value="学士">学士</option>
+					<option value="其他">其他</option>
+				</select><span class="must">*</span>
 			</div>
 			<div class="line">
 				<label for="political_status">政治面貌</label>
@@ -78,21 +88,21 @@
 				</select><span class="must">*</span>
 			</div>
 			<div class="line">
-				<label for="research" style="float:left;">研究方向</label>
-				 <input type="checkbox" name="research" value="1">电子信息
-				<input type="checkbox" name="research" value="2">机械设计与制造
-				<input type="checkbox" name="research" value="3">新能源与环保<br>
-				<input type="checkbox" name="research" value="4">生物技术与医药
-				<input type="checkbox" name="research" value="5">新材料
-				<input type="checkbox" name="research" value="6">现代农业
-				<input type="checkbox" name="research" value="7">其他 <span id="" class="must">*</span>
+				<label for="research" style="float:left;">研究领域</label>
+				 <input type="checkbox" name="research[]" value="1">电子信息
+				<input type="checkbox" name="research[]" value="2">机械设计与制造
+				<input type="checkbox" name="research[]" value="3">新能源与环保<br>
+				<input type="checkbox" name="research[]" value="4">生物技术与医药
+				<input type="checkbox" name="research[]" value="5">新材料
+				<input type="checkbox" name="research[]" value="6">现代农业
+				<input type="checkbox" name="research[]" value="7">其他 <span id="" class="must">*</span>
 			</div>
 			<div class="line textarea">
 				<label for="research_content">研究内容</label>
 				<textarea name="research_content" id="research_content"></textarea>
 			</div>
 			 <div class="line">
-				<label for="college">院校名称</label>
+				<label for="college">工作单位</label>
 				<input type="text" class="line-input" id="college" name="college">
 			</div>
 			<div class="line">
@@ -104,7 +114,7 @@
 				<input type="text" class="line-input" required id="mobile-phone" name="mobile_phone" placeholder="例:13866665666"><span id="phoneError" class="must">*</span>
 			</div>
 			<div class="line">
-				<label for="telphone">办公室电话</label>
+				<label for="telphone">办公电话</label>
 				<input type="text" class="line-input" required id="telphone" name="telphone" placeholder="例:0516-12345678"><span id="telphoneError" class="must">*</span>
 			</div>
 			<div class="line">
@@ -128,7 +138,7 @@
 					var un = $('#username').val();
 					$.ajax({
 						type:"post",
-						url:"__ROOT__/index.php/Signup/checkName",
+						url:"__ROOT__/index.php/Public/checkName",
 						dataType:'json',
 						data:{username:un}
 						})

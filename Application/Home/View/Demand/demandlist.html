@@ -2,11 +2,35 @@
 <html>
 <head>
     <script src="__PUBLIC__/js/jquery.js"></script>
-    <!-- <link href="__PUBLIC__/css/css.css" rel="stylesheet" type="text/css"> -->
     <link href="__PUBLIC__/css/nav.css" rel="stylesheet" type="text/css">
     <link href="__PUBLIC__/css/listpage.css" rel="stylesheet" type="text/css">
     <meta charset="utf-8">
     <title>张家港工程项目协同创新服务平台</title>
+    <style>
+        button{
+            background: #72CEDD;
+            color: #FAFDFD;
+            font-weight: 700;
+            border: 2px solid #0999B1;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        button:hover{
+            background: #0F93A9;
+            color: white;
+        }
+        .info-title:first-child a{
+            color: #0862E5;
+        }
+        div.add{
+            text-align: center;
+        }
+        div.add img{
+            width: 200px;
+            height: 44px;
+        }
+    </style>
 </head>
 <body>
     <include file="Public/nav"/>
@@ -16,16 +40,18 @@
 	<div class="infolist-main">
         <div class="leftmain">
             <div class="mainlefttitle">
+                <img src="__PUBLIC__/images/需求发布.png">
+            </div>
+            <div class="add"> 
                 <?php if(session('uid')): ?>
                     <?php if(session('type') == 2):?>
-                        <a href="{:U('Demand/add')}"><img src="__PUBLIC__/images/需求发布.png"></a>
+                        <a href="{:U('Demand/add')}"><img src="__PUBLIC__/images/add_demand.png"></a>
                     <?php else: ?>
-                        <a href="#" onclick="waring()"><img src="__PUBLIC__/images/需求发布.png"></a>
+                        <a href="#" onclick="waring()"><img src="__PUBLIC__/images/add_demand.png"></a>
                     <?php endif ?>
                 <?php else: ?>
-                    <a href="{:U('Demand/add')}"><img src="__PUBLIC__/images/需求发布.png"></a>
-                <?php endif ?>
-
+                    <a href="{:U('Public/login')}"><img src="__PUBLIC__/images/add_demand.png"></a>
+                <?php endif ?>              
             </div>
             <div class="mainbtn">
                 <div class="navlist active">
@@ -41,19 +67,19 @@
                 	<a href="#">企业需求</a>
                     <span>&nbsp;>&nbsp;</span>
                     <a href="__ROOT__">首页</a>
-                    <p>您的位置：</p>
+                    <span>您的位置：</span>
                     <img src="__PUBLIC__/images/download_06.png">
                 </div>
             </div>
             <div class="info-type">
                 <span style="font-size:16px;">需求类型：</span>
-                <a href="{:U('Demand/demandlist')}">全部</a>&nbsp;&nbsp;
-                <a href="{:U('Demand/demandlist',array('type' => 1))}">电子信息</a>&nbsp;&nbsp;
-                <a href="{:U('Demand/demandlist',array('type' => 2))}">机械设计与制造</a>&nbsp;&nbsp;
-                <a href="{:U('Demand/demandlist',array('type' => 3))}">新能源与环保</a>&nbsp;&nbsp;
-                <a href="{:U('Demand/demandlist',array('type' => 4))}">生物技术与医药</a>&nbsp;&nbsp;
-                <a href="{:U('Demand/demandlist',array('type' => 5))}">新材料</a>&nbsp;&nbsp;
-                <a href="{:U('Demand/demandlist',array('type' => 6))}">现代农业</a>&nbsp;&nbsp;
+                <a href="{:U('Demand/demandlist')}">全部</a>&nbsp;
+                <a href="{:U('Demand/demandlist',array('type' => 1))}">电子信息</a>&nbsp;
+                <a href="{:U('Demand/demandlist',array('type' => 2))}">机械设计与制造</a>&nbsp;
+                <a href="{:U('Demand/demandlist',array('type' => 3))}">新能源与环保</a>&nbsp;
+                <a href="{:U('Demand/demandlist',array('type' => 4))}">生物技术与医药</a>&nbsp;
+                <a href="{:U('Demand/demandlist',array('type' => 5))}">新材料</a>&nbsp;
+                <a href="{:U('Demand/demandlist',array('type' => 6))}">现代农业</a>&nbsp;
                 <a href="{:U('Demand/demandlist',array('type' => 1))}">其他</a>
             </div>
             <hr />
@@ -66,9 +92,16 @@
                             </a>
                         </span>
                         <span>&nbsp;{$list.publish_time}</span>
-                        <a href="{:U('Public/link')}">
-                            <img id="linkbutton" src="__PUBLIC__/images/linkbutton.jpg">
-                        </a>
+                        <?php if (session('uid')): ?>
+                            <a id="linkbutton" href="{:U('Public/link',array('id'=>$list['demand_id'],'linkType'=>3,'title'=>$list['title']))}" target="_black">
+                                <button>我要联系</button>
+                            </a>
+                        <?php else: ?>
+                            <a id="linkbutton" href="{:U('Public/login')}" target="_black">
+                                <button>我要联系</button>
+                            </a>
+                        <?php endif ?>
+                        
                    </div>                           
                </div>
             </volist>                

@@ -3,31 +3,38 @@
 <head>
 	<meta charset="UTF-8">
 	<title>张家港工程项目协同创新服务平台档</title>
+	<script src="__PUBLIC__/js/jquery.min.js"></script>
 	<link rel="stylesheet" href="__PUBLIC__/css/nav.css">
 	<style>
-		.main{
+		.link-main{
 		    width:600px;
+		    min-height: 600px;
 		    margin:0 auto;
 		    background-color: white;
+		    margin-top:20px;
+		    margin-bottom: 30px; 
 		}
 		.line{
+			margin-top:20px;
 		    margin-bottom:5px;
 		}
 		.line input{
 			width: 400px;
-			height: 20px;
+			height: 30px;
 			border-width: 2px;
-			padding: 2px;
+			margin-left: -18px;
 		}
 		span{
-		    width:100px;
-		    font-size:14px;
-		    
+		    width:120px;
+		    font-size:18px;
+		    display: inline-block;
 		}
 		b{
 			display:inline-block;
-			margin-left: 15px;
-			margin-bottom: 20px;
+			max-width: 440px;
+			white-space: nowrap;
+		    overflow: hidden;
+		    text-overflow:ellipsis;
 		}
 		.textarea{
 		    position: relative;
@@ -44,34 +51,46 @@
 		    border-width: 2px;
 		}
 		.sub{
-		    width:400px;
 		    margin-top:10px;
 		    text-align:center;
 		}
 		.sub input{
-		    font-size:20px;
-		    padding:5px 10px;
+		    font-size:16px;
+		    padding:10px 15px;
+		    border-radius: 5px;
+		    cursor: pointer;
+		}
+		.sub input:hover{
+			background: #146FBD;
+			color: #fff;
 		}
 	</style>
 </head>
 <body>
 	<include file="Public/nav"/>
-	<div class="main">
-		<h2>对接类型</h2>
-		<form action="#" method="post">
+	<div class="link-main">
+		<!-- <h2>对接类型</h2> -->
+		<form action="{:U('Public/dolink')}" method="post">
 			<div class="line">
-				<span for="title">对接技术需求</span>
-				<b>技术需求标题技术需求标题技术需求标题技术需求标</b>
-				[<a href="#">详情</a>]
+				<span>{$linkInfo.linkTip}</span>
+				<b title="{$linkInfo.title}">{$linkInfo.title}</b>
+			</div>
+			<div class="line">
+				<span>标题</span>
+				<input type="text" name="title">
 			</div>
 			<div class="textarea">
-				<span for="content">对接缘由说明</span>
+				<span for="content">对接说明</span>
 				<textarea name="content" id="content"></textarea>
 			</div>
 			<div class="textarea">
 				<span for="remark">备注</span>
 				<textarea name="remark" id="remark"></textarea>
 			</div>
+			<input type="hidden" value="{$linkInfo.linkType}" name="type">
+			<input type="hidden" value="{$linkInfo.owner}" name="owner">
+			<input type="hidden" value="{$linkInfo.title}" name="title">
+
 			<div class="sub">
 				<input type="submit" value="确认连接">
 			</div>

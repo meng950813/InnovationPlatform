@@ -14,21 +14,6 @@ class SignupController extends Controller {
 	}
 
 	/**
-	* 判断输入的姓名是否已被注册
-	*/
-	public function checkName(){
-		// 获取用户名
-		$where['username'] = I('post.username');
-		// 在注册表中查找姓名
-		$result = M('Login')->where($where)->find();
-		// 查找有结果 -> 该用户名已被注册
-		if($result){
-			$this->ajaxReturn(['code'=>1]);
-		}else{
-			$this->ajaxReturn(['code'=>0]);
-		}
-	}
-	/**
 	*显示专家注册页面
 	*/
 	public function signup_expert(){
@@ -54,9 +39,9 @@ class SignupController extends Controller {
 				$loginInfo['logo'] = $logoPath;
 			}
 		}
-		$loginInfo['mobile_phone'] = I('post.phone');
+		$loginInfo['mobile_phone'] = I('post.mobile_phone');
 		$loginInfo['email'] = I('post.email');
-		$result = M('Login')->add($loginInfo);
+		$result = M('Login')->data($loginInfo)->add();
 		/*
 			若信息在login表中添加不成功，则没有必要继续在expert表中添加
 			因为expert中的uid字段是login表中id的外键
@@ -67,15 +52,34 @@ class SignupController extends Controller {
 			session('realname',$loginInfo['realname']);
 			$where['username'] = $loginInfo['username'];
 			$expertInfo['uid'] = M('Login')->where($where)->getField('id');
+			// 职称
 			$expertInfo['level'] = getJobType(I('post.level'));
+			// 学位
+			$expertInfo['degree'] = I('post.degree');
+			// 性别
+			$expertInfo['gender'] = I('post.gender');
+			// 出生日期
+			$expertInfo['birthday'] = I('post.birthday');
+			// 身份证号
+			$expertInfo['identify'] = I('post.identify');
+			// 政治面貌
+			$expertInfo['political_status'] = I('post.political_status');
 			// 复选框，以数组形式存储值
+			// 研究领域
 			$research = I("post.research");
 			$expertInfo['research'] = getResearchType($research);
+			// 研究内容
+			$expertInfo['research_content'] = I('post.research_content');
+			// 工作单位
 			$expertInfo['work_college'] = I('post.college');
+			// 办公电话
+			$expertInfo['telphone'] = I('post.telphone');
+			// 职务
 			$expertInfo['jobname'] = I('post.jobname');
+			// 个人简介
 			$expertInfo['info'] = I('post.info');
-			$result = M('ExpertUser')->add($expertInfo);
-			$this->success("欢迎你,".$loginInfo['realname'].',请完善个人信息',U('Personal/modify'));
+			$result = M('ExpertUser')->data($expertInfo)->add();
+			$this->success("欢迎你,".$loginInfo['realname'],U('Personal/index'));
 		}else{
 			$this->error("很可惜，注册失败了",U('Signup/signup'));
 		}
@@ -133,7 +137,7 @@ class SignupController extends Controller {
 	 * @return [type] [description]
 	 */
 	public function forgetPwd_step2(){
-		$this->assign("username",I('get.username',null));
+		$this->assign("username",I('get.un',null));
 		$this->display();
 	}
 
@@ -143,7 +147,7 @@ class SignupController extends Controller {
 	 * @return [type] [description]
 	 */
 	public function forgetPwd_step3(){
-		$this->assign("username",I('get.username',null));
+		$this->assign("username",I('get.un',null));
 		$this->display();
 	}
 
@@ -154,12 +158,12 @@ class SignupController extends Controller {
 	 * @return [type] [description]
 	 */
 	public function do_forgetPwd_step1(){
-		$info['username'] = I('get.username');
-		$info['realname'] = I('get.realname');
+		$info['username'] = I('post.username');
+		$info['realname'] = I('post.realname');
 		$result = M('Login')->where($info)->find();
 		// 找到用户
 		if($result){
-			$this->redirect('Hoem/Signup/forgetPwd_step2?un='.$info['username']);
+			$this->redirect('Signup/forgetPwd_step2?un='.$info['username']);
 		}else{
 			$this->error("输入信息不正确",U('Signup/forgetPwd_step1'));
 		}
@@ -172,16 +176,15 @@ class SignupController extends Controller {
 	 */
 	public function do_forgetPwd_step2(){
 		// 若没有来自第一步的数据，则非正常流程，不予处理
-		if(I('get.username',null)){
-			$where['username']=I('get.username');
-			$where['mobile_phone'] = I('get.phone');
-			$where['email'] = I('get.email');
+		if(I('post.username',null)){
+			$where['username']=I('post.username');
 			$result = M('Login')->where($where)->find();
-			if($result){
-				$this->redirect('Hoem/Signup/forgetPwd_step3?un='.$where['username']);
+			if($result){$where['mobile_phone'] = I('post.phone');
+			$where['email'] = I('post.email');
+				$this->redirect('Signup/forgetPwd_step3?un='.$where['username']);	
 			}
 			else{
-				$this->error("输入信息不正确",U('Signup/forgetPwd_step2',array('username'=>$where['username'])));
+				$this->error("输入信息不正确",U('Signup/forgetPwd_step2',array('un'=>$where['username'])));
 			}
 		}
 	}
@@ -200,17 +203,17 @@ class SignupController extends Controller {
 				$info['password'] = md5($newPwd);
 
 				//更新数据
-				$result = M('Login')->where($where)->update($info); 
+				$result = M('Login')->where($where)->save($info); 
 				if($result){
 					$this->success("修改成功，请登录",U('Public/login'));
 				}
 				else{
-					$this->error('修改失败，请重试',U('Signup/forgetPwd_step3',array('username'=>$where['username'])));
+					$this->error('修改失败，请重试',U('Signup/forgetPwd_step3',array('un'=>$where['username'])));
 				}
 
 			}
 			else{
-				$this->error('两次密码不相同',U('Signup/forgetPwd_step3',array('username'=>$where['username'])));
+				$this->error('两次密码不相同',U('Signup/forgetPwd_step3',array('un'=>$where['username'])));
 			}
 			
 		}

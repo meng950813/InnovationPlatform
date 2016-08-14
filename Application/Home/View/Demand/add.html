@@ -11,20 +11,20 @@
     <include file="Public/nav" />
     
     <div class="main">
-        <form id="demand_form" action="{:U('Demand/addDemand')}" method="get" enctype="multipart/form-data">
+        <form id="demand_form" action="{:U('Demand/addDemand')}" method="post" enctype="multipart/form-data">
             <div class="line">
                 <label for="demand_title">需求标题 </label>
                 <input class="line-input" type="text" id="demand_title" name="demand_title" required><span class="must">*</span>
             </div>
             <div class="line">
                 <label for="demand_type" style="float:left;">需求类型</label>
-                <input type="checkbox" name="demand_type" value="1">电子信息
-                <input type="checkbox" name="demand_type" value="2">机械设计与制造
-                <input type="checkbox" name="demand_type" value="3">新能源与环保<br/>
-                <input type="checkbox" name="demand_type" value="4">生物技术与医药
-                <input type="checkbox" name="demand_type" value="5">新材料
-                <input type="checkbox" name="demand_type" value="6">现代农业
-                <input type="checkbox" name="demand_type" value="7">其他
+                <input type="checkbox" name="demand_type[]" value="1">电子信息
+                <input type="checkbox" name="demand_type[]" value="2">机械设计与制造
+                <input type="checkbox" name="demand_type[]" value="3">新能源与环保<br/>
+                <input type="checkbox" name="demand_type[]" value="4">生物技术与医药
+                <input type="checkbox" name="demand_type[]" value="5">新材料
+                <input type="checkbox" name="demand_type[]" value="6">现代农业
+                <input type="checkbox" name="demand_type[]" value="7">其他
                 <span class="must">*</span>
             </div>
             <div class="line">

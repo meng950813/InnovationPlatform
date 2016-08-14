@@ -6,6 +6,21 @@
     <link rel="stylesheet" href="__PUBLIC__/css/nav.css">
     <script src="__PUBLIC__/js/jquery.min.js"></script>
     <title>张家港工程项目协同创新服务平台</title>
+    <style>
+        .link_img button{
+            background: #72CEDD;
+            color: #FAFDFD;
+            font-weight: 700;
+            border: 2px solid #0999B1;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .link_img button:hover{
+            background: #0F93A9;
+            color: white;
+        }
+    </style>
 </head>
 <body>
     <include file="Public/nav"/>
@@ -20,7 +35,7 @@
             <a href="#">需求详情</a>
         </div>
        
-        <h3 class="caption">需求名 >> <sapn class="research_title">{$demandInfo.title}</sapn></h3>
+        <h3 class="caption">需求名称</h3>
         <table>
             <tr>
                 <td class="logo" rowspan="8">
@@ -57,7 +72,17 @@
             <tr>
                 <td colspan="2" class="link_img">
                     <!-- <a href=""><img src="__PUBLIC/images/" alt="点击收藏"></a> -->
-                    <img src="__PUBLIC__/images/linkbutton.jpg" alt="我要联系">
+                    <?php if (session('uid')): ?>
+                        <a href="{:U('Public/link',array('id'=>$demandInfo['demand_id'],'linkType'=>3,'title'=>$demandInfo['title']))}" target="_black">
+                            <button>我要联系</button>
+                        </a>
+                    <?php else: ?>
+                        <a href="{:U('Public/login')}" target="_black">
+                            <button>我要联系</button>
+                        </a>
+                    <?php endif ?>
+                   
+                    
                 </td>
             </tr>
         </table>
@@ -66,19 +91,28 @@
                 <td class="tip" rowspan="3">需求简介</td>
                 <td class="tip">综合介绍</td>
                 <td class="research_info">
-                    {$demandInfo.total_info}
+                    <span>
+                        {$demandInfo.total_info}
+                    </span>
+                   
                 </td>
             </tr>
             <tr>
                 <td class="tip">技术指标</td>
                 <td class="research_info">
-                   {$demandInfo.tech_target}
+                    <span>
+                        {$demandInfo.tech_target}
+                    </span>
+                   
                 </td>
             </tr>
             <tr>
                 <td class="tip">其他说明</td>
                 <td class="research_info">
-                    {$demandInfo.other_info}
+                    <span>
+                        {$demandInfo.other_info}
+                    </span>
+                    
                 </td>
             </tr>
         </table>

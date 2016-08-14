@@ -30,6 +30,9 @@ body{
     width: 600px;
     font-size: 14px;
 }
+.research_info>span{
+    line-height: 25px;
+}
 table{
     width: 1099px;
     border-top: 1px solid #64b748;
@@ -37,7 +40,7 @@ table{
     border-spacing: 0px;
     padding: 0;
 }
-td{
+td,th{
     border-right: 1px solid #64b748;
     border-bottom: 1px solid #64b748;
     padding-left: 10px;
@@ -78,4 +81,7 @@ h3{
 .owner_info{
     width: 400px;
     padding: 5px 0 5px 10px;
+}
+.center{
+    text-align: center;
 }

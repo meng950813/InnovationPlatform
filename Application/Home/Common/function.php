@@ -106,26 +106,175 @@
 	 * 判断双方是否已建立联系
 	 *
 	 * @param [type] $require 用户1
-	 * @param [type] $request 用户2
-	 * @param [type] $type  被联系人的类型，个人->1, 团队->2, 企业->3
+	 * @param [type] $request 用户2 或者是 团队 id
+	 * @param [type] $type  联系的类型，0：个人-个人,  1：个人- 团队
 	 * @return [type] 
 	 */
 	function isLinked($require,$request,$type){
-		$where = array(
+		// 如果 $require 为 null。即没有登录，直接返回 false
+		if(!$require){
+			return false;
+		}
+		// 个人联系团队
+		if($type == 1){
+			$where = array(
+					'require_id' => $require,
+					'teamid' => $request,
+					'link_type' => 1,
+					'_logic'=>'and'
+				);
+		}
+		else{
+			// 个人间的联系
+			$where = array(
 				array(
 					'require_id' => $require,
 					'request_id' => $request,
-					'request_type' =>$type,
+					'link_type'  => 0,
 					'_logic'=>'and'
 					),
 				array(
 					'require_id' => $request,
 					'request_id' => $require,
-					'request_type' =>$type,
+					'link_type'  => 0,
 					'_logic'=>'and'
 					),
 				'_logic'=>'or'
 			);
-		return M('Linked')->where($where)->find();
+		}
+		$result = M('Linked')->where($where)->find();
+		if ($result) {
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
+
+	/**
+	* 判断是否已登录
+	*/
+	function islogin(){
+		if(session('uid')){
+			return true;
+		}
+		else{
+			$this->error("请先登录",U('Public/login'));
+		}
+	}
+
+	/**
+	* 将require——link表中的status 置为0，表示信息已处理
+	*/
+    function setStatus($id){
+    	$where['id'] = $id;
+    	$data['status'] = 0;
+    	$result = M('RequireLink')->where($where)->save($data);
+    	if ($result) {
+    		// 修改成功
+    		return true;
+    	}
+    	return false;
+    }
+
+    /**
+	* 将需求详情页中的联系信息置为 * ，不具有普适性
+	*/
+    function demand_none($comInfo){
+    	$comInfo['mobile_phone']    = "********";
+        $comInfo['email']           = "********";
+        $comInfo['website']         = "********";
+        $comInfo['area']            = "********";
+        $comInfo['linkman']         = "********";
+        $comInfo['link_phone']      = "********";
+        $comInfo['linkEmail']       = "********";
+        $comInfo['jobname']         = "********";
+        return $comInfo;
+    }
+
+    /**
+	* 将团队详情页中的联系信息置为 * ，不具有普适性
+	*/
+    function team_none($leader){
+    	$leader['realname']	 	= "********";
+        $leader['level'] 		= "********";
+        $leader['mobile_phone'] = "********";
+        $leader['telphone']  	= "********";
+        $leader['email'] 		= "********";
+        $leader['work_college'] = "********";
+        $leader['jobname']  	= "********";
+        return $leader;
+    }
+
+	 /**
+	* 将从数据库中取出数据中的换行符转换为 浏览器可以处理的换行符，保证显示效果
+	*/
+	function replace_br($content){
+		return str_replace("\n", "<br>", $content);
+	}
+
+	// 检测输入的验证码是否正确，$code为用户输入的验证码字符串
+	function authcode($str, $seKey='ThinkPHP.CN'){
+		$key = substr(md5($seKey), 5, 8);
+		$str = substr(md5($str), 8, 10);
+		return md5($key . $str);
+	}
+	
+	//获取随机验证码函数\
+	function get_code($length=32,$mode=0){
+		switch ($mode){
+			case '1':
+				$str = '123456789';
+				break;
+			case '2':
+				$str = 'abcdefghijklmnopqrstuvwxyz';
+				break;
+			case '3':
+				$str = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+				break;
+			case '4':
+				$str = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+				break;
+			case '5':
+				$str = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+				break;
+			case '6':
+				$str = 'abcdefghijklmnopqrstuvwxyz1234567890';
+				break;
+			default:
+				$str = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890';
+				break;
+		}
+		$checkstr = '';
+		$len = strlen($str) - 1;
+		for ($i = 0; $i < $length; $i++){
+			//$num = rand(0, $len);//产生一个0到$len之间的随机数
+			$num = mt_rand(0, $len);//产生一个0到$len之间的随机数
+			$checkstr .= $str[$num];
+		}
+		return $checkstr;
+	}
+	function check_verify($code, $id = '') {
+		/*$verify = new \Think\Verify();
+		return $verify->check($code, $id);*/
+		$seKey='ThinkPHP.CN';
+		$key = authcode($seKey).$id;
+		// 验证码不能为空
+		$secode = session($key);
+		if(empty($code) || empty($secode)) {
+			return false;
+		}
+		// session 过期
+		if(NOW_TIME - $secode['verify_time'] > 1800) {
+			session($key, null);
+			return false;
+		}
+
+		if(authcode(strtoupper($code)) == $secode['verify_code']) {
+			return true;
+		}
+
+		return false;
+	}
+
 ?>

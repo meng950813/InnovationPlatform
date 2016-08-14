@@ -6,6 +6,22 @@
     <link rel="stylesheet" href="__PUBLIC__/css/nav.css">
     <script src="__PUBLIC__/js/jquery.min.js"></script>
     <title>张家港工程项目协同创新服务平台</title>
+    <style>
+        button{
+            background: #72CEDD;
+            color: #FAFDFD;
+            font-weight: 700;
+            border: 2px solid #0999B1;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover{
+            background: #0F93A9;
+            color: white;
+        }
+    </style>
 </head>
 <body>
     <include file ="Public/nav"/>
@@ -54,7 +70,16 @@
             <tr>
                 <td colspan="2" class="link_img">
                     <!-- <img src="/" alt="点击收藏"> -->
-                    <img src="__PUBLIC__/images/linkbutton.jpg" alt="我要联系">
+                    <?php if (session('uid')): ?>
+                        <a href="{:U('Public/link',array('linkType'=> 4,'id'=>$researchInfo['research_id'],'title'=>$researchInfo['title']))}" target="_black">>
+                            <button>我要联系</button>
+                        </a>
+                    <?php else: ?>
+                        <a href="{:U('Public/login')}" target="_black">
+                            <button>我要联系</button>
+                        </a>
+                    <?php endif ?>
+                    
                 </td>
             </tr>
         </table>
@@ -63,15 +88,20 @@
                 <td class="tip" rowspan="3">成果简介</td>
                 <td class="tip">综合介绍</td>
                 <td class="research_info">
-                    针对我国自主研发的废金属破碎机因不具有防爆功能而导致破碎生产过程中经常发生破碎腔内部爆炸，对生产设备和人员带来安全隐患的问题，采用计算机仿真与爆炸实验、多信息感知与融合、产品优化设计和智能控制技术，对废金属破碎过程爆炸临界条件与压力分布规律，实时数据采集与临爆危险状态识别，危险废金属料安全破碎工艺参数，抑爆、隔爆与泄爆装置设计与控制，防爆型废金属破碎装备设计等关键技术进行研究，突破废金属破碎机防爆的技术难题，实现废金属破碎机防爆功能，支持废金属资源循环利用的生产安全。核心技术达到当代国际先进水平。
+                    <span>
+                         针对我国自主研发的废金属破碎机因不具有防爆功能而导致破碎生产过程中经常发生破碎腔内部爆炸，对生产设备和人员带来安全隐患的问题，采用计算机仿真与爆炸实验、多信息感知与融合、产品优化设计和智能控制技术，对废金属破碎过程爆炸临界条件与压力分布规律，实时数据采集与临爆危险状态识别，危险废金属料安全破碎工艺参数，抑爆、隔爆与泄爆装置设计与控制，防爆型废金属破碎装备设计等关键技术进行研究，突破废金属破碎机防爆的技术难题，实现废金属破碎机防爆功能，支持废金属资源循环利用的生产安全。核心技术达到当代国际先进水平。
+                    </span>
                 </td>
             </tr>
             <tr>
                 <td class="tip">技术指标</td>
                 <td class="research_info">
-                    1、爆炸危险识别率达到95%；
-                    2、防爆、隔爆与泄爆率达到99%；
-                    3、达到II类环境2区的隔爆型产品的技术要求。
+                    <span>
+                        1、爆炸危险识别率达到95%；
+                        2、防爆、隔爆与泄爆率达到99%；
+                        3、达到II类环境2区的隔爆型产品的技术要求。
+                    </span>
+                    
                 </td>
             </tr>
             <tr>
@@ -80,24 +110,31 @@
             </tr>
         </table>
         <?php if ($isteam): ?>
-            <h3 class="caption">团队成员</h3>
-            <table>
+            <h3 class="caption">成员信息</h3>
+            <table class="table-fixed">
                 <tr>
-                    <td class="tip">队长</td>
-                    <td class="owner_info">{$team.teamleader}</td>
-                    <td class="tip" rowspan="{$team.teamNum}+1">职称</td>
-                    <td class="owner_info">教授</td>
+                    <th class="tip">队员</th>
+                    <th class="tip">职称</th>
+                    <th class="owner_info">研究领域</th>
                 </tr>
-                <tr>
-                     <td class="tip" rowspan="{$team.teamNum}">队员</td>
-                </tr>
-                <volist id="list" name="list">
+                <!-- 队员信息 -->
+                <volist id="memberInfo" name="memberInfo">
                     <tr>
-                        <td class="owner_info">{$list.realname}</td>
-                        <td class="owner_info">{$list.type}</td>
+                        <?php if ($agree == 1): ?>
+                            <td class="tip">
+                                <a href="{:U('Expert/expert',array('id'=>$memberInfo['uid']))}">
+                                    {$memberInfo.member_name}
+                                </a>
+                            </td>
+                        <?php else: ?>
+                            <td class="tip"> {$memberInfo.member_name}</td>
+                        <?php endif ?>
+                        <td class="tip"> {$memberInfo.level}</td>
+                        <td class="owner_info center">
+                            {$memberInfo.research}
+                        </td>
                     </tr>
                 </volist>
-                
             </table>
         <?php else: ?>
             <h3 class="caption">完成人</h3>
@@ -117,7 +154,7 @@
             <tr>
                 <td class="tip">姓名</td>
                 <td class="owner_info">********</td>
-                <td class="tip">职称</td>
+                <td class="tip">办公电话</td>
                 <td class="owner_info">********</td>
             </tr>
             <tr>

@@ -1,5 +1,5 @@
 .main{
-    width:600px;
+    width:700px;
     margin:0 auto;
     padding-top: 25px;
     padding-bottom: 30px;
@@ -15,8 +15,12 @@ label{
     display:inline-block;
 }
 .line-input{
-    width:300px;
+    width:400px;
     height:30px;
+}
+input[type=radio]{
+    width: 18px;
+    height: 18px;
 }
 .upload{
     width:400px;
@@ -38,7 +42,7 @@ label{
     margin-top: -16px;
 }
 .textarea textarea{
-    width:380px;
+    width:480px;
     height:100px;
     margin-left:124px;
 }
@@ -49,4 +53,9 @@ label{
 .sub input{
     font-size:20px;
     padding:5px 10px;
+    border-radius: 5px;
+}
+.sub input:hover{
+    background: #146FBD;
+    color: #fff;
 }

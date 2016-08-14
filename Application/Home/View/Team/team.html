@@ -1,13 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="__PUBLIC__/js/jquery.min.js"></script>
-<link rel="stylesheet" href="__PUBLIC__/css/research.css">
-<link rel="stylesheet" href="__PUBLIC__/css/nav.css">
-
-</style>
-<meta charset="utf-8">
-<title>张家港工程项目协同创新服务平台</title>
+    <script src="__PUBLIC__/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="__PUBLIC__/css/research.css">
+    <link rel="stylesheet" href="__PUBLIC__/css/nav.css">
+    <meta charset="utf-8">
+    <title>张家港工程项目协同创新服务平台</title>
+    <style>
+        button{
+            background: #72CEDD;
+            color: #FAFDFD;
+            font-weight: 700;
+            border: 2px solid #0999B1;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover{
+            background: #0F93A9;
+            color: white;
+        }
+    </style>
 </head>
 
 <body>
@@ -21,41 +35,45 @@
         <a href="{:U('Team/teamlist')}">专家团队</a>
         <span>>&nbsp;团队信息</span>
         
-        <h3 class="caption">团队信息 >> <sapn class="research_title">团队名</sapn></h3>
+        <h3 class="caption">团队信息</h3>
         <table>
             <tr>
                 <td class="logo" rowspan="8">
-                    <img src="" alt="">
+                    <img src="__ROOT__/{$teamInfo.team_logo}" alt="">
                 </td>
-                <td colspan="2" height="40px" style="text-align:center;"><b class="research_title">团队名</b></td>
+                <td colspan="2" height="40px" style="text-align:center;"><b class="research_title">{$teamInfo.teamname}</b></td>
             </tr>
             <tr>
-                <td class="tip">完成单位</td>
-                <td class="content">南京大学</td>
+                <td class="tip">工作地点</td>
+                <td class="content">{$teamInfo.workplace}</td>
             </tr>
              <tr>
-                <td class="tip">完成时间</td>
-                <td  class="content">2016</td>
+                <td class="tip">成立时间</td>
+                <td  class="content">{$teamInfo.setup_time}</td>
             </tr>
              <tr>
-                <td class="tip">研发程度</td>
-                <td class="content">研制阶段</td>
+                <td class="tip">研究领域</td>
+                <td class="content">{$teamInfo.team_research}</td>
             </tr>
              <tr>
-                <td class="tip">应用领域</td>
-                <td class="content">电子信息，机械制造</td>
+                <td class="tip">研究方向</td>
+                <td class="content">{$teamInfo.research_content}</td>
             </tr>
-             <tr>
-                <td class="tip">成果等级</td>
-                <td class="content">其他省部级计划</td>
-            </tr>
-             <tr>
-                <td class="tip">专利情况</td>
-                <td class="content">未申请专利</td>
+            <tr>
+                <td class="tip">团队人数</td>
+                <td class="content">{$teamInfo.member_num}</td>
             </tr>
             <tr>
                 <td colspan="2" class="link_img">
-                    <img src="__PUBLIC__/images/linkbutton.jpg" alt="我要联系">
+                    <?php if (session('uid')): ?>
+                        <a href="{:U('Public/link',array('id'=>$teamInfo['teamid'] ,'linkType'=>2,'title'=>$teamInfo['teamname']))}" target="_black">
+                            <button>我要联系</button>
+                        </a>
+                    <?php else: ?>
+                        <a href="{:U('Public/login')}" target="_black">
+                            <button>我要联系</button>
+                        </a>
+                    <?php endif ?>
                 </td>
             </tr>
         </table>
@@ -63,65 +81,100 @@
             <tr>
                 <td class="tip">团队简介</td>
                 <td class="research_info">
-                    针对我国自主研发的废金属破碎机因不具有防爆功能而导致破碎生产过程中经常发生破碎腔内部爆炸，对生产设备和人员带来安全隐患的问题，采用计算机仿真与爆炸实验、多信息感知与融合、产品优化设计和智能控制技术，对废金属破碎过程爆炸临界条件与压力分布规律，实时数据采集与临爆危险状态识别，危险废金属料安全破碎工艺参数，抑爆、隔爆与泄爆装置设计与控制，防爆型废金属破碎装备设计等关键技术进行研究，突破废金属破碎机防爆的技术难题，实现废金属破碎机防爆功能，支持废金属资源循环利用的生产安全。核心技术达到当代国际先进水平。
+                    <span>
+                        {$teamInfo.teaminfo}
+                    </span>
+                   
                 </td>
             </tr>
-            <tr>
-                <td class="tip" rowspan="4">团队成果</td>
-            </tr>
-            </tr>
-            <tr>
-                <td class="research_info">
-                    针对我国自主研发的废金属破碎机因不具有防爆功能而导致破碎生产过程中经常发生破碎腔内部爆炸，对生产设备和人员带来安全隐患的问题，采用计算机仿真与爆炸实验、多信息感
-                </td>
-            </tr>
-            <tr>
-                <td class="research_info">
-                    针对我国自主研发的废金属破碎机因不具有防爆功能而导致破碎生产过程中经常发生破碎腔内部爆炸，对生产设备和人员带来安全隐患的问题，采用计算机仿真与爆炸实验、多信息感
-                </td>
         </table>
-            <h3 class="caption">成员信息</h3>
-            <table>
+        <h3 class="caption">团队项目</h3>
+        <table class="table-fixed">
+            <tr>
+                <th class="research_info">科研项目</th>
+                <th class="tip">项目类型</th>
+            </tr>
+            <volist id = "research" name = "research">
                 <tr>
-                    <td class="tip">队长</td>
-                    <td class="owner_info">********</td>
-                    <td class="tip" rowspan="6">职称</td>
-
-                    <!-- <td class="tip" rowspan="{$team.teamNum}+1">职称</td> -->
-                    <td class="owner_info">********</td>
+                    <td class="research_info center ">
+                        <a href="{:U('Result/result',array('id'=>$research['result_id']))}">{$research.research_name}</a>
+                    </td>
+                    <td class="tip">
+                        <a href="#">{$research.research_level}</a>
+                    </td>
                 </tr>
+            </volist>
+            
+        </table>
+        <h3 class="caption">团队荣誉</h3>
+        <table class="table-fixed">
+            <tr>
+                <th class="research_info">获奖/专利名称</th>
+                <th class="tip">获奖时间</th>
+            </tr>
+            <volist id = "award" name = "award">
                 <tr>
-                    <!-- <td class="tip" rowspan="{team.teamNum}">队员</td> -->
-                    <td class="tip" rowspan="5">队员</td>
+                    <td class="research_info center ">
+                        <a href="{:U('Result/result',array('id'=> $award['research_id']))}">{$award.award_title}</a>
+                    </td>
+                    <td class="tip">{$award.get_time}</td>
                 </tr>
+            </volist>
+            
+        </table>
+        <h3 class="caption">成员信息</h3>
+        <table class="table-fixed">
+            <tr>
+                <th class="tip">队员</th>
+                <th class="tip">职称</th>
+                <th class="owner_info">研究领域</th>
+            </tr>
+            <!-- 队员信息 -->
+            <volist id="memberInfo" name="memberInfo">
                 <tr>
-                    <td class="owner_info">********</td>
-                    <td class="owner_info">********</td>
+                    <?php if ($agree == 1): ?>
+                        <td class="tip">
+                            <a href="{:U('Expert/expert',array('id'=>$memberInfo['uid']))}">
+                                {$memberInfo.member_name}
+                            </a>
+                        </td>
+                    <?php else: ?>
+                        <td class="tip"> {$memberInfo.member_name}</td>
+                    <?php endif ?>
+                    <td class="tip"> {$memberInfo.level}</td>
+                    <td class="owner_info center">
+                        {$memberInfo.research}
+                    </td>
                 </tr>
-                <tr>
-                    <td class="owner_info">********</td>
-                    <td class="owner_info">********</td>
-                </tr>
-            </table>
+            </volist>
+        </table>
         <h3 class="caption">团队联系人</h3>
-        <table>
+        <table class="table-fixed">
             <tr>
                 <td class="tip">姓名</td>
-                <td class="owner_info">********</td>
-                <td class="tip">职称</td>
-                <td class="owner_info">********</td>
+                <?php if ($agree == 1): ?>
+                    <td class="owner_info">
+                        <a href="{:U('Expert/expert',array('id'=>$leader['uid']))}">
+                            {$leader.realname}
+                        </a>
+                    </td>
+                <?php else: ?>
+                    <td class="owner_info">{$leader.realname}</td>
+                <?php endif ?>
+                <td class="tip">办公电话</td>
+                <td class="owner_info">{$leader.telphone}</td>
             </tr>
             <tr>
-                <td class="tip">联系方式</td>
-                <td class="owner_info">********</td>
+                <td class="tip">手机</td>
+                <td class="owner_info">{$leader.mobile_phone}</td>
                 <td class="tip">E-mail</td>
-                <td class="owner_info">********</td>
+                <td class="owner_info">{$leader.email}</td>
             </tr>
             <tr>
                 <td class="tip">单位</td>
-                <td class="owner_info">********</td>
+                <td class="owner_info">{$leader.work_college}</td>
                 <td class="tip">职务</td>
-                <td class="owner_info">********</td>
+                <td class="owner_info">{$leader.jobname}</td>
             </tr>
         </table>
     </div>

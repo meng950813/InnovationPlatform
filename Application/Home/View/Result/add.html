@@ -11,26 +11,26 @@
     <include file="Public/nav" />
 
     <div class="main">
-        <form id="demand_form" action="{:U('Result/addResearch')}" method="get" enctype="multipart/form-data">
+        <form id="demand_form" action="{:U('Result/addResearch')}" method="post" enctype="multipart/form-data">
             <div class="line">
                 <label for="research_title">课题名称 </label>
                 <input class="line-input" type="text" id="research_title" name="research_title" required><span class="must">*</span>
             </div>
             <div class="line">
                 <label for="research_type" style="float:left;">课题类型</label>
-                <input type="checkbox" name="research_type" value="1">电子信息
-                <input type="checkbox" name="research_type" value="2">机械设计与制造
-                <input type="checkbox" name="research_type" value="3">新能源与环保<br/>
-                <input type="checkbox" name="research_type" value="4">生物技术与医药
-                <input type="checkbox" name="research_type" value="5">新材料
-                <input type="checkbox" name="research_type" value="6">现代农业
-                <input type="checkbox" name="research_type" value="7">其他
+                <input type="checkbox" name="research_type[]" value="1">电子信息
+                <input type="checkbox" name="research_type[]" value="2">机械设计与制造
+                <input type="checkbox" name="research_type[]" value="3">新能源与环保<br/>
+                <input type="checkbox" name="research_type[]" value="4">生物技术与医药
+                <input type="checkbox" name="research_type[]" value="5">新材料
+                <input type="checkbox" name="research_type[]" value="6">现代农业
+                <input type="checkbox" name="research_type[]" value="7">其他
                 <span class="must">*</span>
             </div>
             <div class="line">
                 <label for="isteam">研发方式 </label>
-                <input class="line-input" type="radio" name="isteam" checked value="1" >团队合作
-                <input class="line-input" type="radio" name="isteam" value="0">独立开发
+                <input type="radio" name="isteam" checked value="1" >团队合作
+                <input type="radio" name="isteam" value="0">独立开发
             </div>
              <div class="line" id="team">
                 <label for="team_name">团队名称 </label>
@@ -61,10 +61,6 @@
                 </select>
                     <span class="must">*</span>
             </div>
-            <div class="line">
-                <label for="patent">专利申请 </label>
-                <input class="line-input" type="text" placeholder="填写本项目申请的专利名称" id="patent" name="patent">
-            </div>
             <div class="line textarea">
                 <label for="totalInfo">综合介绍</label>
                 <textarea name="total_info" id="totalInfo"></textarea>
@@ -77,6 +73,7 @@
                 <label for="otherInfo">其他介绍</label>
                 <textarea name="other_info" id="otherInfo"></textarea>
             </div>
+            <input type="hidden" name="add" value="1">
             <div class="sub" >
                 <input type="submit" value="提交" />
             </div>

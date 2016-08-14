@@ -9,23 +9,43 @@
 </head>
 <body>
     <include file="Public/nav" />
-    <form id="demand_form" action="{:U('Result/addResearch')}" method="get" enctype="multipart/form-data">
+    <form id="demand_form" action="{:U('Team/addTeam')}" method="post" enctype="multipart/form-data">
         <div class="main">
             <div class="line">
                 <label for="teamname">团队名称 </label>
-                <input class="line-input" type="text" id="teamname" name="teamname" required><span class="must">*</span>
+                <input class="line-input" type="text" id="teamname" name="teamname" required><span id="nameError" class="must">*</span>
             </div>
-            <div class="line">
-                <label for="research_type" style="float:left;">研究方向</label>
-                <input type="checkbox" name="research_type" value="1">电子信息
-                <input type="checkbox" name="research_type" value="2">机械设计与制造
-                <input type="checkbox" name="research_type" value="3">新能源与环保<br/>
-                <input type="checkbox" name="research_type" value="4">生物技术与医药
-                <input type="checkbox" name="research_type" value="5">新材料
-                <input type="checkbox" name="research_type" value="6">现代农业
-                <input type="checkbox" name="research_type" value="7">其他
-                <span class="must">*</span>
-            </div>
+            <script>
+                $(function() {
+                    $('#teamname').change(function(event){
+                        if($('#teamname').val().trim() != ""){
+                            var teamname = $('#teamname').val();
+                            $.ajax({
+                                type:"post",
+                                url:"__ROOT__/index.php/Public/checkName",
+                                dataType:'json',
+                                data:{teamname:teamname}
+                                })
+                            .done(function(data) {
+                                console.log("success",data);
+                                if(data.code == 0){
+                                    $('#nameError').html("*");
+                                }else{
+                                    $("#nameError").html("团队名已存在");
+                                }
+                            })
+                            .fail(function(XMLHttpRequest, textStatus, errorThrown){
+                                console.log("status = "+XMLHttpRequest.status);  // 200
+                                console.log("readyState = "+XMLHttpRequest.readyState); //4
+                                console.log("textStatus = "+textStatus);  //parsererror
+                            })
+                            .always(function() {
+                                console.log("complete");
+                            });
+                        }
+                    });
+                });
+            </script>
             <div class="line" style="text-align:center">
                 <p>团队logo (建议尺寸： 456 × 342 像素 仅限上传一张)</p>
                 <input type="file" name="img" id="logo" accept="image/*" />
@@ -34,9 +54,27 @@
                 </div>
             </div>
             <div class="line">
-                <label for="team_memnber">邀请成员</label>
-                <input class="line-input" type="text" id="team_memnber" name="team_memnber">
+                <label for="research_type" style="float:left;">研究领域</label>
+                <input type="checkbox" name="research_type[]" value="1">电子信息
+                <input type="checkbox" name="research_type[]" value="2">机械设计与制造
+                <input type="checkbox" name="research_type[]" value="3">新能源与环保<br/>
+                <input type="checkbox" name="research_type[]" value="4">生物技术与医药
+                <input type="checkbox" name="research_type[]" value="5">新材料
+                <input type="checkbox" name="research_type[]" value="6">现代农业
+                <input type="checkbox" name="research_type[]" value="7">其他
+                <span class="must">*</span>
             </div>
+            <div class="line">
+                <label for="research_name">研究方向 </label>
+                <input class="line-input" type="text" id="research_name" name="research_content" required><span class="must">*</span>
+            </div>
+             <div class="line">
+                <label for="workplace">工作地点 </label>
+                <input class="line-input" type="text" id="workplace" name="workplace" required>
+            </div>
+            <p style="text-align:center;">
+               注意：<span class="must">邀请成员只能在 “ 专家信息 ” 中进行;只能邀请专家用户</span>
+            </p>
             <div class="line textarea">
                 <label for="info">团队简介</label>
                 <textarea name="info" id="info"></textarea>
