@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- create by cm -->
 	<meta charset="UTF-8">
 	<title>专家注册</title>
 	<script src="__PUBLIC__/js/jquery.min.js"></script>
 	<script src="__PUBLIC__/js/signup.js"></script>
-	<link rel="stylesheet" href="__PUBLIC__/css/signup.css">  
-	<link rel="stylesheet" href="__PUBLIC__/css/nav.css">
+	<link rel="stylesheet" href="__PUBLIC__/css/home/signup.css">  
+	<link rel="stylesheet" href="__PUBLIC__/css/home/nav.css">
     <style>
 		input[type=radio]{
 			width: 20px;
@@ -136,6 +137,7 @@
 			$('#username').change(function(event){
 				if($('#username').val().trim() != ""){
 					var un = $('#username').val();
+					console.log(un);
 					$.ajax({
 						type:"post",
 						url:"__ROOT__/index.php/Public/checkName",
@@ -146,8 +148,10 @@
 						console.log("success",data);
 						if(data.code == 0){
 							$('#nameError').html("*");
+							$('input[type=submit]').show();
 						}else{
 							$("#nameError").html("用户名已存在");
+							$('input[type=submit]').hide();
 						}
 					})
 					.fail(function(XMLHttpRequest, textStatus, errorThrown){

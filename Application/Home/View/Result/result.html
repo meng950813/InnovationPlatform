@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- create by cm -->
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="__PUBLIC__/css/research.css">
-    <link rel="stylesheet" href="__PUBLIC__/css/nav.css">
+    <link rel="stylesheet" href="__PUBLIC__/css/home/research.css">
+    <link rel="stylesheet" href="__PUBLIC__/css/home/nav.css">
     <script src="__PUBLIC__/js/jquery.min.js"></script>
     <title>张家港工程项目协同创新服务平台</title>
     <style>
@@ -35,43 +36,42 @@
             <span>>&nbsp;科技成果详情</span>
         </div>
         
-        <h3 class="caption">科技成果名称 >> <sapn class="research_title">科技成果标题</sapn></h3>
+        <h3 class="caption">科技成果名称</h3>
         <table>
             <tr>
                 <td class="logo" rowspan="8">
-                    <img src="__ROOT__/Public/images/demand_default.png" alt="">
+                    <img src="__ROOT__/{$resultInfo.result_picture}" alt="">
                 </td>
-                <td colspan="2" height="40px" style="text-align:center;"><b class="research_title">科技成果标题</b></td>
+                <td colspan="2" height="40px" style="text-align:center;"><b class="research_title">{$resultInfo.result_name}</b></td>
             </tr>
             <tr>
-                <td class="tip">完成单位</td>
-                <td class="content">南京大学</td>
+                <td class="tip">完成人/团队</td>
+                <td class="content">
+                    <?php if($resultInfo['isteam'] == 1):?>
+                        {$title.teamname}
+                    <?php else:?>
+                        {$title.realname}
+                    <?php endif?>
+                </td>
             </tr>
              <tr>
                 <td class="tip">完成时间</td>
-                <td  class="content">2016</td>
+                <td  class="content">{$resultInfo.end_time}</td>
             </tr>
-             <tr>
-                <td class="tip">研发程度</td>
-                <td class="content">研制阶段</td>
-            </tr>
+            
              <tr>
                 <td class="tip">应用领域</td>
-                <td class="content">电子信息，机械制造</td>
+                <td class="content">{$resultInfo.research_type}</td>
             </tr>
              <tr>
                 <td class="tip">成果等级</td>
-                <td class="content">其他省部级计划</td>
-            </tr>
-             <tr>
-                <td class="tip">专利情况</td>
-                <td class="content">未申请专利</td>
+                <td class="content">{$resultInfo.research_level}</td>
             </tr>
             <tr>
                 <td colspan="2" class="link_img">
                     <!-- <img src="/" alt="点击收藏"> -->
                     <?php if (session('uid')): ?>
-                        <a href="{:U('Public/link',array('linkType'=> 4,'id'=>$researchInfo['research_id'],'title'=>$researchInfo['title']))}" target="_black">>
+                        <a href="{:U('Public/link',array('linkType'=> 4,'id'=>$resultInfo['result_id']))}" target="_black">
                             <button>我要联系</button>
                         </a>
                     <?php else: ?>
@@ -89,7 +89,7 @@
                 <td class="tip">综合介绍</td>
                 <td class="research_info">
                     <span>
-                         针对我国自主研发的废金属破碎机因不具有防爆功能而导致破碎生产过程中经常发生破碎腔内部爆炸，对生产设备和人员带来安全隐患的问题，采用计算机仿真与爆炸实验、多信息感知与融合、产品优化设计和智能控制技术，对废金属破碎过程爆炸临界条件与压力分布规律，实时数据采集与临爆危险状态识别，危险废金属料安全破碎工艺参数，抑爆、隔爆与泄爆装置设计与控制，防爆型废金属破碎装备设计等关键技术进行研究，突破废金属破碎机防爆的技术难题，实现废金属破碎机防爆功能，支持废金属资源循环利用的生产安全。核心技术达到当代国际先进水平。
+                        {$resultInfo.total_info}
                     </span>
                 </td>
             </tr>
@@ -97,19 +97,29 @@
                 <td class="tip">技术指标</td>
                 <td class="research_info">
                     <span>
-                        1、爆炸危险识别率达到95%；
-                        2、防爆、隔爆与泄爆率达到99%；
-                        3、达到II类环境2区的隔爆型产品的技术要求。
+                       {$resultInfo.tech_target}
                     </span>
                     
                 </td>
             </tr>
-            <tr>
-                <td class="tip">其他说明</td>
-                <td class="research_info"></td>
-            </tr>
         </table>
-        <?php if ($isteam): ?>
+        <h3 class="caption">项目获奖/专利</h3>
+        <table class="table-fixed">
+            <tr>
+                <th class="research_info">获奖/专利名称</th>
+                <th class="tip">获得时间</th>
+            </tr>
+            <volist id = "awardInfo" name = "awardInfo">
+                <tr>
+                    <td class="research_info center ">
+                        {$awardInfo.award_title}
+                    </td>
+                    <td class="tip">{$awardInfo.get_time}</td>
+                </tr>
+            </volist>
+        </table>
+        
+        <?php if ($resultInfo['isteam'] == 1): ?>
             <h3 class="caption">成员信息</h3>
             <table class="table-fixed">
                 <tr>
@@ -136,39 +146,100 @@
                     </tr>
                 </volist>
             </table>
-        <?php else: ?>
-            <h3 class="caption">完成人</h3>
-            <table>
-                <tr>
-                    <td class="tip">姓名</td>
-                    <td class="owner_info">********</td>
-                    <td class="tip">职称</td>
-                    <td class="owner_info">********</td>
-                </tr>
-            </table> 
         <?php endif ?>
         
         
         <h3 class="caption">联系人</h3>
         <table class="table-fixed">
-            <tr>
-                <td class="tip">姓名</td>
-                <td class="owner_info">********</td>
-                <td class="tip">办公电话</td>
-                <td class="owner_info">********</td>
-            </tr>
-            <tr>
-                <td class="tip">联系方式</td>
-                <td class="owner_info">********</td>
-                <td class="tip">E-mail</td>
-                <td class="owner_info">********</td>
-            </tr>
-            <tr>
-                <td class="tip">单位</td>
-                <td class="owner_info">********</td>
-                <td class="tip">职务</td>
-                <td class="owner_info">********</td>
-            </tr>
+            <!-- 未登录显示 -->
+            <?php if (!session('uid')): ?>
+                 <tr>
+                    <td class="tip">姓名</td>
+                    <td class="owner_info">{$ownerInfo.realname}</td>
+                  
+                    <td class="tip">办公电话</td>
+                    <td class="owner_info">{$ownerInfo.telphone}</td>
+                </tr>
+                 <tr>
+                    <td class="tip">联系方式</td>
+                    <td class="owner_info">{$ownerInfo.mobile_phone}</td>
+                    <td class="tip">E-mail</td>
+                    <td class="owner_info">{$ownerInfo.email}</td>
+                </tr>
+                <tr>
+                    <td class="tip">单位</td>
+                    <td class="owner_info">{$ownerInfo.work_college}</td>
+                    <td class="tip">职务</td>
+                    <td class="owner_info">{$ownerInfo.jobname}</td>
+                </tr>
+            <?php endif ?>
+            <!-- 团队成果 -->
+            <?php if($resultInfo['isteam'] == 1):?>
+                <tr>
+                    <td class="tip">姓名</td>
+                    <td class="owner_info">{$ownerInfo.realname}</td>
+                  
+                    <td class="tip">办公电话</td>
+                    <td class="owner_info">{$ownerInfo.telphone}</td>
+                </tr>
+                 <tr>
+                    <td class="tip">联系方式</td>
+                    <td class="owner_info">{$ownerInfo.mobile_phone}</td>
+                    <td class="tip">E-mail</td>
+                    <td class="owner_info">{$ownerInfo.email}</td>
+                </tr>
+                <tr>
+                    <td class="tip">单位</td>
+                    <td class="owner_info">{$ownerInfo.work_college}</td>
+                    <td class="tip">职务</td>
+                    <td class="owner_info">{$ownerInfo.jobname}</td>
+                </tr>
+            <?php else: ?>
+                <?php if($title['type'] == 1):?>
+                    <tr>
+                        <td class="tip">姓名</td>
+                        <td class="owner_info">{$title.realname}</td>
+                      
+                        <td class="tip">办公电话</td>
+                        <td class="owner_info">{$ownerInfo.telphone}</td>
+                    </tr>
+                     <tr>
+                        <td class="tip">联系方式</td>
+                        <td class="owner_info">{$title.mobile_phone}</td>
+                        <td class="tip">E-mail</td>
+                        <td class="owner_info">{$title.email}</td>
+                    </tr>
+                    <tr>
+                        <td class="tip">单位</td>
+                        <td class="owner_info">{$ownerInfo.work_college}</td>
+                        <td class="tip">职务</td>
+                        <td class="owner_info">{$ownerInfo.jobname}</td>
+                    </tr>
+                <?php else:?>
+                    <?php if ($titlt['type'] == 2): ?>
+                        <tr>
+                            <td class="tip">企业电话</td>
+                            <td class="owner_info">{$title.mobile_phone}</td>
+                            <td class="tip">企业邮箱</td>
+                            <td class="owner_info">{$title.email}</td>
+                        </tr>  
+                        <tr> 
+                            <td class="tip">企业联系人</td>
+                            <td class="owner_info">{$ownerInfo.linkman}</td>
+                            <td class="tip">联系方式</td>
+                            <td class="owner_info">{$ownerInfo.link_phone}</td>
+                            
+                        </tr>
+                        <tr>
+                            <td class="tip">联系人邮箱</td>
+                            <td class="owner_info">{$ownerInfo.linkEmail}</td>
+                            <td class="tip">职务</td>
+                            <td class="owner_info">{$ownerInfo.jobname}</td>
+                        </tr> 
+                    <?php endif ?>
+                   
+                <?php endif?>
+            <?php endif?>            
         </table>
     </div>
     <include file ="Public/footer"/>

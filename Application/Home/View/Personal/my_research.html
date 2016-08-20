@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- create by cm -->
+	<meta charset="UTF-8">
+	<title>个人中心——我的成果</title>
+    <link rel="stylesheet" href="__PUBLIC__/css/home/personal.css">
+	<style>
+		.my_list{
+			margin-bottom: 20px;
+		}
+		.list{
+			height: 40px;
+			line-height: 40px;
+			border-bottom: 2px dotted #52A8DE;
+		}
+		.list >a{
+			float: right;
+			color: #1B8DEF;
+			padding: 0 20px;
+			margin: 0 10px;
+			background: #E4F1F9;
+			border-radius: 10px;
+		}
+		.list>a:hover{
+			font-weight: bold;
+			background: #1B8DEF;
+			color: #fff;
+		}
+		.list a.free:hover{
+			color: #f00;
+		}
+		.name{
+			margin-left: 20px;
+		}
+		.name>a{
+			color: #101010;
+			font-weight: bold;
+			font-size: 18px;
+		}
+		.name>a:hover{
+			color: #1B8DEF;
+		}
+	</style>
+</head>
+<body>
+	<div id="header">
+    	<div id="header_box">
+    		<a href="__ROOT__">
+    			<img src="__PUBLIC__/images/背景.png" alt="">
+    		</a>
+    		<a class="index" href="__ROOT__">回到首页</a>
+    	</div>
+    </div>
+    <div id="nav">
+    	<div id="nav_box">
+    		<ul>
+    			<li>
+    				<a href="{:U('Personal/index')}">个人中心</a>
+    			</li>
+    			<?php if(session('uid') && session('type') == 1) :?>
+	    			<li>
+	    				<a href="{:U('Personal/my_team')}">我的团队</a>
+	    			</li>
+	    		<?php endif?>
+    			<li class="focus">
+    				<a href="{:U('Personal/my_research')}">研究成果</a>
+    			</li>
+    			<li>
+    				<a href="{:U('Personal/my_award')}">我的成就</a>
+    			</li>
+    			<li>
+    				<a href="{:U('Personal/my_info')}">个人信息</a>
+    			</li>
+    			<?php if(session('type') != 0):?>
+	    			<li>
+	    				<a href="{:U('Personal/detail_info')}">详细信息</a>
+	    			</li>
+	    		<?php endif?>
+    		</ul>
+    	</div>
+    </div>
+    <div id="link_img">
+		<!-- 各种找专家，找团队的图片链接 -->
+		<ul>
+			<li>
+				<a href="{:U('Expert/expertlist')}">
+					找专家	
+				</a>
+			</li>
+			<li>
+				<a href="{:U('Team/teamlist')}">
+					找专家团队	
+				</a>
+			</li>
+			<li>
+				<a href="{:U('Result/resultlist')}">
+					找科技成果	
+				</a>
+			</li>
+			<li>
+				<a href="{:U('Demand/demandlist')}">
+					找企业需求	
+				</a>
+			</li>
+			<?php if (session('type') == 1): ?>
+				<li>
+					<a href="{:U('Team/add')}">
+						组建团队	
+					</a>
+				</li>
+			<?php endif ?>
+			<li>
+				<a href="{:U('Result/add')}">
+					发布科技成果	
+				</a>
+			</li>
+			<?php if (session('type') == 2): ?>
+				<li>
+					<a href="{:U('Demand/add')}">
+						发布企业需求	
+					</a>
+				</li>
+			<?php endif ?>
+		</ul>
+    </div>
+	
+	<div id="body">
+		<!-- 显示我的科研成果 -->
+		<img src="__PUBLIC__/images/my_research.png" alt="">
+		<div class="my_list">
+			<volist id="my_research" name="my_research">
+				<div class="list">
+					<span class="name">
+						<a href="{:U('Result/result',array('id'=>$my_research['result_id']))}">{$my_research.result_name}</a>
+					</span>
+					<a href="{:U('Personal/modify_research',array('id'=>$my_research['result_id']))}">修改信息</a>
+					<a href="{:U('Personal/addAward',array('id'=>$my_research['result_id'],'type'=>0))}" target="_black">添加成就</a>
+					<a href="javascript:void(0);" class="free" id="my_research-{$my_research.result_id}" value="{$my_research.result_id}" onclick="del_research(this)">删除成果</a>
+				</div>
+			</volist>
+			<?php if($my_research == null):?>
+				<div class="list" style="overflow:hidden;">
+					<h3 style="float:left;">暂未发布研究成果</h3>
+					<a href="{:U('Team/add')}">成果发布</a>
+				</div>
+			<?php endif?>
+		</div>
+
+		<!-- 显示我的团队的科研成果 -->
+		<img src="__PUBLIC__/images/team_research.png" alt="">
+		<div class="team_list">
+			<volist id="team_research" name="team_research">
+				<div class="list">
+					<span class="name">
+						<a href="{:U('Result/result',array('id'=>$team_research['result_id']))}">{$team_research.result_name}</a>
+					</span>
+					<?php if($team_research['leader'] == 1):?>
+						<a href="javascript:void(0);" id="team_research-{$team_research.result_id}" value="{$team_research.result_id}" onclick="del_research(this)" class="free">删除成果</a>
+						<a href="{:U('Personal/modify_research',array('id'=>$team_research['result_id']))}">修改信息</a>
+					<?php endif?>
+					<a href="{:U('Personal/addAward',array('id'=>$team_research['result_id'],'type'=>1))}" target="_black">添加成就</a>
+					
+				</div>
+			</volist>
+			
+		</div>
+	</div>
+	<script>
+		function del_research(obj) {
+			if (confirm("确定删除这条研究成果吗?")) {
+				var id = document.getElementById(obj.id).getAttribute("value");
+				window.location.href="__URL__/del_research/id/"+id;
+			}
+		}
+	</script>	
+    <include file="Public/footer" />
+</body>
+</html>

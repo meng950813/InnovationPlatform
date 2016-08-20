@@ -20,6 +20,6 @@ return array(
 	'DB_PARAMS' => array(PDO::ATTR_CASE => PDO::CASE_NATURAL),
 	'DB_CHARSET'=> 'utf8', // 字符集
 	'DB_DEBUG'  =>  false, // 数据库调试模式 开启后可以记录SQL日志 3.2.3新增
-	'SHOW_PAGE_TRACE' =>true,
+	// 'SHOW_PAGE_TRACE' =>true,
 	'ADMIN_MARK' => array('root','admin'),
 );

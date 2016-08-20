@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- create by cm -->
+	<meta charset="UTF-8">
+	<title>张家港工程项目协同创新服务平台档</title>
+	<script src="__PUBLIC__/js/jquery.min.js"></script>
+	<link rel="stylesheet" href="__PUBLIC__/css/home/nav.css">
+	<style>
+		.link-main{
+		    width:600px;
+		    margin:0 auto;
+		    background-color: white;
+		    margin-top:20px;
+		    margin-bottom: 30px; 
+		}
+		.line{
+			margin-top:20px;
+		    margin-bottom:5px;
+		}
+		#teamname{
+			width: 300px;
+			height: 20px;
+			border: 2px solid #A9A9A9;
+			margin-left: 4px;
+			padding: 2px;
+		}
+		div>span{
+		    width:100px;
+		    font-size:14px;
+		    display: inline-block;
+		}
+		.textarea{
+		    position: relative;
+		}
+		.textarea span{
+		    position: absolute;
+		    top: 50%;
+		    margin-top: -16px;
+		}
+		.textarea textarea{
+		    width:400px;
+		    height:120px;
+		    margin-left:108px;
+		    border-width: 2px;
+		}
+		.sub{
+		    margin-top:10px;
+		    text-align:center;
+		}
+		.sub input{
+		    font-size:16px;
+		    padding:10px 15px;
+		    border-radius: 5px;
+		    cursor: pointer;
+		}
+		.sub input:hover{
+			background: #0097DA;
+			color: #fff;
+		}
+	</style>
+</head>
+<body>
+	<include file="Public/nav"/>
+	<div class="link-main">
+		<form action="{:U('Public/join')}" method="post">
+			<p align="center">注意：<span style="color:#e4393c;">只有团队创建人有权限邀请新成员</span></p>
+			<div class="line">
+				<span for="teamname">团队名</span>
+				<input type="text" id="teamname" name="teamname"><span id="tnameError" style="color:red;">*</span>
+			</div>
+			<script>
+                $(function() {
+                    $('#teamname').change(function(event){
+                    	console.log("into change");
+                        if($('#teamname').val().trim() != ""){
+                            var teamname = $('#teamname').val();
+                            $.ajax({
+                                type:"post",
+                                url:"__ROOT__/index.php/Public/checkName",
+                                dataType:'json',
+                                data:{
+                                	teamname:teamname,
+                                	leader:<?php echo session('uid'); ?> 
+                                }
+                                })
+                            .done(function(data) {
+                                console.log("success",data);
+                                if(data.code == 0){
+                                    $('#tnameError').html("团队名不正确");
+                                }else{
+                                    $("#tnameError").html("*");
+                                }
+                            })
+                            .fail(function(XMLHttpRequest, textStatus, errorThrown){
+                                console.log("status = "+XMLHttpRequest.status);  // 200
+                                console.log("readyState = "+XMLHttpRequest.readyState); //4
+                                console.log("textStatus = "+textStatus);  //parsererror
+                            })
+                            .always(function() {
+                                console.log("complete");
+                            });
+                        }
+                    });
+                });
+            </script>
+			<div class="textarea">
+				<span for="content">邀请说明</span>
+				<textarea name="content" id="content"></textarea>
+			</div>
+			<div class="textarea">
+				<span for="remark">备注</span>
+				<textarea name="remark" id="remark"></textarea>
+			</div>
+			<input type="hidden" value="{$id}" name="request_id">
+
+			<div class="sub">
+				<input type="submit" value="确认邀请">
+			</div>
+		</form>
+	</div>
+	<include file="Public/footer"/>
+</body>
+</html>

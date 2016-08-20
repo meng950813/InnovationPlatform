@@ -3,6 +3,7 @@ namespace Home\Controller;
 use Think\Controller;
 
 /**
+ * create by cm
  * 专家团队
  */
 class TeamController extends Controller {
@@ -16,10 +17,14 @@ class TeamController extends Controller {
             $type = getResearchType(I('get.type'));
             $where['team_research'] = array("like","%".$type."%");
         }
-        $list = M('ExpertTeam')->where($where)->order('sort desc')->page($_GET['p'].',20')->getField('teamid,teamname,workplace,team_research,research_content,setup_time');
-        $count = count($list);
+        $ExpertTeam = M('ExpertTeam');
+        $list =$ExpertTeam->where($where)->order('sort desc')->page(I('get.p',1).',20')->getField('teamid,teamname,workplace,team_research,research_content,setup_time');
+        
+        // 分页 
+        $count =$ExpertTeam->where($where)->count();
         $page = new \Think\Page($count,20);
         $show = $page->show();
+        
         $this->assign("list",$list);
         $this->assign("page",$show);
     	$this->display();

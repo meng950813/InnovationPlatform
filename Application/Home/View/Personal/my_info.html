@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- create by cm -->
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="__PUBLIC__/css/home/personal.css">
+	<script type="text/javascript" src="__PUBLIC__/js/jquery.min.js"></script>
+	<title>个人中心--我的信息</title>
+	<style>
+		.myInfo{
+			width: 1000px;
+			margin: 0 auto;
+			margin-top: 20px;
+			padding-bottom: 20px;
+			border-bottom: 2px dotted #bbb;
+			overflow: hidden;
+		}
+
+		/*头像*/
+		#mylogo{
+			float: left;
+			width: 200px;
+			border-right: 1px dotted #aaa;
+			text-align: center;
+		}
+		#mylogo form{
+			text-align: center;
+		}
+		.upload{
+		    width:140px;
+		    height: 160px;
+			margin-left: 29px;
+			border:1px solid #ccc;
+		}
+		.upload #preview{
+		    max-width:140px;
+		    max-height:160px;
+		}
+		#mylogo div{
+			margin-top: 10px;
+			text-align: center;
+		}
+		#mylogo input[type = file]{
+			width: 200px;
+		}
+		.sub{
+			text-align: center;
+		}
+		.sub>input{
+			font-size: 16px;
+			padding: 5px 10px;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+		.sub>input:hover{
+			background-color: #03dcf4;
+			color: #fff;
+		}
+
+		/* 基础信息*/
+		#basicInfo{
+			float: left;
+			width: 650px;
+			margin:20px 0 0 50px;
+		}
+		.line{
+		    margin-bottom:5px;
+		}
+		label{
+		    width:100px;
+		    padding:5px 10px;
+		    font-size:20px;
+		    display:inline-block;
+		}
+		.line-input{
+		    width:300px;
+		    height:30px;
+		}
+		.must{
+		    color:red;
+		    margin-left:10px; 
+		}
+
+		.changePwd{
+			width: 600px;
+			margin: 0 auto;
+		}
+		.line input.uppwd {
+			height: 33px;
+			width: 125px;
+			padding: 0 15px;
+			border: 1px solid #CCC;
+		}
+		.verfiy{
+			display: inline-block;
+			margin-left: 10px;
+			vertical-align: bottom;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+	<div id="header">
+    	<div id="header_box">
+    		<a href="__ROOT__">
+    			<img src="__PUBLIC__/images/背景.png" alt="">
+    		</a>
+    		<a class="index" href="__ROOT__">回到首页</a>
+    	</div>
+    </div>
+    <div id="nav">
+    	<div id="nav_box">
+    		<ul>
+    			<li>
+    				<a href="{:U('Personal/index')}">个人中心</a>
+    			</li>
+    			<?php if(session('uid') && session('type') == 1) :?>
+	    			<li>
+	    				<a href="{:U('Personal/my_team')}">我的团队</a>
+	    			</li>
+	    		<?php endif?>
+    			<li>
+    				<a href="{:U('Personal/my_research')}">研究成果</a>
+    			</li>
+    			<li>
+    				<a href="{:U('Personal/my_award')}">我的成就</a>
+    			</li>
+    			<li class="focus">
+    				<a href="{:U('Personal/my_info')}">个人信息</a>
+    			</li>
+    			<?php if(session('type') != 0):?>
+	    			<li>
+	    				<a href="{:U('Personal/detail_info')}">详细信息</a>
+	    			</li>
+	    		<?php endif?>
+    		</ul>
+    	</div>
+    </div>
+    <div id="link_img">
+		<!-- 各种找专家，找团队的图片链接 -->
+		<ul>
+			<li>
+				<a href="{:U('Expert/expertlist')}">
+					找专家	
+				</a>
+			</li>
+			<li>
+				<a href="{:U('Team/teamlist')}">
+					找专家团队	
+				</a>
+			</li>
+			<li>
+				<a href="{:U('Result/resultlist')}">
+					找科技成果	
+				</a>
+			</li>
+			<li>
+				<a href="{:U('Demand/demandlist')}">
+					找企业需求	
+				</a>
+			</li>
+			<?php if (session('type') == 1): ?>
+				<li>
+					<a href="{:U('Team/add')}">
+						组建团队	
+					</a>
+				</li>
+			<?php endif ?>
+			<li>
+				<a href="{:U('Result/add')}">
+					发布科技成果	
+				</a>
+			</li>
+			<?php if (session('type') == 2): ?>
+				<li>
+					<a href="{:U('Demand/add')}">
+						发布企业需求	
+					</a>
+				</li>
+			<?php endif ?>
+		</ul>
+    </div>
+	
+	
+	<div class="myInfo">
+		<div>
+			<img src="__PUBLIC__/images/basicInfo.png" alt="">
+		</div>
+		
+		<!-- 显示头像 -->
+		<div id="mylogo">
+			<form action="{:U('Personal/upload_logo')}" method="post" enctype="multipart/form-data">
+				<div class="upload">
+					<img id="preview" src="__ROOT__/{$basicInfo.logo}" alt="">
+				</div>
+				<div>
+					<input type="file" id="logo" name="img" accept="image/*">
+				</div>
+				<div class="sub">
+					<input type="submit" value="上传修改">
+				</div>
+			</form>
+		</div>
+		<div id="basicInfo">
+			<form action="{:U('Personal/modify_basicinfo')}" method="post">
+				<div class="line">
+					<label for="username">用户名</label>
+					<input type="text" class="line-input" readonly id="username" value="{$basicInfo.username}">
+				</div>
+				<div class="line">
+					<label for="realname"><?php echo ($basicInfo['type'] == 2)?'企业名称' :'真实姓名'; ?></label>
+					<input type="text" class="line-input" id="realname" name="realname" value="{$basicInfo.realname}">
+				</div>
+				<div class="line">
+					<label for="mobile_phone">手机号</label>
+					<input type="text" class="line-input" id="mobile_phone" name="mobile_phone" value="{$basicInfo.mobile_phone}"><span id="phoneError" class="must"></span>
+				</div>
+				<div class="line">
+					<label for="email">邮箱</label>
+					<input type="email" class="line-input" id="email" name="email" value="{$basicInfo.email}">
+				</div>
+				<div class="sub" style="width:420px; margin-top:20px;">
+					<input type="submit" value="确认修改">
+				</div>
+			</form>
+			
+		</div>
+	</div>
+	
+	<!-- 修改密码 -->
+	<div class="myInfo">
+		<div>
+			<img src="__PUBLIC__/images/changePwd.png" alt="">
+		</div>
+		<div class="changePwd">
+			<form action="{:U('Personal/modify_pwd')}" method="post">	
+				<div class="line">
+					<label for="pwd1">原密码</label>
+					<input type="password" class="line-input" id="pwd1" name="pwd1" required>
+				</div>
+				<div class="line">
+					<label for="pwd2">新密码</label>
+					<input type="password" class="line-input" id="pwd2" name="pwd2" required>
+				</div>
+				<div class="line">
+					<label for="pwd3">确认密码</label>
+					<input type="password" class="line-input" id="pwd3" name="pwd3" required><span id="pwdError" class="must"></span>
+				</div>
+				<div class="line">
+					<label for="inputcode">验证码</label>
+					<input class="uppwd" type="text" name="verfigcode" id="inputcode" placeholder="不区分大小写" required>
+					<img class="img-responsive verfiy" src="{:U('Public/verfig',array('t'=>time()),null)}">
+				</div>
+				<div class="sub" style="margin-top:20px;">
+					<input type="submit" value="确认修改">
+				</div>
+			</form>
+		</div>
+		
+	</div>
+	
+    <include file = "Public/footer" />
+</body>
+<script>
+	$(function(){
+		$('#logo').change(function(event) {
+	        event.preventDefault();
+	        var $file = $(this);
+	        var fileObj = $file[0];
+	        var windowURL = window.URL || window.webkitURL;
+	        if(fileObj && fileObj.files && fileObj.files[0]){
+	            var path = windowURL.createObjectURL(fileObj.files[0]);
+	            $('#preview').attr('src',path);
+	        }else{
+	            console.log($file.val());
+	            var dataURL = $file.val();
+	            var imgObj = document.getElementById("preview");
+	            // 两个坑:
+	            // 1、在设置filter属性时，元素必须已经存在在DOM树中，动态创建的Node，也需要在设置属性前加入到DOM中，先设置属性在加入，无效；
+	            // 2、src属性需要像下面的方式添加，上面的两种方式添加，无效；
+	            imgObj.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);max-width:140px;";
+	            imgObj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
+	    	}
+	    });
+
+	    $('#pwd3').change(function(event){
+	        if($('#pwd2').val() == $('#pwd3').val()){
+	            $('#pwdError').html("");
+	        }else{
+	            $('#pwdError').html('两次密码不同');
+	        }
+	    });
+
+	    $('#phone').change(function(event){
+	        if(/^\d{11}$/.test($('#phone').val())){
+	            $('#phoneError').html('*');
+	        }else{
+	            $('#phoneError').html('手机号码格式错误');
+	        }
+	    });
+	    $('.verfiy').on('click', function(event) {
+			event.preventDefault();
+			$(this).attr('src',"{:U('Public/verfig',array('t'=>1),null)}"+Math.random());
+			$('#inputcode').val('');
+		});
+	});
+</script>
+</html>

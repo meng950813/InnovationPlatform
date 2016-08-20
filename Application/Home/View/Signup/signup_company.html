@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- create by cm -->
     <meta charset="UTF-8">
     <title>企业注册</title>
     <script src="__PUBLIC__/js/jquery.min.js"></script>
     <script src="__PUBLIC__/js/signup.js"></script>
-    <link rel="stylesheet" href="__PUBLIC__/css/signup.css">  
-    <link rel="stylesheet" href="__PUBLIC__/css/nav.css">
+    <link rel="stylesheet" href="__PUBLIC__/css/home/signup.css">  
+    <link rel="stylesheet" href="__PUBLIC__/css/home/nav.css">
     
     
 </head>
@@ -54,9 +55,9 @@
             <div class="line">
                 <label for="jobtype">所在城市</label>
                 <select class="line-input" name="city" id="city">
-                    <option value="1">上海</option>
-                    <option value="2">南京</option>
-                    <option value="3">北京</option>
+                    <volist id="city" name="city">
+                        <option value="{$city.id}">{$city.cityname}</option>
+                    </volist>
                 </select><span class="must">*</span>
             </div>
             <div class="line">
@@ -115,8 +116,10 @@
                         console.log("success",data);
                         if(data.code == 0){
                             $('#nameError').html("*");
+                            $('input[type=submit]').show();
                         }else{
                             $("#nameError").html("用户名已存在");
+                            $('input[type=submit]').hide();
                         }
                     })
                     .fail(function(XMLHttpRequest, textStatus, errorThrown){

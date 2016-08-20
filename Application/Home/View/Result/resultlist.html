@@ -1,10 +1,11 @@
 <!doctype html>
 <html>
 <head>
+    <!-- create by cm -->
     <script src="__PUBLIC__/js/jquery.min.js"></script>
-    <link href="__PUBLIC__/css/css.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="__PUBLIC__/css/nav.css">
-    <link href="__PUBLIC__/css/listpage.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/css/home/css.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="__PUBLIC__/css/home/nav.css">
+    <link href="__PUBLIC__/css/home/listpage.css" rel="stylesheet" type="text/css">
     <style>
         button{
             background: #72CEDD;
@@ -14,7 +15,6 @@
             border-radius: 5px;
             padding: 5px 10px;
             cursor: pointer;
-            margin-top: 10px;
         }
         button:hover{
             background: #0F93A9;
@@ -89,29 +89,27 @@
                 <a href="{:U('Result/resultlist',array('type' => 7))}">其他</a>
             </div>
             <hr />
-               <volist id="list" name="list">
-                   <div class="info-list <?php if($i % 2 == 0) echo ' grey';?>">
-                       <div class="info-title" >
-                            <span>
-                                <a href="{:U('Result/result',array('id'=>$list['result_id']))}" title="{$list.title}">
-                                    {$list.research_name}&nbsp;&nbsp;
-                                </a>
-                            </span>
-                            <span>&nbsp;{$list.publish_time}</span>
-                            <?php if (session('uid')): ?>
-                                <a id="linkbutton" href="{:U('Public/link',array('linkType'=> 4,'id'=>$list['research_id'],'title'=>$list['title']))}" target="_black">
-                                    <button>我要联系</button>
-                                </a>
-                            <?php else: ?>
-                                <a id="linkbutton" href="{:U('Public/login')}" target="_black">
-                                    <button>我要联系</button>
-                                </a>
-                            <?php endif ?>
-                            
-                            
-                       </div>                           
-                   </div>
-               </volist>                
+            <volist id="list" name="list">
+                <div class="info-list <?php if($i % 2 == 0) echo ' grey';?>">
+                    <div class="info-title" >
+                        <span>
+                            <a href="{:U('Result/result',array('id'=>$list['result_id']))}" title="{$list.result_name}">
+                                {$list.result_name}&nbsp;&nbsp;
+                            </a>
+                        </span>
+                        <span>&nbsp;{$list.publish_time}</span>
+                        <?php if (session('uid')): ?>
+                            <a id="linkbutton" href="{:U('Public/link',array('linkType'=> 4,'id'=>$list['result_id']))}" target="_black">
+                                <button>我要联系</button>
+                            </a>
+                        <?php else: ?>
+                            <a id="linkbutton" href="{:U('Public/login')}" target="_black">
+                                <button>我要联系</button>
+                            </a>
+                        <?php endif ?>
+                    </div>                           
+                </div>
+            </volist>                
             <div class="mainbottom">
                 {$page}
             </div>

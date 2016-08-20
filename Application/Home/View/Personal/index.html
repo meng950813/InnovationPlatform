@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- create by cm -->
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="__PUBLIC__/css/personal.css">
+    <link rel="stylesheet" href="__PUBLIC__/css/home/personal.css">
     <title>张家港工程项目协同创新服务平台档-个人中心</title>
     <style>
 		.lf{
@@ -125,14 +126,14 @@
 	    			<span>
 	    				<?php if ($list['type'] == 1): ?>
 	    					<!-- 专家用户 -->
-	    					<a href="{:U('Expert/expert',array('id'=>$list['request_id']))}">发信人</a>
+	    					<a href="{:U('Expert/expert',array('id'=>$list['request_id']))}">{$list.realname}</a>
 	    				<?php else: ?>
 	    					<?php if($list['type'] == 2): ?>
 	    						<!-- 企业用户，详细信息 -->
-	    						<a href="#">发信人</a>
+	    						<a href="#">{$list.realname}</a>
 	    					<?php else: ?>
 	    						<!-- 个人用户 -->
-	    						<a href="#">发信人</a>
+	    						<a href="#">{$list.realname}</a>
 	    					<?php endif ?>
 	    				<?php endif ?>
 	    			</span>

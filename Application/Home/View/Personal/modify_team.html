@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- create by cm -->
+    <meta charset="UTF-8">
+    <title>张家港工程项目协同创新服务平台</title>
+    <link rel="stylesheet" href="__PUBLIC__/css/home/personal.css">
+    <link rel="stylesheet" href="__PUBLIC__/css/home/signup.css">
+    <script src="__PUBLIC__/js/jquery.min.js"></script>    
+</head>
+<body>
+    <div id="header">
+        <div id="header_box">
+            <a href="__ROOT__">
+                <img src="__PUBLIC__/images/背景.png" alt="">
+            </a>
+            <a class="index" href="__ROOT__">回到首页</a>
+        </div>
+    </div>
+    <div id="nav">
+        <div id="nav_box">
+            <ul>
+                <li>
+                    <a href="{:U('Personal/index')}">个人中心</a>
+                </li>
+                <?php if(session('uid') && session('type') == 1) :?>
+                    <li class="focus">
+                        <a href="{:U('Personal/my_team')}">我的团队</a>
+                    </li>
+                <?php endif?>
+                <li>
+                    <a href="{:U('Personal/my_research')}">研究成果</a>
+                </li>
+                <li>
+                    <a href="{:U('Personal/my_award')}">我的成就</a>
+                </li>
+                <li>
+                    <a href="{:U('Personal/my_info')}">个人信息</a>
+                </li>
+                <?php if(session('type') != 0):?>
+                    <li>
+                        <a href="{:U('Personal/detail_info')}">详细信息</a>
+                    </li>
+                <?php endif?>
+            </ul>
+        </div>
+    </div>
+    <form id="demand_form" action="{:U('Personal/modify_my_team')}" method="post" enctype="multipart/form-data">
+        <div class="main">
+            <input type="hidden" value="{$info.teamid}" name="teamid">
+            <div class="line">
+                <label for="teamname">团队名称 </label>
+                <input class="line-input" type="text" id="teamname" name="teamname" value="{$info.teamname}"><span id="nameError" class="must"></span>
+            </div>
+            <script>
+                $(function() {
+                    $('#teamname').change(function(event){
+                        if($('#teamname').val().trim() != ""){
+                            var teamname = $('#teamname').val();
+                            $.ajax({
+                                type:"post",
+                                url:"__ROOT__/index.php/Public/checkName",
+                                dataType:'json',
+                                data:{teamname:teamname}
+                                })
+                            .done(function(data) {
+                                console.log("success",data);
+                                if(data.code == 0){
+                                    $('#nameError').html("");
+                                }else{
+                                    $("#nameError").html("团队名已存在");
+                                }
+                            })
+                            .fail(function(XMLHttpRequest, textStatus, errorThrown){
+                                console.log("status = "+XMLHttpRequest.status);  // 200
+                                console.log("readyState = "+XMLHttpRequest.readyState); //4
+                                console.log("textStatus = "+textStatus);  //parsererror
+                            })
+                            .always(function() {
+                                console.log("complete");
+                            });
+                        }
+                    });
+                });
+            </script>
+            <div class="line" style="text-align:center">
+                <p>团队logo (建议尺寸： 456 × 342 像素 仅限上传一张)</p>
+                <input type="file" name="img" id="logo" accept="image/*" />
+                <div class="upload">
+                    <img id="preview" src="__ROOT__/{$info.team_logo}" alt="">
+                </div>
+            </div>
+             <div class="line">
+                <label for="research_name">研究领域 </label>
+                <input class="line-input" type="text" readonly value="{$info.team_research}">
+            </div>
+            <div class="line">
+                <label for="research_type" style="float:left;">重新选择</label>
+                <input type="checkbox" name="research_type[]" value="1">电子信息
+                <input type="checkbox" name="research_type[]" value="2">机械设计与制造
+                <input type="checkbox" name="research_type[]" value="3">新能源与环保<br/>
+                <input type="checkbox" name="research_type[]" value="4">生物技术与医药
+                <input type="checkbox" name="research_type[]" value="5">新材料
+                <input type="checkbox" name="research_type[]" value="6">现代农业
+                <input type="checkbox" name="research_type[]" value="7">其他
+                <span class="must">*</span>
+            </div>
+            <div class="line">
+                <label for="research_name">研究方向 </label>
+                <input class="line-input" type="text" id="research_name" name="research_content" value="{$info.research_content}">
+            </div>
+             <div class="line">
+                <label for="workplace">工作地点 </label>
+                <input class="line-input" type="text" id="workplace" name="workplace" value="{$info.workplace}">
+            </div>
+            <div class="line textarea">
+                <label for="info">团队简介</label>
+                <textarea name="info" id="info">{$info.teaminfo}</textarea>
+            </div>
+            <div class="sub" >
+                <input type="submit" value="修改" />
+            </div>
+       
+        </div>
+    </form>
+    <include file="Public/footer" />
+</body>
+<script>
+    $(function($){
+        $('#logo').change(function(event) {
+            event.preventDefault();
+            var $file = $(this);
+            var fileObj = $file[0];
+            var windowURL = window.URL || window.webkitURL;
+            console.log("logo ");
+            if(fileObj && fileObj.files && fileObj.files[0]){
+                var path = windowURL.createObjectURL(fileObj.files[0]);
+                console.log(path);
+                $('#preview').attr('src',path);
+            }else{
+                console.log($file.val());
+                var dataURL = $file.val();
+                var imgObj = document.getElementById("preview");
+                // 两个坑:
+                // 1、在设置filter属性时，元素必须已经存在在DOM树中，动态创建的Node，也需要在设置属性前加入到DOM中，先设置属性在加入，无效；
+                // 2、src属性需要像下面的方式添加，上面的两种方式添加，无效；
+                imgObj.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);max-width:200px;";
+                imgObj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
+            }
+        });
+    });
+    
+</script>
+</html>

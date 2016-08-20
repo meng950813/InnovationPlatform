@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- create by cm -->
 	<meta charset="UTF-8">
 	<title>张家港工程项目协同创新服务平台档</title>
 	<script src="__PUBLIC__/js/jquery.min.js"></script>
-	<link rel="stylesheet" href="__PUBLIC__/css/nav.css">
+	<link rel="stylesheet" href="__PUBLIC__/css/home/nav.css">
 	<style>
 		.link-main{
 		    width:600px;
@@ -70,14 +71,13 @@
 	<include file="Public/nav"/>
 	<div class="link-main">
 		<!-- <h2>对接类型</h2> -->
-		<form action="{:U('Public/dolink')}" method="post">
-			<div class="line">
+		<form action="{:U('Public/dolink')}" method="post" enctype="multipart/form-data">
+			<div class="line" style="text-align:center;">
 				<span>{$linkInfo.linkTip}</span>
-				<b title="{$linkInfo.title}">{$linkInfo.title}</b>
 			</div>
 			<div class="line">
 				<span>标题</span>
-				<input type="text" name="title">
+				<input type="text" name="title" id="title">
 			</div>
 			<div class="textarea">
 				<span for="content">对接说明</span>
@@ -89,7 +89,6 @@
 			</div>
 			<input type="hidden" value="{$linkInfo.linkType}" name="type">
 			<input type="hidden" value="{$linkInfo.owner}" name="owner">
-			<input type="hidden" value="{$linkInfo.title}" name="title">
 
 			<div class="sub">
 				<input type="submit" value="确认连接">

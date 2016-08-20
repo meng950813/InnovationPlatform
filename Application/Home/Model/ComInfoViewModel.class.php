@@ -2,6 +2,7 @@
 namespace Home\Model;
 use Think\Model\ViewModel;
 /**
+ * create by cm
  * 企业信息模块
  * 作用：
  *	筛选出将login表中的企业用户；

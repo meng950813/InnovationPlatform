@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- create by cm -->
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="__PUBLIC__/css/home/personal.css">
+	<title>个人中心--添加成就</title>
+	<style>
+		#body{
+			width: 700px;
+		}
+		.line{
+		    margin-bottom:5px;
+		}
+		label{
+		    width:120px;
+		    padding:5px 10px;
+		    font-size:18px;
+		    display:inline-block;
+		}
+		.line-input{
+		    width:400px;
+		    height:30px;
+		}
+		.sub{
+			width: 500px;
+			margin: 0 auto;
+		    margin-top:10px;
+		    text-align: center;
+		}
+		.sub input{
+		    font-size:20px;
+		    padding:5px 10px;
+		    border-radius: 5px;
+		}
+		.sub input:hover{
+		    background: #146FBD;
+		    color: #fff;
+		}
+	</style>
+</head>
+<body>
+	<div id="header">
+    	<div id="header_box">
+    		<a href="__ROOT__">
+    			<img src="__PUBLIC__/images/背景.png" alt="">
+    		</a>
+    		<a class="index" href="__ROOT__">回到首页</a>
+    	</div>
+    </div>
+    <div id="nav">
+    	<div id="nav_box">
+    		<ul>
+    			<li>
+    				<a href="{:U('Personal/index')}">个人中心</a>
+    			</li>
+    			<?php if(session('uid')&&session('type') == 1) :?>
+	    			<li>
+	    				<a href="{:U('Personal/my_team')}">我的团队</a>
+	    			</li>
+	    		<?php endif?>
+    			<li>
+    				<a href="{:U('Personal/my_research')}">研究成果</a>
+    			</li>
+    			<li class="focus">
+    				<a href="{:U('Personal/my_award')}">我的成就</a>
+    			</li>
+    			<li>
+    				<a href="{:U('Personal/my_info')}">个人信息</a>
+    			</li>
+               <?php if(session('type') != 0):?>
+                    <li>
+                        <a href="{:U('Personal/detail_info')}">详细信息</a>
+                    </li>
+                <?php endif?>
+    		</ul>
+    	</div>
+    </div>
+
+    <div id="body">
+    	<form action="{:U('Personal/do_modify_award')}" method="post">
+            <input type="hidden" name="id" value="{$info.id}">
+            <div class="line">
+                <label for="award_name">专利/奖励名称</label>
+                <input class="line-input" type="text" id="award_name" name="award_name" required  value="{$info.award_name}">
+            </div>
+            <div class="line">
+                <label for="get_time">获得时间</label>
+                <input type="date" id="get_time" name="get_time" value="{$info.get_time}" required >
+            </div>
+            <div class="sub">
+            	<input type="submit" value="提交">
+            </div>
+            
+    	</form>
+    </div>
+
+    <include file="Public/footer"/>
+</body>
+</html>
