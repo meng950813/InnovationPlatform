@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>张家港工程项目协同创新服务平台-后台管理</title>
+
+	<link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet">
+	<script src="__PUBLIC__/assets/ie-emulation-modes-warning.js"></script>
+
+</head>
+<body>
+	<table class="table table-bordered table-striped">
+		<tr>
+			<th>序号</th>
+			<th>名称</th>
+			<th>发布时间</th>
+			<th>是否有效</th>
+			<th>点击量</th>
+			<th>编辑</th>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td><a href="#" target="_blank">高校/企业/协会名称</a></td>
+			<td>2013-08-19</td>
+			<td>有效</td>
+			<td>33</td>
+			<td>
+				<a href="#">修改</a>&nbsp;&nbsp;
+				<a href="javascript:void(0)" onclick="del(this)">删除</a>
+			</td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td><a href="#" target="_blank">高校/企业/协会名称</a></td>
+			<td>2013-08-19</td>
+			<td>有效</td>
+			<td>33</td>
+			<td>
+				<a href="#">修改</a>&nbsp;&nbsp;
+				<a href="javascript:void(0)" id="coo_list-{$list.id}" value="{$list.id}" onclick="del(this)">删除</a>
+			</td>
+		</tr>
+	</table>
+
+	<!-- Bootstrap core JavaScript
+	================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="__PUBLIC__/js/jquery-1.11.1.min.js"></script>
+	<script src="__PUBLIC__/js/bootstrap.min.js"></script>
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="__PUBLIC__/assets/ie10-viewport-bug-workaround.js"></script>
+	<script src="__PUBLIC__/js/master/fixiframe.js"></script>
+	<script>
+		function del (obj) {
+			if(confirm("确定要删除这条信息？")){
+				var id = document.getElementById(obj.id).getAttribute("value");
+				window.location.href="__ROOT__/index.php/Master/Cooperation/del/id/"+id;
+			}
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+    <!-- create by cm -->
+    <script src="__PUBLIC__/js/jquery.js"></script>
+    <link href="__PUBLIC__/css/home/nav.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="__PUBLIC__/css/home/cooperation.css">
+    <meta charset="utf-8">
+    <title>张家港工程项目协同创新服务平台</title>
+</head>
+
+<body>
+    <include file="Public/nav"/>
+    
+    <div id="main">
+        <div class="position">
+            <img src="__PUBLIC__/images/download_06.png">
+            您的位置：
+            <a href="__ROOT__">首页</a>
+            <sapn>&nbsp;>&nbsp;</sapn>
+            <a href="{:U('Edu/edulist')}">信息咨询</a>
+            <sapn>&nbsp;>&nbsp;</sapn>
+            <a href="#">学历教育</a>
+        </div>
+        <div class="left-list">
+            <div class="mainbtn">
+                <div class="navlist">
+                    <a href="{:U('Edu/edulist')}">教育培训</a>
+                </div>
+                 <div class="navlist">
+                    <a href="{:U('Edu/edulist',array('type'=>3))}">学历教育</a>
+                </div>
+                <div class="navlist">
+                    <a href="{:U('Edu/edulist',array('type'=>1))}" style="padding:5px;">职业资格教育</a>
+                </div>
+                <div class="navlist">
+                    <a href="{:U('Edu/edulist',array('type'=>2))}">技能培训</a>
+                </div>
+            </div>
+        </div>
+        <div class="right_content">
+            <div class="title">
+                 <h2>标题标题标题</h2>
+                 <span>发布时间：2016-01-02</span>&nbsp;&nbsp;
+                 <span>点击量：33次</span>
+            </div>
+            <pre>随便什么内容，随便什么东西
+正常换行，
+    这是个 pre 标签，完全按照输入的内容格式输出，
+    意思是编码时的缩进也会被显示
+    所以在添加内容时不要换行，
+    &lt;标签>变量&lt;/标签>
+            </pre>
+
+            <div class="next">
+                <p>
+                    上一篇:<a href="#">  获取上一篇标题和id</a>
+                </p>
+                <p>
+                    下一篇: 如果没有上一个或上一个显示 -> 没有了
+                </p>
+                
+            </div>
+        </div>
+    </div>
+	
+    <include file="Public/footer"/>
+
+</body>
+</html>
