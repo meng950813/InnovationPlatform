@@ -1,95 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- create by cm -->
     <meta charset="UTF-8">
     <title>张家港工程项目协同创新服务平台档</title>
-    <link rel="stylesheet" href="__PUBLIC__/css/nav.css">
-<script type="text/javascript">
-    function MM_swapImgRestore() { //v3.0
-        var i,x,a=document.MM_sr; 
-        for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++){
-            x.src=x.oSrc;
-        }   
-    }
-    function MM_preloadImages() { //v3.0
-        var d=document; 
-        if(d.images){ 
-            if(!d.MM_p){
-                d.MM_p=new Array();
-            }
-            var i,j=d.MM_p.length,a=MM_preloadImages.arguments;
-            for(i=0; i<a.length; i++){
-                if (a[i].indexOf("#")!=0){ 
-                    d.MM_p[j]=new Image; 
-                    d.MM_p[j++].src=a[i];
-                }
-            }
-        }
-    }
-
-    function MM_findObj(n, d) { //v4.01
-        var p,i,x;  
-        if(!d){
-            d=document; 
-        }            
-        if((p=n.indexOf("?"))>0&&parent.frames.length) {
-            d=parent.frames[n.substring(p+1)].document; 
-            n=n.substring(0,p);
-        }
-        if(!(x=d[n])&&d.all){
-            x=d.all[n]; 
-        }
-        for (i=0;!x&&i<d.forms.length;i++){
-            x=d.forms[i][n];
-        }
-        for(i=0;!x&&d.layers&&i<d.layers.length;i++){
-            x=MM_findObj(n,d.layers[i].document);
-        }
-        if(!x && d.getElementById){
-            x=d.getElementById(n); 
-        }
-        return x;
-    }
-
-    function MM_swapImage() { //v3.0
-        var i,j=0,x,a=MM_swapImage.arguments; 
-        document.MM_sr=new Array; 
-        for(i=0;i<(a.length-2);i+=3){
-            if ((x=MM_findObj(a[i]))!=null){
-                document.MM_sr[j++]=x; 
-                if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];
-            }
-        }
-     }
-</script>
+    <link rel="stylesheet" href="__PUBLIC__/css/home/nav.css">
     <style>
         *{
             margin: 0;
             padding: 0;
         }
-        .login{
-            margin:50px auto 0;
+        .topbox{
+            width: 100%;
+            min-width: 1100px;
+            background-color: #f0f0f0;
+        }
+        .top{ 
+            width:1100px; 
+            margin:0 auto; 
+            position: relative;
+        }
+        .topbox .top img{
+            max-height: 80px;
+        }
+        #login_box{
+            min-height: 500px;
+            width: 100%;
+            background: url(__PUBLIC__/images/login_bg.jpg) no-repeat;
+            background-size: 100% 100%;
+            position: relative;
+        }
+        #login{
             height:456px;
-            width:700px; 
+            width:700px;
+            position: absolute;
+            right: 60px;
+            top: 40px;
             background-image:url(__PUBLIC__/images/登陆界面.png);
         }
         .login2{
             height:120px; 
             width:300px; 
-            margin-top:50px; 
-            margin-right:60px; 
+            margin:50px 60px 0 0;
             clear:right; 
             float:right; 
             font-size:24px; 
             color:#1321d9; 
             font-family:"微软雅黑"; 
         }
-        table{
-            margin-top: 10px;
-            margin-bottom: 15px;
+        .input_text{
+            margin: 20px 0;
         }
         input{
-            height: 20px;
+            height: 36px;
+            width: 245px;
+            font-size: 18px;
+            margin: 2px 0;
+            padding-left: 25px;
+        }
+        #txt_userName{
+            background: #fff url(__PUBLIC__/images/user.jpg) no-repeat 2% center;
+        }
+        #pwd_userPwd{
+            background: #fff url(__PUBLIC__/images/pwd.jpg) no-repeat 2% center;
         }
         .sub{
             border: solid 0px;
@@ -101,38 +74,49 @@
 
         }
     </style>
+    <!-- [if IE lt 10] -->
+        <style>
+            img{
+                border:none;
+            }
+        </style>
+    <!-- [endif] -->
 </head>
 	
-<body onload="MM_preloadImages('__PUBLIC__/images/按钮2.png','__PUBLIC__/images/按钮4.png')">
-    <include file = "Public/nav" />
-	<div class="login"> 
-        <form action="{:U('Public/dologin')}" method="post">
-	       <div class="login2"><br/>
-                <table>
-                    <tr>
-                        <td><span>用户名：</span></td>
-                        <td><input name="username" type="text" /></td>
-                    </tr>
-                    <tr>
-                        <td><span>密&nbsp;码：</span></td>
-                        <td><input name="password" type="password" /></td>
-                    </tr>
-                </table>
-                <div style="float:left"> 
-                    <button class="sub" type="submit" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image2','','__PUBLIC__/images/按钮2.png',1)">
-                        <img src="__PUBLIC__/images/按钮1.png" width="135" height="43" id="Image2" />
-                    </button>  
+<body>
+    <div class="topbox">
+        <div class="top">
+            <img src="__PUBLIC__/images/背景.png">
+        </div>
+    </div>
+    <div id="login_box">
+        <div id="login"> 
+            <form action="{:U('Public/dologin')}" method="post">
+               <div class="login2">
+                    <div class="input_text">
+                        <input id="txt_userName" name="username" type="text" placeholder="用户名"/>
+                        <input id="pwd_userPwd" name="password" type="password" placeholder="密码" />
+                    </div>
+                   
+                    <div style="float:left"> 
+                        <button class="sub" type="submit" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image2','','__PUBLIC__/images/按钮2.png',1)">
+                            <img src="__PUBLIC__/images/按钮1.png" style="width:135px;" id="Image2" />
+                        </button>  
+                    </div>
+                    <!-- 注册 -->
+                    <div style="float:left; margin-left:10px;">
+                        <a href="{:U('Signup/signup')}" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image','','__PUBLIC__/images/按钮4.png',1)">
+                            <img src="__PUBLIC__/images/按钮3.png" width="135" height="43" id="Image" />
+                        </a> 
+                    </div>
+                    <!-- 忘记密码 -->
+                    <a id="forgetpwd" href="{:U('Signup/forgetPwd_step1')}">忘记密码>> </a>
                 </div>
-                <!-- 注册 -->
-                <div style="float:left; margin-left:10px;">
-                    <a href="{:U('Public/singup')}" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image','','__PUBLIC__/images/按钮4.png',1)">
-                        <img src="__PUBLIC__/images/按钮3.png" width="135" height="43" id="Image" />
-                    </a> 
-                </div>
-                <!-- 忘记密码 -->
-                <a id="forgetpwd" href="{:U('Signup/forgetPwd_step1')}">忘记密码>> </a>
-            </div>
-        </form>       
-	</div>
+            </form>       
+        </div>
+    </div>
+	<script>
+           
+    </script>
 </body>
 </html>

@@ -2,8 +2,9 @@
 namespace Home\Controller;
 use Think\Controller;
 /**
- * 公用内容
- */
+* create by cm
+* 公用内容
+*/
 class PublicController extends Controller {
 	/**
 	 * 展示登陆页面
@@ -77,9 +78,12 @@ class PublicController extends Controller {
 		}
 		// 查找有结果 -> 该用户名已被注册/teamleader输入正确的团队名
  		if($result){
-			$this->ajaxReturn(['code'=>1]);
+ 			$data['code'] = 1;
+			$this->ajaxReturn($data);
+			// $this->ajaxReturn(['code'=>1]);
 		}else{
-			$this->ajaxReturn(['code'=>0]);
+			$data['code'] = 0;
+			$this->ajaxReturn($data);
 		}
 	}
 	
@@ -117,11 +121,12 @@ class PublicController extends Controller {
 				$linkTip = "对接科技成果";
 				$where['result_id'] = I('get.id');
 				// 通过成果 id 判断是否是团队成果
-				$researchInfo = M('ResearchResult')->where($where)->getField('owner_id,isteam');
+				$researchInfo = M('ResearchResult')->where($where)->find();
 				//团队成果 => 联系团队创始人
 				if($researchInfo['isteam'] == 1){
 					$arr['teamid'] = $researchInfo['owner_id'];
-					$linkInfo['owner'] = M("ExpertTeam")->where($arr)->getField('teamleader');
+					$temp = M("ExpertTeam")->where($arr)->field('teamleader')->find();
+					$linkInfo['owner'] = $temp['teamleader'];
 				}
 				// 个人成果 = > 联系个人
 				else{
@@ -129,10 +134,8 @@ class PublicController extends Controller {
 				}
 				break;
 		}
-
 		$linkInfo['linkType'] = I('get.linkType');
 		$linkInfo['linkTip'] = $linkTip;
-		$linkInfo['title'] = I('get.title');
 		$linkInfo['id'] = I('get.id');
 		$this->assign("linkInfo",$linkInfo);
 		$this->display();
@@ -142,6 +145,7 @@ class PublicController extends Controller {
 		islogin();
 
 		$info['require_id'] = session('uid');
+
 		$info['request_id'] = I('post.owner');
 		if(I('post.type') == 2){
 			// 个人联系团队
@@ -154,7 +158,7 @@ class PublicController extends Controller {
 		$info['title'] = I('post.title');
 		$info['content'] = I('post.content');
 		$info['remark'] = I('post.remark');
-		$result = M('RequireLink')->add($info);
+		$result = M('RequireLink')->data($info)->add();
 		switch (I('post.type')) {
 			case 1:
 				$path = 'Expert/expertlist';
@@ -193,6 +197,8 @@ class PublicController extends Controller {
         $this->display();
     }
 
-
+    public function loading(){
+        $this->display();
+    }
 }
 ?>

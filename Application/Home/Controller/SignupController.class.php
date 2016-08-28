@@ -1,7 +1,10 @@
 <?php
 namespace Home\Controller;
 use Think\Controller;
+
+
 /**
+ * create by cm
  * 注册
  */
 class SignupController extends Controller {
@@ -47,11 +50,12 @@ class SignupController extends Controller {
 			因为expert中的uid字段是login表中id的外键
 		*/
 		if($result){
-			session('uid',$expertInfo['uid']);
+			$where['username'] = $loginInfo['username'];
+			$uid = M('Login')->where($where)->getField('id');
+			session('uid',$uid);
 			session('type',2);
 			session('realname',$loginInfo['realname']);
-			$where['username'] = $loginInfo['username'];
-			$expertInfo['uid'] = M('Login')->where($where)->getField('id');
+			
 			// 职称
 			$expertInfo['level'] = getJobType(I('post.level'));
 			// 学位
@@ -86,12 +90,14 @@ class SignupController extends Controller {
 		$loginInfo['identify'] = I('post.identify');
 	}
 
-	/**
+		/**
 	 * 显示公司注册的页面
 	 *
 	 * @return [type] [description]
 	 */
 	public function signup_company(){
+		$city = M("City")->select();
+		$this->assign('city',$city);
 		$this->display();
 	}
 
@@ -101,7 +107,48 @@ class SignupController extends Controller {
 	 * @return [type] [description]
 	 */
 	public function do_signup_company(){
-		// type =1
+		// type =2
+		$loginInfo['username'] = I('post.username');
+		// 密码加密
+		$loginInfo['password'] = md5($_POST['pwd']);
+		$loginInfo['type'] = 2;
+		$loginInfo['realname'] = I('post.com_name');
+		if(!empty($_FILES)){//有图上传
+			// 返回值不为null -> 上传成功
+			if(($logoPath = uploadPicture($_FILES,'user_logo'))){
+				$loginInfo['logo'] = $logoPath;
+			}
+		}
+		$loginInfo['mobile_phone'] = I('post.com_phone');
+		$loginInfo['email'] = I('post.email');
+		$result = M('Login')->data($loginInfo)->add();
+		/*
+			若信息在login表中添加不成功，则没有必要继续
+		*/
+		if($result){
+			$where['username'] = $loginInfo['username'];
+			$uid = M("Login")->where($where)->getField('id');
+			session('uid',$uid);
+			session('type',2);
+			session('realname',$loginInfo['realname']);//企业名
+			$companyInfo['website']=I('post.website');//企业官网
+			$companyInfo['company_type'] = I('post.company_type');//企业标签
+			$where['city']=$city['cityname'];
+			$companyInfo['city'] =M('city') ->where($where)->getField('id');
+
+			$companyInfo['area']=I('post.adress');//具体地址
+			$research = I("post.research");
+			$companyInfo['research'] = getResearchType($research);//经营方向
+			$companyInfo['linkman']=I('post.linkman');//联系人
+			$companyInfo['jobname'] = I('post.jobname');//联系人职务
+			$companyInfo['link_phone'] = I('post.phone');//联系人电话
+			$companyInfo['linkEmail']=I('post.linkEmail');//联系人邮箱
+			$companyInfo['info']=I('post.info');//企业简介
+			$result = M('CompanyUser')->add($companyInfo);
+			$this->success("欢迎你,".$loginInfo['realname'],U('Personal/index'));
+		}else{
+			$this->error("注册失败，请稍后再试",U('Signup/signup'));
+		}
 	}
 
 	/**
@@ -120,6 +167,32 @@ class SignupController extends Controller {
 	 */
 	public function do_signup_person(){
 		// type=0
+		$loginInfo['username'] = I('post.username');
+		// 密码加密
+		$loginInfo['password'] = md5($_POST['pwd']);
+		$loginInfo['type'] = 0;
+		$loginInfo['realname'] = I('post.realname');
+		if(!empty($_FILES)){//有图上传
+			// 返回值不为null -> 上传成功
+			if(($logoPath = uploadPicture($_FILES,'user_logo'))){
+				$loginInfo['logo'] = $logoPath;
+			}
+		}
+		$loginInfo['mobile_phone'] = I('post.phone');
+		$loginInfo['email'] = I('post.email');
+		$result = M('Login')->add($loginInfo);
+		if($result){
+			$where['username'] = $loginInfo['username'];
+			$uid = M("Login")->where($where)->getField('id');
+			session('uid',$uid);
+			session('type',0);
+			session('realname',$loginInfo['realname']);
+			//用户名
+			$this->success("欢迎你,".$loginInfo['realname'],U('Personal/index'));
+		}
+		else{
+			$this->error("注册失败，请稍后再试",U('Signup/signup'));
+		}
 	}
 
 	/**

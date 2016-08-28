@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
+    <!-- create by cm -->
 <head>
     <script src="__PUBLIC__/js/jquery.min.js"></script>
-    <link rel="stylesheet" href="__PUBLIC__/css/research.css">
-    <link rel="stylesheet" href="__PUBLIC__/css/nav.css">
+    <link rel="stylesheet" href="__PUBLIC__/css/home/research.css">
+    <link rel="stylesheet" href="__PUBLIC__/css/home/nav.css">
     <meta charset="utf-8">
     <title>张家港工程项目协同创新服务平台</title>
     <style>
@@ -66,7 +67,7 @@
             <tr>
                 <td colspan="2" class="link_img">
                     <?php if (session('uid')): ?>
-                        <a href="{:U('Public/link',array('id'=>$teamInfo['teamid'] ,'linkType'=>2,'title'=>$teamInfo['teamname']))}" target="_black">
+                        <a href="{:U('Public/link',array('id'=>$teamInfo['teamid'] ,'linkType'=>2))}" target="_black">
                             <button>我要联系</button>
                         </a>
                     <?php else: ?>
@@ -97,7 +98,7 @@
             <volist id = "research" name = "research">
                 <tr>
                     <td class="research_info center ">
-                        <a href="{:U('Result/result',array('id'=>$research['result_id']))}">{$research.research_name}</a>
+                        <a href="{:U('Result/result',array('id'=>$research['result_id']))}">{$research.result_name}</a>
                     </td>
                     <td class="tip">
                         <a href="#">{$research.research_level}</a>
@@ -181,4 +182,9 @@
     <include file="Public/footer" />
 
 </body>
+<script>
+    $(function(){
+        $('#nav_expert').addClass('nav_active').siblings().removeClass('nav_active');
+    });
+</script>
 </html>

@@ -3,7 +3,7 @@
         <img src="__PUBLIC__/images/背景.png">
         <div class="login-tip">
             <?php if(!session('?uid')){ ?>
-            	<a href="{:U('Public/login')}">登录</a>
+            	<a href="{:U('Public/login')}" target="_block">登录</a>
                 <span>丨</span>
                 <a href="{:U('Signup/signup')}">注册</a>
             <?php }else{ ?>
@@ -19,7 +19,7 @@
 </div>
 <div class="nav-background">
     <div class="nav">
-        <div class="nav-tip">
+        <div class="nav-tip" id="nav_index">
             <a href="__ROOT__">网站首页</a>
             <div class="nav-list">
                 <p>
@@ -27,60 +27,61 @@
                 </p>
             </div>
         </div>       
-        <div class="nav-tip">
+        <div class="nav-tip" id="nav_news">
             <a href="{:U('News/newslist')}">信息咨询</a>
             <div class="nav-list">
                 <p>
-                    <a href="#">政策法规</a>
+                    <a href="{:U('News/newslist',array('type'=>3))}">政策法规</a>
                 </p>
                 <p>
-                    <a href="#">市场动态</a>
+                    <a href="{:U('News/newslist',array('type'=>1))}">市场动态</a>
                 </p>
                 <p >
-                    <a href="#">业内资讯</a>
+                    <a href="{:U('News/newslist',array('type'=>2))}">业内资讯</a>
                 </p>
             </div>
         </div>
-        <div class="nav-tip">
+        <div class="nav-tip" id="nav_expert">
             <a href="{:U('Team/teamlist')}">专家团队</a>
             <div class="nav-list">
                 <p>
                     <a href="{:U('Expert/expertlist')}">专家信息</a>
                 </p>
             </div>
+    <!-- create by cm -->
         </div>  
-            <div class="nav-tip">
+            <div class="nav-tip" id="nav_demand">
                 <a href="{:U('Demand/demandlist')}">企业需求</a>
             </div>
-            <div class="nav-tip">
+            <div class="nav-tip" id="nav_research">
                 <a href="{:U('Result/resultlist')}">科技成果</a>
             </div>
-        <div class="nav-tip" >
-            <a href="agentstrategy.html">教育培训</a>
+        <div class="nav-tip" id="nav_edu">
+            <a href="{:U('Edu/edulist')}">教育培训</a>
             <div class="nav-list">
                 <p>
-                    <a href="#">学历教育</a>
+                    <a href="{:U('Edu/edulist',array('type'=>3))}">学历教育</a>
                 </p>
                 <p>
-                    <a href="#">职业资格教育</a>
+                    <a href="{:U('Edu/edulist',array('type'=>1))}">职业资格教育</a>
                 </p>
                  <p>
-                    <a href="#">技能培训</a>
+                    <a href="{:U('Edu/edulist',array('type'=>2))}">技能培训</a>
                 </p>
             </div>
         </div>
     
-        <div class="nav-tip">
-            <a href="service.html">协同管理</a>
+        <div class="nav-tip" id="nav_cooperation">
+            <a href="{:U('Cooperation/index')}">协同管理</a>
             <div class="nav-list">
                 <p>
-                    <a href="#">协同高校</a>
+                    <a href="{:U('Cooperation/index',array('type'=>3))}">协同高校</a>
                 </p>
                 <p>
-                    <a href="#">协同企业</a>
+                    <a href="{:U('Cooperation/index',array('type'=>1))}">协同企业</a>
                 </p>
                 <p>
-                    <a href="#">行业协会</a>
+                    <a href="{:U('Cooperation/index',array('type'=>2))}">行业协会</a>
                 </p>
             </div>
         </div>

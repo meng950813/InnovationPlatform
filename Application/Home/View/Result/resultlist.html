@@ -1,10 +1,10 @@
 <!doctype html>
 <html>
 <head>
+    <!-- create by cm -->
     <script src="__PUBLIC__/js/jquery.min.js"></script>
-    <link href="__PUBLIC__/css/css.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="__PUBLIC__/css/nav.css">
-    <link href="__PUBLIC__/css/listpage.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="__PUBLIC__/css/home/nav.css">
+    <link href="__PUBLIC__/css/home/listpage.css" rel="stylesheet" type="text/css">
     <style>
         button{
             background: #72CEDD;
@@ -14,17 +14,10 @@
             border-radius: 5px;
             padding: 5px 10px;
             cursor: pointer;
-            margin-top: 10px;
         }
         button:hover{
             background: #0F93A9;
             color: white;
-        }
-         .info-list:first-child a{
-            color: #0862E5;
-         }
-        .info-list:first-child a:hover{
-            color: #e4393c;
         }
         div.add{
             text-align: center;
@@ -35,6 +28,16 @@
         }
     </style>
     
+    <!-- [if IE lt 9] -->
+        <style>
+            img{
+                border:none;
+            }
+            button{
+                padding: 2px 10px;
+            }
+        </style>
+    <!-- [endif] -->
 <meta charset="utf-8">
 <title>张家港工程项目协同创新服务平台</title>
 </head>
@@ -78,40 +81,37 @@
                 </div>
             </div>
             <div class="info-type">
-                <span style="font-size:16px;">需求类型：</span>
+                <span style="font-size:16px;">成果领域：</span>
                 <a href="{:U('Result/resultlist')}">全部</a>&nbsp;
-                <a href="{:U('Result/resultlist',array('type' => 1))}">电子信息</a>&nbsp;
-                <a href="{:U('Result/resultlist',array('type' => 2))}">机械设计与制造</a>&nbsp;
-                <a href="{:U('Result/resultlist',array('type' => 3))}">新能源与环保</a>&nbsp;
-                <a href="{:U('Result/resultlist',array('type' => 4))}">生物技术与医药</a>&nbsp;
-                <a href="{:U('Result/resultlist',array('type' => 5))}">新材料</a>&nbsp;
-                <a href="{:U('Result/resultlist',array('type' => 6))}">现代农业</a>&nbsp;
+                <a href="{:U('Result/resultlist',array('type' => 1))}">结构工程</a>&nbsp;
+                <a href="{:U('Result/resultlist',array('type' => 2))}">市政工程</a>&nbsp;
+                <a href="{:U('Result/resultlist',array('type' => 3))}">防震减灾及防护工程</a>&nbsp;
+                <a href="{:U('Result/resultlist',array('type' => 4))}">桥梁与隧道公程</a>&nbsp;
+                <a href="{:U('Result/resultlist',array('type' => 5))}">岩土工程</a>&nbsp;
                 <a href="{:U('Result/resultlist',array('type' => 7))}">其他</a>
             </div>
             <hr />
-               <volist id="list" name="list">
-                   <div class="info-list <?php if($i % 2 == 0) echo ' grey';?>">
-                       <div class="info-title" >
-                            <span>
-                                <a href="{:U('Result/result',array('id'=>$list['result_id']))}" title="{$list.title}">
-                                    {$list.research_name}&nbsp;&nbsp;
-                                </a>
-                            </span>
-                            <span>&nbsp;{$list.publish_time}</span>
-                            <?php if (session('uid')): ?>
-                                <a id="linkbutton" href="{:U('Public/link',array('linkType'=> 4,'id'=>$list['research_id'],'title'=>$list['title']))}" target="_black">
-                                    <button>我要联系</button>
-                                </a>
-                            <?php else: ?>
-                                <a id="linkbutton" href="{:U('Public/login')}" target="_black">
-                                    <button>我要联系</button>
-                                </a>
-                            <?php endif ?>
-                            
-                            
-                       </div>                           
-                   </div>
-               </volist>                
+            <volist id="list" name="list">
+                <div class="info-list <?php if($i % 2 == 0) echo ' grey';?>">
+                    <div class="info-title" >
+                        <span>
+                            <a href="{:U('Result/result',array('id'=>$list['result_id']))}" title="{$list.result_name}">
+                                {$list.result_name}&nbsp;&nbsp;
+                            </a>
+                        </span>
+                        <span class="publish_time">&nbsp;{$list.publish_time}</span>
+                        <?php if (session('uid')): ?>
+                            <a id="linkbutton" href="{:U('Public/link',array('linkType'=> 4,'id'=>$list['result_id']))}" target="_black">
+                                <button>我要联系</button>
+                            </a>
+                        <?php else: ?>
+                            <a id="linkbutton" href="{:U('Public/login')}" target="_black">
+                                <button>我要联系</button>
+                            </a>
+                        <?php endif ?>
+                    </div>                           
+                </div>
+            </volist>                
             <div class="mainbottom">
                 {$page}
             </div>
@@ -119,6 +119,10 @@
     </div>
     <include file="Public/footer" />
 
-
 </body>
+<script>
+    $(function(){
+        $('#nav_research').addClass('nav_active').siblings().removeClass('nav_active');
+    });
+</script>
 </html>

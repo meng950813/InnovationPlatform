@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- create by cm -->
+	<meta charset="UTF-8">
+	<title>张家港工程项目协同创新服务平台档-个人中心</title>
+	<link rel="stylesheet" href="__PUBLIC__/css/home/personal.css">
+	<script src="__PUBLIC__/js/jquery.min.js"></script>
+	<style>
+		.link-main{
+		    width:800px;
+		    min-height: 500px;
+		    margin:0 auto;
+		    margin-top:20px;
+		}
+		.line{
+			margin-top:20px;
+		    margin-bottom:5px;
+		}
+		.line input{
+			width: 500px;
+			height: 36px;
+			line-height: 36px;
+			font-size: 16px;
+		}
+		.line a{
+			color: blue;
+		}
+		span{
+		    width:100px;
+		    font-size:18px;
+		    display: inline-block;
+		}		
+		.textarea{
+		    position: relative;
+		}
+		.textarea span{
+		    position: absolute;
+		    top: 50%;
+		    margin-top: -16px;
+		}
+		.textarea textarea{
+		    width:500px;
+		    height:120px;
+		    margin-left:108px;
+		    border-width: 2px;
+		}
+		.sub{
+			width: 500px;
+			margin: 0 auto;
+		    margin-top:10px;
+		}
+		.sub input{
+		    font-size:16px;
+		    padding:10px 20px;
+		    border-radius: 5px;
+		    cursor: pointer;
+		}
+		.sub input:hover{
+			background: #0097DA;
+			color: #fff;
+		}
+	</style>
+	<!-- [if IE lt 10] -->
+    	<style>
+			img{
+				border: none;
+			}
+    	</style>
+    <!-- [endif] -->
+</head>
+<body>
+    <include file = "Public/person_nav" />
+	
+	<div class="link-main">
+		<div class="line">
+			<span for="title">联系人</span>
+			<?php if ($linkInfo['type'] == 1): ?>
+				<!-- 专家用户 -->
+				<a href="{:U('Expert/expert',array('id'=>$linkInfo['request_id']))}">{$linkInfo.realname}</a>
+			<?php else: ?>
+				<?php if($linkInfo['type'] == 2): ?>
+					<!-- 企业用户，详细信息 -->
+					<a href="#">{$linkInfo.realname}</a>
+				<?php else: ?>
+					<!-- 个人用户 -->
+					<a href="#">{$linkInfo.realname}</a>
+				<?php endif ?>
+			<?php endif ?>
+		</div>
+		<?php if ($linkInfo['teamid']!= null): ?>
+			<div class="line">
+				<span for="title">邀请团队</span>
+				<a href="{:U('Team/team',array('id',$linkInfo['teamid']))}">{$linkInfo.teamname}</a>
+			</div>
+		<?php endif ?>
+		
+		<div class="line">
+			<span for="title">标题</span>
+			<input type="text" readonly value="{$linkInfo.title}">
+		</div>
+		<div class="textarea">
+			<span for="content">对接说明</span>
+			<textarea id="content" readonly="">{$linkInfo.content}</textarea>
+		</div>
+		<div class="textarea">
+			<span for="remark">备注</span>
+			<textarea id="remark" readonly>{$linkInfo.remark}</textarea>
+		</div>
+		<input type="hidden" value="{$linkInfo.link_id}" id="link_id">
+		<div class="sub">
+			<input type="button" value="拒绝" onclick="sub(0)">
+			<input style="margin-left:250px;" onclick="sub(1)"  type="button" value="同意">
+		</div>
+
+		
+		<script>
+			$(function(){
+		        $('#personal_center').addClass('focus').siblings().removeClass('focus');
+		   });
+			
+			function sub (argument) {
+				var id = document.getElementById('link_id').getAttribute("value");
+				if (argument == 1) {
+ 					window.location.href="__URL__/deal_link/re/1/id/"+id;
+
+				}else{
+					if (confirm("确定拒绝这条信息？")) {
+ 						window.location.href="__URL__/deal_link/re/0/id/"+id;
+					}
+				}
+			}
+		</script>
+	</div>
+	<include file="Public/footer"/>
+</body>
+</html>

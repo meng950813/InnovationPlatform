@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- create by cm -->
+	<meta charset="UTF-8">
+	<title>个人中心——我的团队</title>
+    <link rel="stylesheet" href="__PUBLIC__/css/home/personal.css">
+	<script src="__PUBLIC__/js/jquery.min.js"></script>
+	<style>
+		.my_team{
+			margin-bottom: 20px;
+		}
+		.team_list{
+			height: 40px;
+			line-height: 40px;
+			border-bottom: 2px dotted #52A8DE;
+		}
+		.team_list >a{
+			float: right;
+			color: #1B8DEF;
+			padding: 0 20px;
+			margin: 0 10px;
+			background: #E4F1F9;
+			border-radius: 10px;
+		}
+		.team_list>a:hover{
+			font-weight: bold;
+			background: #1B8DEF;
+			color: #fff;
+		}
+		.team_list a.free:hover{
+			color: #f00;
+		}
+		.teamname{
+			margin-left: 20px;
+		}
+		.teamname>a{
+			color: #101010;
+			font-weight: bold;
+			font-size: 18px;
+		}
+		.teamname>a:hover{
+			color: #1B8DEF;
+		}
+	</style>
+	<!-- [if IE lt 10] -->
+    	<style>
+			img{
+				border: none;
+			}
+    	</style>
+    <!-- [endif] -->
+</head>
+<body>
+    <include file = "Public/person_nav" />
+	
+	<div id="body">
+		<!-- 显示我创建的团队 -->
+		<img src="__PUBLIC__/images/my_team.png" alt="">
+		<div class="my_team">
+			<volist id="teamlist" name="teamlist">
+				<div class="team_list">
+					<span class="teamname">
+						<a href="{:U('Team/team',array('id'=>$teamlist['teamid']))}">{$teamlist.teamname}</a>
+					</span>
+					<a href="{:U('Personal/modify_team',array('id'=>$teamlist['teamid']))}">修改团队信息</a>
+					<a href="javascript:void(0);" id="del_myteam-{$teamlist.teamid}" onclick="del_my_team(this)" value="{$teamlist.teamid}" class="free">解散团队</a>
+				</div>
+			</volist>
+			<?php if($teamlist == null):?>
+				<div class="team_list" style="overflow:hidden;">
+					<h3 style="float: left;">暂未创建团队</h3>
+					<a href="{:U('Team/add')}">创建团队</a>
+				</div>
+			<?php endif?>
+		</div>
+
+		<!-- 显示我加入的团队 -->
+		<img src="__PUBLIC__/images/join_team.png" alt="">
+		<div class="join_team">
+			<div class="my_team">
+				<volist id="joinlist" name="joinlist">
+					<div class="team_list">
+						<span class="teamname">
+							<a href="{:U('Team/team',array('id'=>$joinlist['teamid']))}">团队名</a>
+						</span>
+						<a href="javascript:void(0);" id="leave_team-{$joinlist.teamid}" onclick="leave_team(this)" value="{$joinlist.teamid}" class="free">离开团队</a>
+					</div>
+				</volist>
+			</div>
+		</div>
+	</div>
+	<script>
+		$(function(){
+        	$('#my_team').addClass('focus').siblings().removeClass('focus');
+		});
+
+		function del_my_team(obj) {
+			if(confirm("确定解散团队？")){
+				var id = document.getElementsByid(obj.id).getAttribute("value");
+				alert(id);
+				window.location.href="__URL__/del_team/id/"+id;
+			}
+		}
+		function leave_team(obj){
+			if(confirm("确定离开团队？")){
+				var id = document.getElementByid(obj.id).getAttribute("value");
+				window.location.href="__URL__/leave_team/id/"+id;
+			}
+		}
+	</script>
+    <include file="Public/footer" />
+</body>
+</html>

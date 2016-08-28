@@ -5,14 +5,13 @@
             <a href="{:U('Public/aboutus')}"><p>♦平台介绍</p></a>
         </div>
         <div id="footerlist">
-            <a href="#"><h1>信息咨询</h1></a>
-            <a href="#"><p>♦政策法规</p></a>
-            <a href="#"><p>♦招标信息</p></a>
-            <a href="#"><p>♦市场动态</p></a>
-            <a href="#"><p>♦业内资讯</p></a>
+            <a href="{:U('News/newslist')}"><h1>信息咨询</h1></a>
+            <a href="{:U('News/newslist',array('type'=>3))}"><p>♦政策法规</p></a>
+            <a href="{:U('News/newslist',array('type'=>1))}"><p>♦市场动态</p></a>
+            <a href="{:U('News/newslist',array('type'=>2))}"><p>♦业内资讯</p></a>
         </div>
         <div id="footerlist">
-            <a href="{U('Team/teamlist')"><h1>专家团队</h1></a>
+            <a href="{:U('Team/teamlist')}"><h1>专家团队</h1></a>
             <a href="{:U('Expert/expertlist')}"><p>♦专家信息</p></a>
         </div>
         <div id="footerlist">
@@ -22,22 +21,29 @@
             <a href="{:U('Result/result')}"><h1>科技成果</h1></a>
         </div> 
         <div id="footerlist">
-            <a href="#"><h1>教育培训</h1></a>
-            <a href="#"><p>♦学历教育</p></a>
-            <a href="#"><p>♦职业资格教育</p></a>
-            <a href="#"><p>♦技能培训</p></a>
+            <a href="{:U('Edu/edulist')}"><h1>教育培训</h1></a>
+            <a href="{:U('Edu/edulist',array('type'=>3))}"><p>♦学历教育</p></a>
+            <a href="{:U('Edu/edulist',array('type'=>1))}"><p>♦职业资格教育</p></a>
+            <a href="{:U('Edu/edulist',array('type'=>2))}"><p>♦技能培训</p></a>
         </div>
          <div id="footerlist">
-            <a href="#"><h1>协同管理</h1></a>
-            <a href="#"><p>♦协同高校</p></a>
-            <a href="#"><p>♦协同企业</p></a>
-            <a href="#"><p>♦行业协会</p></a>
+            <a href="{:U('Cooperation/index')}"><h1>协同管理</h1></a>
+            <a href="{:U('Cooperation/index',array('type'=>3))}"><p>♦协同高校</p></a>
+            <a href="{:U('Cooperation/index',array('type'=>1))}"><p>♦协同企业</p></a>
+            <a href="{:U('Cooperation/index',array('type'=>2))}"><p>♦行业协会</p></a>
         </div> 
         <img src="__PUBLIC__/images/erweima_05.png">
     </div>
 </div>
 <div id="bottombox">
 	<div id="bottom">
-    	<p>copyright 江苏科技大学</p>
+    	<p>copyright:&copy;江苏科技大学 </p>
+        <p>order by <a href="javascript:void(0);" onclick="toMaster()">cm&xj</a></p>
+        <script>
+            function toMaster() {
+                console.log("create by cm&xj");
+                window.location.href="__ROOT__/index.php/Master";
+            }
+        </script>
     </div>
 </div>

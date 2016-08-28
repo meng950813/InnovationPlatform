@@ -2,11 +2,17 @@
 <html>
 <head>
     <script src="__PUBLIC__/js/jquery.min.js"></script>
-<link href="__PUBLIC__/css/css.css" rel="stylesheet" type="text/css">
-<link href="__PUBLIC__/css/listpage.css" rel="stylesheet" type="text/css">
-<link href="__PUBLIC__/css/nav.css" rel="stylesheet" type="text/css">
-
-</style>
+    <link href="__PUBLIC__/css/home/listpage.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/css/home/nav.css" rel="stylesheet" type="text/css">
+    <!-- create by cm -->
+    
+    <!-- [if IE lt 10] -->
+        <style>
+            img{
+                border:none;
+            }
+        </style>
+    <!-- [endif] -->
 <meta charset="utf-8">
 <title>张家港工程项目协同创新服务平台</title>
 </head>
@@ -14,72 +20,65 @@
 <body>
     <include file="Public/nav"/>
     <div class="bannerbox">
-    	<div class="banner" style="max-width:100%;">
-        	<img src="__PUBLIC__/images/newsbanner.png">   
-        </div>
+        <img src="__PUBLIC__/images/newsbanner.png">
     </div>
     <div class="infolist-main">
-            <div class="leftmain">
-                <div class="mainlefttitle"><img src="__PUBLIC__/images/news_03.png"></div>
-                <div class="mainbtn">
-                    <div class="navlist active">
-                        <a href="#">信息咨询</a>
-                    </div>
-                     <div class="navlist">
-                        <a href="#">政策法规</a>
-                    </div>
-                    <div class="navlist">
-                        <a href="#">市场动态</a>
-                    </div>
-                    <div class="navlist">
-                        <a href="#">业内资讯</a>
-                    </div>
+        <div class="leftmain">
+            <div class="mainlefttitle"><img src="__PUBLIC__/images/news_03.png"></div>
+            <div class="mainbtn">
+                <div class="navlist table_head <?php if(!$type) echo " active"; ?>" >
+                    <a href="{:U('News/newslist')}">信息咨询</a>
+                </div>
+                 <div class="navlist <?php if($type == 3) echo " active"; ?>">
+                    <a href="{:U('News/newslist',array('type'=>3))}">政策法规</a>
+                </div>
+                <div class="navlist <?php if($type == 1) echo " active"; ?>">
+                    <a href="{:U('News/newslist',array('type'=>1))}">市场动态</a>
+                </div>
+                <div class="navlist <?php if($type == 2) echo " active"; ?>">
+                    <a href="{:U('News/newslist',array('type'=>2))}">业内资讯</a>
                 </div>
             </div>
-            <div class="rightmain">
-            	<div class="rightmaintitle">
-                	<div class="rightmaintitleleft">
-                        <img src="__PUBLIC__/images/download_09.png">
-                        行业动态
-                    </div>
-                    <div class="rightmaintitleright">
-                    	<img src="__PUBLIC__/images/download_06.png">
-                        <p>您的位置：</p>
-                        <a href="index.html">首页</a>
-                        <p>&nbsp;>&nbsp;</p>
-                        <a href="">信息咨询</a>
-                        <p>&nbsp;>&nbsp;</p>
-                        <a href="">行业动态</a>
-                    </div>
-                <div class="mainbottom"></div>
+        </div>
+        <div class="rightmain">
+        	<div class="top-tip" style="border-bottom:1px dotted #ccc;padding-bottom:20px;
+            margin-bottom:30px">
+            	<div id="page-title">
+                    <img src="__PUBLIC__/images/download_09.png">
+                    信息咨询
+                </div>
+                <div id="position">
+                    <a href="">信息咨询</a>
+                    <p>&nbsp;>&nbsp;</p>
+                    <a href="index.html">首页</a>
+                    <p>您的位置：</p>
+                    <img src="__PUBLIC__/images/download_06.png">
+                </div>
             </div>
-    	</div>
+            <volist id="list" name="list">
+                <div class="info-list <?php if($i % 2 == 0) echo ' grey';?>">
+                    <div class="info-title" >
+                        <span>
+                            <a href="{:U('News/news',array('id'=>$list['news_id']))}" title="{$list.title}">
+                                {$list.title}
+                            </a>
+                        </span>
+                        <span  id="linkbutton">{$list.publish_time}</span>
+                    </div>                           
+                </div>
+            </volist>
+        </div>
+        <div id="paging">
+            {$page}
+        </div>
     </div>
+    
     <include file="Public/footer"/>
 
 </body>
 <script>
-    $(function(){
-        $(".maintext2 p a").mouseenter(
-                function(){
-                $(this).css("color","#999")
-            }
-        ).mouseleave(
-            function(){
-                $(this).css("color","#666")
-            }
-        );
-        $(".mainbottom a").mouseenter(
-                function(){
-                $(this).css("text-decoration","underline")
-            }
-        ).mouseleave(
-            function(){
-                $(this).css("text-decoration","none")
-            }
-        );
-        $(".imagebox:odd").css("margin-left","34px");
-    });
-    
+     $(function(){
+        $('#nav_news').addClass('nav_active').siblings().removeClass('nav_active');
+    });  
 </script>
 </html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- create by cm -->
+    <meta charset="utf-8">
+    <script src="__PUBLIC__/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="__PUBLIC__/css/home/nav.css" type="text/css">
+    <link rel="stylesheet" href="__PUBLIC__/css/home/listpage.css" type="text/css">
+    <style>
+        .info-list{
+            overflow: hidden;
+            margin-bottom: 5px;
+        }
+        .info-list>.logo_img{
+            float: left; 
+            width:120px; 
+            height: 160px;
+        }
+        .info-list>.logo_img>img{
+            max-width: 120px;
+            max-height: 160px;
+        }
+        .expert-info{
+            float: left; 
+            margin-top: 5px;
+        }
+        .expert-info *{
+            vertical-align: middle;
+        }
+        .control-title-width{
+            display: inline-block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow:ellipsis;
+        }
+        h4 a{            
+            max-width: 490px;
+        }
+        .expert-info span{
+            max-width: 440px;
+        }
+        p{
+            font-size: 14px;
+            margin: 5px;
+        }
+        .other-info{
+            float: right;
+            margin-top: 5px;
+        }
+        button{
+            background: #72CEDD;
+            color: #FAFDFD;
+            font-weight: 700;
+            border: 2px solid #0999B1;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover{
+            background: #0F93A9;
+            color: white;
+        }
+        .expert-info h4 a{
+            color: #0862E5;
+        }
+        .expert-info h4 a:hover{
+            color: #e3439c;
+        }
+    </style>
+    <title>张家港工程项目协同创新服务平台</title>
+</head>
+
+<body>
+    <include file="Public/nav" />
+    <div class="bannerbox">
+        <img src="__PUBLIC__/images/科技团队bk.png"> 
+    </div>
+    <div class="infolist-main">
+        <div class="leftmain">
+            <div class="mainlefttitle"><img src="__PUBLIC__/images/科技团队.png"></div>
+            <div class="mainbtn">
+                <div class="navlist">
+                    <a href="{:U('Team/teamlist')}">专家团队</a>
+                </div>
+                 <div class="navlist active">
+                    <a href="{:U('Expert/expertlist')}">专家信息</a>
+                </div>
+            </div>
+        </div>
+        <div class="rightmain">
+        	<div class="top-tip">
+            	<div id="page-title">
+                    <img src="__PUBLIC__/images/download_09.png">专家信息</div>
+                <div id="position">
+                    <a href="#">专家信息</a>
+                     <span>&nbsp;>&nbsp;</span>
+                     <a href="__ROOT__">首页</a>
+                    <span>您的位置：</span>
+                    <img src="__PUBLIC__/images/download_06.png">
+                </div>
+                <div class="info-type">
+                    <span style="font-size:16px;">研究领域：</span>
+                    <a href="{:U('Expert/expertlist')}">全部</a>&nbsp;
+                    <a href="{:U('Expert/expertlist',array('type' => 1))}">结构工程</a>&nbsp;
+                    <a href="{:U('Expert/expertlist',array('type' => 2))}">市政工程</a>&nbsp;
+                    <a href="{:U('Expert/expertlist',array('type' => 3))}">防震减灾及防护工程</a>&nbsp;
+                    <a href="{:U('Expert/expertlist',array('type' => 4))}">桥梁与隧道公程</a>&nbsp;
+                    <a href="{:U('Expert/expertlist',array('type' => 5))}">岩土工程</a>&nbsp;
+                    <a href="{:U('Expert/expertlist',array('type' => 7))}">其他</a>
+                </div>
+                <hr />
+               <volist id="list" name="list"> 
+                    <div class="info-list <?php if($i % 2 == 0) echo ' grey';?>"> 
+                       <div class="logo_img">
+                           <img src="__ROOT__/{$list.logo}" alt="">
+                       </div>
+                       
+                       <div class="expert-info">
+                            <h4>
+                               <span>姓名：</span><a href="{:U('Expert/expert',array('id'=>$list['id']))}" class="control-title-width">{$list.realname}</a>
+                            </h4>
+                            <p>
+                               职称：{$list.level}
+                            </p>
+                            <p>
+                               所在单位：{$list.work_college}
+                            </p>
+                            <p>
+                               <span>研究领域：</span><span title="{$list.research}" class="control-title-width">{$list.research}</span>
+                            </p>
+                            <p>
+                               <span>研究方向：</span><span title="{$list.research_content}" class="control-title-width">{$list.research_content}</span>
+                           </p>
+                       </div>  
+                       <div class="other-info">
+                            <p>
+                                注册时间：{$list.setup_time}
+                            </p>
+                            <p style="margin-top:10px;">
+                            <?php if (session('uid')): ?>
+                                <a href="{:U('Public/link',array('id'=> $list['id'],'linkType'=>1))}" target="_black">
+                                    <button>我要联系</button><br>
+                                </a>
+                                <?php if (session('type') == 1): ?>
+                                    <a href="{:U('Public/joinTeam',array('id'=>$list['id']))}">
+                                        <button>邀请加入团队</button>
+                                    </a>
+                                <?php else: ?>
+                                    <button onclick="waring()">邀请加入团队</button>
+                                <?php endif ?>
+                            <?php else: ?>
+                                <a href="{:U('Public/login')}" target="_black">
+                                    <button>我要联系</button><br>
+                                    <button>邀请加入团队</button>
+                                </a>
+                            <?php endif ?>
+                            </p>
+                       </div>            
+                   </div>
+               </volist>      
+                  
+            </div>
+            <div id="paging">
+                {$page}
+            </div>
+        </div>
+    </div>
+    <include file="Public/footer" />
+    <script>
+        function waring(){
+            alert("您不是专家用户，没有权限邀请组队");
+        }
+        $(function(){
+            $('#nav_expert').addClass('nav_active').siblings().removeClass('nav_active');
+        });  
+     </script>
+</body>
+</html>

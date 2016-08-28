@@ -2,6 +2,7 @@
 namespace Home\Model;
 use Think\Model\ViewModel;
 /**
+ * create by cm
  * 企业需求模块
  * 作用：
  *	将发布需求的企业信息和需求对应

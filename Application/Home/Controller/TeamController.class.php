@@ -3,6 +3,7 @@ namespace Home\Controller;
 use Think\Controller;
 
 /**
+ * create by cm
  * 专家团队
  */
 class TeamController extends Controller {
@@ -16,10 +17,14 @@ class TeamController extends Controller {
             $type = getResearchType(I('get.type'));
             $where['team_research'] = array("like","%".$type."%");
         }
-        $list = M('ExpertTeam')->where($where)->order('sort desc')->page($_GET['p'].',20')->getField('teamid,teamname,workplace,team_research,research_content,setup_time');
-        $count = count($list);
+        $ExpertTeam = M('ExpertTeam');
+        $list =$ExpertTeam->where($where)->order('sort desc,click desc')->page(I('get.p',1).',20')->getField('teamid,teamname,workplace,team_research,research_content,setup_time');
+        
+        // 分页 
+        $count =$ExpertTeam->where($where)->count();
         $page = new \Think\Page($count,20);
         $show = $page->show();
+        
         $this->assign("list",$list);
         $this->assign("page",$show);
     	$this->display();
@@ -31,6 +36,9 @@ class TeamController extends Controller {
      */
     public function team(){
         $where['teamid'] = I('get.id');
+
+        // 点击量加1
+        M("ExpertTeam")->where($where)->setInc('click');
 
         // 获取团队信息
         $teamInfo = D("TeamInfoView")->where($where)->find();
@@ -45,8 +53,9 @@ class TeamController extends Controller {
         $award['isteam'] = 1;
         $awardInfo = M("Award")->where($award)->select();
 
+        $TeamMember = M('TeamMember');
         //  团队总人数
-        $teamInfo['member_num'] = M('TeamMember')->where($where)->count();
+        $teamInfo['member_num'] = $TeamMember->where($where)->count();
 
          // 方便前端判断字段，0表示信息不可见,无超链接
         $agree = 0;
@@ -62,7 +71,7 @@ class TeamController extends Controller {
             else{
                 $arr['uid'] = session('uid');
                 $arr['teamid'] = $where['teamid'];
-                $isMember = M('TeamMember')->where($arr)->find();
+                $isMember = $TeamMember->where($arr)->find();
                 if($isMember){
                     // 是团队成员，可以看到信息
                     $isNone = false;
@@ -80,7 +89,7 @@ class TeamController extends Controller {
                 $agree = 1;
 
                 // 获取成员信息，包括：id,姓名，职称,研究领域
-                $Member_info = M("TeamMember")->where($where)->select();
+                $Member_info = $TeamMember->where($where)->select();
                 $ExpertUser = M('ExpertUser');
                 $size = count($Member_info);
                 for ($i=0; $i < $size; $i++) {

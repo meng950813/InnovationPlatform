@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- create by cm -->
+	<meta charset="UTF-8">
+	<title>个人中心——我的成果</title>
+    <link rel="stylesheet" href="__PUBLIC__/css/home/personal.css">
+    <script src="__PUBLIC__/js/jquery.min.js"></script>
+	<style>
+		.my_list{
+			margin-bottom: 20px;
+		}
+		.list{
+			height: 40px;
+			line-height: 40px;
+			border-bottom: 2px dotted #52A8DE;
+		}
+		.list >a{
+			float: right;
+			color: #1B8DEF;
+			padding: 0 20px;
+			margin: 0 10px;
+			background: #E4F1F9;
+			border-radius: 10px;
+		}
+		.list>a:hover{
+			background: #1B8DEF;
+			color: #fff;
+		}
+		.list a.free:hover{
+			color: #f00;
+		}
+		.name{
+			margin-left: 20px;
+		}
+		.name>a{
+			color: #101010;
+			font-weight: bold;
+			font-size: 18px;
+		}
+		.name>a:hover{
+			color: #1B8DEF;
+		}
+	</style>
+	<!-- [if IE lt 10] -->
+    	<style>
+			img{
+				border: none;
+			}
+    	</style>
+    <!-- [endif] -->
+</head>
+<body>
+    <include file = "Public/person_nav" />
+	
+	<div id="body">
+		<!-- 显示我的科研成果 -->
+		<img src="__PUBLIC__/images/my_research.png" alt="">
+		<div class="my_list">
+			<volist id="my_research" name="my_research">
+				<div class="list">
+					<span class="name">
+						<a href="{:U('Result/result',array('id'=>$my_research['result_id']))}">{$my_research.result_name}</a>
+					</span>
+					<a href="{:U('Personal/modify_research',array('id'=>$my_research['result_id']))}">修改信息</a>
+					<a href="{:U('Personal/addAward',array('id'=>$my_research['result_id'],'type'=>0))}" target="_black">添加成就</a>
+					<a href="javascript:void(0);" class="free" id="my_research-{$my_research.result_id}" value="{$my_research.result_id}" onclick="del_research(this)">删除成果</a>
+				</div>
+			</volist>
+			<?php if($my_research == null):?>
+				<div class="list" style="overflow:hidden;">
+					<h3 style="float:left;">暂未发布研究成果</h3>
+					<a href="{:U('Team/add')}">成果发布</a>
+				</div>
+			<?php endif?>
+		</div>
+
+		<!-- 专家用户才有团队 -->
+		<?php if (session('type') == 1): ?>
+			<!-- 显示我的团队的科研成果 -->
+			<img src="__PUBLIC__/images/team_research.png" alt="">
+			<div class="team_list">
+				<volist id="team_research" name="team_research">
+					<div class="list">
+						<span class="name">
+							<a href="{:U('Result/result',array('id'=>$team_research['result_id']))}">{$team_research.result_name}</a>
+						</span>
+						<?php if($team_research['leader'] == 1):?>
+							<a href="javascript:void(0);" id="team_research-{$team_research.result_id}" value="{$team_research.result_id}" onclick="del_research(this)" class="free">删除成果</a>
+							<a href="{:U('Personal/modify_research',array('id'=>$team_research['result_id']))}">修改信息</a>
+						<?php endif?>
+						<a href="{:U('Personal/addAward',array('id'=>$team_research['result_id'],'type'=>1))}" target="_black">添加成就</a>
+						
+					</div>
+				</volist>
+				
+			</div>
+		<?php endif ?>
+		
+	</div>
+	<script>
+		$(function(){
+        	$('#my_research_result').addClass('focus').siblings().removeClass('focus');
+		});
+		function del_research(obj) {
+			if (confirm("确定删除这条研究成果吗?")) {
+				var id = document.getElementById(obj.id).getAttribute("value");
+				window.location.href="__URL__/del_research/id/"+id;
+			}
+		}
+	</script>	
+    <include file="Public/footer" />
+</body>
+</html>

@@ -1,5 +1,6 @@
 <?php
 	/**
+	* create by cm
 	* 将获取的研究方向的值对应成相应名称
 	*
 	*/
@@ -12,22 +13,19 @@
         for ($i=0; $i < $size; $i++) { 
             switch ($arr[$i]) {
                 case 1:
-                    $type = $type.'电子信息';
+                    $type = $type.'结构工程';
                     break;
                 case 2:
-                    $type = $type.'机械设计与制造';
+                    $type = $type.'市政工程';
                     break;
                 case 3:
-                    $type = $type.'新能源与环保';
+                    $type = $type.'防震减灾及防护工程';
                     break;
                 case 4:
-                    $type = $type.'生物技术与医药';
+                    $type = $type.'桥梁与隧道公程';
                     break;
                 case 5:
-                    $type = $type.'新材料';
-                    break;
-                case 6:
-                    $type = $type.'现代农业';
+                    $type = $type.'岩土工程';
                     break;
                 default:
                     $type = $type.'其他';

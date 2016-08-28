@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- create by cm -->
     <meta charset="UTF-8">
     <title>个人注册</title>
     <script src="__PUBLIC__/js/jquery.min.js"></script>
     <script src="__PUBLIC__/js/signup.js"></script>
-    <link rel="stylesheet" href="__PUBLIC__/css/signup.css">
-    <link rel="stylesheet" href="__PUBLIC__/css/nav.css">
+    <link rel="stylesheet" href="__PUBLIC__/css/home/signup.css">
+    <link rel="stylesheet" href="__PUBLIC__/css/home/nav.css">
 </head>
 <body>
     <include file = "Public/nav"/>
@@ -14,32 +15,32 @@
         <div class="main">
              <div class="line">
                 <label for="logo">上传头像</label>
-                <input type="file" id="logo" name="img" accept="image/*">
+                <input class="line-input" type="file" id="logo" name="img" accept="image/*">
                 <div class="upload"><img id="preview" src="" alt=""></div>
             </div>
             <div class="line">
                 <label for="username">用户名</label>
-                <input type="text" required id="username" name="username" ><span class="must">*</span>
+                <input class="line-input" type="text" required id="username" name="username" ><span id="nameError" class="must">*</span>
             </div>
             <div class="line">
                 <label for="pwd">密码</label>
-                <input type="password" required id="pwd" name="pwd"><span class="must">*</span>
+                <input class="line-input" type="password" required id="pwd" name="pwd"><span class="must">*</span>
             </div>
              <div class="line">
                 <label for="sure_pwd">确认密码</label>
-                <input type="password" required id="sure_pwd"><span id="pwdError" class="must">*</span>
+                <input class="line-input" type="password" required id="sure_pwd"><span id="pwdError" class="must">*</span>
             </div>
             <div class="line">
                 <label for="realname">真实姓名</label>
-                <input type="text" required id="realname" name="realname"><span class="must">*</span>
+                <input class="line-input" type="text" required id="realname" name="realname"><span class="must">*</span>
             </div>
              <div class="line">
                 <label for="phone">手机号</label>
-                <input type="text" required id="phone" name="phone" placeholder="例:13866665666"><span id="phoneError" class="must">*</span>
+                <input class="line-input" type="text" required id="phone" name="phone" placeholder="例:13866665666"><span id="phoneError" class="must">*</span>
             </div>
             <div class="line">
                 <label for="realname">邮箱</label>
-                <input type="email" required id="realname" name="realname"><span class="must">*</span>
+                <input class="line-input" type="email" required id="realname" name="realname"><span class="must">*</span>
             </div>
             <div class="sub">
                 <input type="submit" value="提交">
@@ -62,8 +63,10 @@
                         console.log("success",data);
                         if(data.code == 0){
                             $('#nameError').html("*");
+                            $('input[type=submit]').show();
                         }else{
                             $("#nameError").html("用户名已存在");
+                            $('input[type=submit]').hide();
                         }
                     })
                     .fail(function(XMLHttpRequest, textStatus, errorThrown){

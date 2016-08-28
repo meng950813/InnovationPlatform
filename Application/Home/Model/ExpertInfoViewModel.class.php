@@ -2,6 +2,7 @@
 namespace Home\Model;
 use Think\Model\ViewModel;
 /**
+ * create by cm
  * 专家信息模块
  * 作用：
  *	筛选出将login表中的专家用户；
@@ -14,7 +15,7 @@ class ExpertInfoViewModel extends ViewModel {
 	public $viewFields = array(
 		'login'=>array('id','username','logo', 'realname','type','mobile_phone','email'),
 		'expert_user'=>array('uid','identify','birthday','gender', 'work_college','jobname','telphone',
-			'political_status','level','degree','research','research_content','info','setup_time', '_on'=>'id=uid')
+			'political_status','level','degree','research','research_content','info','setup_time','click', '_on'=>'id=uid')
 		);
 }
 ?>

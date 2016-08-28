@@ -1,17 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- create by cm -->
 	<meta charset="UTF-8">
 	<title>专家注册</title>
 	<script src="__PUBLIC__/js/jquery.min.js"></script>
 	<script src="__PUBLIC__/js/signup.js"></script>
-	<link rel="stylesheet" href="__PUBLIC__/css/signup.css">  
-	<link rel="stylesheet" href="__PUBLIC__/css/nav.css">
+	<link rel="stylesheet" href="__PUBLIC__/css/home/signup.css">  
+	<link rel="stylesheet" href="__PUBLIC__/css/home/nav.css">
     <style>
 		input[type=radio]{
 			width: 20px;
 		}
     </style>
+     <!-- [if IE lt 10] -->
+        <style>
+            img{
+                border:none;
+            }
+        </style>
+    <!-- [endif] -->
 </head>
 <body>
 	<include file="Public/nav" />
@@ -89,12 +97,11 @@
 			</div>
 			<div class="line">
 				<label for="research" style="float:left;">研究领域</label>
-				 <input type="checkbox" name="research[]" value="1">电子信息
-				<input type="checkbox" name="research[]" value="2">机械设计与制造
-				<input type="checkbox" name="research[]" value="3">新能源与环保<br>
-				<input type="checkbox" name="research[]" value="4">生物技术与医药
-				<input type="checkbox" name="research[]" value="5">新材料
-				<input type="checkbox" name="research[]" value="6">现代农业
+				 <input type="checkbox" name="research[]" value="1">结构工程
+				<input type="checkbox" name="research[]" value="2">市政工程
+				<input type="checkbox" name="research[]" value="3">防震减灾及防护工程<br>
+				<input type="checkbox" name="research[]" value="4">桥梁与隧道公程
+				<input type="checkbox" name="research[]" value="5">岩土工程
 				<input type="checkbox" name="research[]" value="7">其他 <span id="" class="must">*</span>
 			</div>
 			<div class="line textarea">
@@ -136,6 +143,7 @@
 			$('#username').change(function(event){
 				if($('#username').val().trim() != ""){
 					var un = $('#username').val();
+					console.log(un);
 					$.ajax({
 						type:"post",
 						url:"__ROOT__/index.php/Public/checkName",
@@ -146,8 +154,10 @@
 						console.log("success",data);
 						if(data.code == 0){
 							$('#nameError').html("*");
+							$('input[type=submit]').show();
 						}else{
 							$("#nameError").html("用户名已存在");
+							$('input[type=submit]').hide();
 						}
 					})
 					.fail(function(XMLHttpRequest, textStatus, errorThrown){

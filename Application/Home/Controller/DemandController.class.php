@@ -3,8 +3,9 @@ namespace Home\Controller;
 use Think\Controller;
 
 /**
- * 企业需求
- */
+* create by cm
+* 企业需求
+*/
 class DemandController extends Controller {
 	/**
 	 * 列表页
@@ -12,14 +13,20 @@ class DemandController extends Controller {
 	 */
     public function demandlist(){
         $where['status']=1;
-        if(isset($_GET['type'])){
+        if(!empty($_GET['type'])){
             $type = getResearchType($_GET['type']);
             $where['demand_type'] = array("like","%".$type);
         }
-        $list = M('Demand')->where($where)->order('sort desc')->page($_GET['p'].',20')->select();;
-        $count = count($list);
+
+        $Demand =  M('Demand');
+
+        $list =$Demand->where($where)->order('sort desc')->page(I('get.p',1).',20')->select();;
+        
+        // 分页
+        $count = $Demand->where($where)->count();
         $page = new \Think\Page($count,20);
         $show = $page->show();
+        
         $this->assign('list',$list);
         $this->assign('page',$show);
     	$this->display();

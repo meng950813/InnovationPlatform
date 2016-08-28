@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- create by cm -->
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="__PUBLIC__/css/home/personal.css">
+	<script type="text/javascript" src="__PUBLIC__/js/jquery.min.js"></script>
+	<title>个人中心--详细信息</title>
+	<style>
+		.myInfo{
+			width: 1000px;
+			margin: 0 auto;
+			margin-top: 20px;
+			padding-bottom: 20px;
+			border-bottom: 2px dotted #bbb;
+			overflow: hidden;
+		}
+
+		/*头像*/
+		#mylogo{
+			float: left;
+			width: 200px;
+			border-right: 1px dotted #aaa;
+			text-align: center;
+		}
+		#mylogo form{
+			text-align: center;
+		}
+		.upload{
+		    width:140px;
+		    height: 160px;
+			margin-left: 29px;
+			border:1px solid #ccc;
+		}
+		.upload #preview{
+		    max-width:140px;
+		    max-height:160px;
+		}
+		#mylogo div{
+			margin-top: 10px;
+			text-align: center;
+		}
+		#mylogo input[type = file]{
+			width: 200px;
+		}
+		.sub{
+			text-align: center;
+		}
+		.sub>input{
+			font-size: 16px;
+			padding: 5px 10px;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+		.sub>input:hover{
+			background-color: #52A8DE;
+			color: #fff;
+		}
+
+		/* 基础信息*/
+		#basicInfo{
+			float: left;
+			width: 650px;
+			margin:20px 0 0 50px;
+		}
+		.line{
+		    margin-bottom:5px;
+		}
+		label{
+		    width:100px;
+		    padding:5px 10px;
+		    text-align: right;
+		    display:inline-block;
+		}
+		.line-input{
+		    width:300px;
+		    height:30px;
+		    line-height: 30px;
+		}
+		.must{
+		    color:red;
+		    margin-left:10px; 
+		}
+		.textarea{
+		    position: relative;
+		}
+		.textarea label{
+		    position: absolute;
+		    top: 50%;
+		    margin-top: -16px;
+		}
+		.textarea textarea{
+		    width:480px;
+		    height:100px;
+		    margin-left:124px;
+		}			
+		/*详细信息*/
+		.show_info{
+			width: 700px;
+			margin: 0 auto;
+		}
+	</style>
+	<!-- [if IE lt 10] -->
+    	<style>
+			img{
+				border: none;
+			}
+			*{
+				font-size: 14px;
+			}
+    	</style>
+    <!-- [endif] -->
+</head>
+<body>
+	<include file = "Public/person_nav" />
+
+	<!-- 显示详细信息 -->
+	<div class="myInfo">
+		<div>
+			<img src="__PUBLIC__/images/detailInfo.png" alt="">
+		</div>
+		<div class="show_info">
+			<!-- 专家用户 -->
+			<?php if(session('type') == 1):?>
+				<form action="{:U('Personal/modify_expert')}" method="post">
+					<div class="line">
+						<label for="gender">性别</label>
+						<input type="radio" name="gender" value="1" <?php echo ($myinfo['gender'] == 1)? 'checked':''; ?> >男&nbsp;&nbsp;
+						<input type="radio" id="woman" name="gender" <?php echo ($myinfo['gender'] == 0)? 'checked':''; ?> value="0">女
+					</div>
+					<div class="line">
+						<label for="birthday">出生日期</label>
+						<input type="text" class="line-input" placeholder="例：1987-08-19" id="birthday" name="birthday" value="{$myinfo.birthday}">
+					</div>
+					<div class="line">
+						<label for="identify">身份证号</label>
+						<input type="text" class="line-input" id="identify" name="identify" value="{$myinfo.identify}"><span id="idError" class="must"></span>
+					</div>
+					<div class="line">
+						<label for="degree">学位</label>
+						<select name="degree" id="degree">
+							<option value="{$myinfo.degree}">{$myinfo.degree}</option>
+							<option value="博士后">博士后</option>
+							<option value="博士">博士</option>
+							<option value="硕士">硕士</option>
+							<option value="学士">学士</option>
+							<option value="其他">其他</option>
+						</select>
+					</div>
+					<div class="line">
+						<label for="political_status">政治面貌</label>
+						<select name="political_status" id="political_status">
+							<option value="{$myinfo.political_status}">{$myinfo.political_status}</option>
+							<option value="党员">党员</option>
+							<option value="预备党员">预备党员</option>
+							<option value="其他党派人士">其他党派人士</option>
+							<option value="无党派人士">无党派人士</option>
+							<option value="其他">其他</option>
+						</select>
+					</div>
+					<div class="line">
+						<label for="jobtype">职称</label>
+						<select name="level" id="jobtype">
+							<option value="{$myinfo.level}">{$myinfo.level}</option>
+							<option value="教授">教授</option>
+							<option value="副教授">副教授</option>
+							<option value="研究员">研究员</option>
+							<option value="副研究员">副研究员</option>
+							<option value="高级工程师">高级工程师</option>
+							<option value="讲师">讲师</option>
+							<option value="其他类正高级">其他类正高级</option>
+							<option value="其他类副高级">其他类副高级</option>
+							<option value="中级">中级</option>
+							<option value="初级及以下">初级及以下</option>
+						</select>
+					</div>
+					<div class="line">
+						<label>研究领域</label>
+						<input type="text" class="line-input" id="college" readonly name="my_research" value="{$myinfo.research}"> 
+					</div>
+					<div class="line">
+						<label for="research" style="float:left;">重新选择</label>
+						 <input type="checkbox" name="research[]" value="1">结构工程
+						<input type="checkbox" name="research[]" value="2">市政工程
+						<input type="checkbox" name="research[]" value="3">防震减灾及防护工程<br>
+						<input type="checkbox" name="research[]" value="4">桥梁与隧道公程
+						<input type="checkbox" name="research[]" value="5">岩土工程
+						<input type="checkbox" name="research[]" value="7">其他 
+					</div>
+					<div class="line textarea">
+						<label for="research_content">研究内容</label>
+						<textarea name="research_content" id="research_content">{$myinfo.research_content}</textarea>
+					</div>
+					<div class="line">
+						<label for="college">工作单位</label>
+						<input type="text" class="line-input" id="college" name="college" value="{$myinfo.work_college}">
+					</div>
+					<div class="line">
+						<label for="jobname">职务</label>
+						<input type="text" class="line-input" id="jobname" name="jobname" value="{$myinfo.jobname}">
+					</div>
+					<div class="line">
+						<label for="telphone">办公电话</label>
+						<input type="text" class="line-input" required id="telphone" name="telphone" placeholder="例:0516-12345678" value="{$myinfo.telphone}"><span id="telphoneError" class="must"></span>
+					</div>
+					<div class="line textarea">
+						<label for="info">个人简介</label>
+						<textarea name="info" id="info">{$myinfo.info}</textarea>
+					</div>
+					<div class="sub">
+						<input type="submit" value="确认修改">
+					</div>
+				</form>
+			<?php endif?>
+			<!-- 企业用户 -->
+			<?php if(session('type') == 2):?>
+				<form action="{:U('Personal/modify_company')}" method="post">
+					<div class="line">
+		                <label for="website">企业官网</label>
+		                <input type="text" class="line-input" id="website" name="website" value="{$myinfo.website}">
+		            </div>
+		            <div class="line">
+		                <label for="company_type">企业标签</label>
+		                <input type="text" class="line-input" id="company_type" name="company_type" maxlength="50" placeholder="例：互联网公司、创业公司、民营企业" value="{$myinfo.company_type}">
+		            </div>
+		            <div class="line">
+		                <label for="jobtype">企业地址</label>
+		                <select style="width:80px;height:30px;" name="city" id="city">
+		                	<option value="{$myinfo.city}">{$myinfo.cityname}</option>
+		                    <volist id="city" name="city">
+		                    	<option value="{$city.id}">{$city.cityname}</option>
+		                    </volist>
+		                </select>
+		                <input type="text" class="line-input" id="address" name="address" value="{$myinfo.area}">
+		            </div>
+		            <div class="line">
+		                <label>经营方向</label>
+		                <input type="text" readonly class="line-input" value="{$myinfo.research}" name="my_research">
+		            </div>      
+		            <div class="line">
+		                <label for="research" style="float:left;">重新选择</label>
+		                <input type="checkbox" name="research[]" value="1">结构工程
+		                <input type="checkbox" name="research[]" value="2">市政工程
+		                <input type="checkbox" name="research[]" value="3">防震减灾及防护工程<br>
+		                <input type="checkbox" name="research[]" value="4">桥梁与隧道公程
+		                <input type="checkbox" name="research[]" value="5">岩土工程
+		                <input type="checkbox" name="research[]" value="7">其他 
+		            </div>
+		            <div class="line">
+		                <label for="linkman">联系人</label>
+		                <input type="text" class="line-input" id="linkman" name="linkman" value="{$myinfo.linkman}">
+		            </div>
+		            <div class="line">
+		                <label for="jobname">联系人职务</label>
+		                <input type="text" class="line-input" id="jobname" name="jobname" value="{$myinfo.jobname}">
+		            </div>
+		             <div class="line">
+		                <label for="phone">手机号码</label>
+		                <input type="text" class="line-input" required id="phone" name="phone" value="{$myinfo.link_phone}"><span id="phoneError" class="must"></span>
+		            </div>
+		            <div class="line">
+		                <label for="linkEmail">联系人邮箱</label>
+		                <input type="email" class="line-input" id="linkEmail" name="linkEmail" value="{$myinfo.linkEmail}">
+		            </div>
+		           
+		            <div class="line textarea">
+		                <label for="info">企业简介</label>
+		                <textarea name="info" id="info">{$myinfo.info}</textarea>
+		            </div>
+		            <div class="sub">
+		            	<input type="submit" value="确认修改">
+		            </div>
+				</form>
+			<?php endif?>
+		</div>
+	</div>
+    <include file = "Public/footer" />
+</body>
+<script>
+	$(function(){
+        $('#detail_info').addClass('focus').siblings().removeClass('focus');
+
+	    $('#identify').change(function(event){
+	        if(/^\d{18}|\d{17}[Xx]$/.test($('#identify').val())){
+	            $('#idError').html("*");
+	        }else{
+	            $('#idError').html('身份证格式错误');
+	        }
+	    });
+
+	    $('#telphone').change(function(event){
+	        if(!(/^\d{4}-\d{8}$/.test($('#com_phone').val()))){
+	            $("#telphoneError").html("电话号码格式错误");
+	        }
+	    });
+	    
+	    $('#phone').change(function(event){
+	        if(/^\d{11}$/.test($('#phone').val())){
+	            $('#phoneError').html('*');
+	        }else{
+	            $('#phoneError').html('手机号码格式错误');
+	        }
+	    });
+	});
+</script>
+</html>

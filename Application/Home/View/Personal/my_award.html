@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- create by cm -->
+	<meta charset="UTF-8">
+	<title>个人中心——我的成就</title>
+    <link rel="stylesheet" href="__PUBLIC__/css/home/personal.css">
+	
+	<style>
+		.my_team{
+			margin-bottom: 20px;
+		}
+		.team_list{
+			height: 40px;
+			line-height: 40px;
+			border-bottom: 2px dotted #52A8DE;
+		}
+		.team_list >a{
+			float: right;
+			color: #1B8DEF;
+			padding: 0 20px;
+			margin: 0 10px;
+			background: #E4F1F9;
+			border-radius: 10px;
+		}
+		.team_list>a:hover{
+			font-weight: bold;
+			background: #1B8DEF;
+			color: #fff;
+		}
+		.team_list a.free:hover{
+			color: #f00;
+		}
+		.teamname{
+			margin-left: 20px;
+		}
+		.teamname>a{
+			color: #101010;
+			font-weight: bold;
+			font-size: 18px;
+		}
+		.teamname>a:hover{
+			color: #1B8DEF;
+		}
+	</style>
+</head>
+<body>
+	<div id="header">
+    	<div id="header_box">
+    		<a href="__ROOT__">
+    			<img src="__PUBLIC__/images/背景.png" alt="">
+    		</a>
+    		<a class="index" href="__ROOT__">回到首页</a>
+    	</div>
+    </div>
+    <div id="nav">
+    	<div id="nav_box">
+    		<ul>
+    			<li>
+    				<a href="{:U('Personal/index')}">个人中心</a>
+    			</li>
+    			<?php if(session('uid') && session('type') == 1) :?>
+	    			<li>
+	    				<a href="{:U('Personal/my_team')}">我的团队</a>
+	    			</li>
+	    		<?php endif?>
+    			<li>
+    				<a href="{:U('Personal/my_research')}">研究成果</a>
+    			</li>
+    			<li class="focus">
+    				<a href="{:U('Personal/my_award')}">我的成就</a>
+    			</li>
+    			<li>
+    				<a href="{:U('Personal/my_info')}">个人信息</a>
+    			</li>
+    			<?php if(session('type') != 0):?>
+	    			<li>
+	    				<a href="{:U('Personal/detail_info')}">详细信息</a>
+	    			</li>
+	    		<?php endif?>
+    		</ul>
+    	</div>
+    </div>
+    <div id="link_img">
+		<!-- 各种找专家，找团队的图片链接 -->
+		<ul>
+			<li>
+				<a href="{:U('Expert/expertlist')}">
+					找专家	
+				</a>
+			</li>
+			<li>
+				<a href="{:U('Team/teamlist')}">
+					找专家团队	
+				</a>
+			</li>
+			<li>
+				<a href="{:U('Result/resultlist')}">
+					找科技成果	
+				</a>
+			</li>
+			<li>
+				<a href="{:U('Demand/demandlist')}">
+					找企业需求	
+				</a>
+			</li>
+			<?php if (session('type') == 1): ?>
+				<li>
+					<a href="{:U('Team/add')}">
+						组建团队	
+					</a>
+				</li>
+			<?php endif ?>
+			<li>
+				<a href="{:U('Result/add')}">
+					发布科技成果	
+				</a>
+			</li>
+			<?php if (session('type') == 2): ?>
+				<li>
+					<a href="{:U('Demand/add')}">
+						发布企业需求	
+					</a>
+				</li>
+			<?php endif ?>
+		</ul>
+    </div>
+	
+	<div id="body">
+		<!-- 显示个人成就 -->
+		<img src="__PUBLIC__/images/my_award.png" alt="">
+		<div class="my_team">
+			<volist id="awardlist" name="awardlist">
+				<div class="team_list">
+					<span class="teamname">
+						<a href="{:U('Result/result',array('id'=>$awardlist['research_id']))}">{$awardlist.award_title}</a>
+					</span>
+					<a href="{:U('Personal/modify_award',array('id'=>$awardlist['id']))}">修改</a>
+					<a href="javascript:void(0);" id="del_myaward-{$awardlist.id}" onclick="del(this)" value="{$awardlist.id}" class="free">删除</a>
+				</div>
+			</volist>
+			<?php if($awardlist == null):?>
+				<div class="team_list" style="overflow:hidden;">
+					<h3 style="float: left;">暂未添加成就</h3>
+				</div>
+			<?php endif?>
+		</div>
+
+		<!-- 显示团队成就 -->
+		<img src="__PUBLIC__/images/team_award.png" alt="">
+		<div class="join_team">
+			<div class="my_team">
+				<volist id="teamaward" name="teamaward">
+					<div class="team_list">
+						<span class="teamname">
+							<a href="{:U('Result/result',array('id'=>$teamaward['research_id']))}">{$teamaward.award_title}</a>
+						</span>
+						<?php if($teamaward['leader'] == 1):?>
+							<a href="{:U('Personal/modify_award',array('id'=>$awardlist['id']))}">修改</a>
+							<a href="javascript:void(0);" id="del_teamaward-{$awardlist.id}" onclick="del(this)" value="{$awardlist.id}" class="free">删除</a>
+						<?php endif?>
+					</div>
+				</volist>
+			</div>
+		</div>
+	</div>
+	<script>
+		function del(obj) {
+			if(confirm("确定删除这条成就信息？")){
+				var id = document.getElementsByid(obj.id).getAttribute("value");
+				alert(id);
+				window.location.href="__URL__/del_award/id/"+id;
+			}
+		}
+	</script>
+    <include file="Public/footer" />
+</body>
+</html>

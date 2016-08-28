@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <!-- create by cm -->
     <meta charset="utf-8">
     <script src="__PUBLIC__/js/jquery.min.js"></script>
-    <link rel="stylesheet" href="__PUBLIC__/css/nav.css" type="text/css">
-    <link rel="stylesheet" href="__PUBLIC__/css/listpage.css" type="text/css">
+    <link rel="stylesheet" href="__PUBLIC__/css/home/nav.css" type="text/css">
+    <link rel="stylesheet" href="__PUBLIC__/css/home/listpage.css" type="text/css">
     <title>张家港工程项目协同创新服务平台</title>
     <style>
         .info-list{
@@ -71,6 +72,13 @@
             height: 44px;
         }
     </style>
+    <!-- [if IE lt 10] -->
+        <style>
+            img{
+                border:none;
+            }
+        </style>
+    <!-- [endif] -->
 </head>
 
 <body>
@@ -123,12 +131,11 @@
             <div class="info-type">
                 <span style="font-size:16px;">研究领域：</span>
                 <a href="{:U('Team/teamlist')}">全部</a>&nbsp;
-                <a href="{:U('Team/teamlist',array('type' => 1))}">电子信息</a>
-                <a href="{:U('Team/teamlist',array('type' => 2))}">机械设计与制造</a>&nbsp;
-                <a href="{:U('Team/teamlist',array('type' => 3))}">新能源与环保</a>&nbsp;
-                <a href="{:U('Team/teamlist',array('type' => 4))}">生物技术与医药</a>&nbsp;
-                <a href="{:U('Team/teamlist',array('type' => 5))}">新材料</a>&nbsp;
-                <a href="{:U('Team/teamlist',array('type' => 6))}">现代农业</a>&nbsp;
+                <a href="{:U('Team/teamlist',array('type' => 1))}">结构工程</a>
+                <a href="{:U('Team/teamlist',array('type' => 2))}">市政工程</a>&nbsp;
+                <a href="{:U('Team/teamlist',array('type' => 3))}">防震减灾及防护工程</a>&nbsp;
+                <a href="{:U('Team/teamlist',array('type' => 4))}">桥梁与隧道公程</a>&nbsp;
+                <a href="{:U('Team/teamlist',array('type' => 5))}">岩土工程</a>&nbsp;
                 <a href="{:U('Team/teamlist',array('type' => 7))}">其他</a>
             </div>
             <hr />
@@ -143,7 +150,7 @@
                            工作单位：{$list.workpalce}
                         </p>
                         <p>
-                           <span>服务产业领域：</span><span title="{$list.team_research}" class="control-title-width">{$list.team_research}</span>
+                           <span>研究领域：</span><span title="{$list.team_research}" class="control-title-width">{$list.team_research}</span>
                         </p>
                         <p>
                            <span>研究方向：</span><span title="{$list.research_content}" class="control-title-width">{$list.research_content}</span>
@@ -156,7 +163,7 @@
                         <!-- <p>关注度：1 </p> -->
                         <p style="margin-top:10px;">
                         <?php if (session('uid')): ?>
-                            <a href="{:U('Public/link',array('id'=>$list['teamid'] ,'linkType'=>2,'title'=>$list['teamname']))}" target="_black">
+                            <a href="{:U('Public/link',array('id'=>$list['teamid'] ,'linkType'=>2))}" target="_black">
                                 <button>我要联系</button>
                             </a>
                         <?php else: ?>
@@ -177,6 +184,9 @@
         function waring () {
             alert("只有专家用户有权限组建团队");
         }
+        $(function(){
+            $('#nav_expert').addClass('nav_active').siblings().removeClass('nav_active');
+        });
     </script>
 </body>
 </html>

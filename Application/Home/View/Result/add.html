@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- create by cm -->
     <meta charset="UTF-8">
     <title>张家港工程项目协同创新服务平台</title>
-    <link rel="stylesheet" href="__PUBLIC__/css/nav.css">
-    <link rel="stylesheet" href="__PUBLIC__/css/signup.css">
-    <script src="__PUBLIC__/js/jquery.js"></script>
+    <link rel="stylesheet" href="__PUBLIC__/css/home/nav.css">
+    <link rel="stylesheet" href="__PUBLIC__/css/home/signup.css">
+    <script src="__PUBLIC__/js/jquery.min.js"></script>
 </head>
 <body>
     <include file="Public/nav" />
@@ -17,13 +18,12 @@
                 <input class="line-input" type="text" id="research_title" name="research_title" required><span class="must">*</span>
             </div>
             <div class="line">
-                <label for="research_type" style="float:left;">课题类型</label>
-                <input type="checkbox" name="research_type[]" value="1">电子信息
-                <input type="checkbox" name="research_type[]" value="2">机械设计与制造
-                <input type="checkbox" name="research_type[]" value="3">新能源与环保<br/>
-                <input type="checkbox" name="research_type[]" value="4">生物技术与医药
-                <input type="checkbox" name="research_type[]" value="5">新材料
-                <input type="checkbox" name="research_type[]" value="6">现代农业
+                <label for="research_type" style="float:left;">研究领域</label>
+                <input type="checkbox" name="research_type[]" value="1">结构工程
+                <input type="checkbox" name="research_type[]" value="2">市政工程
+                <input type="checkbox" name="research_type[]" value="3">防震减灾及防护工程<br/>
+                <input type="checkbox" name="research_type[]" value="4">桥梁与隧道公程
+                <input type="checkbox" name="research_type[]" value="5">岩土工程
                 <input type="checkbox" name="research_type[]" value="7">其他
                 <span class="must">*</span>
             </div>
@@ -34,7 +34,7 @@
             </div>
              <div class="line" id="team">
                 <label for="team_name">团队名称 </label>
-                <input class="line-input" type="text" name="team_name" id="team_name"><span class="must">独立开发不用填写</span>
+                <input class="line-input" type="text" name="team_name" id="team_name"><span id="nameError" class="must">独立开发不用填写</span>
             </div>
             <div class="line">
                 <label for="end_time">完成日期 </label>
@@ -69,10 +69,6 @@
                 <label for="techTarget">技术指标</label>
                 <textarea name="tech_target" id="techTarget"></textarea>
             </div>
-            <div class="line textarea">
-                <label for="otherInfo">其他介绍</label>
-                <textarea name="other_info" id="otherInfo"></textarea>
-            </div>
             <input type="hidden" name="add" value="1">
             <div class="sub" >
                 <input type="submit" value="提交" />
@@ -84,6 +80,36 @@
 </body>
 <script>
     $(function($){
+        $('#team_name').change(function(event){
+            if($('#team_name').val() != ""){
+                var teamname = $('#team_name').val();
+                $.ajax({
+                    type:"post",
+                    url:"__ROOT__/index.php/Public/checkName",
+                    dataType:'json',
+                    data:{teamname:teamname}
+                    })
+                .done(function(data) {
+                    console.log("success",data);
+                    if(data.code == 1){
+                        $('#nameError').html("*");
+                        $('input[type=submit]').show();
+                    }else{
+                        $("#nameError").html("用户名已存在");
+                        $('input[type=submit]').hide();
+                    }
+                })
+                .fail(function(XMLHttpRequest, textStatus, errorThrown){
+                    console.log("status = "+XMLHttpRequest.status);  // 200
+                    console.log("readyState = "+XMLHttpRequest.readyState); //4
+                    console.log("textStatus = "+textStatus);  //parsererror
+                })
+                .always(function() {
+                    console.log("complete");
+                });
+            }
+        });
+
         $('#logo').change(function(event) {
             event.preventDefault();
             var $file = $(this);
@@ -118,6 +144,8 @@
                     break;
             }
         });
+
+        $('#nav_research').addClass('nav_active').siblings().removeClass('nav_active');
     });
     
 </script>

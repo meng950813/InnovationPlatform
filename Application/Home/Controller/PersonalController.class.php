@@ -3,6 +3,7 @@ namespace Home\Controller;
 use Think\Controller;
 
 /**
+ * create by cm
  * 个人中心
  */
 class PersonalController extends Controller {
@@ -15,12 +16,8 @@ class PersonalController extends Controller {
     	islogin();
     	$where['request_id'] = session('uid');
     	$where['status'] = 1;
-    	$linkInfo = D('RequireInfoView')->where($where)->order('sort desc')->select('link_id,request_id,link_type,teamid,realname,type');
-    	$size = count($linkInfo);
-    	for ($i=0; $i < $size; $i++) {
-    		// 生成对应每个用户名 详情页的路径
-    		$linkInfo[$i]['path'] = create_path($linkInfo[$i]['type'],$linkInfo[$i]['request_id']);
-    	}
+    	$linkInfo = D('RequireInfoView')->where($where)->order('sort desc')->field('link_id,request_id,link_type,teamid,realname,type')->select();
+    
     	if($linkInfo){
     		$this->assign("list",$linkInfo);
     	}
@@ -58,7 +55,7 @@ class PersonalController extends Controller {
     	// 同意联系
     	if($agree){
     		// 获取联系的具体信息
-    		$result = M('RequireLink')->where($where)->getField('id,require_id,request_id,link_type,teamid');
+    		$result = M('RequireLink')->where($where)->field('id,require_id,request_id,link_type,teamid')->find();
     		// 本条消息：团队邀请队员
     		if($result['link_type'] == 2 && $result['teamid'] != null){
     			$team['teamname'] = $result['teamid'];
@@ -74,29 +71,40 @@ class PersonalController extends Controller {
     			}
     			else{
     				// 加入团队不成功
-    				$this->error("服务器忙，请稍候");
+    				$this->error("服务器忙，请稍候",U('Personal/index'));
     			}	
     		}
     		// 本条消息：个人联系个人/团队
     		else{
     			$link['require_id'] = $result['require_id'];
     			$link['request_id'] = $result['request_id'];
-    			// 本条消息  联系团队
-    			if($result['link_type'] == 1 && $result['teamid'] != null){
-    				$link['link_type'] = 1;
-    				$link['teamid'] = $result['teamid'];
-    			}
-    			// 若是 个人联系个人，后两个字段取默认值
-    			// 在 Linked 表中添加数据
-    			$addLink = M("Linked")->add($link);
-    			if ($addLink) {
-    				// 添加成功,将联系消息置为0，已处理
-    				setStatus($result['id']);
-    			}
-    			else{
-    				// 添加数据不成功
-    				$this->error("服务器忙，请稍候");
-    			}
+
+                $exsit = M('Linked')->where($link)->find();
+                if($exsit){
+                    // 连接已存在
+                    setStatus($result['id']);
+                    $this->success("处理成功",U('Personal/index'));
+                }
+                // 连接不存在，添加
+                else{
+                    // 本条消息  联系团队
+                    if($result['link_type'] == 1 && $result['teamid'] != null){
+                        $link['link_type'] = 1;
+                        $link['teamid'] = $result['teamid'];
+                    }
+                    // 若是 个人联系个人，后两个字段取默认值
+                    // 在 Linked 表中添加数据
+                    $addLink = M("Linked")->add($link);
+                    if ($addLink) {
+                        // 添加成功,将联系消息置为0，已处理
+                        setStatus($result['id']);
+                    }
+                    else{
+                        // 添加数据不成功
+                        $this->error("服务器忙，请稍候",U('Personal/index'));
+                    }
+                }
+    			
     		}
     	}
     	// 拒绝联系/邀请
@@ -106,7 +114,7 @@ class PersonalController extends Controller {
     			$this->success("成功处理",U("Personal/index"));
     		}
     		else{
-    			$this->error("服务器忙，请稍候");
+    			$this->error("服务器忙，请稍候",U('Personal/index'));
     		}
     	}
     }
@@ -187,39 +195,41 @@ class PersonalController extends Controller {
         // 我的成果 -> 个人研究成果
         $where['owner_id'] = session('uid');
         $where['isteam'] = 0;
-        $my_research =$ResearchResult->where($where)->order('sort desc')->getField('result_id,result_name');
+        $my_research =$ResearchResult->where($where)->order('sort desc')->field('result_id,result_name')->select();
 
-        // 所在团队的研究成果
-        $team['uid'] = session('uid');
-        $myTeam = M('TeamMember')->where($team)->select();
+        // 专家用户才能组织和加入团队
+        if(session('type') == 1){
+             // 所在团队的研究成果
+            $team['uid'] = session('uid');
+            $myTeam = M('TeamMember')->where($team)->select();
 
-        // 声明变量 用于存储数据
-        $team_research;
-        $teamNum = count($myTeam);
-        for ($i=0; $i < $teamNum; $i++) {
-            $array[$i] = $myTeam[$i]['teamid'];
-        }
-        $research['owner_id'] = array('in',$array);
-        $research['isteam'] = 1;
-        $team_research = $ResearchResult->where($research)->order('sort desc')->field('result_name,result_id,owner_id')->select();
- 
-        // 判断当前用户是否是团队负责人，以确定是否要给用户修改这个团队成果的权利
-        $Team = M('ExpertTeam');
-        $cout = count($team_research);
-        for ($i=0; $i < $cout; $i++) {
-            $teamid['teamid'] = $team_research[$i]['owner_id'];
-            $leader = $Team->where($teamid)->getField('teamleader');
-            // 如果是
-            if(session('uid') == $leader){
-                $team_research[$i]['leader'] = 1;
+            $teamNum = count($myTeam);
+            for ($i=0; $i < $teamNum; $i++) {
+                $array[$i] = $myTeam[$i]['teamid'];
             }
-            else{
-                $team_research[$i]['leader'] = 0;
+            $research['owner_id'] = array('in',$array);
+            $research['isteam'] = 1;
+            $team_research = $ResearchResult->where($research)->order('sort desc')->field('result_name,result_id,owner_id')->select();
+     
+            // 判断当前用户是否是团队负责人，以确定是否要给用户修改这个团队成果的权利
+            $Team = M('ExpertTeam');
+            $cout = count($team_research);
+            for ($i=0; $i < $cout; $i++) {
+                $tid['teamid'] = $team_research[$i]['owner_id'];
+                $leader = $Team->where($tid)->getField('teamleader');
+                // 如果是
+                if(session('uid') == $leader){
+                    $team_research[$i]['leader'] = 1;
+                }
+                else{
+                    $team_research[$i]['leader'] = 0;
+                }
             }
+            $this->assign("team_research",$team_research);
         }
-
+       
         $this->assign("my_research",$my_research);
-        $this->assign("team_research",$team_research);
+        
         $this->display();
     }
 
@@ -243,12 +253,11 @@ class PersonalController extends Controller {
        for ($i=0; $i < $count; $i++) { 
            $array[$i] = $myTeam[$i]['teamid'];
        }
-
        // 获取所有我参与的团队的成就
-       $where['award_owner'] = array("in",$array);
+       $where['award_owner'] = array('in',$array);
        $where['isteam'] = 1;
        $teamAward = $Award->where($where)->order('sort desc')->field('id,research_id,award_title')->select();
-
+       
         // 判断当前用户是否是团队负责人，以确定是否要给用户修改这个团队成果的权利
         $Team = M('ExpertTeam');
         $size = count($teamAward);
@@ -299,6 +308,11 @@ class PersonalController extends Controller {
         else if(session('type') == 2){
             // 企业用户
             $myinfo = M('CompanyUser')->where($arr)->find();
+            $Citylist=  M('City');
+            $where['id'] = $myinfo['city'];
+            $myinfo['cityname'] = $Citylist->where($where)->getField('cityname'); 
+            $city =$Citylist->select();
+            $this->assign("city",$city);
         }
 
         $this->assign("myinfo",$myinfo);
@@ -558,7 +572,6 @@ class PersonalController extends Controller {
         $info['research_level'] = I('post.research_level');
         $info['total_info'] = I('post.total_info');
         $info['tech_target'] = I('post.tech_target');
-        $info['other_info'] = I('post.other_info');
         if (!empty($_FILES)) {//有图片上传
             // 返回值不为null -> 上传成功
             if(($result = uploadPicture($_FILES,'research_picture'))){
