@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="renderer" content="webkit">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<!-- <link rel="icon" href="__PUBLIC__/favicon.ico"> -->
+	<title>城市管理 - 后台管理</title>
+	<base target="mainiframe" />
+	<!-- Bootstrap core CSS -->
+	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+	<!--[if lt IE 9]><script src="__PUBLIC__/js/ie8-emulation-modes-warning.js"></script><![endif]-->
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+		<script src="__PUBLIC__/assets/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="__PUBLIC__/assets/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
+
+	<!-- Custom styles for this template -->
+	<style>
+		#cityname{
+			height: 24px;
+			font-size: 16px;
+		}
+		button{
+			padding: 5px 15px;
+			cursor: pointer;
+		}
+	</style>
+</head>
+
+<body>
+	<div>
+		<form action="{:U('Master/City/deal_info')}" method="post">
+				<label for="cityname">城市名称:</label>
+				<input class="form-control" type="text" name="cityname" id="cityname" maxlength="50" required="required" value="{$info.cityname}">
+			<?php if ($info): ?>
+				<input type="hidden" value="{$info.id}" name="id">
+			<?php endif ?>
+				<button type="submit">提交</button>
+		</form>
+	</div>
+
+	<!-- Bootstrap core JavaScript
+		================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<!-- 	<script src="__PUBLIC__/assets/ie10-viewport-bug-workaround.js"></script>
+	<script src="__PUBLIC__/js/master/fixiframe.js"></script> -->
+</body>
+
+</html>

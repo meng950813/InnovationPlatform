@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="renderer" content="webkit">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<!-- <link rel="icon" href="__PUBLIC__/favicon.ico"> -->
+	<title>后台管理</title>
+	<base target="mainiframe" />
+	<!-- Bootstrap core CSS -->
+	<link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet">
+	<link href="__PUBLIC__/css/master/master.css" rel="stylesheet">
+	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+	<!--[if lt IE 9]><script src="__PUBLIC__/js/ie8-emulation-modes-warning.js"></script><![endif]-->
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+		<script src="__PUBLIC__/assets/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="__PUBLIC__/assets/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
+
+	<!-- Custom styles for this template -->
+
+</head>
+<body>
+	<div class="container-fluid">
+		<div id="header" class="page-header">
+			<h1><small>后台管理</small></h1>
+			<a href="__ROOT__/index.php" target="_self">去前台</a>
+		</div>
+		<div class="row" id="main">
+			<div class="col-md-3 col-lg-2 col-sm-3 col-xs-4">
+				<ul class="nav panel panel-default" id="sidebar">
+					<li role="presentation"><a href="{:U('Master/Index/welcome')}">欢迎页</a></li>
+
+					<!-- 用户管理 -->
+					<li role="presentation"><a class="title"><span class="glyphicon glyphicon-tag"></span>用户信息</a></li>
+					<li role="presentation"><a href="{:U('Master/User/user_list')}">用户列表</a></li>
+					
+					<!-- 成果管理 -->
+					<li role="presentation"><a class="title"><span class="glyphicon glyphicon-tag"></span>科技成果</a></li>
+					<li role="presentation"><a href="{:U('Master/Research/research_list')}">成果列表</a></li>
+
+
+					<!-- 需求管理 -->
+					<li role="presentation"><a class="title"><span class="glyphicon glyphicon-tag"></span>需求管理</a></li>
+					<li role="presentation"><a href="{:U('Master/Demand/demand_list')}">需求列表</a></li>
+					
+
+					<!-- 信息咨询 -->
+					<li role="presentation"><a class="title"><span class="glyphicon glyphicon-tag"></span>信息咨询</a></li>
+					<li role="presentation"><a href="{:U('Master/News/news_list',array('type'=>3))}">政策法规</a></li>
+					<li role="presentation"><a href="{:U('Master/News/news_list',array('type'=>1))}">市场动态</a></li>
+					<li role="presentation"><a href="{:U('Master/News/news_list',array('type'=>2))}">业内资讯</a></li>
+					<li role="presentation"><a href="{:U('Master/News/add_modify')}">发布信息</a></li>
+
+					<!-- 教育培训 -->
+					<li role="presentation"><a class="title"><span class="glyphicon glyphicon-tag"></span>教育培训</a></li>
+					<li role="presentation"><a href="{:U('Master/Edu/edu_list',array('type'=>3))}">学历教育</a></li>
+					<li role="presentation"><a href="{:U('Master/Edu/edu_list',array('type'=>1))}">职业资格教育</a></li>
+					<li role="presentation"><a href="{:U('Master/Edu/edu_list',array('type'=>2))}">技能培训</a></li>
+					<li role="presentation"><a href="{:U('Master/Edu/add_modify')}">发布信息</a></li>
+
+
+					<!-- 协同管理 -->
+					<li role="presentation"><a class="title"><span class="glyphicon glyphicon-tag"></span>协同管理</a></li>
+					<li role="presentation"><a href="{:U('Master/Cooperation/coo_list',array('type'=>3))}">协同高校</a></li>
+					<li role="presentation"><a href="{:U('Master/Cooperation/coo_list',array('type'=>1))}">行业协会</a></li>
+					<li role="presentation"><a href="{:U('Master/Cooperation/coo_list',array('type'=>2))}">协同企业</a></li>
+					<li role="presentation"><a href="{:U('Master/Cooperation/add_modify')}">发布信息</a></li>
+					
+					<!-- 杂项 -->
+					<li role="presentation"><a class="title"><span class="glyphicon glyphicon-tag"></span>杂项</a></li>
+					<li role="presentation"><a href="{:U('Master/City/city_list')}">城市管理</a></li>
+				</ul>
+			</div>
+			<div class="col-md-9 col-lg-10 col-sm-9 col-xs-8">
+				<div class="embed-responsive">
+					<iframe class="embed-responsive-item" name="mainiframe" src="{:U('Master/Index/welcome')}"></iframe>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Bootstrap core JavaScript
+		================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="__PUBLIC__/js/jquery-1.11.1.min.js"></script>
+	<script src="__PUBLIC__/js/bootstrap.min.js"></script>
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="__PUBLIC__/assets/ie10-viewport-bug-workaround.js"></script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+    <script src="__PUBLIC__/js/jquery.min.js"></script>
+    <link href="__PUBLIC__/css/home/listpage.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/css/home/nav.css" rel="stylesheet" type="text/css">
+    <!-- create by cm -->
+    
+<meta charset="utf-8">
+<title>张家港工程项目协同创新服务平台</title>
+</head>
+
+<body>
+    <include file="Public/nav"/>
+    <div class="bannerbox">
+        <img src="__PUBLIC__/images/servicebanner.png">
+    </div>
+    <div class="infolist-main">
+        <div class="leftmain">
+            <div class="mainlefttitle"><img src="__PUBLIC__/images/service_03.png"></div>
+            <div class="mainbtn">
+                <div class="navlist table_head active">
+                    <a href="{:U('Edu/edulist')}">教育培训</a>
+                </div>
+                 <div class="navlist">
+                    <a href="{:U('Edu/edulist',array('type'=>3))}">学历教育</a>
+                </div>
+                <div class="navlist">
+                    <a href="{:U('Edu/edulist',array('type'=>1))}" style="padding:10px 45px;">职业资格教育</a>
+                </div>
+                <div class="navlist">
+                    <a href="{:U('Edu/edulist',array('type'=>2))}">技能培训</a>
+                </div>
+            </div>
+        </div>
+        <div class="rightmain">
+        	<div class="top-tip" style="border-bottom:1px dotted #ccc;padding-bottom:20px;
+            margin-bottom:30px">
+            	<div id="page-title">
+                    <img src="__PUBLIC__/images/download_09.png">
+                    教育培训
+                </div>
+                <div id="position">
+                    <a href="">教育培训</a>
+                    <p>&nbsp;>&nbsp;</p>
+                    <a href="index.html">首页</a>
+                    <p>您的位置：</p>
+                    <img src="__PUBLIC__/images/download_06.png">
+                </div>
+            </div>
+            <volist name="list" id="list">
+                <div class="info-list <?php echo $i % 2 == 0 ? 'grey': '';?>">
+                    <div class="info-title" >
+                        <span>
+                            <a href="{:U('Edu/edu',array('id'=>$list['edu_id']))}" title="{$list.title}">{$list.title}
+                            </a>
+                        </span>
+                        <span  id="linkbutton">{$list.publish_time}</span>
+                    </div>            
+                </div>
+                
+            </volist>
+           
+        </div>
+        <div id="paging">
+            <!-- 分页位置 -->
+            {$page}
+        </div>
+    </div>
+    
+    <include file="Public/footer"/>
+
+</body>
+<script>
+     $(function(){
+        $('#nav_edu').addClass('nav_active').siblings().removeClass('nav_active');
+    });  
+</script>
+</html>

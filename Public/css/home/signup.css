@@ -1,0 +1,64 @@
+/*  create by cm  */
+.main{
+    width:700px;
+    margin:0 auto;
+    min-height: 600px;
+    padding-top: 25px;
+    padding-bottom: 30px;
+    background-color: white;
+}
+.line{
+    margin-bottom:5px;
+}
+label{
+    width:100px;
+    padding:5px 10px;
+    font-size:20px;
+    display:inline-block;
+}
+.line-input{
+    width:400px;
+    height:30px;
+    line-height: 30px;
+}
+input[type=radio]{
+    width: 18px;
+    height: 18px;
+}
+.upload{
+    width:400px;
+    margin:0 auto;
+}
+#preview{
+    max-width:400px;
+}
+.must{
+    color:red;
+    margin-left:10px; 
+}
+.textarea{
+    position: relative;
+}
+.textarea label{
+    position: absolute;
+    top: 50%;
+    margin-top: -16px;
+}
+.textarea textarea{
+    width:480px;
+    height:100px;
+    margin-left:124px;
+}
+.sub{
+    margin-top:10px;
+    text-align:center;
+}
+.sub input{
+    font-size:20px;
+    padding:5px 10px;
+    border-radius: 25px;
+}
+.sub input:hover{
+    background: #146FBD;
+    color: #fff;
+}

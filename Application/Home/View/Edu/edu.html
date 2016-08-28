@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+<head>
+    <!-- create by cm -->
+    <script src="__PUBLIC__/js/jquery.min.js"></script>
+    <link href="__PUBLIC__/css/home/nav.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="__PUBLIC__/css/home/cooperation.css">
+    <meta charset="utf-8">
+    <title>张家港工程项目协同创新服务平台</title>
+</head>
+
+<body>
+    <include file="Public/nav"/>
+    
+    <div id="main">
+        <div class="position">
+            <img src="__PUBLIC__/images/download_06.png">
+            您的位置：
+            <a href="__ROOT__">首页</a>
+            <sapn>&nbsp;>&nbsp;</sapn>
+            <a href="{:U('Edu/edulist')}">教育培训</a>
+            <sapn>&nbsp;>&nbsp;</sapn>
+            <?php if ($info['type'] == 0): ?>
+                <a href="#">学历教育</a>
+            <?php else: ?>
+                <a href="#"><?php echo ($info['type'] == 1)?'职业资格教育':'技能培训';?></a>
+            <?php endif ?>
+        </div>
+        <div class="left-list">
+            <div class="mainbtn">
+                <div class="navlist">
+                    <a href="{:U('Edu/edulist')}">教育培训</a>
+                </div>
+                 <div class="navlist">
+                    <a href="{:U('Edu/edulist',array('type'=>3))}">学历教育</a>
+                </div>
+                <div class="navlist">
+                    <a href="{:U('Edu/edulist',array('type'=>1))}" style="padding:5px;">职业资格教育</a>
+                </div>
+                <div class="navlist">
+                    <a href="{:U('Edu/edulist',array('type'=>2))}">技能培训</a>
+                </div>
+            </div>
+        </div>
+        <div class="right_content">
+            <div class="title">
+                 <h2>{$info.title}</h2>
+                 <span>发布时间：{$info.publis_htime}</span>&nbsp;&nbsp;
+                 <span>点击量：{$info.click}次</span>
+            </div>
+            <pre> {$info.content} </pre><!--显示内容-->
+
+            <div class="next">
+                <p>
+                    上一篇: 
+                        <?php if ($past): ?>
+                            <a href="{:U('Edu/edu',array('id'=>$past['edu_id']))}">{$past.title}</a>
+                        <?php else: ?>
+                            已是第一篇
+                        <?php endif ?>
+                </p>
+                <p>
+                    下一篇: 
+                        <?php if ($next): ?>
+                            <a href="{:U('Edu/edu',array('id'=>$next['edu_id']))}">{$next.title}</a>
+                        <?php else: ?>
+                            已是最后一篇
+                        <?php endif ?>
+                </p>
+                
+            </div>
+        </div>
+    </div>
+	
+    <include file="Public/footer"/>
+
+</body>
+<script>
+     $(function(){
+        $('#nav_edu').addClass('nav_active').siblings().removeClass('nav_active');
+    });  
+</script>
+</html>

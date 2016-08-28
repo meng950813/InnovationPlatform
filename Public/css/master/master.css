@@ -1,0 +1,21 @@
+.page-header{
+	margin: 0px;
+	padding: 40px 0px 30px 3em;
+	background-color: #EEE;
+}
+#main{
+	padding-top: 1em;
+}
+#sidebar a{
+	padding-left: 2em;
+}
+#sidebar a.title{
+	padding-left: 1em;
+	color: #000;
+	border-top: 2px solid #EEE;
+}
+iframe{
+	position: relative;
+	display: block;
+	overflow: hidden;
+}

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- create by cm -->
+    <script src="__PUBLIC__/js/jquery.min.js"></script>
+    <link href="__PUBLIC__/css/home/listpage.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="__PUBLIC__/css/home/nav.css">
+    <meta charset="utf-8">
+    <title>张家港工程项目协同创新服务平台</title>
+</head>
+
+<body>
+    <include file="Public/nav" />
+    <div class="bannerbox">
+        <img src="__PUBLIC__/images/agentstrategybanner.png">
+    </div>
+    <div class="infolist-main">
+        <div class="leftmain">
+            <div class="mainlefttitle"><img src="__PUBLIC__/images/agentstrategy_03.png"></div>
+            <div class="mainbtn">
+                <div class="navlist table_head <?php if(!$type) echo " active"; ?>">
+                    <a href="{:U('Cooperation/index')}">协同管理</a>
+                </div>
+                 <div class="navlist <?php if($type == 3) echo " active"; ?>">
+                    <a href="{:U('Cooperation/index',array('type'=>3))}">协同高校</a>
+                </div>
+                <div class="navlist <?php if($type == 1) echo " active"; ?>">
+                    <a href="{:U('Cooperation/index',array('type'=>1))}">行业协会</a>
+                </div>
+                <div class="navlist  <?php if($type == 2) echo " active"; ?>">
+                    <a href="{:U('Cooperation/index',array('type'=>2))}">协同企业</a>
+                </div>
+            </div>
+        </div>
+        <div class="rightmain">
+            <div class="top-tip" style="border-bottom:1px dotted #ccc;padding-bottom:20px;  margin-bottom:30px">
+                <div id="page-title">
+                    <img src="__PUBLIC__/images/download_09.png">
+                    协同管理
+                </div>
+                <div id="position">
+                    <a href="#">协同管理</a>
+                    <p>&nbsp;>&nbsp;</p>
+                    <a href="index.html">首页</a>
+                    <p>您的位置：</p>
+                    <img src="__PUBLIC__/images/download_06.png">
+                </div>
+            </div>
+            <volist id="list" name="list">
+                <div class="info-list <?php if($i % 2 == 0) echo ' grey';?>">
+                    <div class="info-title" >
+                        <span>
+                            <a href="http://{$list.website}" title="{$list.name}" value="{$list.id}" class="click_title">
+                                {$list.name}
+                            </a>
+                        </span>
+                        <span  id="linkbutton">点击量：{$list.click} 次</span>
+                    </div>                           
+                </div>
+            </volist>
+            <script>
+                $(function(){
+                    $('.click_title').click(function(event){
+                        var id = $(this).attr('value');
+                        $.ajax({
+                            type:'post',
+                            url:"__ROOT__/index.php/Cooperation/addClick",
+                            dataType:'json',
+                            data:{id:id}
+                        })
+                        .done(function(data) {
+                            if(data.code == 1){
+                              console.log('success');
+                            }
+                        })
+                        .fail(function(XMLHttpRequest, textStatus, errorThrown){
+                          
+                        })
+                        .always(function() {
+                        });
+                    });
+                    $('#nav_cooperation').addClass('nav_active').siblings().removeClass('nav_active');
+                });
+            </script> 
+        </div>
+    </div>
+    <div id="paging">
+        {$page}
+    </div>
+    <include file="Public/footer" />
+</body> 
+
+</html>

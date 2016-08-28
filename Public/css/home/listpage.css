@@ -1,0 +1,133 @@
+/*  create by cm  */
+.bannerbox{
+    width: 100%;
+    position: relative;
+}
+.bannerbox img{
+    /*max-width: 1920px;*/
+    min-width: 1100px;
+    width: 100%;
+    vertical-align: bottom;
+}
+.infolist-main{
+    width:1100px; 
+    margin:0 auto; 
+    padding-top:40px; 
+    padding-bottom:50px; 
+    overflow:hidden;
+}
+.leftmain{
+    width:210px; 
+    float:left; 
+    background-image:url(../../images/leftmain.png);
+}
+.mainlefttitle{ 
+    margin-bottom:48px;
+}
+.mainbtn{ 
+    margin:20px 10px 0 0;
+    background: #EAEAEA;
+}
+.mainbtn .navlist{
+    text-align: center;
+    margin-bottom: 5px;
+}
+.mainbtn .navlist a{
+    font-size: 14px;
+    padding: 10px 60px;
+    display: inline-block;
+    color: #345;
+}
+.active{
+    background: #7EDBFA;
+}
+.mainbtn .table_head>a{
+    font-weight: bold;
+    font-size: 18px;
+}
+.mainbtn .navlist:hover{
+    background: #0097DA;
+}
+.mainbtn .navlist:hover a{
+    color: #fff;
+}
+.rightmain{
+    padding-left:22px;
+    border-left:2px solid #fafafa; 
+    float:left; 
+    width:866px;
+    min-height: 500px;
+}
+.top-tip{
+    overflow: hidden;
+}
+.top-tip #page-title,.top-tip #page-title *{
+    float:left;
+    font-size: 14px;
+}
+.top-tip #page-title img{ 
+    margin:2px 0 4px; 
+}
+#position *{
+    color: grey;
+    font-size: 14px;
+}
+.top-tip #position,.top-tip #position *{
+    float: right;
+}
+.info-type{
+    clear: both;
+    padding-top: 10px; 
+    margin-bottom: 20px;
+}
+.info-type a{
+    font-size: 16px;
+    color: black;
+}
+.info-type a:hover{
+    color: blue;
+}
+.info-title{
+    height: 50px;
+    line-height: 50px;
+    padding-left: 40px;
+    position: relative;
+}
+.info-title:first-child{
+    background: url(../../images/title_logo_small.png) no-repeat 0 center;
+}
+.info-title>span>a{
+    display: inline-block;
+    max-width: 640px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    color: black;
+    font-size: 14px;
+}
+.info-title a:hover{
+    color: #2A9ECF;
+}
+span.publish_time{
+    position: absolute;
+    right: 85px;
+    line-height: 50px;
+}
+#linkbutton{
+   height: 30px;
+   margin-top: 10px;
+   line-height: 30px;
+   float: right;
+}
+#linkbutton>button{
+    font-size: 14px;
+}
+.grey{
+    background-color: #EDEDED;
+}
+#paging{ 
+    font-size: 16px;
+    color:#666;
+    width: 100%; 
+    text-align: center;
+}
