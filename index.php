@@ -23,6 +23,9 @@ define('APP_PATH','./Application/');
 // define('BIND_MODULE','Home');
 
 // 引入ThinkPHP入口文件
-require './ThinkPHP/ThinkPHP.php';
+// require './ThinkPHP/ThinkPHP.php';
+
+// 引导在SAE上的入口设置
+require './ThinkPHP/Extend/Engine/Sae.php';
 
 // 亲^_^ 后面不需要任何代码了 就是如此简单
