@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>张家港工程项目协同创新服务平台-后台管理</title>
+
+	<link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet">
+	<style>
+		#add_master{
+			text-align: center;
+		}
+		#add_master button{
+			padding: 10px 20px;
+			margin: 0 auto;
+			font-size: 16px;
+		}
+
+	</style>
+</head>
+<body>
+	<table class="table table-bordered table-striped">
+		<tr>
+			<th>序号</th>
+			<th>账号名称</th>
+			<th>管理员类型</th>
+			<th>编辑</th>
+		</tr>
+		<volist name="list" id="a">
+			<tr>
+				<td>{$i}</td>
+				<td>{$a.master_name}</td>
+				<?php if($a['super'] == 1): ?>
+					<td><b style='color:red';>超级管理员</b></td>
+					<td></td>
+				<?php else :?>
+					<td>普通管理员</td>
+					<td>
+						<a href="javascript:void(0)" id="master_list-{$a.master_id}" value="{$a.master_id}" onclick="del(this)">删除账号</a>
+					</td>
+				<?php endif?>
+			</tr>
+		</volist>
+
+	</table>
+	<p id="add_master">
+		<a href="{:U('Master/Public/add_master')}"><button>添加管理员</button></a>
+	</p>
+	
+	<!-- Bootstrap core JavaScript
+	================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<!-- <script src="__PUBLIC__/js/bootstrap.min.js"></script> -->
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<!-- <script src="__PUBLIC__/assets/ie10-viewport-bug-workaround.js"></script> -->
+	<script src="__PUBLIC__/js/master/fixiframe.js"></script>
+	<script>
+		function del (obj) {
+			if(confirm("确定要删除这个管理员账号？")){
+				var id = document.getElementById(obj.id).getAttribute("value");
+				window.location.href="__ROOT__/index.php/Master/Public/del_master/id/"+id;
+			}
+		}
+	</script>
+</body>
+</html>

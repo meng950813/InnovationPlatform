@@ -25,18 +25,16 @@
         }
         #login_box{
             min-height: 500px;
+            padding-top: 200px;
             width: 100%;
             background: url(__PUBLIC__/images/login_bg.jpg) no-repeat;
             background-size: 100% 100%;
-            position: relative;
         }
         #login{
             height:456px;
             width:700px;
-            position: absolute;
-            right: 60px;
-            top: 40px;
-            background-image:url(__PUBLIC__/images/登陆界面.png);
+            margin: 0 auto;
+            background-image:url(__PUBLIC__/images/login_page.png);
         }
         .login2{
             height:120px; 
@@ -64,13 +62,27 @@
         #pwd_userPwd{
             background: #fff url(__PUBLIC__/images/pwd.jpg) no-repeat 2% center;
         }
-        .sub{
-            border: solid 0px;
+        #sub{
+            border: none;
             height: 43px;
+            width: 135px;
+            background: url(__PUBLIC__/images/login.png) no-repeat;
+        }
+        #sub:hover{
+            background-image: url(__PUBLIC__/images/login_hover.png);
+        }
+        #signup{
+            display: inline-block;
+            width: 135px;
+            height: 43px;
+            background: url(__PUBLIC__/images/signup.png) no-repeat;
+        }
+        #signup:hover{
+            background-image: url(__PUBLIC__/images/signup_hover.png);
         }
         #forgetpwd{
             float: right;
-            font-size: 9px;
+            font-size: 12px;
 
         }
     </style>
@@ -86,7 +98,7 @@
 <body>
     <div class="topbox">
         <div class="top">
-            <img src="__PUBLIC__/images/背景.png">
+            <img src="__PUBLIC__/images/background.png">
         </div>
     </div>
     <div id="login_box">
@@ -97,16 +109,12 @@
                         <input id="txt_userName" name="username" type="text" placeholder="用户名"/>
                         <input id="pwd_userPwd" name="password" type="password" placeholder="密码" />
                     </div>
-                   
                     <div style="float:left"> 
-                        <button class="sub" type="submit" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image2','','__PUBLIC__/images/按钮2.png',1)">
-                            <img src="__PUBLIC__/images/按钮1.png" style="width:135px;" id="Image2" />
-                        </button>  
+                        <input id="sub" type="submit" value="" /> 
                     </div>
                     <!-- 注册 -->
                     <div style="float:left; margin-left:10px;">
-                        <a href="{:U('Signup/signup')}" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image','','__PUBLIC__/images/按钮4.png',1)">
-                            <img src="__PUBLIC__/images/按钮3.png" width="135" height="43" id="Image" />
+                        <a href="{:U('Signup/signup')}" id="signup">
                         </a> 
                     </div>
                     <!-- 忘记密码 -->

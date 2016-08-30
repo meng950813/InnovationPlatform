@@ -4,7 +4,7 @@ use Think\Controller;
 class MasterController extends Controller {
 	public function _initialize(){
 
-		if(session('power') != 'admin'){
+		if(!session('master_id')){
 			$this->redirect('Master/Public/login');
 			return;
 		}

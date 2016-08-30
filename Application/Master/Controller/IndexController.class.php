@@ -4,7 +4,7 @@ use Lib\MasterController;
 class IndexController extends MasterController {
 	public function index(){
 		// 未登录
-		if(!session('power')){
+		if(!session('master_id')){
 			$this->redirect('Master/Public/login');
 		}
 		$this->display();

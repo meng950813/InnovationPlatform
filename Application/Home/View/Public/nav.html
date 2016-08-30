@@ -1,6 +1,6 @@
 <div class="topbox">
 	<div class="top">
-        <img src="__PUBLIC__/images/背景.png">
+        <img src="__PUBLIC__/images/background.png">
         <div class="login-tip">
             <?php if(!session('?uid')){ ?>
             	<a href="{:U('Public/login')}" target="_block">登录</a>
@@ -20,7 +20,7 @@
 <div class="nav-background">
     <div class="nav">
         <div class="nav-tip" id="nav_index">
-            <a href="__ROOT__">网站首页</a>
+            <a href="{:U('Index/index')}">网站首页</a>
             <div class="nav-list">
                 <p>
                     <a href="{:U('Public/aboutus')}">平台介绍</a>

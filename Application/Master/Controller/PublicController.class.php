@@ -27,13 +27,116 @@ class PublicController extends Controller {
 		$this->display();
 	}
 	public function dologin(){
-		$name = I('post.name');
-		$pass = I('post.pass');
-		if($name == 'master' && $pass == '123'){
-			session('power','admin');
+		$info['master_name'] = I('post.name');
+		$info['master_pwd'] = md5(I('post.pass'));
+		$result = M('Master')->where($info)->find();
+		if($result){
+			session('master_id',$result['master_id']);
+			session('master_name',$result['master_name']);
+			session('super',$result['super']);
 			$this->redirect('Master/Index/index');
 		}else{
 			$this->error('用户名或者密码不正确',U('Master/Public/login'),3);
+		}
+	}
+
+	/**
+	 * 管理员列表，只有超级管理员有权限进入
+	 */
+	public function master_list(){
+		if(session('super') == 1){
+			$list = M('Master')->select();
+			$this->list = $list;
+			$this->display();
+		}
+	}
+
+	/**
+	 * 添加管理员
+	 */
+	public function add_master(){
+		$this->display();
+	}
+	/**
+	 * 处理添加逻辑
+	 *
+	 */
+	public function deal_addMaster(){
+		$Master = M('Master');
+		$info['master_name'] = I('post.master_name');
+		$existed = $Master->where($info)->find();
+		// 用户名已存在
+		if($existed){
+			$this->error("用户名已存在,请重新设置");
+		}
+		$info['master_pwd'] = I('post.master_pwd');
+		if($info['master_pwd'] == I('post.sure_pwd')){
+			$result = $Master->data($info)->add();
+			if($result){
+				$this->success("添加成功",U('Master/Public/master_list'));
+			}
+			else{
+				$this->error("添加失败，请稍后再试");
+			}
+		}
+		else{
+			$this->error("两次密码不相同，请重新输入");
+		}
+	}
+	/**
+	 * 删除管理员账号
+	 *
+	 */
+	public function del_master(){
+		$Master = M("Master");
+		$info['master_id'] = I('get.id');
+
+		$result = $Master->where($info)->delete();
+		if($result){
+			$this->success("删除成功");
+		}
+		else{
+			$this->error("删除失败,请稍后重试");
+		}
+	}
+
+	/**
+	 * 修改密码
+	 *
+	 */
+	public function modify_pwd(){
+		$this->master_name = session('master_name');
+		$this->super = session('super');
+		$this->display();
+	}
+
+	/**
+	 * 处理修改，密码逻辑
+	 *
+	 */
+	public function deal_modify_pwd(){
+		$Master = M('Master');
+		$info['master_id'] = session('master_id');
+		$info['master_pwd'] = md5(I('post.old_pwd'));
+		$isRight = $Master->where($info)->find();
+		if($isRight){
+			if(I('post.new_pwd') == I('post.sure_pwd')){
+				$info['master_pwd'] = md5(I('post.new_pwd'));
+				$result = $Master->save($info);
+				if ($result) {
+					session(null);
+					$this->success("修改成功，请重新登陆",U('Master/Public/login'));
+				}
+				else{
+					$this->error("修改失败，请稍后再试");
+				}
+			}
+			else{
+				$this->error("两次密码不相同，请重新输入");
+			}
+		}
+		else{
+			$this->error("密码错误，请重新输入");
 		}
 	}
 

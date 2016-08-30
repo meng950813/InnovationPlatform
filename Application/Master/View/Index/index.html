@@ -75,6 +75,10 @@
 					<!-- 杂项 -->
 					<li role="presentation"><a class="title"><span class="glyphicon glyphicon-tag"></span>杂项</a></li>
 					<li role="presentation"><a href="{:U('Master/City/city_list')}">城市管理</a></li>
+					<?php if(session('super') == 1) :?>
+						<li role="presentation"><a href="{:U('Master/Public/master_list')}">管理员管理</a></li>
+					<?php endif?>
+					<li role="presentation"><a href="{:U('Master/Public/modify_pwd')}">修改密码</a></li>
 				</ul>
 			</div>
 			<div class="col-md-9 col-lg-10 col-sm-9 col-xs-8">
