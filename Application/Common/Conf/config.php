@@ -11,11 +11,11 @@ return array(
 	'APP_GROUP_LIST' => 'Home,Admin', //项目分组设定
 	'DEFAULT_GROUP' => 'Home', //默认分组
 	'DB_TYPE'   => 'mysql', // 数据库类型
-	'DB_HOST'   => '218.4.212.16', // 服务器地址
-	'DB_NAME'   => 'innovation_platform', // 数据库名
-	'DB_USER'   => 'webtest', // 用户名
-	'DB_PWD'	=> 'webtest', // 密码
-	'DB_PORT'   => 3306, // 端口
+	'DB_HOST'   => 'SAE_MYSQL_HOST_M', // 服务器地址
+	'DB_NAME'   => 'SAE_MYSQL_DB', // 数据库名
+	'DB_USER'   => 'SAE_MYSQL_USER', // 用户名
+	'DB_PWD'	=> 'SAE_MYSQL_PASS', // 密码
+	'DB_PORT'   => 'SAE_MYSQL_PORT', // 端口
 	'DB_PREFIX' => 'cx_', // 数据库表前缀
 	'DB_PARAMS' => array(PDO::ATTR_CASE => PDO::CASE_NATURAL),
 	'DB_CHARSET'=> 'utf8', // 字符集
