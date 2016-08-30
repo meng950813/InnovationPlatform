@@ -67,7 +67,7 @@
 					<a href="javascript:void(0);" class="free" id="my_research-{$my_research.result_id}" value="{$my_research.result_id}" onclick="del_research(this)">删除成果</a>
 				</div>
 			</volist>
-			<?php if($my_research == null):?>
+			<?php if(!$my_research):?>
 				<div class="list" style="overflow:hidden;">
 					<h3 style="float:left;">暂未发布研究成果</h3>
 					<a href="{:U('Team/add')}">成果发布</a>

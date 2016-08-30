@@ -195,7 +195,7 @@ class PersonalController extends Controller {
         // 我的成果 -> 个人研究成果
         $where['owner_id'] = session('uid');
         $where['isteam'] = 0;
-        $my_research =$ResearchResult->where($where)->order('sort desc')->field('result_id,result_name')->select();
+        $my =$ResearchResult->where($where)->order('sort desc')->field('result_id,result_name')->select();
 
         // 专家用户才能组织和加入团队
         if(session('type') == 1){
@@ -203,32 +203,35 @@ class PersonalController extends Controller {
             $team['uid'] = session('uid');
             $myTeam = M('TeamMember')->where($team)->select();
 
-            $teamNum = count($myTeam);
-            for ($i=0; $i < $teamNum; $i++) {
-                $array[$i] = $myTeam[$i]['teamid'];
-            }
-            $research['owner_id'] = array('in',$array);
-            $research['isteam'] = 1;
-            $team_research = $ResearchResult->where($research)->order('sort desc')->field('result_name,result_id,owner_id')->select();
-     
-            // 判断当前用户是否是团队负责人，以确定是否要给用户修改这个团队成果的权利
-            $Team = M('ExpertTeam');
-            $cout = count($team_research);
-            for ($i=0; $i < $cout; $i++) {
-                $tid['teamid'] = $team_research[$i]['owner_id'];
-                $leader = $Team->where($tid)->getField('teamleader');
-                // 如果是
-                if(session('uid') == $leader){
-                    $team_research[$i]['leader'] = 1;
+            // 在某个团队中
+            if($myTeam){
+                 $teamNum = count($myTeam);
+                for ($i=0; $i < $teamNum; $i++) {
+                    $array[$i] = $myTeam[$i]['teamid'];
                 }
-                else{
-                    $team_research[$i]['leader'] = 0;
+                $research['owner_id'] = array('in',$array);
+                $research['isteam'] = 1;
+                $team_research = $ResearchResult->where($research)->order('sort desc')->field('result_name,result_id,owner_id')->select();
+         
+                // 判断当前用户是否是团队负责人，以确定是否要给用户修改这个团队成果的权利
+                $Team = M('ExpertTeam');
+                $cout = count($team_research);
+                for ($i=0; $i < $cout; $i++) {
+                    $tid['teamid'] = $team_research[$i]['owner_id'];
+                    $leader = $Team->where($tid)->getField('teamleader');
+                    // 如果是
+                    if(session('uid') == $leader){
+                        $team_research[$i]['leader'] = 1;
+                    }
+                    else{
+                        $team_research[$i]['leader'] = 0;
+                    }
                 }
+                $this->assign("team_research",$team_research);
             }
-            $this->assign("team_research",$team_research);
         }
        
-        $this->assign("my_research",$my_research);
+        $this->assign("my_research",$my);
         
         $this->display();
     }
