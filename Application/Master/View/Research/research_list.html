@@ -26,7 +26,7 @@
 				<td>{$a.publish_time}</td>
 				<td><?php echo ($a['status'] == 1)?"有效":"<b style=color:red>失效</b>";?></td>
 				<td>
-					<a href="javascript:void(0)" id="user_list-{$a.id}" value="{$a.id}" onclick="del(this)">删除信息</a>
+					<a href="javascript:void(0)" id="user_list-{$a.result_id}" value="{$a.result_id}" onclick="del(this)">删除信息</a>
 					<span> | </span>
 					<a href="{:U('Master/Public/setStatus',array('id'=>$a['result_id'],'type'=>'res','status'=>$a['status']))}"><?php echo ($a['status'] == 1)?"设为失效":"设为有效";?></a>
 				</td>
