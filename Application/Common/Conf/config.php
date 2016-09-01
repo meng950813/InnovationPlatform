@@ -1,21 +1,21 @@
 <?php
 
 // sae 数据库配置
-define('SAE_MYSQL_HOST_M', 'w.rdc.sae.sina.com.cn');
-define('SAE_MYSQL_HOST_S', 'r.rdc.sae.sina.com.cn');
-define('SAE_MYSQL_PORT', '3307');
-define('SAE_MYSQL_DB', 'app_oncm');
-define('SAE_MYSQL_USER', 'noy3mylyoz');
-define('SAE_MYSQL_PASS', 'xyk3khxw0430mi302mkmzwh3mj1j0ylwjx153ilk');
+// define('SAE_MYSQL_HOST_M', 'w.rdc.sae.sina.com.cn');
+// define('SAE_MYSQL_HOST_S', 'r.rdc.sae.sina.com.cn');
+// define('SAE_MYSQL_PORT', '3307');
+// define('SAE_MYSQL_DB', 'app_oncm');
+// define('SAE_MYSQL_USER', 'noy3mylyoz');
+// define('SAE_MYSQL_PASS', 'xyk3khxw0430mi302mkmzwh3mj1j0ylwjx153ilk');
 
 // 本地数据库设置
-/*define('SAE_MYSQL_HOST_M', 'localhost');
+define('SAE_MYSQL_HOST_M', 'localhost');
 define('SAE_MYSQL_HOST_S', 'r.rdc.sae.sina.com.cn');
 define('SAE_MYSQL_PORT', '3306');
 define('SAE_MYSQL_DB', 'innovation_platform');
 define('SAE_MYSQL_USER', 'root');
 define('SAE_MYSQL_PASS', '');
-*/
+
 return array(
 	'PAGE_NUM' => 5,
 	'MODULE_ALLOW_LIST' => array('Home','Master'),

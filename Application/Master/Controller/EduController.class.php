@@ -36,8 +36,8 @@ class EduController extends MasterController {
 	public function del(){
 		if(I('get.id')){
 			$where['edu_id'] = I('get.id');
-
-			$result = M('EduTrain')->delete($where);
+			
+			$result = M('EduTrain')->where($where)->delete();
 			if($result){
 				$this->success('删除成功');
 			}

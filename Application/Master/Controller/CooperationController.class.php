@@ -38,7 +38,7 @@ class CooperationController extends MasterController {
 		if(I('get.id')){
 			$where['id'] = I('get.id');
 
-			$result = M('Cooperation')->delete($where);
+			$result = M('Cooperation')->where($where)->delete();
 			if($result){
 				$this->success('删除成功');
 			}

@@ -39,7 +39,7 @@ class NewsController extends MasterController {
 		if(I('get.id')){
 			$where['news_id'] = I('get.id');
 
-			$result = M('News')->delete($where);
+			$result = M('News')->where($where)->delete();
 			if($result){
 				$this->success('删除成功');
 			}
