@@ -58,15 +58,15 @@ class NewsController extends Controller {
 
         // 下一个
         $next_info['type'] = $info['type'];
+        $next_info['status'] = 1;
         $next_info['news_id'] = array('gt',$info['news_id']);
         $next = $News->where($next_info)->field('news_id,title')->find();
         // 转变换行符
         // $next['content'] = replace_br($info['content']);
 
         // 上一个
-        $past_info['type'] = $info['type'];
-        $past_info['news_id'] = array('lt',$info['news_id']);
-        $past = $News->where($past_info)->field('news_id,title')->find();
+        $next_info['news_id'] = array('lt',$info['news_id']);
+        $past = $News->where($next_info)->field('news_id,title')->find();
 
         $this->assign('info',$info);
         $this->assign('next',$next);
