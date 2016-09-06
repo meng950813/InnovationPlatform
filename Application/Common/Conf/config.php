@@ -1,20 +1,20 @@
 <?php
 
 // sae 数据库配置
-// define('SAE_MYSQL_HOST_M', 'w.rdc.sae.sina.com.cn');
-// define('SAE_MYSQL_HOST_S', 'r.rdc.sae.sina.com.cn');
-// define('SAE_MYSQL_PORT', '3307');
-// define('SAE_MYSQL_DB', 'app_oncm');
-// define('SAE_MYSQL_USER', 'noy3mylyoz');
-// define('SAE_MYSQL_PASS', 'xyk3khxw0430mi302mkmzwh3mj1j0ylwjx153ilk');
+define('SAE_MYSQL_HOST_M', 'w.rdc.sae.sina.com.cn');
+define('SAE_MYSQL_HOST_S', 'r.rdc.sae.sina.com.cn');
+define('SAE_MYSQL_PORT', '3307');
+define('SAE_MYSQL_DB', 'app_oncm');
+define('SAE_MYSQL_USER', 'noy3mylyoz');
+define('SAE_MYSQL_PASS', 'xyk3khxw0430mi302mkmzwh3mj1j0ylwjx153ilk');
 
 // 本地数据库设置
-define('SAE_MYSQL_HOST_M', 'localhost');
-define('SAE_MYSQL_HOST_S', 'r.rdc.sae.sina.com.cn');
-define('SAE_MYSQL_PORT', '3306');
-define('SAE_MYSQL_DB', 'innovation_platform');
-define('SAE_MYSQL_USER', 'root');
-define('SAE_MYSQL_PASS', '');
+// define('SAE_MYSQL_HOST_M', 'localhost');
+// define('SAE_MYSQL_HOST_S', 'r.rdc.sae.sina.com.cn');
+// define('SAE_MYSQL_PORT', '3306');
+// define('SAE_MYSQL_DB', 'innovation_platform');
+// define('SAE_MYSQL_USER', 'root');
+// define('SAE_MYSQL_PASS', '');
 
 return array(
 	'PAGE_NUM' => 5,
@@ -39,4 +39,6 @@ return array(
 	// 'DB_DEBUG'  =>  false, // 数据库调试模式 开启后可以记录SQL日志 3.2.3新增
 	// 'SHOW_PAGE_TRACE' =>true,
 	'ADMIN_MARK' => array('root','admin'),
+
+	'FILE_UPLOAD_TYPE' => 'Sae',
 );
