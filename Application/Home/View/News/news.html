@@ -49,7 +49,10 @@
                  <span>发布时间：{$info.publish_time}</span>&nbsp;&nbsp;
                  <span>点击量：{$info.click}次</span>
             </div>
-            <pre>{$info.content}</pre>
+            <div id="news_content">
+                <img id="news_picture" src="__ROOT__/{$picture.picture}" alt="">
+                {$info.content}
+            </div>
 
             <div class="next">
                 <p>
@@ -73,13 +76,17 @@
             </div>
         </div>
     </div>
-	
+	<div style="clear:both"></div>
     <include file="Public/footer"/>
+    <script>
+        $(function(){
+            $('#nav_news').addClass('nav_active').siblings().removeClass('nav_active');
 
+            if($('#news_picture').attr('src') == "__ROOT__/"){
+                $('#news_picture').attr("src","");
+            }
+        });  
+    </script>
 </body>
-<script>
-     $(function(){
-        $('#nav_news').addClass('nav_active').siblings().removeClass('nav_active');
-    });  
-</script>
+
 </html>
