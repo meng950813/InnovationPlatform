@@ -58,7 +58,7 @@
                         <a href="#" onclick="waring()"><img src="__PUBLIC__/images/add_demand.png"></a>
                     <?php endif ?>
                 <?php else: ?>
-                    <a href="{:U('Public/login')}"><img src="__PUBLIC__/images/add_demand.png"></a>
+                    <a onclick="showLogin()"><img src="__PUBLIC__/images/add_demand.png"></a>
                 <?php endif ?>              
             </div>
             <div class="mainbtn">
@@ -104,7 +104,7 @@
                                 <button>我要联系</button>
                             </a>
                         <?php else: ?>
-                            <a id="linkbutton" href="{:U('Public/login')}" target="_black">
+                            <a id="linkbutton" onclick="showLogin()">
                                 <button>我要联系</button>
                             </a>
                         <?php endif ?>

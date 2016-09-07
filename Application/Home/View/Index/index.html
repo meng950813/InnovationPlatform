@@ -95,7 +95,7 @@
                     <?php if (session('uid')): ?>
                         <li><a href="{:U('Result/add')}">成果发布</a></li>
                     <?php else: ?>
-                        <li><a href="{:U('Public/login')}">成果发布</a></li>
+                        <li><a  onclick="showLogin()">成果发布</a></li>
                     <?php endif ?>
                 </ul>
             </li>
@@ -113,7 +113,7 @@
                             <li><a href="javascript:void(0);" onclick="waring()">需求发布</a></li>
                         <?php endif ?>
                     <?php else: ?>
-                        <li><a href="{:U('Public/login')}">需求发布</a></li>
+                        <li><a onclick="showLogin()">需求发布</a></li>
                     <?php endif ?>
                 </ul>
             </li>

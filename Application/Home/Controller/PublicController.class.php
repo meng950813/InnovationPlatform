@@ -22,7 +22,7 @@ class PublicController extends Controller {
 		$name['username'] = I('post.username',false);
 		$pwd = $_POST['password'];
 		if(!$name['username']){
-			$this->error("用户名为空",U('Public/login'));
+			$this->error("用户名不能为空");
 		}
 		$res = M('Login')->where($name)->find();
 		if($res){
@@ -32,10 +32,10 @@ class PublicController extends Controller {
 				session('realname',$res['realname']);
 				$this->success("欢迎你：".$res['realname'],U('Personal/index'));
 			}else{
-				$this->error("密码错误",U('Public/login'));
+				$this->error("密码错误");
 			}
 		}else{
-			$this->error("用户名不存在",U('Public/login'));
+			$this->error("用户名不存在");
 		}
 	}
 

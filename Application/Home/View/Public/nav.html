@@ -3,7 +3,9 @@
         <img src="__PUBLIC__/images/background.png">
         <div class="login-tip">
             <?php if(!session('?uid')){ ?>
-            	<a href="{:U('Public/login')}" target="_block">登录</a>
+            	<!-- <a href="{:U('Public/login')}" 
+                target="_block">登录</a> -->
+                <a onclick="showLogin()">登录</a>
                 <span>丨</span>
                 <a href="{:U('Signup/signup')}">注册</a>
             <?php }else{ ?>
@@ -87,3 +89,33 @@
         </div>
     </div>
 </div>
+
+<div id="login_bg" class="login_hidden">
+    <div id="login_container">
+        <div id="login_form">
+            <form action="{:U('Public/dologin')}" method="post">
+                <div class="input_text">
+                    <input id="txt_userName" name="username" type="text" placeholder="用户名"/>
+                    <input id="pwd_userPwd" name="password" type="password" placeholder="密码" />
+                </div>
+                <div  id="login_btns"> 
+                    <button type="submit">登录</button>
+                <!-- 注册 -->
+                    <a href="{:U('Signup/signup')}" id="signup-btn">注册
+                    </a> 
+                </div>
+                <!-- 忘记密码 -->
+                <a id="forgetpwd" href="{:U('Signup/forgetPwd_step1')}">忘记密码>> </a>
+            </form>
+        </div>
+        <div id="login_close" onclick="hiddenLogin()">X</div>
+    </div>
+</div>
+<script>
+    function showLogin() {
+        document.getElementById('login_bg').className="login_show";
+    }
+    function hiddenLogin(){
+        document.getElementById('login_bg').className="login_hidden";
+    }
+</script>
