@@ -10,7 +10,7 @@
 
 // 本地数据库设置
 define('SAE_MYSQL_HOST_M', 'localhost');
-define('SAE_MYSQL_HOST_S', 'r.rdc.sae.sina.com.cn');
+// define('SAE_MYSQL_HOST_S', 'r.rdc.sae.sina.com.cn');
 define('SAE_MYSQL_PORT', '3306');
 define('SAE_MYSQL_DB', 'innovation_platform');
 define('SAE_MYSQL_USER', 'root');
@@ -40,5 +40,5 @@ return array(
 	// 'SHOW_PAGE_TRACE' =>true,
 	'ADMIN_MARK' => array('root','admin'),
 
-	'FILE_UPLOAD_TYPE' => 'Sae',
+	// 'FILE_UPLOAD_TYPE' => 'Sae',
 );

@@ -86,10 +86,16 @@
 	 * @return [type] $dir 上传文件夹的名称
 	 */
 	function uploadPicture($picture,$dir){
-		$upload = new \Think\Upload();// 实例化上传类
-        $upload->maxSize   =     3145728 ;// 设置附件上传大小
+		$config = array(
+				'maxSize'	=>	3145728 ,// 设置附件上传大小
+				'exts'      =>  array('jpg', 'gif', 'png', 'jpeg'),// 设置附件上传类型
+				'savePath'  =>  '/'.$dir.'/', // 设置附件上传目录
+				'autoSub'	=>	false  
+			);
+		$upload = new \Think\Upload($config,'sae');// 实例化上传类
+      /*  $upload->maxSize   =     
         $upload->exts      =     array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
-        $upload->savePath  =     '/'.$dir.'/'; // 设置附件上传目录
+        $upload->savePath  =     '/'.$dir.'/'; // 设置附件上传目录*/
         // 这里要保证所有上传图片的input标签的 name = img
         $result   =   $upload->uploadOne($_FILES['img']);// 上传单个文件
 

@@ -56,6 +56,7 @@ class SignupController extends Controller {
 			session('type',2);
 			session('realname',$loginInfo['realname']);
 			
+			$expertInfo['uid'] = $uid;
 			// 职称
 			$expertInfo['level'] = getJobType(I('post.level'));
 			// 学位
@@ -87,7 +88,6 @@ class SignupController extends Controller {
 		}else{
 			$this->error("很可惜，注册失败了",U('Signup/signup'));
 		}
-		$loginInfo['identify'] = I('post.identify');
 	}
 
 		/**
@@ -131,10 +131,11 @@ class SignupController extends Controller {
 			session('uid',$uid);
 			session('type',2);
 			session('realname',$loginInfo['realname']);//企业名
+			$companyInfo['uid'] = $uid;
 			$companyInfo['website']=I('post.website');//企业官网
 			$companyInfo['company_type'] = I('post.company_type');//企业标签
-			$where['city']=$city['cityname'];
-			$companyInfo['city'] =M('city') ->where($where)->getField('id');
+			$city['city']=$city['cityname'];
+			$companyInfo['city'] =M('city') ->where($city)->getField('id');
 
 			$companyInfo['area']=I('post.adress');//具体地址
 			$research = I("post.research");

@@ -27,7 +27,7 @@ input[type=radio]{
 }
 .upload{
     width:400px;
-    margin:0 auto;
+    margin-left: 104px;
 }
 #preview{
     max-width:400px;
@@ -47,7 +47,7 @@ input[type=radio]{
 .textarea textarea{
     width:480px;
     height:100px;
-    margin-left:124px;
+    margin-left:104px;
 }
 .sub{
     margin-top:10px;
