@@ -51,7 +51,6 @@ class NewsController extends Controller {
     public function news(){
         $where['news_id'] = I('get.id');
         $News =  M('News');
-        $picture = M('NewsPicture')->where($where)->field('picture')->find();
 
 
         // 点击量加 1
@@ -73,7 +72,6 @@ class NewsController extends Controller {
         $this->assign('next',$next);
         $this->assign('past',$past);
         
-        $this->assign("picture",$picture);
     	$this->display();
     }
 }

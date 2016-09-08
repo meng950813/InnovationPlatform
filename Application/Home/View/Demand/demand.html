@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="__PUBLIC__/css/home/research.css">
     <link rel="stylesheet" href="__PUBLIC__/css/home/nav.css">
-    <script src="__PUBLIC__/js/jquery.min.js"></script>
+    <!-- [if IE lt 10] -->
+        <link rel="stylesheet" href="__PUBLIC__/css/home/ltIE8.css">
+    <!-- [endif] -->
     <title>张家港工程项目协同创新服务平台</title>
     <style>
         .link_img button{
@@ -149,6 +151,8 @@
         </table>
     </div>
     <include file="Public/footer"/>
+    
+    <script src="__PUBLIC__/js/jquery.min.js"></script>
 </body>
 <script>
      $(function(){

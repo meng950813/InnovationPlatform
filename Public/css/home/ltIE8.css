@@ -1,0 +1,37 @@
+ div,a,img,button{
+    border: none;
+}
+/* demand + result*/
+button.demand_link,button.result_link{
+    padding: 2px 10px;
+}
+
+/* index  */
+.control{
+    position: absolute;
+    left: 50%;
+    margin-left: -65px;
+    top: 270px;
+}
+.control-btn{
+    float: left;
+    width: 13px;
+    height: 13px;
+    margin-left: 13px;
+    border: 1px solid transparent;
+    background: white;
+}
+.focus{
+    background: blue;
+}
+
+/* nav */
+.login_show{
+    display: block;
+}
+.login_hidden{
+    display: none;
+}
+#login_btns>button,#signup-btn{
+    background: #5dc3fe;
+}

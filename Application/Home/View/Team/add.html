@@ -5,8 +5,10 @@
     <meta charset="UTF-8">
     <title>张家港工程项目协同创新服务平台</title>
     <link rel="stylesheet" href="__PUBLIC__/css/home/signup.css">
-    <script src="__PUBLIC__/js/jquery.min.js"></script>
-    <link rel="stylesheet" href="__PUBLIC__/css/home/nav.css">    
+    <link rel="stylesheet" href="__PUBLIC__/css/home/nav.css">  
+    <!-- [if IE lt 10] -->
+        <link rel="stylesheet" href="__PUBLIC__/css/home/ltIE8.css">
+    <!-- [endif] -->  
 </head>
 <body>
     <include file="Public/nav" />
@@ -16,42 +18,6 @@
                 <label for="teamname">团队名称 </label>
                 <input class="line-input" type="text" id="teamname" name="teamname" required><span id="nameError" class="must">*</span>
             </div>
-            <script>
-                $(function() {
-                    $('#teamname').change(function(event){
-                        if($('#teamname').val().trim() != ""){
-                            var teamname = $('#teamname').val();
-                            $.ajax({
-                                type:"post",
-                                url:"__ROOT__/index.php/Public/checkName",
-                                dataType:'json',
-                                data:{teamname:teamname}
-                                })
-                            .done(function(data) {
-                                console.log("success",data);
-                                if(data.code == 0){
-                                    $('#nameError').html("*");
-                                    $('input[type=submit]').show();
-                                }else{
-                                    $("#nameError").html("用户名已存在");
-                                    $('input[type=submit]').hide();
-                                }
-                            })
-                            .fail(function(XMLHttpRequest, textStatus, errorThrown){
-                                console.log("status = "+XMLHttpRequest.status);  // 200
-                                console.log("readyState = "+XMLHttpRequest.readyState); //4
-                                console.log("textStatus = "+textStatus);  //parsererror
-                            })
-                            .always(function() {
-                                console.log("complete");
-                            });
-                        }
-                    });
-
-                $('#nav_expert').addClass('nav_active').siblings().removeClass('nav_active');
-
-                });
-            </script>
             <div class="line" style="text-align:center">
                 <p>团队logo (建议尺寸： 456 × 342 像素 仅限上传一张)</p>
                 <input type="file" name="img" id="logo" accept="image/*" />
@@ -91,6 +57,43 @@
         </div>
     </form>
     <include file="Public/footer" />
+    <script src="__PUBLIC__/js/jquery.min.js"></script>
+    <script>
+        $(function() {
+            $('#teamname').change(function(event){
+                if($('#teamname').val().trim() != ""){
+                    var teamname = $('#teamname').val();
+                    $.ajax({
+                        type:"post",
+                        url:"__ROOT__/index.php/Public/checkName",
+                        dataType:'json',
+                        data:{teamname:teamname}
+                        })
+                    .done(function(data) {
+                        console.log("success",data);
+                        if(data.code == 0){
+                            $('#nameError').html("*");
+                            $('input[type=submit]').show();
+                        }else{
+                            $("#nameError").html("用户名已存在");
+                            $('input[type=submit]').hide();
+                        }
+                    })
+                    .fail(function(XMLHttpRequest, textStatus, errorThrown){
+                        console.log("status = "+XMLHttpRequest.status);  // 200
+                        console.log("readyState = "+XMLHttpRequest.readyState); //4
+                        console.log("textStatus = "+textStatus);  //parsererror
+                    })
+                    .always(function() {
+                        console.log("complete");
+                    });
+                }
+            });
+
+        $('#nav_expert').addClass('nav_active').siblings().removeClass('nav_active');
+
+        });
+    </script>
 </body>
 <script>
     $(function($){

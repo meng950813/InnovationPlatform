@@ -2,13 +2,15 @@
 <html>
 <head>
     <!-- create by cm -->
-    <script src="__PUBLIC__/js/jquery.min.js"></script>
     <link href="__PUBLIC__/css/home/nav.css" rel="stylesheet" type="text/css">
     <link href="__PUBLIC__/css/home/listpage.css" rel="stylesheet" type="text/css">
+    <!-- [if IE lt 10] -->
+        <link rel="stylesheet" href="__PUBLIC__/css/home/ltIE8.css">
+    <!-- [endif] -->
     <meta charset="utf-8">
     <title>张家港工程项目协同创新服务平台</title>
     <style>
-        button{
+        button.demand_link{
             background: #72CEDD;
             color: #FAFDFD;
             font-weight: 700;
@@ -17,7 +19,7 @@
             padding: 5px 10px;
             cursor: pointer;
         }
-        button:hover{
+        button.demand_link:hover{
             background: #0F93A9;
             color: white;
         }
@@ -45,7 +47,7 @@
     <div class="bannerbox">
         <img src="__PUBLIC__/images/需求发布bk.png">   
     </div>
-	<div class="infolist-main">
+    <div class="infolist-main">
         <div class="leftmain">
             <div class="mainlefttitle">
                 <img src="__PUBLIC__/images/需求发布.png">
@@ -68,11 +70,11 @@
             </div>
         </div>
         <div class="rightmain">
-        	<div class="top-tip">
-            	<div id="page-title">
+            <div class="top-tip">
+                <div id="page-title">
                     <img src="__PUBLIC__/images/download_09.png">最新需求</div>
                 <div id="position">
-                	<a href="#">企业需求</a>
+                    <a href="#">企业需求</a>
                     <span>&nbsp;>&nbsp;</span>
                     <a href="__ROOT__">首页</a>
                     <span>您的位置：</span>
@@ -101,11 +103,11 @@
                         <span class="publish_time">&nbsp;{$list.publish_time}</span>
                         <?php if (session('uid')): ?>
                             <a id="linkbutton" href="{:U('Public/link',array('id'=>$list['demand_id'],'linkType'=>3))}" target="_black">
-                                <button>我要联系</button>
+                                <button class="demand_link">我要联系</button>
                             </a>
                         <?php else: ?>
                             <a id="linkbutton" onclick="showLogin()">
-                                <button>我要联系</button>
+                                <button class="demand_link">我要联系</button>
                             </a>
                         <?php endif ?>
                         
@@ -116,8 +118,9 @@
                {$page}
             </div>
         </div>
-	</div>
+    </div>
     <include file="Public/footer"/>
+    <script src="__PUBLIC__/js/jquery.min.js"></script>
 </body>
 <script>
     function waring(){

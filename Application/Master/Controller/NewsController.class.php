@@ -129,7 +129,7 @@ class NewsController extends MasterController {
 		}
 		// 添加数据
 		else{
-			if(!empty($news['type'])){
+			if(!empty($news['type']) || $news['type'] == 0){
 
 				if (!empty($_FILES)) {//有图片上传
 		            // 返回值不为null -> 上传成功
@@ -145,6 +145,7 @@ class NewsController extends MasterController {
 
 				$result = M('News')->data($news)->add();
 				if($result){
+					($news['type'] == 0)&&($news['type'] = 3);
 					$this->success("发布成功",U('Master/News/news_list/type/'.$news['type']));
 				}
 				else{

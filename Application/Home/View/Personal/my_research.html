@@ -4,8 +4,8 @@
     <!-- create by cm -->
 	<meta charset="UTF-8">
 	<title>个人中心——我的成果</title>
+	
     <link rel="stylesheet" href="__PUBLIC__/css/home/personal.css">
-    <script src="__PUBLIC__/js/jquery.min.js"></script>
 	<style>
 		.my_list{
 			margin-bottom: 20px;
@@ -43,11 +43,7 @@
 		}
 	</style>
 	<!-- [if IE lt 10] -->
-    	<style>
-			img{
-				border: none;
-			}
-    	</style>
+        <link rel="stylesheet" href="__PUBLIC__/css/home/ltIE8.css">
     <!-- [endif] -->
 </head>
 <body>
@@ -98,6 +94,8 @@
 		<?php endif ?>
 		
 	</div>
+    <include file="Public/footer" />
+    <script src="__PUBLIC__/js/jquery.min.js"></script>
 	<script>
 		$(function(){
         	$('#my_research_result').addClass('focus').siblings().removeClass('focus');
@@ -109,6 +107,5 @@
 			}
 		}
 	</script>	
-    <include file="Public/footer" />
 </body>
 </html>

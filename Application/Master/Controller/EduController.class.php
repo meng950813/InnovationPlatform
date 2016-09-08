@@ -88,9 +88,10 @@ class EduController extends MasterController {
 		}
 		// 添加数据
 		else{
-			if(!empty($edu['type'])){
+			if(!empty($edu['type']) || $edu['type'] == 0){
 				$result = M('EduTrain')->data($edu)->add();
 				if($result){
+					($edu['type'] == 0)&&($edu['type'] =3 );
 					$this->success("发布成功",U('Master/Edu/edu_list/type/'.$edu['type']));
 				}
 				else{

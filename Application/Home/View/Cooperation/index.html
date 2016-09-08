@@ -2,11 +2,14 @@
 <html>
 <head>
     <!-- create by cm -->
-    <script src="__PUBLIC__/js/jquery.min.js"></script>
-    <link href="__PUBLIC__/css/home/listpage.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="__PUBLIC__/css/home/nav.css">
     <meta charset="utf-8">
     <title>张家港工程项目协同创新服务平台</title>
+    
+    <link href="__PUBLIC__/css/home/listpage.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="__PUBLIC__/css/home/nav.css">
+    <!-- [if IE lt 10] -->
+        <link rel="stylesheet" href="__PUBLIC__/css/home/ltIE8.css">
+    <!-- [endif] -->
 </head>
 
 <body>
@@ -58,36 +61,39 @@
                     </div>                           
                 </div>
             </volist>
-            <script>
-                $(function(){
-                    $('.click_title').click(function(event){
-                        var id = $(this).attr('value');
-                        $.ajax({
-                            type:'post',
-                            url:"__ROOT__/index.php/Cooperation/addClick",
-                            dataType:'json',
-                            data:{id:id}
-                        })
-                        .done(function(data) {
-                            if(data.code == 1){
-                              console.log('success');
-                            }
-                        })
-                        .fail(function(XMLHttpRequest, textStatus, errorThrown){
-                          
-                        })
-                        .always(function() {
-                        });
-                    });
-                    $('#nav_cooperation').addClass('nav_active').siblings().removeClass('nav_active');
-                });
-            </script> 
+
         </div>
     </div>
     <div id="paging">
         {$page}
     </div>
     <include file="Public/footer" />
+    
+    <script src="__PUBLIC__/js/jquery.min.js"></script>
+    <script>
+        $(function(){
+            $('.click_title').click(function(event){
+                var id = $(this).attr('value');
+                $.ajax({
+                    type:'post',
+                    url:"__ROOT__/index.php/Cooperation/addClick",
+                    dataType:'json',
+                    data:{id:id}
+                })
+                .done(function(data) {
+                    if(data.code == 1){
+                      console.log('success');
+                    }
+                })
+                .fail(function(XMLHttpRequest, textStatus, errorThrown){
+                  
+                })
+                .always(function() {
+                });
+            });
+            $('#nav_cooperation').addClass('nav_active').siblings().removeClass('nav_active');
+        });
+    </script> 
 </body> 
 
 </html>

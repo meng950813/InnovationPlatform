@@ -4,10 +4,11 @@
     <!-- create by cm -->
     <meta charset="UTF-8">
     <title>个人注册</title>
-    <script src="__PUBLIC__/js/jquery.min.js"></script>
-    <script src="__PUBLIC__/js/signup.js"></script>
     <link rel="stylesheet" href="__PUBLIC__/css/home/signup.css">
     <link rel="stylesheet" href="__PUBLIC__/css/home/nav.css">
+    <!-- [if IE lt 10] -->
+        <link rel="stylesheet" href="__PUBLIC__/css/home/ltIE8.css">
+    <!-- [endif] -->
 </head>
 <body>
     <include file = "Public/nav"/>
@@ -48,6 +49,8 @@
         </div>
     </form>
     <include file = "Public/footer"/>
+    <script src="__PUBLIC__/js/jquery.min.js"></script>
+    <script src="__PUBLIC__/js/signup.js"></script>
     <script>
         $(function() {
             $('#username').change(function(event){

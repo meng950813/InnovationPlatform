@@ -2,11 +2,11 @@
 <html>
 <head>
     <!-- create by cm -->
-    <link rel="stylesheet" href="__PUBLIC__/css/home/nav.css">
-    <link rel="stylesheet" href="__PUBLIC__/css/home/listpage.css">
-    <script src="__PUBLIC__/js/jquery.min.js"></script>
     <meta charset="utf-8">
     <title>张家港工程项目协同创新服务平台</title>
+    
+    <link rel="stylesheet" href="__PUBLIC__/css/home/nav.css">
+    <link rel="stylesheet" href="__PUBLIC__/css/home/listpage.css">
     <style>
         .top-tip{
             overflow: hidden;
@@ -15,13 +15,16 @@
             margin-top: 20px;
         }
     </style>
+    <!-- [if IE lt 10] -->
+        <link rel="stylesheet" href="__PUBLIC__/css/home/ltIE8.css">
+    <!-- [endif] -->
 </head>
 
 <body>
     <include file="Public/nav"/>
     <div class="bannerbox">
-    	<div class="banner">
-        	<img src="__PUBLIC__/images/aboutusbanner.png">   
+        <div class="banner">
+            <img src="__PUBLIC__/images/aboutusbanner.png">   
         </div>
     </div>
     <div class="infolist-main">
@@ -29,8 +32,8 @@
             <div class="mainlefttitle"><img src="__PUBLIC__/images/download_03.png"></div>
         </div>
         <div class="rightmain">
-        	<div class="top-tip">
-            	<div id="page-title">
+            <div class="top-tip">
+                <div id="page-title">
                     <img src="__PUBLIC__/images/download_09.png">
                     <sapn>平台简介</sapn>
                 </div>
@@ -47,11 +50,12 @@
             <div class="line2">
                 <img class="mainimage" src="__PUBLIC__/images/just.jpg">
             </div>
-        	
+            
            
         </div>
     </div>
     <include file="Public/footer"/>
+    <script src="__PUBLIC__/js/jquery.min.js"></script>
 </body>
 <script>
      $(function(){

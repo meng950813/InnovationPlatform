@@ -66,11 +66,6 @@ a{
 	line-height: 20px;
 	color: #000;
 }
-#news_content>img{
-	float: left;
-	width: 300px;
-	margin: 10px 20px 10px 10px;
-}
 .next p{
 	margin: 10px 0;
 }

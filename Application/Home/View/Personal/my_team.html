@@ -4,8 +4,8 @@
     <!-- create by cm -->
 	<meta charset="UTF-8">
 	<title>个人中心——我的团队</title>
+
     <link rel="stylesheet" href="__PUBLIC__/css/home/personal.css">
-	<script src="__PUBLIC__/js/jquery.min.js"></script>
 	<style>
 		.my_team{
 			margin-bottom: 20px;
@@ -44,11 +44,7 @@
 		}
 	</style>
 	<!-- [if IE lt 10] -->
-    	<style>
-			img{
-				border: none;
-			}
-    	</style>
+        <link rel="stylesheet" href="__PUBLIC__/css/home/ltIE8.css">
     <!-- [endif] -->
 </head>
 <body>
@@ -90,6 +86,9 @@
 			</div>
 		</div>
 	</div>
+    <include file="Public/footer" />
+    
+	<script src="__PUBLIC__/js/jquery.min.js"></script>
 	<script>
 		$(function(){
         	$('#my_team').addClass('focus').siblings().removeClass('focus');
@@ -109,6 +108,5 @@
 			}
 		}
 	</script>
-    <include file="Public/footer" />
 </body>
 </html>

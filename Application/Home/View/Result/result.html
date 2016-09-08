@@ -3,12 +3,12 @@
 <head>
     <!-- create by cm -->
     <meta charset="UTF-8">
+    <title>张家港工程项目协同创新服务平台</title>
+
     <link rel="stylesheet" href="__PUBLIC__/css/home/research.css">
     <link rel="stylesheet" href="__PUBLIC__/css/home/nav.css">
-    <script src="__PUBLIC__/js/jquery.min.js"></script>
-    <title>张家港工程项目协同创新服务平台</title>
     <style>
-        button{
+        button.result_link{
             background: #72CEDD;
             color: #FAFDFD;
             font-weight: 700;
@@ -18,11 +18,14 @@
             cursor: pointer;
             margin-top: 10px;
         }
-        button:hover{
+        button.result_link:hover{
             background: #0F93A9;
             color: white;
         }
     </style>
+    <!-- [if IE lt 10] -->
+        <link rel="stylesheet" href="__PUBLIC__/css/home/ltIE8.css">
+    <!-- [endif] -->
 </head>
 <body>
     <include file ="Public/nav"/>
@@ -72,11 +75,11 @@
                     <!-- <img src="/" alt="点击收藏"> -->
                     <?php if (session('uid')): ?>
                         <a href="{:U('Public/link',array('linkType'=> 4,'id'=>$resultInfo['result_id']))}" target="_black">
-                            <button>我要联系</button>
+                            <button class="result_link">我要联系</button>
                         </a>
                     <?php else: ?>
                         <a  onclick="showLogin()">
-                            <button>我要联系</button>
+                            <button class="result_link">我要联系</button>
                         </a>
                     <?php endif ?>
                     
@@ -241,11 +244,10 @@
                     <?php endif ?>
                 <?php endif?>    
             <?php endif ?>
-
-                    
         </table>
     </div>
     <include file ="Public/footer"/>
+    <script src="__PUBLIC__/js/jquery.min.js"></script>
 </body>
 <script>
     $(function(){

@@ -4,12 +4,11 @@
     <!-- create by cm -->
     <meta charset="UTF-8">
     <title>企业注册</title>
-    <script src="__PUBLIC__/js/jquery.min.js"></script>
-    <script src="__PUBLIC__/js/signup.js"></script>
     <link rel="stylesheet" href="__PUBLIC__/css/home/signup.css">  
     <link rel="stylesheet" href="__PUBLIC__/css/home/nav.css">
-    
-    
+    <!-- [if IE lt 10] -->
+        <link rel="stylesheet" href="__PUBLIC__/css/home/ltIE8.css">
+    <!-- [endif] -->
 </head>
 <body>
     <include file = "Public/nav"/>
@@ -24,41 +23,6 @@
                 <label for="username">用户名</label>
                 <input type="text" class="line-input" required id="username" name="username" ><span class="must" id="nameError">*</span>
             </div>
-            <script>
-                $(function() {
-                    $('#username').change(function(event){
-                        var un = $('#username').val();
-                        if(un != ""){
-                            console.log(un);
-                            $.ajax({
-                                type:"post",
-                                url:"__ROOT__/index.php/Public/checkName",
-                                dataType:'json',
-                                data:{username:un}
-                                })
-                            .done(function(data) {
-                                console.log("success",data);
-                                if(data.code == 0){
-                                    $('#nameError').html("*");
-                                    $('input[type=submit]').show();
-                                }else{
-                                    $("#nameError").html("用户名已存在");
-                                    $('input[type=submit]').hide();
-                                }
-                            })
-                            .fail(function(XMLHttpRequest, textStatus, errorThrown){
-                                $("#nameError").html("服务器忙，请稍后");
-                                console.log("status = "+XMLHttpRequest.status);  // 200
-                                console.log("readyState = "+XMLHttpRequest.readyState); //4
-                                console.log("textStatus = "+textStatus);  //parsererror
-                            })
-                            .always(function() {
-                                console.log("complete");
-                            });
-                        }
-                    });
-                });
-            </script>
             <div class="line">
                 <label for="pwd">密码</label>
                 <input type="password" class="line-input" required id="pwd" name="pwd"><span class="must">*</span>
@@ -135,6 +99,43 @@
         </div>
     </form>
     <include file = "Public/footer"/>
+    <script src="__PUBLIC__/js/jquery.min.js"></script>
+    <script src="__PUBLIC__/js/signup.js"></script>
+    <script>
+        $(function() {
+            $('#username').change(function(event){
+                var un = $('#username').val();
+                if(un != ""){
+                    console.log(un);
+                    $.ajax({
+                        type:"post",
+                        url:"__ROOT__/index.php/Public/checkName",
+                        dataType:'json',
+                        data:{username:un}
+                        })
+                    .done(function(data) {
+                        console.log("success",data);
+                        if(data.code == 0){
+                            $('#nameError').html("*");
+                            $('input[type=submit]').show();
+                        }else{
+                            $("#nameError").html("用户名已存在");
+                            $('input[type=submit]').hide();
+                        }
+                    })
+                    .fail(function(XMLHttpRequest, textStatus, errorThrown){
+                        $("#nameError").html("服务器忙，请稍后");
+                        console.log("status = "+XMLHttpRequest.status);  // 200
+                        console.log("readyState = "+XMLHttpRequest.readyState); //4
+                        console.log("textStatus = "+textStatus);  //parsererror
+                    })
+                    .always(function() {
+                        console.log("complete");
+                    });
+                }
+            });
+        });
+    </script>
    
 </body>
 </html>

@@ -2,10 +2,12 @@
 <html>
 <head>
     <!-- create by cm -->
-    <script src="__PUBLIC__/js/jquery.min.js"></script>
+    <meta charset="utf-8">
     <link href="__PUBLIC__/css/home/nav.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="__PUBLIC__/css/home/cooperation.css">
-    <meta charset="utf-8">
+    <!-- [if IE lt 10] -->
+        <link rel="stylesheet" href="__PUBLIC__/css/home/ltIE8.css">
+    <!-- [endif] -->
     <title>张家港工程项目协同创新服务平台</title>
 </head>
 
@@ -71,9 +73,10 @@
             </div>
         </div>
     </div>
-	
+    
     <include file="Public/footer"/>
 
+    <script src="__PUBLIC__/js/jquery.min.js"></script>
 </body>
 <script>
      $(function(){

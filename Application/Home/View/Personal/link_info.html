@@ -4,8 +4,8 @@
     <!-- create by cm -->
 	<meta charset="UTF-8">
 	<title>张家港工程项目协同创新服务平台档-个人中心</title>
+
 	<link rel="stylesheet" href="__PUBLIC__/css/home/personal.css">
-	<script src="__PUBLIC__/js/jquery.min.js"></script>
 	<style>
 		.link-main{
 		    width:800px;
@@ -61,12 +61,8 @@
 			color: #fff;
 		}
 	</style>
-	<!-- [if IE lt 10] -->
-    	<style>
-			img{
-				border: none;
-			}
-    	</style>
+	 <!-- [if IE lt 10] -->
+        <link rel="stylesheet" href="__PUBLIC__/css/home/ltIE8.css">
     <!-- [endif] -->
 </head>
 <body>
@@ -111,27 +107,27 @@
 		<div class="sub">
 			<input type="button" value="拒绝" onclick="sub(0)">
 			<input style="margin-left:250px;" onclick="sub(1)"  type="button" value="同意">
-		</div>
-
-		
-		<script>
-			$(function(){
-		        $('#personal_center').addClass('focus').siblings().removeClass('focus');
-		   });
-			
-			function sub (argument) {
-				var id = document.getElementById('link_id').getAttribute("value");
-				if (argument == 1) {
- 					window.location.href="__URL__/deal_link/re/1/id/"+id;
-
-				}else{
-					if (confirm("确定拒绝这条信息？")) {
- 						window.location.href="__URL__/deal_link/re/0/id/"+id;
-					}
-				}
-			}
-		</script>
+		</div>		
 	</div>
 	<include file="Public/footer"/>
+	
+	<script src="__PUBLIC__/js/jquery.min.js"></script>
+	<script>
+		$(function(){
+	        $('#personal_center').addClass('focus').siblings().removeClass('focus');
+	   });
+		
+		function sub (argument) {
+			var id = document.getElementById('link_id').getAttribute("value");
+			if (argument == 1) {
+					window.location.href="__URL__/deal_link/re/1/id/"+id;
+
+			}else{
+				if (confirm("确定拒绝这条信息？")) {
+						window.location.href="__URL__/deal_link/re/0/id/"+id;
+				}
+			}
+		}
+	</script>
 </body>
 </html>

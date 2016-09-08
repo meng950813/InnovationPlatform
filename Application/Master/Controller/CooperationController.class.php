@@ -88,9 +88,10 @@ class CooperationController extends MasterController {
 		}
 		// 添加数据  有没有发现问题在哪 仔细看看 对 不是我写的。。。试试看
 		else{
-			if(!empty($cooperation['type'])){
+			if(!empty($cooperation['type']) || $cooperation['type'] == 0){
 				$result = M('Cooperation')->data($cooperation)->add();
 				if($result){
+					($cooperation['type'] == 0)&&($cooperation['type'] = 3);
 					$this->success("发布成功",U('Master/Cooperation/coo_list/type/'.$cooperation['type']));
 				}
 				else{

@@ -6,7 +6,9 @@
     <title>张家港工程项目协同创新服务平台</title>
     <link rel="stylesheet" href="__PUBLIC__/css/home/signup.css">
     <link rel="stylesheet" href="__PUBLIC__/css/home/nav.css">
-    <script src="__PUBLIC__/js/jquery.min.js"></script>
+    <!-- [if IE lt 10] -->
+        <link rel="stylesheet" href="__PUBLIC__/css/home/ltIE8.css">
+    <!-- [endif] -->
 </head>
 <body>
     <include file="Public/nav" />
@@ -57,6 +59,8 @@
     </div>
 
     <include file="Public/footer" />
+    
+    <script src="__PUBLIC__/js/jquery.min.js"></script>
 </body>
 <script>
     $(function($){

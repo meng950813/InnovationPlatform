@@ -29,12 +29,12 @@
 			height: 27px;
 			line-height: 27px;
 		}
-		.upload{
+		.uploadfile{
 		    width:300px;
 		    max-height: 200px;
 		    /*margin:0 auto;*/
 		}
-		#preview{
+		#preview_img{
 		    max-width:300px;
 		    max-height: 200px;
 		}
@@ -62,10 +62,10 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-xs-2 control-label" for="news_picture">资讯图片:</label>
+				<label class="col-xs-2 control-label" for="news_picture">标题图片:</label>
 				<div class="col-xs-10">
 					<input  type="file" name="news_picture" id="news_picture"  value="只能上传一张图">
-					<div class="upload"><img id="preview" src="__ROOT__/{$picture}" alt=""></div>
+					<div class="uploadfile"><img id="preview_img" src="__ROOT__/{$picture}" alt=""></div>
 				</div>
 			</div>		
 			<div class="form-group">
@@ -98,8 +98,11 @@
 	<script src="__PUBLIC__/js/jquery.form.min.js"></script>
 	<js href="__PUBLIC__/ueditor/ueditor.config.js" />
 	<js href="__PUBLIC__/ueditor/ueditor.all.min.js" />
-	<script type="text/javascript">
-		var imgObj = document.getElementById("preview");
+
+<!-- 	<script src="__PUBLIC__/ueditor/ueditor.config.js"></script>
+<script src="__PUBLIC__/ueditor/ueditor.all.min.js"></script> -->
+	<script>
+		var imgObj = document.getElementById("preview_img");
 		if(imgObj.getAttribute('src') == "__ROOT__/"){
 			imgObj.setAttribute("src","");
 		}
@@ -107,12 +110,12 @@
 		$(document).ready(function() {
 			window.UEDITOR_CONFIG.initialFrameHeight = $(document).width()*0.3;
 			window.UEDITOR_CONFIG.initialFrameWidth = $(document).width()*0.7;
-			window.UEDITOR_CONFIG.toolbars = [['fullscreen', 'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|', 'undo', 'redo', '|', 'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc', '|', 'rowspacingtop', 'rowspacingbottom', 'lineheight', '|', 'indent', '|', 'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|', 'link', 'unlink',/* '|', 'imagenone', 'imageleft', 'imageright', 'imagecenter', '|', 'simpleupload', 'insertimage', 'attachment', 'pagebreak', 'background',*/ '|', 'horizontal', 'date', 'time', /*'wordimage', */'|', 'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', 'charts', '|', 'prng eview', 'searchreplace']];
+			window.UEDITOR_CONFIG.toolbars = [['fullscreen', 'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|', 'undo', 'redo', '|', 'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc', '|', 'rowspacingtop', 'rowspacingbottom', 'lineheight', '|', 'indent', '|', 'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|', 'link', 'unlink', '|', 'imagenone', 'imageleft', 'imageright', 'imagecenter', '|', 'simpleupload', 'insertimage', 'attachment', 'pagebreak', 'background', '|', 'horizontal', 'date', 'time', 'wordimage', '|', 'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', 'charts', '|', 'prng eview', 'searchreplace']];
 			window.UEDITOR_CONFIG.elementPathEnabled = false;
-			window.UEDITOR_CONFIG.maximumWords = 1000;
+			// window.UEDITOR_CONFIG.maximumWords = 1000;
 			var ue = UE.getEditor('content',{serverUrl :'{:U('Master/Index/ueditor')}'});
-		});	
-		$(function(){
+			console.log(ue);
+		
 			$('#news_picture').change(function(event) {
 		        event.preventDefault();
 		        var $file = $(this);
@@ -120,7 +123,7 @@
 		        var windowURL = window.URL || window.webkitURL;
 		        if(fileObj && fileObj.files && fileObj.files[0]){
 		            var path = windowURL.createObjectURL(fileObj.files[0]);
-		            $('#preview').attr('src',path);
+		            $('#preview_img').attr('src',path);
 		        }else{
 		            console.log($file.val());
 		            var dataURL = $file.val();
@@ -130,7 +133,7 @@
 		            imgObj.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);max-width:200px;";
 		            // imgObj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
 		            // imgObj.setAttribute("max-width",'200px');
-		            console.log("ie");
+		            // console.log("ie");
 		            imgObj.setAttribute("src",dataURL);
 		    	}
     		});
