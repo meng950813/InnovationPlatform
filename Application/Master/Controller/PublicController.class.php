@@ -150,6 +150,19 @@ class PublicController extends Controller {
 				$result = M("News")->data($where)->save();
 				break;
 
+			case 'file':
+				$where['file_id'] = I('get.id'); 
+				$where['status'] = (I('get.status')+1)%2;
+				$result = M("DownloadFile")->data($where)->save();
+				break;
+
+			case 'case':
+				$where['case_id'] = I('get.id'); 
+				$where['status'] = (I('get.status')+1)%2;
+				$result = M("ClassicCase")->data($where)->save();
+				break;
+
+
 			case 'res':
 				$where['result_id'] = I('get.id'); 
 				$where['status'] = (I('get.status')+1)%2;

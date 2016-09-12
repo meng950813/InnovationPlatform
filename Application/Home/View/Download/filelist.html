@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- create by cm -->
+    <meta charset="utf-8">
+    <title>张家港工程项目协同创新服务平台</title>
+    
+    <link rel="stylesheet" href="__PUBLIC__/css/home/nav.css" type="text/css">
+    <link rel="stylesheet" href="__PUBLIC__/css/home/listpage.css" type="text/css">
+    <style>
+        .info-list{
+            overflow: hidden;
+            margin-bottom: 5px;
+        }
+        .info-list>img{
+            float: left; 
+            max-width:120px;
+            max-height: 160px; 
+        }
+        .team-info{
+            float: left; 
+            margin-top: 10px;
+        }
+        .team-info *{
+            vertical-align: middle;
+        }
+        .team-info h4{
+            margin: 5px;
+        }
+        .control-title-width{
+            display: inline-block;
+        }
+        .team-info span{
+            max-width: 600px;
+        }
+        p{
+            font-size: 14px;
+            margin: 5px;
+        }
+        .other-info{
+            float: right;
+            margin-top: 10px;
+        }
+         button{
+            background: #72CEDD;
+            color: #FAFDFD;
+            font-weight: 700;
+            border: 2px solid #0999B1;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover{
+            background: #0F93A9;
+            color: white;
+        }
+        div.add{
+            text-align: center;
+        }
+        div.add img{
+            width: 200px;
+            height: 44px;
+        }
+    </style>
+    <!-- [if IE lt 10] -->
+        <link rel="stylesheet" href="__PUBLIC__/css/home/ltIE8.css">
+    <!-- [endif] -->
+</head>
+
+<body>
+    <include file="Public/nav" />
+    <div class="bannerbox">
+        <img src="__PUBLIC__/images/科技团队bk.png"> 
+    </div>
+    <div class="infolist-main">
+        <div class="leftmain">
+             <div class="mainlefttitle"><img src="__PUBLIC__/images/科技团队.png"></div>
+      
+            <div class="mainbtn">
+                <div class="navlist active">
+                    <a href="{:U('Download/filelist')}">下载中心</a>
+                </div>
+            </div>
+        </div>
+        <div class="rightmain">
+            <div class="top-tip">
+                <div id="page-title">
+                    <img src="__PUBLIC__/images/download_09.png">下载中心</div>
+                <div id="position">
+                    <a href="{:U('Download/filelist')}">下载中心</a>
+                     <span>&nbsp;>&nbsp;</span>
+                     <a href="{:U('Index/index')}">首页</a>
+                    <span>您的位置：</span>
+                    <img src="__PUBLIC__/images/download_06.png">
+                </div>
+            </div>
+            <hr />
+            <volist name = "list" id="list">
+                <div class="info-list <?php if($i % 2 == 0) echo ' grey';?>">
+                    <div class="team-info">
+                        <h4>
+                           <span>文件名称：</span>{$list.download_title}
+                        </h4>
+                        <p>
+                           <b>文档简介：</b><span class="control-title-width">{$list.info}</span>
+                        </p>
+                    </div>  
+                    <div class="other-info">
+                        <p>
+                            下载次数：<span id="download_times">{$list.download_sum}</span> 
+                        </p>
+                         <p>
+                            发布时间：{$list.publish_time}
+                        </p>
+                        <p style="margin-top:10px;">
+                            <a href="__ROOT__/{$list.file_path}" value="{$list.file_id}" id="file-{$list.file_id}" class="download_btn"">
+                                <button>点击下载</button>
+                            </a>
+                        </p>
+                   </div>            
+                </div>
+            </volist>
+            <div id="paging">
+                {$page}
+            </div>
+        </div>
+    </div>
+    <include file="Public/footer" />
+    <script src="__PUBLIC__/js/jquery.min.js"></script>
+    <script>
+        $(function(){
+            $('#nav_download').addClass('nav_active').siblings().removeClass('nav_active');
+
+            $('.download_btn').click(function(event){
+                event.preventDefault();
+                var id = $(this).attr('value');
+                var href = $(this).attr('href');
+                $.ajax({
+                    type:"get",
+                    url:"__ROOT__/index.php/Download/addDownload_sum",
+                    dataType:'json',
+                    data:{id:id}
+                    })
+                .done(function(data) {
+                })
+                .fail(function(XMLHttpRequest, textStatus, errorThrown){ 
+                    var times =parseInt($("#download_times").html())+1;
+                    $('#download_times').html(times);
+                })
+                .always(function() {
+                    window.location.href= href;
+                });
+            });
+        });
+    </script>
+</body>
+</html>

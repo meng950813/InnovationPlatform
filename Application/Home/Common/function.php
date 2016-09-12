@@ -92,7 +92,8 @@
 				'savePath'  =>  '/'.$dir.'/', // 设置附件上传目录
 				'autoSub'	=>	false  
 			);
-		$upload = new \Think\Upload($config,'sae');// 实例化上传类
+		$upload = new \Think\Upload($config,'sae');// 实例化适应sae的上传类
+		// $upload = new \Think\Upload($config);// 实例化上传类
       /*  $upload->maxSize   =     
         $upload->exts      =     array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
         $upload->savePath  =     '/'.$dir.'/'; // 设置附件上传目录*/

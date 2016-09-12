@@ -41,4 +41,27 @@
             return null;
         }
 	}
+
+	/* 处理上传文档 */
+	function uploadFile($file){
+		C('SHOW_PAGE_TRACE',false);
+ 		$config = array(
+			'maxSize'	=>	20971520,// 设置附件上传大小，最大20M  20971520
+			'exts'      =>  array('txt','doc', 'docx', 'xls', 'xlsx','ppt','pptx','pdf','md','zip','rar','7z','chm'),// 设置附件上传类型
+			'savePath'  =>  '/downloadfile/', // 设置附件上传目录
+			'autoSub'	=>	true,  
+		);
+		// $upload = new \Think\Upload($config,'sae');// 实例化适应sae的上传类
+		$upload = new \Think\Upload($config);// 实例化上传类
+
+		$result = $upload->uploadOne($_FILES['download_files']);
+		if($result){
+			$array = array(1,'Uploads'.$result['savepath'].$result['savename']);
+		}
+		else{
+			$array = array(0,''.$upload->getError());
+		}
+		return $array;
+	}
+
 ?>

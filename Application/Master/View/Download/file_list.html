@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>张家港工程项目协同创新服务平台-后台管理</title>
+
+	<link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet">
+	<script src="__PUBLIC__/assets/ie-emulation-modes-warning.js"></script>
+
+</head>
+<body>
+	<table class="table table-bordered table-striped">
+		<tr>
+			<th>序号</th>
+			<th>标题</th>
+			<th>下载文档</th>
+			<th>发布时间</th>
+			<th>是否有效</th>
+			<th>下载量</th>
+			<th>编辑</th>
+		</tr>
+		<volist name="list" id="a">
+			<tr>
+				<td><?php echo $i+C('PAGE_NUM',null,5)*(I('get.p',1,int)-1); ?></td>
+				<td>{$a.download_title}</td>
+				<td>{$a.file_name}</td>
+				<td>{$a.publish_time}</td>
+				<td><?php echo ($a['status'] == 1)?'有效':'<b style=color:red;>失效</b>'; ?></td>
+				<td>{$a.download_sum}</td>
+				<td>
+					<a href="{:U('Master/Download/add_modify',array('id'=>$a['file_id']))}">修改</a>&nbsp;&nbsp;
+					<span> | </span>
+					<a href="javascript:void(0)" id="file_list-{$a.file_id}" value="{$a.file_id}" onclick="del(this)">删除</a>
+					<span> | </span>
+					<a href="{:U('Master/Public/setStatus',array('id'=>$a['file_id'],'type'=>'file','status'=>$a['status']))}"><?php echo ($a['status'] == 1)?"设为失效":"设为有效";?></a>
+				</td>
+			</tr>
+		</volist>
+	</table>
+	{$page}
+
+	<!-- Bootstrap core JavaScript
+	================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="__PUBLIC__/js/jquery-1.11.1.min.js"></script>
+	<script src="__PUBLIC__/js/bootstrap.min.js"></script>
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="__PUBLIC__/assets/ie10-viewport-bug-workaround.js"></script>
+	<script src="__PUBLIC__/js/master/fixiframe.js"></script>
+	<script>
+		function del (obj) {
+			if(confirm("确定要删除这条信息？")){
+				var id = document.getElementById(obj.id).getAttribute("value");
+				window.location.href="__ROOT__/index.php/Master/Download/del/id/"+id;
+			}
+		}
+	</script>
+</body>
+</html>

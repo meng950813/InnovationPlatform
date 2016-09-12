@@ -3,13 +3,43 @@
 <head>
     <!-- create by cm -->
     <meta charset="utf-8"> 
-    <title>张家港工程项目协同创新服务平台</title>
-    
+    <script src="__PUBLIC__/js/jquery.js"></script>
     <link href="__PUBLIC__/css/home/index.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="__PUBLIC__/css/home/nav.css">
+    <title>张家港工程项目协同创新服务平台</title>
     
     <!-- [if IE lt 10] -->
-        <link rel="stylesheet" href="__PUBLIC__/css/home/ltIE8.css">
+        <style>
+            div,a,img{
+                border: none;
+            }
+            .control{
+                position: absolute;
+                left: 50%;
+                margin-left: -65px;
+                top: 270px;
+            }
+            .control-btn{
+                float: left;
+                width: 13px;
+                height: 13px;
+                margin-left: 13px;
+                border: 1px solid transparent;
+                background: white;
+            }
+            .focus{
+                background: blue;
+            }
+            .login_show{
+                display: block;
+            }
+            .login_hidden{
+                display: none;
+            }
+            #login_btns>button,#signup-btn{
+                background: #5dc3fe;
+            }
+        </style>
     <!-- [endif] -->
 </head>
 
@@ -31,7 +61,7 @@
     </div>
     <div id="index_main_container">
         <!-- 新闻部分 -->
-        <div id="news_part">
+        <div class="news_part">
             <p><span>新闻中心</span><a href="{:U('News/newslist')}">更多&gt;&gt;</a></p>
             <div class="picture_and_title">
                 <volist id="newsPicture" name="newsPicture">
@@ -40,79 +70,80 @@
                             <a href="{:U('News/news',array('id'=>$newsPicture['news_id']))}"><img src="__ROOT__/{$newsPicture.picture}"></a>
                         </span>
                     
-                    <div class="news_title">
-                        <a href="{:U('News/news',array('id'=>$newsPicture['news_id']))}">{$newsPicture.title}</a>
-                    </div></div>
+                        <div class="news_title">
+                            <a href="{:U('News/news',array('id'=>$newsPicture['news_id']))}" >{$newsPicture.title}</a>
+                        </div>
+                    </div>
                 </volist>
             </div>
             <ul>
                 <volist id="newsInfo" name="newsInfo">
-                    <li><a href="{:U('News/news',array('id'=>$newsInfo['news_id']))}">{$newsInfo.title}</a></li>
+                    <li><a href="{:U('News/news',array('id'=>$newsInfo['news_id']))}" title="{$newsInfo.title}">{$newsInfo.title}</a></li>
                 </volist>
             </ul>
         </div>
         <!-- 四图文 -->
-        <ul id="index_four_part">
-            <li>
-                <h2>专家团队</h2>
-                <div>
-                    <img src="__PUBLIC__/images/专家团队.jpg" alt="">
-                </div>
-                <ul class="four_part_tip">
-                    <li><a href="{:U('Expert/expertlist')}">专家信息</a></li>
-                    <li><a href="{:U('Team/teamlist')}">团队信息</a></li>
-                </ul>
-            </li>
+        <ul class="index_four_part">
             <li>
                 <h2>科技成果</h2>
-                <div>
-                    <img src="__PUBLIC__/images/专家团队.jpg" alt="">
-                </div>
                 <ul class="four_part_tip">
-                    <li><a href="{:U('Result/resultlist')}">成果集锦</a></li>
-                    <?php if (session('uid')): ?>
-                        <li><a href="{:U('Result/add')}">成果发布</a></li>
-                    <?php else: ?>
-                        <li><a  onclick="showLogin()">成果发布</a></li>
-                    <?php endif ?>
+                    <volist id="resultInfo" name="resultInfo">
+                         <li><a href="{:U('Result/result',array('id'=>$resultInfo['result_id']))}" title="{$resultInfo.result_name}">{$resultInfo.result_name}</a></li>
+                    </volist>
                 </ul>
             </li>
             <li>
                 <h2>企业需求</h2>
-                <div>
-                    <img src="__PUBLIC__/images/专家团队.jpg" alt="">
-                </div>
                 <ul class="four_part_tip">
-                    <li><a href="{:U('Demand/demandlist')}">需求集锦</a></li>
-                    <?php if(session('uid')): ?>
-                        <?php if(session('type') == 2):?>
-                          <li><a href="{:U('Demand/add')}">需求发布</a></li>
-                        <?php else: ?>
-                            <li><a href="javascript:void(0);" onclick="waring()">需求发布</a></li>
-                        <?php endif ?>
-                    <?php else: ?>
-                        <li><a onclick="showLogin()">需求发布</a></li>
-                    <?php endif ?>
-                </ul>
-            </li>
-            <li>
-                <h2>协同管理</h2>
-                <div>
-                    <img src="__PUBLIC__/images/专家团队.jpg" alt="">
-                </div>
-                <ul class="four_part_tip">
-                    <li><a href="{:U('Cooperation/index',array('type'=>3))}">协同高校</a></li>
-                    <li><a href="{:U('Cooperation/index',array('type'=>1))}">行业协会</a></li>
-                    <li><a href="{:U('Cooperation/index',array('type'=>2))}">协同企业</a></li>
+                   <volist id="demandInfo" name="demandInfo">
+                        <li><a href="{:U('Demand/demand',array('id'=>$demandInfo['demand_id'],'com'=>$demandInfo['demand_com']))}" title="{$demandInfo.title}">{$demandInfo.title}</a></li>
+                    </volist>
                 </ul>
             </li>
         </ul>
+        <ul class="index_four_part">
+            <li>
+                <h2>协同管理</h2>
+                <ul class="four_part_tip">
+                   <volist id="cooInfo" name="cooInfo">
+                        <li><a href="http://{$cooInfo.website}" title="{$cooInfo.name}">{$cooInfo.name}</a></li>
+                    </volist>
+                </ul>
+            </li>
+            <li>
+                <h2>下载中心</h2>
+                <ul class="four_part_tip">
+                   <volist id="downloadInfo" name="downloadInfo">
+                        <li><a href="{:U('Download/filelist',array('id'=>$downloadInfo['file_id']))}">{$downloadInfo.download_title}</a></li>
+                    </volist>
+                </ul>
+            </li>
+        </ul>
+          <!-- 典型案例 -->
+        <div class="news_part">
+            <p><span>典型案例</span><a href="{:U('ClassicCase/caselist')}">更多&gt;&gt;</a></p>
+            <div class="picture_and_title">
+                <volist id="casePicture" name="casePicture">
+                    <div class="case_picture">
+                        <span>
+                            <a href="{:U('ClassicCase/cases',array('id'=>$casePicture['case_id']))}"><img src="__ROOT__/{$casePicture.picture}"></a>
+                        </span>
+                    
+                        <div class="case_title">
+                            <a href="{:U('ClassicCase/cases',array('id'=>$casePicture['case_id']))}">{$casePicture.case_title}</a>
+                        </div>
+                    </div>
+                </volist>
+            </div>
+            <ul>
+                <volist id="caseInfo" name="caseInfo">
+                    <li><a href="{:U('ClassicCase/cases',array('id'=>$caseInfo['case_id']))}" title="{$caseInfo.case_title}">{$caseInfo.case_title}</a></li>
+                </volist>
+            </ul>
+        </div>
     </div>
 
     <include file = "Public/footer" />
-
-    <script src="__PUBLIC__/js/jquery.js"></script>
-    
     <script>
         $(function(){
 
@@ -140,7 +171,7 @@
                 if(animateEnd == 1){ // 表示图片不在切换
                     $(this).addClass('focus').siblings().removeClass('focus');
                     var nextIndex = $(this).index();
-                    console.log("nextIndex = "+nextIndex);
+                    // console.log("nextIndex = "+nextIndex);
                     // 获取当前显示图片序列
                     var currentIndex = $('#banner-container li').first().attr('index');
                     // 保存当前图片
@@ -191,6 +222,13 @@
             var z=setInterval(function(){
                 if(++y==5){y=0;}
                 $(".news_picture").eq(y).fadeIn().siblings().fadeOut();
+            },5000);
+
+            $(".case_picture").hide().first().fadeIn();
+            var y=0
+            var z=setInterval(function(){
+                if(++y==5){y=0;}
+                $(".case_picture").eq(y).fadeIn().siblings().fadeOut();
             },5000);
         });
 		function waring(){

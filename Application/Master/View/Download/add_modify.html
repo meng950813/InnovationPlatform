@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="renderer" content="webkit">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<!-- <link rel="icon" href="__PUBLIC__/favicon.ico"> -->
+	<title>添加文档 - 后台管理</title>
+	<base target="mainiframe" />
+	<!-- Bootstrap core CSS -->
+	<link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet">
+	<link href="__PUBLIC__/css/master/master.css" rel="stylesheet">
+	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+	<!--[if lt IE 9]><script src="__PUBLIC__/js/ie8-emulation-modes-warning.js"></script><![endif]-->
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+		<script src="__PUBLIC__/assets/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="__PUBLIC__/assets/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
+
+	<!-- Custom styles for this template -->
+	<style type="text/css">
+		#page{min-width: 600px;width: 80%;}
+		#info{
+			width: 100%;
+			min-height:200px; 
+		}
+		#uploadTip{
+			display: inline-block;
+			color: #e4393c;
+		}
+		#download_files{
+			display: inline-block;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="page">
+		<form id="wordcontext" class="form-horizontal uploadform" action="{:U('Master/Download/deal_data')}" method="post" enctype="multipart/form-data">
+			<div class="form-group">
+				<label class="col-xs-2 control-label" for="download_title">标题:</label>
+				<div class="col-xs-10">
+					<input class="form-control" name="download_title" id="download_title" maxlength="50" required="required" value="{$info.download_title}">
+				</div>
+			</div>
+			<?php if($info) :?>
+				<div class="form-group">
+					<label class="col-xs-2 control-label">文件名:</label>
+					<div class="col-xs-10">
+						<input class="form-control" readonly="readonly" value="<?php echo end(explode('/',$info['file_path'])); ?>">
+					</div>
+				</div>
+			<?php endif ?>
+			<input type="hidden" value="{$info.file_id}" name="file_id">
+
+			<div class="form-group">
+				<label class="col-xs-2 control-label" for="info">简介:</label>
+				<div class="col-xs-10">
+					<textarea  name="info" id="info" maxlength="200">{$info.info}</textarea>
+				</div>
+			</div>
+			<input type="hidden" name="download_files" id="file_path">
+		</form>
+		<form action="{:U('Master/Download/uploadFile')}" method="post" id="uploadfile" class="form-horizontal uploadform">
+			<div class="form-group">
+				<label class="col-xs-2 control-label" for="download_files">上传文档:</label>
+				<div class="col-xs-10">
+					<input  type="file" id="download_files" name="zip" >
+					<span id="uploadTip"></span><br>
+					<span >最大20M ，支持 .txt, .doc, .docx, .xls, .xlsx, .ppt, .pptx, .pdf,.zip, .rar, .7z, 格式文件</span>
+				</div>
+			</div>
+		</form>
+			
+		<div class="form-group">
+			<div class="col-xs-offset-3">
+				<button type="submit" class="btn btn-primary" form="wordcontext">提交</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- Bootstrap core JavaScript
+		================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<!-- <script src="__PUBLIC__/js/jquery-1.11.1.min.js"></script> -->
+	<script src="__PUBLIC__/js/bootstrap.min.js"></script>
+	<script src="__PUBLIC__/js/jquery.min.js"></script>
+	<script src="__PUBLIC__/js/jquery.form.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('#download_files').change(function(event){
+				$('#uploadfile').ajaxSubmit({
+					dataType:'json',
+					success:function(data){
+					
+						if(data.status){ 
+							// 上传成功
+							$('#file_path').attr('value',data.path);
+							$('#uploadTip').html("");
+						}
+						else{
+							$('#uploadTip').html("上传失败，"+data.errmsg);
+						}
+					},
+					error:function(xhr){
+						$('#uploadTip').html("上传失败，请检查文件");
+					}
+				});
+			});
+		});
+	</script>
+</body>
+
+</html>

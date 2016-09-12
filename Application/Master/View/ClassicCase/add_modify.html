@@ -8,7 +8,7 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<!-- <link rel="icon" href="__PUBLIC__/favicon.ico"> -->
-	<title>新增资讯 - 后台管理</title>
+	<title>新增案例 - 后台管理</title>
 	<base target="mainiframe" />
 	<!-- Bootstrap core CSS -->
 	<link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet">
@@ -29,7 +29,7 @@
 			height: 27px;
 			line-height: 27px;
 		}
-		.uploadfile{
+		.upload{
 		    width:300px;
 		    max-height: 200px;
 		    /*margin:0 auto;*/
@@ -43,39 +43,28 @@
 
 <body>
 	<div id="page">
-		<form class="form-horizontal" action="{:U('Master/News/deal_news')}" method="post" enctype="multipart/form-data">
+		<form class="form-horizontal" action="{:U('Master/ClassicCase/deal_cases')}" method="post" enctype="multipart/form-data">
 			<div class="form-group">
-				<label class="col-xs-2 control-label" for="title">标题:</label>
+				<label class="col-xs-2 control-label" for="case_title">案例标题:</label>
 				<div class="col-xs-10">
-					<input class="form-control" type="text" name="title" id="title" maxlength="50" required="required" value="{$info.title}">
+					<input class="form-control" type="text" name="case_title" id="case_title" maxlength="50" required="required" value="{$info.case_title}">
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-xs-2 control-label">类型:</label>
+				<label class="col-xs-2 control-label" for="case_picture">标题图片:</label>
 				<div class="col-xs-10">
-					<select name="type" id="type">
-						<option value="{$info.type}">{$info.type_name}</option>
-						<option value="0">政策法规</option>
-						<option value="1">市场动态</option>
-						<option value="2">业内资讯</option>
-					</select>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-xs-2 control-label" for="news_picture">标题图片:</label>
-				<div class="col-xs-10">
-					<input  type="file" name="news_picture" id="news_picture"  value="只能上传一张图">
+					<input  type="file" name="news_picture" id="case_picture"">
 					<div class="uploadfile"><img id="preview_img" src="__ROOT__/{$picture}" alt=""></div>
 				</div>
 			</div>		
 			<div class="form-group">
-				<label class="col-xs-2 control-label" for="content" style="text-align:right">正文:</label>
+				<label class="col-xs-2 control-label" for="content">正文:</label>
 				<div class="col-xs-10">
 					<textarea  name="content" id="content" required="required">{$info.content}</textarea>
 				</div>
 			</div>
 			<?php if ($info): ?>
-				<input type="hidden" value="{$info.news_id}" name="news_id">
+				<input type="hidden" value="{$info.case_id}" name="case_id">
 			<?php endif ?>
 			<div class="form-group">
 				<div class="col-xs-offset-3">
@@ -91,31 +80,28 @@
 	<script src="__PUBLIC__/js/jquery-1.11.1.min.js"></script>
 	<script src="__PUBLIC__/js/bootstrap.min.js"></script>
 	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<!-- 	<script src="__PUBLIC__/assets/ie10-viewport-bug-workaround.js"></script>
-	<script src="__PUBLIC__/js/master/fixiframe.js"></script> -->
+	<script src="__PUBLIC__/assets/ie10-viewport-bug-workaround.js"></script>
+	<script src="__PUBLIC__/js/master/fixiframe.js"></script>
 
 	<script src="__PUBLIC__/js/jquery.form.min.js"></script>
 	<js href="__PUBLIC__/ueditor/ueditor.config.js" />
 	<js href="__PUBLIC__/ueditor/ueditor.all.min.js" />
-
-<!-- 	<script src="__PUBLIC__/ueditor/ueditor.config.js"></script>
-<script src="__PUBLIC__/ueditor/ueditor.all.min.js"></script> -->
-	<script>
+	<script type="text/javascript">
 		var imgObj = document.getElementById("preview_img");
 		if(imgObj.getAttribute('src') == "__ROOT__/"){
 			imgObj.setAttribute("src","");
 		}
-
+		
 		$(document).ready(function() {
 			window.UEDITOR_CONFIG.initialFrameHeight = $(document).width()*0.3;
 			window.UEDITOR_CONFIG.initialFrameWidth = $(document).width()*0.7;
 			window.UEDITOR_CONFIG.toolbars = [['fullscreen', 'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|', 'undo', 'redo', '|', 'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc', '|', 'rowspacingtop', 'rowspacingbottom', 'lineheight', '|', 'indent', '|', 'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|', 'link', 'unlink', '|', 'imagenone', 'imageleft', 'imageright', 'imagecenter', '|', 'simpleupload', 'insertimage', 'attachment', 'pagebreak', 'background', '|', 'horizontal', 'date', 'time', 'wordimage', '|', 'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', 'charts', '|', 'prng eview', 'searchreplace']];
 			window.UEDITOR_CONFIG.elementPathEnabled = false;
-			// window.UEDITOR_CONFIG.maximumWords = 1000;
+			window.UEDITOR_CONFIG.maximumWords = 1000;
 			var ue = UE.getEditor('content',{serverUrl :'{:U('Master/Index/ueditor')}'});
-			console.log(ue);
-		
-			$('#news_picture').change(function(event) {
+		});	
+		$(function(){
+			$('#case_picture').change(function(event) {
 		        event.preventDefault();
 		        var $file = $(this);
 		        var fileObj = $file[0];
@@ -132,7 +118,7 @@
 		            imgObj.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);max-width:200px;";
 		            // imgObj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
 		            // imgObj.setAttribute("max-width",'200px');
-		            // console.log("ie");
+		            console.log("ie");
 		            imgObj.setAttribute("src",dataURL);
 		    	}
     		});

@@ -1,4 +1,6 @@
-*{
+body,  dd,  dl, div, dt, 
+h1, h2, h3, h4, h5, h6, header, html,
+ img, li, nav, ol, p, ul{
 	margin: 0;
 	padding: 0;
 	font-weight: normal;
@@ -65,6 +67,11 @@ a{
 	font-size: 14px;
 	line-height: 20px;
 	color: #000;
+}
+#news_content>img{
+	float: left;
+	width: 300px;
+	margin: 10px 20px 10px 10px;
 }
 .next p{
 	margin: 10px 0;
