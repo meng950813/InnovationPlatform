@@ -20,10 +20,18 @@
 	 * @return [type] $dir 上传文件夹的名称
 	 */
 	function newsPicture($picture,$dir,$width,$height){
-		$upload = new \Think\Upload();// 实例化上传类
-        $upload->maxSize   =     3145728 ;// 设置附件上传大小
+       /* $upload->maxSize   =     3145728 ;// 设置附件上传大小
         $upload->exts      =     array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
-        $upload->savePath  =     '/'.$dir.'/'; // 设置附件上传目录
+        $upload->savePath  =     '/'.$dir.'/'; // 设置附件上传目录*/
+
+        $config = array(
+        	'maxSize'	=>	3145728,
+        	'exts'		=>	array('jpg', 'gif', 'png', 'jpeg'),
+        	'savepath'	=>	'/'.$dir.'/'
+        );
+		
+		$upload = new \Think\Upload($config,'sae');// 实例化上传类
+        
         // 这里要保证所有上传图片的input标签的 name = img
         $result   =   $upload->uploadOne($_FILES['news_picture']);// 上传单个文件
 
@@ -51,8 +59,8 @@
 			'savePath'  =>  '/downloadfile/', // 设置附件上传目录
 			'autoSub'	=>	true,  
 		);
-		// $upload = new \Think\Upload($config,'sae');// 实例化适应sae的上传类
-		$upload = new \Think\Upload($config);// 实例化上传类
+		$upload = new \Think\Upload($config,'sae');// 实例化适应sae的上传类
+		// $upload = new \Think\Upload($config);// 实例化上传类
 
 		$result = $upload->uploadOne($_FILES['download_files']);
 		if($result){

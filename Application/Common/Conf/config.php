@@ -40,5 +40,5 @@ return array(
 	// 'SHOW_PAGE_TRACE' =>true,
 	'ADMIN_MARK' => array('root','admin'),
 
-	// 'FILE_UPLOAD_TYPE' => 'Sae',
+	'FILE_UPLOAD_TYPE' => 'Sae',
 );
