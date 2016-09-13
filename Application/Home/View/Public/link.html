@@ -100,4 +100,14 @@
 	<include file="Public/footer"/>
 	<script src="__PUBLIC__/js/jquery.min.js"></script>
 </body>
+<script>
+	(function(){
+	    var bodyHeight = document.body.clientHeight;
+	    var bottombox = document.getElementById('bottombox');
+	    var contentHeight = document.getElementsByClassName('link-main')[0].clientHeight;
+	    if((bodyHeight-contentHeight-130)>60){
+	        bottombox.className="buttom_fixed";
+	    }
+	})();
+</script>
 </html>

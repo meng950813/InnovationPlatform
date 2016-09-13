@@ -1,77 +1,77 @@
-    <div id="header">
-    	<div id="header_box">
-    		<a href="{:U('Index/index')}">
-    			<img src="__PUBLIC__/images/background.png" alt="">
-    		</a>
-    		<a class="index" href="{:U('Index/index')}">回到首页</a>
-    	</div>
-    <!-- create by cm -->
-    </div>
-    <div id="nav">
-    	<div id="nav_box">
-    		<ul>
-    			<li id="personal_center">
-    				<a href="{:U('Personal/index')}">个人中心</a>
+<div id="header">
+	<div id="header_box">
+		<a href="{:U('Index/index')}">
+			<img src="__PUBLIC__/images/background.png" alt="">
+		</a>
+		<a class="index" href="{:U('Index/index')}">回到首页</a>
+	</div>
+<!-- create by cm -->
+</div>
+<div id="nav">
+	<div id="nav_box">
+		<ul>
+			<li id="personal_center">
+				<a href="{:U('Personal/index')}">个人中心</a>
+			</li>
+			<?php if(session('uid') && session('type') == 1) :?>
+    			<li id="my_team">
+    				<a href="{:U('Personal/my_team')}">我的团队</a>
     			</li>
-    			<?php if(session('uid') && session('type') == 1) :?>
-	    			<li id="my_team">
-	    				<a href="{:U('Personal/my_team')}">我的团队</a>
-	    			</li>
-	    		<?php endif?>
-    			<li id="my_research_result">
-    				<a href="{:U('Personal/my_research')}">我的成果</a>
-    			</li>
-    			<li id="personal_info">
-    				<a href="{:U('Personal/my_info')}">基本信息</a>
-    			</li>
-    			<li id="detail_info">
-    				<a href="{:U('Personal/detail_info')}">详细信息</a>
-    			</li>
-    		</ul>
-  			
-    	</div>
-    </div>
-    <div style="width:1100px;margin:0 auto;">
-	<!-- 各种找专家，找团队的图片链接 -->
-		<ul id="link_img">
-			<li>
-				<a href="{:U('Expert/expertlist')}">
-					找专家	
-				</a>
+    		<?php endif?>
+			<li id="my_research_result">
+				<a href="{:U('Personal/my_research')}">我的成果</a>
 			</li>
-			<li>
-				<a href="{:U('Team/teamlist')}">
-					找专家团队	
-				</a>
+			<li id="personal_info">
+				<a href="{:U('Personal/my_info')}">基本信息</a>
 			</li>
-			<li>
-				<a href="{:U('Result/resultlist')}">
-					找科技成果	
-				</a>
+			<li id="detail_info">
+				<a href="{:U('Personal/detail_info')}">详细信息</a>
 			</li>
-			<li>
-				<a href="{:U('Demand/demandlist')}">
-					找企业需求	
-				</a>
-			</li>
-			<?php if (session('type') == 1): ?>
-				<li>
-					<a href="{:U('Team/add')}">
-						组建团队	
-					</a>
-				</li>
-			<?php endif ?>
-			<li>
-				<a href="{:U('Result/add')}">
-					发布科技成果	
-				</a>
-			</li>
-			<?php if (session('type') == 2): ?>
-				<li>
-					<a href="{:U('Demand/add')}">
-						发布企业需求	
-					</a>
-				</li>
-			<?php endif ?>
 		</ul>
-    </div>
+			
+	</div>
+</div>
+<div style="width:1100px;margin:0 auto;">
+<!-- 各种找专家，找团队的图片链接 -->
+	<ul id="link_img">
+		<li>
+			<a href="{:U('Expert/expertlist')}">
+				找专家	
+			</a>
+		</li>
+		<li>
+			<a href="{:U('Team/teamlist')}">
+				找专家团队	
+			</a>
+		</li>
+		<li>
+			<a href="{:U('Result/resultlist')}">
+				找科技成果	
+			</a>
+		</li>
+		<li>
+			<a href="{:U('Demand/demandlist')}">
+				找企业需求	
+			</a>
+		</li>
+		<?php if (session('type') == 1): ?>
+			<li>
+				<a href="{:U('Team/add')}">
+					组建团队	
+				</a>
+			</li>
+		<?php endif ?>
+		<li>
+			<a href="{:U('Result/add')}">
+				发布科技成果	
+			</a>
+		</li>
+		<?php if (session('type') == 2): ?>
+			<li>
+				<a href="{:U('Demand/add')}">
+					发布企业需求	
+				</a>
+			</li>
+		<?php endif ?>
+	</ul>
+</div>

@@ -32,6 +32,7 @@ a{
 }
 .topbox .top img{
 	max-height: 80px;
+	vertical-align: bottom;
 }
 .login-tip{
 	position: absolute;
@@ -202,6 +203,8 @@ a{
 	color: #fff;
 }
 
+
+
 /* #footerbox{ 
 	width: 100%;
 	min-width: 1100px;
@@ -236,6 +239,8 @@ a{
 	width: 100%;
 	border-top: 1px solid #ddd;
 	padding-top: 15px;
+	height: 60px;
+	box-sizing: border-box;
 }
 #bottom{
 	width: 1100px;
@@ -251,4 +256,8 @@ a{
 }
 div#footerlist p:hover{
 	background-color: #999;
+}
+.buttom_fixed{
+	position: fixed;
+	bottom: 0;
 }

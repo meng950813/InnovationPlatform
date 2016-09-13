@@ -56,7 +56,7 @@
     border-left:2px solid #fafafa; 
     float:left; 
     width:866px;
-    min-height: 500px;
+    /*min-height: 500px;*/
 }
 .top-tip{
     overflow: hidden;

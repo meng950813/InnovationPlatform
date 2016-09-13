@@ -231,9 +231,13 @@
                 $(".case_picture").eq(y).fadeIn().siblings().fadeOut();
             },5000);
         });
-		function waring(){
-			alert("只有企业用户才能发布需求");
-		}
+		(function(){
+            var contentHeight = document.getElementById('index_main_container').clientHeight;
+            // 已知：top:80px ,nav:50px,banner:300px;bottombox:60px
+            if((bodyHeight-430)>60){
+                bottombox.className="buttom_fixed";
+            }
+        })();
     </script>
 </body>
 </html>

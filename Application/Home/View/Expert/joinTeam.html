@@ -65,7 +65,7 @@
 <body>
 	<include file="Public/nav"/>
 	<div class="link-main">
-		<form action="{:U('Public/join')}" method="post">
+		<form action="{:U('Expert/join')}" method="post">
 			<p align="center">注意：<span style="color:#e4393c;">只有团队创建人有权限邀请新成员</span></p>
 			<div class="line">
 				<span for="teamname">团队名</span>
@@ -125,8 +125,16 @@
 	<script src="__PUBLIC__/js/jquery.min.js"></script>
 </body>
 <script>
-	 $(function(){
+	$(function(){
         $('#nav_expert').addClass('nav_active').siblings().removeClass('nav_active');
-    });  
+    });
+	(function(){
+	    var bodyHeight = document.body.clientHeight;
+	    var bottombox = document.getElementById('bottombox');
+	    var contentHeight = document.getElementsByClassName('link-main')[0].clientHeight;
+	    if((bodyHeight-contentHeight-130)>60){
+	        bottombox.className="buttom_fixed";
+	    }
+	})();
 </script>
 </html>

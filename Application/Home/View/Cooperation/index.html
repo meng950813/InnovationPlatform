@@ -70,6 +70,7 @@
     <include file="Public/footer" />
     
     <script src="__PUBLIC__/js/jquery.min.js"></script>
+    <script src="__PUBLIC__/js/list_footer.js"></script>
     <script>
         $(function(){
             $('.click_title').click(function(event){
@@ -80,16 +81,9 @@
                     dataType:'json',
                     data:{id:id}
                 })
-                .done(function(data) {
-                    if(data.code == 1){
-                      console.log('success');
-                    }
-                })
-                .fail(function(XMLHttpRequest, textStatus, errorThrown){
-                  
-                })
-                .always(function() {
-                });
+                .done(function(data){})
+                .fail(function(XMLHttpRequest, textStatus, errorThrown){})
+                .always(function() {});
             });
             $('#nav_cooperation').addClass('nav_active').siblings().removeClass('nav_active');
         });
