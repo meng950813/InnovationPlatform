@@ -232,9 +232,10 @@
             },5000);
         });
 		(function(){
-            var contentHeight = document.getElementById('index_main_container').clientHeight;
+            var bodyHeight = document.body.innerHeight;
+            var contentHeight = document.getElementById('index_main_container').innerHeight;
             // 已知：top:80px ,nav:50px,banner:300px;bottombox:60px
-            if((bodyHeight-430)>60){
+            if((bodyHeight-430-contentHeight)>60){
                 bottombox.className="buttom_fixed";
             }
         })();

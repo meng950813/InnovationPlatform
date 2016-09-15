@@ -66,7 +66,7 @@
 			</div>
 			<input type="hidden" name="download_files" id="file_path">
 		</form>
-		<form action="{:U('Master/Download/uploadFile')}" method="post" id="uploadfile" class="form-horizontal uploadform">
+		<form action="{:U('Master/Download/uploadFile')}" method="post" id="uploadfile" class="form-horizontal uploadform" enctype="multipart/form-data">
 			<div class="form-group">
 				<label class="col-xs-2 control-label" for="download_files">上传文档:</label>
 				<div class="col-xs-10">
@@ -97,17 +97,19 @@
 				$('#uploadfile').ajaxSubmit({
 					dataType:'json',
 					success:function(data){
-					
 						if(data.status){ 
 							// 上传成功
 							$('#file_path').attr('value',data.path);
-							$('#uploadTip').html("");
+							$('#uploadTip').html("<b style='color:green'>上传成功</b>");
+							$('button[type=submit]').show();
 						}
 						else{
-							$('#uploadTip').html("上传失败，"+data.errmsg);
+							$('#uploadTip').html("上传失败，"+ data.errmsg);
+							$('button[type=submit]').hide();
 						}
 					},
 					error:function(xhr){
+						console.log(xhr);
 						$('#uploadTip').html("上传失败，请检查文件");
 					}
 				});

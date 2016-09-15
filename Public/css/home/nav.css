@@ -204,37 +204,6 @@ a{
 }
 
 
-
-/* #footerbox{ 
-	width: 100%;
-	min-width: 1100px;
-	background-image:url(../../images/footerbackground.png);
-}
-#footer{
-	width:1100px;
-	margin: 0 auto;
-	overflow:hidden;
-}
-#footerlist{ 
-	width:135px; 
-	height:170px; 
-	float:left;
-}
-#footerlist a h1{ 
-	font-size:16px; 
-	color:#666; 
-	margin-top:30px; 
-	line-height:16px;
-}
-#footerlist a p{
-	color:#666; 
-	line-height:22px;
-}
-#footer img{ 
-	margin-top:27px; 
-	float:right; 
-	margin-left:15px;
-} */
 #bottombox{
 	width: 100%;
 	border-top: 1px solid #ddd;
@@ -249,7 +218,6 @@ a{
 }
 #bottom p{
 	font-size: 12px;
-	line-height: 20px;
 }
 #bottom a{
 	color: #000;

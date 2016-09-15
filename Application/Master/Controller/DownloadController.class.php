@@ -86,7 +86,7 @@ class DownloadController extends MasterController {
 		C('SHOW_PAGE_TRACE',false);
 		$config = array(
 			'maxSize'	=>	20971520,// 设置附件上传大小，最大20M  20971520
-			'exts'      =>  array('txt','doc', 'docx', 'xls', 'xlsx','ppt','pptx','pdf','md','zip','rar','7z','chm'),// 设置附件上传类型
+			'exts'      =>  array('txt','doc','docx','xls','xlsx','ppt','pptx','pdf','md','zip','rar','7z','chm'),// 设置附件上传类型
 			'saveName'	=>	'',
 			'savePath'  =>  'downloadfile/', // 设置附件上传目录
 			'autoSub'	=>	true,  

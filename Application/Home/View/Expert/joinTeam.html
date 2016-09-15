@@ -129,9 +129,9 @@
         $('#nav_expert').addClass('nav_active').siblings().removeClass('nav_active');
     });
 	(function(){
-	    var bodyHeight = document.body.clientHeight;
+	    var bodyHeight = document.body.innerHeight;
 	    var bottombox = document.getElementById('bottombox');
-	    var contentHeight = document.getElementsByClassName('link-main')[0].clientHeight;
+	    var contentHeight = document.getElementsByClassName('link-main')[0].innerHeight;
 	    if((bodyHeight-contentHeight-130)>60){
 	        bottombox.className="buttom_fixed";
 	    }
