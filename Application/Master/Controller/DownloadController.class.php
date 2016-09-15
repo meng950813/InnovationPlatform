@@ -91,8 +91,8 @@ class DownloadController extends MasterController {
 			'savePath'  =>  'downloadfile/', // 设置附件上传目录
 			'autoSub'	=>	true,  
 		);
-		// $upload = new \Think\Upload($config,'sae');// 实例化适应sae的上传类
-		$upload = new \Think\Upload($config);// 实例化上传类
+		$upload = new \Think\Upload($config,'sae');// 实例化适应sae的上传类
+		// $upload = new \Think\Upload($config);// 实例化上传类
 		// 上传文件
 		$info = $upload->upload();
 
