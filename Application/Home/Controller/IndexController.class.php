@@ -29,7 +29,7 @@ class IndexController extends Controller {
         $downloadInfo = M("DownloadFile")->where($where)->order('sort desc')->limit(9)->field('file_id,download_title')->select();
 
         /* 典型案例 图片 */
-        $casePictureInfo = D('CasePictureInfoView')->where($where)->order('sort desc')->limit(5)->field('case_id,title,picture')->select();
+        $casePictureInfo = D('CasePictureInfoView')->where($where)->order('sort desc')->limit(5)->field('case_id,case_title,picture')->select();
         
         /* 典型案例 列表 */
         $caseInfo = M("ClassicCase")->where($where)->order('sort desc')->limit(9)->field('case_id,case_title')->select();
