@@ -76,7 +76,7 @@ a{
 	text-align: center;
 	display: none;
 }
-.nav-tip:hover:hover{
+.nav-tip:hover{
 	background: #146FBD;
 }
 .nav-tip:hover .nav-list{
