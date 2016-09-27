@@ -98,7 +98,7 @@
     </div>
 </div>
 
-<div id="login_bg" class="login_hidden">
+<div id="login_bg">
     <div id="login_container">
         <div id="login_form">
             <form action="{:U('Public/dologin')}" method="post">
@@ -120,11 +120,12 @@
     </div>
 </div>
 <script>
+    var login_btn = document.getElementById('login_bg');
+
     function showLogin() {
-        document.getElementById('login_bg').className="login_show";
+        login_btn.className="login_show";
     }
     function hiddenLogin(){
-        document.getElementById('login_bg').className="login_hidden";
+        login_btn.className="";
     }
-    document.getElementById('login_bg').onclick = function(){ hiddenLogin()};
 </script>
