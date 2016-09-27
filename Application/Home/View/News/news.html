@@ -80,16 +80,17 @@
     </div>
     <div style="clear:both"></div>
     <include file="Public/footer"/>
-    <script src="__PUBLIC__/js/jquery.js"></script>
+
     <script src="__PUBLIC__/js/content_footer.js"></script>
     <script>
-        $(function(){
-            $('#nav_news').addClass('nav_active').siblings().removeClass('nav_active');
+        var hereNode = document.getElementById('nav_news');
+        var childnode = hereNode.parentNode.childNodes.className = "nav-tip";
+        hereNode.className = " nav-tip nav_active ";
 
-            if($('#news_picture').attr('src') == "__ROOT__/"){
-                $('#news_picture').attr("src","");
-            }
-        });  
+        var news_picture = document.getElementById('news_picture')
+        if (news_picture.src == "__ROOT__/") {
+            news_picture.src = "";
+        }
     </script>
 </body>
 

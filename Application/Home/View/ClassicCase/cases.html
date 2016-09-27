@@ -65,12 +65,18 @@
     <div style="clear:both"></div>
 
     <include file="Public/footer"/>
-    <script src="__PUBLIC__/js/jquery.min.js"></script>
+    <!-- <script src="__PUBLIC__/js/jquery.min.js"></script> -->
     <script src="__PUBLIC__/js/content_footer.js"></script>
 </body>
 <script>
-    $(function(){
-        $('#nav_news').addClass('nav_active').siblings().removeClass('nav_active');
-    });
+    // $(function(){
+    //     $('#nav_news').addClass('nav_active').siblings().removeClass('nav_active');
+    // });
+    var hereNode = document.getElementById('nav_classic');
+    var childnode = hereNode.parentNode.childNodes;
+    for (var i = 0; i < childnode.length; i++) {
+        childnode[i].className = "nav-tip";
+    }
+    hereNode.className = " nav-tip nav_active ";
 </script>
 </html>

@@ -120,15 +120,14 @@
         </div>
     </div>
     <include file="Public/footer"/>
-    <script src="__PUBLIC__/js/jquery.min.js"></script>
     <script src="__PUBLIC__/js/list_footer.js"></script>
 </body>
 <script>
     function waring(){
         alert("只有企业用户才能发布需求");
     }
-    $(function(){
-        $('#nav_demand').addClass('nav_active').siblings().removeClass('nav_active');
-    });  
+    var hereNode = document.getElementById('nav_demand');
+    var childnode = hereNode.parentNode.childNodes.className = "nav-tip";
+    hereNode.className = " nav-tip nav_active ";
 </script>
 </html>

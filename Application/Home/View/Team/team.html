@@ -184,13 +184,12 @@
     </div>
     <include file="Public/footer" />
 
-    <script src="__PUBLIC__/js/jquery.min.js"></script>
     <script src="__PUBLIC__/js/content_footer_class_main.js"></script>
     
 </body>
 <script>
-    $(function(){
-        $('#nav_expert').addClass('nav_active').siblings().removeClass('nav_active');
-    });
+    var hereNode = document.getElementById('nav_expert');
+    var childnode = hereNode.parentNode.childNodes.className = "nav-tip";
+    hereNode.className = " nav-tip nav_active ";
 </script>
 </html>

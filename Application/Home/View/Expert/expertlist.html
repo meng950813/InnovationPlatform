@@ -170,15 +170,15 @@
         </div>
     </div>
     <include file="Public/footer" />
-    <script src="__PUBLIC__/js/jquery.min.js"></script>
     <script src="__PUBLIC__/js/list_footer.js"></script>
     <script>
         function waring(){
             alert("您不是专家用户，没有权限邀请组队");
         }
-        $(function(){
-            $('#nav_expert').addClass('nav_active').siblings().removeClass('nav_active');
-        });  
+
+        var hereNode = document.getElementById('nav_expert');
+        var childnode = hereNode.parentNode.childNodes.className = "nav-tip";
+        hereNode.className = " nav-tip nav_active ";
      </script>
 </body>
 </html>

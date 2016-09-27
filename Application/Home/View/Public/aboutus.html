@@ -55,11 +55,10 @@
         </div>
     </div>
     <include file="Public/footer"/>
-    <script src="__PUBLIC__/js/jquery.min.js"></script>
 </body>
 <script>
-     $(function(){
-        $('#nav_index').addClass('nav_active').siblings().removeClass('nav_active');
-    });  
+    var hereNode = document.getElementById('nav_index');
+    var childnode = hereNode.parentNode.childNodes.className = "nav-tip";
+    hereNode.className = " nav-tip nav_active ";
 </script>
 </html>
