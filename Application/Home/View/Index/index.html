@@ -81,65 +81,64 @@
                 </volist>
             </ul>
         </div>
-        <!-- 四图文 -->
-        <ul class="index_four_part">
+
+         <!-- 四图文 -->
+        <ul id="index_four_part">
+            <li>
+                <h2>专家团队</h2>
+                <div>
+                    <img src="__PUBLIC__/images/专家团队.jpg" alt="">
+                </div>
+                <ul class="four_part_tip">
+                    <li><a href="{:U('Expert/expertlist')}">专家信息</a></li>
+                    <li><a href="{:U('Team/teamlist')}">团队信息</a></li>
+                </ul>
+            </li>
             <li>
                 <h2>科技成果</h2>
+                <div>
+                    <img src="__PUBLIC__/images/专家团队.jpg" alt="">
+                </div>
                 <ul class="four_part_tip">
-                    <volist id="resultInfo" name="resultInfo">
-                         <li><a href="{:U('Result/result',array('id'=>$resultInfo['result_id']))}" title="{$resultInfo.result_name}">{$resultInfo.result_name}</a></li>
-                    </volist>
+                    <li><a href="{:U('Result/resultlist')}">成果集锦</a></li>
+                    <?php if (session('uid')): ?>
+                        <li><a href="{:U('Result/add')}">成果发布</a></li>
+                    <?php else: ?>
+                        <li><a href="{:U('Public/login')}">成果发布</a></li>
+                    <?php endif ?>
                 </ul>
             </li>
             <li>
                 <h2>企业需求</h2>
+                <div>
+                    <img src="__PUBLIC__/images/专家团队.jpg" alt="">
+                </div>
                 <ul class="four_part_tip">
-                   <volist id="demandInfo" name="demandInfo">
-                        <li><a href="{:U('Demand/demand',array('id'=>$demandInfo['demand_id'],'com'=>$demandInfo['demand_com']))}" title="{$demandInfo.title}">{$demandInfo.title}</a></li>
-                    </volist>
+                    <li><a href="{:U('Demand/demandlist')}">需求集锦</a></li>
+                    <?php if(session('uid')): ?>
+                        <?php if(session('type') == 2):?>
+                          <li><a href="{:U('Demand/add')}">需求发布</a></li>
+                        <?php else: ?>
+                            <li><a href="javascript:void(0);" onclick="waring()">需求发布</a></li>
+                        <?php endif ?>
+                    <?php else: ?>
+                        <li><a href="{:U('Public/login')}">需求发布</a></li>
+                    <?php endif ?>
                 </ul>
             </li>
-        </ul>
-        <ul class="index_four_part">
             <li>
                 <h2>协同管理</h2>
+                <div>
+                    <img src="__PUBLIC__/images/专家团队.jpg" alt="">
+                </div>
                 <ul class="four_part_tip">
-                   <volist id="cooInfo" name="cooInfo">
-                        <li><a href="http://{$cooInfo.website}" title="{$cooInfo.name}">{$cooInfo.name}</a></li>
-                    </volist>
-                </ul>
-            </li>
-            <li>
-                <h2>下载中心</h2>
-                <ul class="four_part_tip">
-                   <volist id="downloadInfo" name="downloadInfo">
-                        <li><a href="{:U('Download/filelist',array('id'=>$downloadInfo['file_id']))}">{$downloadInfo.download_title}</a></li>
-                    </volist>
+                    <li><a href="{:U('Cooperation/index',array('type'=>3))}">协同高校</a></li>
+                    <li><a href="{:U('Cooperation/index',array('type'=>1))}">行业协会</a></li>
+                    <li><a href="{:U('Cooperation/index',array('type'=>2))}">协同企业</a></li>
                 </ul>
             </li>
         </ul>
-          <!-- 典型案例 -->
-        <div class="news_part">
-            <p><span>典型案例</span><a href="{:U('ClassicCase/caselist')}">更多&gt;&gt;</a></p>
-            <div class="picture_and_title">
-                <volist id="casePicture" name="casePicture">
-                    <div class="case_picture">
-                        <span>
-                            <a href="{:U('ClassicCase/cases',array('id'=>$casePicture['case_id']))}"><img src="__ROOT__/{$casePicture.picture}"></a>
-                        </span>
-                    
-                        <div class="case_title">
-                            <a href="{:U('ClassicCase/cases',array('id'=>$casePicture['case_id']))}">{$casePicture.case_title}</a>
-                        </div>
-                    </div>
-                </volist>
-            </div>
-            <ul>
-                <volist id="caseInfo" name="caseInfo">
-                    <li><a href="{:U('ClassicCase/cases',array('id'=>$caseInfo['case_id']))}" title="{$caseInfo.case_title}">{$caseInfo.case_title}</a></li>
-                </volist>
-            </ul>
-        </div>
+
     </div>
 
     <include file = "Public/footer" />
@@ -224,16 +223,10 @@
                 $(".news_picture").eq(y).fadeIn().siblings().fadeOut();
             },5000);
 
-            $(".case_picture").hide().first().fadeIn();
-            var y=0
-            var z=setInterval(function(){
-                if(++y==5){y=0;}
-                $(".case_picture").eq(y).fadeIn().siblings().fadeOut();
-            },5000);
         });
 		(function(){
-            var bodyHeight = document.body.innerHeight;
-            var contentHeight = document.getElementById('index_main_container').innerHeight;
+            var bodyHeight = document.body.clientHeight;
+            var contentHeight = document.getElementById('index_main_container').clientHeight;
             // 已知：top:80px ,nav:50px,banner:300px;bottombox:60px
             if((bodyHeight-430-contentHeight)>60){
                 bottombox.className="buttom_fixed";

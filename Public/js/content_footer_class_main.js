@@ -1,7 +1,7 @@
  (function(){
-    var bodyHeight = document.body.innerHeight;
+    var bodyHeight = document.body.clientHeight;
     var bottombox = document.getElementById('bottombox');
-    var contentHeight = document.getElementsByClassName('main')[0].innerHeight;
+    var contentHeight = document.getElementsByClassName('main')[0].clientHeight;
     if((bodyHeight-contentHeight-130)>60){
         bottombox.className="buttom_fixed";
     }
