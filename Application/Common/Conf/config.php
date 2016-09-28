@@ -41,5 +41,5 @@ return array(
 	'ADMIN_MARK' => array('root','admin'),
 
 	// 在Sae环境下使用时 开启，否则上传文件会因找不到sae环境报错
-	// 'FILE_UPLOAD_TYPE' => 'Sae',
+	'FILE_UPLOAD_TYPE' => 'Sae',
 );
