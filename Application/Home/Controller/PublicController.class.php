@@ -61,6 +61,7 @@ class PublicController extends Controller {
 			// 在注册表中查找姓名
 			$result = M('Login')->where($where)->find();
 		}
+
 		// 获取到团队名和leader
 		// 表示 在邀请加入团队页面，判断团队名与leader是否匹配
 		else if(I('post.teamname',null)&&I('post.leader',null)){
@@ -69,6 +70,7 @@ class PublicController extends Controller {
 			// 若找到，证明输入信息正确
 			$result = M('ExpertTeam')->where($where)->find();
 		}
+		
 		// 获取到的参数是 teamname
 		// 表示在注册页面中，申请新的团队名
 		else if(I('post.teamname',null)){

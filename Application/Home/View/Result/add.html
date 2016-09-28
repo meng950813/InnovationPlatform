@@ -9,6 +9,21 @@
     <!-- [if IE lt 10] -->
         <link rel="stylesheet" href="__PUBLIC__/css/home/ltIE8.css">
     <!-- [endif] -->
+    <style>
+        #addAward{
+            height: 30px;
+            width: 30px;
+            border: 1px solid #a9a9a9;
+            border-radius: 50%;
+            font-size: 20px;
+            background-color: transparent;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        #addAward:hover{
+            background-color: #a9a9a9;
+        }
+    </style>
 </head>
 <body>
     <include file="Public/nav" />
@@ -16,7 +31,7 @@
     <div class="main">
         <form id="demand_form" action="{:U('Result/addResearch')}" method="post" enctype="multipart/form-data">
             <div class="line">
-                <label for="research_title">课题名称 </label>
+                <label for="research_title">成果名称 </label>
                 <input class="line-input" type="text" id="research_title" name="research_title" required><span class="must">*</span>
             </div>
             <div class="line">
@@ -34,23 +49,30 @@
                 <input type="radio" name="isteam" checked value="1" >团队合作
                 <input type="radio" name="isteam" value="0">独立开发
             </div>
-             <div class="line" id="team">
+            <div class="line" id="team">
+                <span class="must">只有 &nbsp;团队创始人  &nbsp;能以团队名义发布成果</span><br>
                 <label for="team_name">团队名称 </label>
                 <input class="line-input" type="text" name="team_name" id="team_name"><span id="nameError" class="must">独立开发不用填写</span>
             </div>
+
+            <div class="line" id="award">
+                <label for="award">发明专利 </label>
+                <input class="line-input" type="text" name="award[]"><button id="addAward">+</button>
+            </div>
+
             <div class="line">
                 <label for="end_time">完成日期 </label>
                 <input class="line-input" type="text" placeholder="计划完成年份，示例：2016" id="end_time" name="end_time">
             </div>
             <div class="line" style="text-align:center">
-                <p>研究课题图片 (建议尺寸： 456 × 342 像素 仅限上传一张)</p>
+                <p>研究成果图片 (建议尺寸： 456 × 342 像素 仅限上传一张)</p>
                 <input type="file" name="img" id="logo" accept="image/*" />
                 <div class="upload">
                     <img id="preview" src="" alt="">
                 </div>
             </div>
              <div class="line">
-                <label for="research_level">课题级别 </label>
+                <label for="research_level">成果级别 </label>
                 <select class="line-input" name="research_level" id="research_level">
                     <option value="其他">请选择</option>
                     <option value="国家级项目">国家级项目</option>
@@ -99,7 +121,7 @@
                         $('#nameError').html("*");
                         $('input[type=submit]').show();
                     }else{
-                        $("#nameError").html("用户名已存在");
+                        $("#nameError").html("不是该团队创始人  或  团队名称错误");
                         $('input[type=submit]').hide();
                     }
                 })
@@ -109,7 +131,7 @@
                     console.log("textStatus = "+textStatus);  //parsererror
                 })
                 .always(function() {
-                    console.log("complete");
+                    // console.log("complete");
                 });
             }
         });
@@ -136,17 +158,26 @@
             }
         });
         $('input[name=isteam]').click(function(event){
-            console.log("into isteam");
+            // console.log("into isteam");
             switch($('input[name=isteam]:checked').val()){
                 case "1":
                     // console.log($('input[name=isteam]:checked').val());
-                    $('#team').show();
+                    $('#team').show("400");
                     break;
                 default:
                     // console.log("default"+$('input[name=isteam]:checked').val());
-                    $('#team').hide();
+                    $('#team').hide("400");
                     break;
             }
+        });
+
+        $("#addAward").click(function(event) {
+            event.preventDefault();
+            console.log($("#award>input:last").val());
+            if($("#award>input:last").val() != ""){
+                $("#award").append("<br><label></label> <input class='line-input' type='text' name='award[]'>");
+            }
+            
         });
 
         $('#nav_research').addClass('nav_active').siblings().removeClass('nav_active');

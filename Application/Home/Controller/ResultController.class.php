@@ -41,6 +41,7 @@ class ResultController extends Controller {
         $where['result_id'] = I('get.id');
         // 从表里拿数据是这一条语句
         $resultInfo = M("ResearchResult")->where($where)->find();//找出这条对应信息
+
         $resultInfo['total_info'] = replace_br($resultInfo['total_info']);
         $resultInfo['tech_target'] = replace_br($resultInfo['tech_target']);
 
@@ -51,14 +52,13 @@ class ResultController extends Controller {
         // 用户已登录
         if(session('uid')){
             if($resultInfo['isteam'] == 0){
-
                 // 表示是个人成果 
                 $owner['id'] = $resultInfo['owner_id'];
                 // 获取用户名，手机，邮箱
                 $info = M('Login')->where($owner)->find();
 
                 // 不是发布者本身查看 同时与发布者没有联系
-                if ((session('uid') != $resultInfo['owner_id']) || (!isLinked(session('uid'),$resultInfo['owner_id'],0))) {
+                if ((session('uid') != $owner['id']) && (!isLinked(session('uid'),$owner['id'],0))) {
                     // 将联系信息置为 ******
                     $info['realname']           = "********";
                     $info['mobile_phone']       = "********";
@@ -170,15 +170,16 @@ class ResultController extends Controller {
      */
     public function addResearch(){
         islogin();
+
         $info['result_name'] = I('post.research_title');
         if(I('post.research_type') == ''){
-            $this->error("请选择课题类型");
+            $this->error("请选择成果类型");
         }
         $info['research_type'] = getResearchType(I('post.research_type'));
 
         if(I('post.isteam') == 1){
             $where['teamname'] = I('post.team_name');
-            $info['owner_id'] = M('ExpertTeam')->where($where)->field('teamid')->postField();
+            $info['owner_id'] = M('ExpertTeam')->where($where)->field('teamid')->getField();
             $info['isteam'] = 1;
         }
         else{
@@ -187,18 +188,54 @@ class ResultController extends Controller {
         }
 
         $info['end_time'] = I('post.end_time');
+
         $info['research_level'] = I('post.research_level');
+
+        // 获取当前日期
         $info['publish_time'] = date('Y/m/d');
+
         $info['total_info'] = I('post.total_info');
+        
         $info['tech_target'] = I('post.tech_target');
         if (!empty($_FILES)) {//有图片上传
             // 返回值不为null -> 上传成功
-            if(($result = uploadPicture($_FILES,'research_picture'))){
-                $info['research_picture'] = $result;
+            if(($research_picture = uploadPicture($_FILES,'research_picture'))){
+                $info['result_picture'] = $research_picture;
             }
         }
-        $result = M('ResearchResult')->data($info)->add();
+
+        $ResearchResult = M('ResearchResult');
+        $result =$ResearchResult->add($info);
+
         if($result){
+            $uploaderInfo = $ResearchResult ->where(array("result_name"=>$info['result_name'],"owner_id"=>$info['owner_id']))->order("sort desc")->field("result_id")->find();
+
+            // 获取填写的专利内容
+            $award = I("post.award");
+
+            // 如果填写内容不为空
+            if(!empty($award)){
+                $awardSzie = count($award);
+                for ($i=0; $i < $awardSzie; $i++) { 
+                    // 表示已经到最后一条
+                    if($award[$i] == ""){
+                        break;
+                    }
+
+                    $awardInfo[]=array(
+                            "award_owner" => $info['owner_id'],
+                            "award_title" => $award[$i],
+                            "isteam"      => $info['isteam'],
+                            "research_id" => $uploaderInfo['result_id'],
+                            "get_time"    => $info['publish_time'],
+                            "sort"        => date("Y-m-d H:i:s",time())
+                        );
+
+                }
+
+                M("Award")->addAll($awardInfo);
+            }
+           
             $this->success("发布成功",U('Result/resultlist'));
         }
         else{

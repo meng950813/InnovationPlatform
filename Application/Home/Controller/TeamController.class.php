@@ -4,7 +4,7 @@ use Think\Controller;
 
 /**
  * create by cm
- * 专家团队
+ * 团队信息
  */
 class TeamController extends Controller {
 	/**
