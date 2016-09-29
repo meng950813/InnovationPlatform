@@ -92,8 +92,8 @@
 				'savePath'  =>  '/'.$dir.'/', // 设置附件上传目录
 				'autoSub'	=>	true  
 			);
-		// $upload = new \Think\Upload($config,'sae');// 实例化适应sae的上传类
-		$upload = new \Think\Upload($config);// 实例化上传类
+		$upload = new \Think\Upload($config,'sae');// 实例化适应sae的上传类
+		// $upload = new \Think\Upload($config);// 实例化上传类
         // 这里要保证所有上传图片的input标签的 name = img
         $result   =   $upload->uploadOne($_FILES['img']);// 上传单个文件
         if($result) {//上传成功
