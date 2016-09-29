@@ -30,8 +30,8 @@
         	'savepath'	=>	'/'.$dir.'/'
         );
 		
-		$upload = new \Think\Upload($config,'sae');// 实例化上传类，sae环境使用
-		// $upload = new \Think\Upload($config);// 实例化上传类，非sae 环境使用
+		// $upload = new \Think\Upload($config,'sae');// 实例化上传类，sae环境使用
+		$upload = new \Think\Upload($config);// 实例化上传类，非sae 环境使用
         
         // 这里要保证所有上传图片的input标签的 name = img
         $result   =   $upload->uploadOne($_FILES['news_picture']);// 上传单个文件
@@ -60,8 +60,8 @@
 			'savePath'  =>  '/downloadfile/', // 设置附件上传目录
 			'autoSub'	=>	true,  
 		);
-		$upload = new \Think\Upload($config,'sae');// 实例化上传类，sae环境使用
-		// $upload = new \Think\Upload($config);// 实例化上传类，非sae 环境使用
+		// $upload = new \Think\Upload($config,'sae');// 实例化上传类，sae环境使用
+		$upload = new \Think\Upload($config);// 实例化上传类，非sae 环境使用
 
 		$result = $upload->uploadOne($_FILES['download_files']);
 		if($result){
