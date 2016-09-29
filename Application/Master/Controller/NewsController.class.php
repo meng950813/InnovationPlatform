@@ -5,29 +5,14 @@ use Lib\MasterController;
 class NewsController extends MasterController {
 	public function news_list(){
 
-		$where;
-		if(I('get.type')){
-			switch (I('get.type')) {
-				case 1:
-					$where['type'] = 1;
-					break;
-				case 2:
-					$where['type'] = 2;
-					break;
-				default:
-					$where['type'] = 0;
-					break;
-			}
-		}
-
 		$News = M('News'); // 实例化对象
-		$num = C('PAGE_NUM',null,5);//每一页的数量
-		$count = $News->where($where)->count();// 查询满足要求的总记录数
+		$num = C('PAGE_NUM',null,10);//每一页的数量
+		$count = $News->count();// 查询满足要求的总记录数
 		$Page = new \Lib\Page($count,$num);//化分页类入总记录数和每页显示的记录数
 		$Page -> setConfig('size', 'pagination');
 		$show = $Page->show();// 分页显示输出
 
-		$list = $News->where($where)->page(I('get.p','1').",$num")->order('sort desc')->select();
+		$list = $News->order('sort desc')->page(I('get.p','1').",$num")->select();
 		
 		$this->list = $list;// 赋值数据集
 		$this->page = $show;// 赋值分页输出

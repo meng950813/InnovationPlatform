@@ -3,31 +3,14 @@ namespace Master\Controller;
 use Lib\MasterController;
 class CooperationController extends MasterController {
 	public function coo_list(){
-		$where;
-		if(I('get.type')){
-			switch (I('get.type')) {
-				case 1:
-					// 行业协会
-					$where['type'] = 1;
-					break;
-				case 2:
-					// 协同企业
-					$where['type'] = 2;
-					break;
-				default:
-					// 协同高校
-					$where['type'] = 0;
-					break;
-			}
-		}
-
+		
 		$Cooperation = M('Cooperation');
-        $num = C('PAGE_NUM',null,5);//每一页的数量
-		$count = $Cooperation->where($where)->count();
+        $num = C('PAGE_NUM',null,10);//每一页的数量
+		$count = $Cooperation->count();
 		$Page = new \Lib\Page($count,$num);
 		$Page -> setConfig('size', 'pagination');
 		$show = $Page->show();
-		$list = $Cooperation->where($where)->page(I('get.p','1').",$num")->order('sort desc')->select();
+		$list = $Cooperation->order('sort desc')->page(I('get.p','1').",$num")->select();
 		
 		$this->list = $list;// 赋值数据集
 		$this->page = $show;// 赋值分页输出

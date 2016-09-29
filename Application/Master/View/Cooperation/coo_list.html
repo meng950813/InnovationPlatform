@@ -6,14 +6,27 @@
 
 	<link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet">
 	<script src="__PUBLIC__/assets/ie-emulation-modes-warning.js"></script>
-
+	<style>
+		.type0,.type1,.type2{
+			font-weight: bold; 
+		}
+		.type0{
+			color: #3f3;
+		}
+		.type1{
+			color: #3ff;
+		}
+		.type2{
+			color: #33f;
+		}
+	</style>
 </head>
 <body>
 	<table class="table table-bordered table-striped">
 		<tr>
 			<th>序号</th>
 			<th>名称</th>
-			<!--<th>发布时间</th>-->
+			<th>分类</th>
 			<th>是否有效</th>
 			<th>点击量</th>
 			<th>编辑</th>
@@ -22,6 +35,9 @@
 		<tr>
 			<td><?php echo $i+C('PAGE_NUM',null,5)*(I('get.p',1,int)-1); ?></td>
 			<td><a href="{:U('Home/Cooperation/cooperation',array('id'=>$a['id']))}" target="_blank">{$a.name}</a></td>
+
+			<td class="type<?php echo $a['type'];?>"><?php echo ($a[type]==0)?"协同高校":(($a[type] == 1)?"行业协会":"协同企业");?></td>
+
 			<!--<td>{$a.sort}</td>-->
 			<td><?php echo ($a['status'] == 1)?'有效':'<b style=color:red>失效</b>'; ?></td>
 			<td>{$a.click}</td>

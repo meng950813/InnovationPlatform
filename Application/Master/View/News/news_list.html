@@ -6,6 +6,21 @@
 
 	<link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet">
 	<script src="__PUBLIC__/assets/ie-emulation-modes-warning.js"></script>
+	
+	<style>
+		.type0,.type1,.type2{
+			font-weight: bold; 
+		}
+		.type0{
+			color: #3f3;
+		}
+		.type1{
+			color: #3ff;
+		}
+		.type2{
+			color: #33f;
+		}
+	</style>
 
 </head>
 <body>
@@ -13,6 +28,7 @@
 		<tr>
 			<th>序号</th>
 			<th>标题</th>
+			<th>分类</th>
 			<th>发布时间</th>
 			<th>是否有效</th>
 			<th>点击量</th>
@@ -22,6 +38,9 @@
 			<tr>
 				<td><?php echo $i+C('PAGE_NUM',null,5)*(I('get.p',1,int)-1); ?></td>
 				<td><a href="{:U('Home/News/news',array('id'=>$a['news_id']))}" target="_blank">{$a.title}</a></td>
+
+				<td class="type<?php echo $a['type'];?>"><?php echo ($a[type]==0)?"政策法规":(($a[type] == 1)?"市场动态":"业内资讯");?></td>
+
 				<td>{$a.publish_time}</td>
 				<td><?php echo ($a['status'] == 1)?'有效':'<b style=color:red;>失效</b>'; ?></td>
 				<td>{$a.click}</td>

@@ -6,7 +6,7 @@ class ResearchController extends MasterController {
 	public function research_list(){
 
 		$ResearchResult = M('ResearchResult'); // 实例化对象
-		$num = C('PAGE_NUM',null,5);//每一页的数量
+		$num = C('PAGE_NUM',null,10);//每一页的数量
 		$count = $ResearchResult->count();// 查询满足要求的总记录数
 		$Page = new \Lib\Page($count,$num);//化分页类入总记录数和每页显示的记录数
 		$Page -> setConfig('size', 'pagination');

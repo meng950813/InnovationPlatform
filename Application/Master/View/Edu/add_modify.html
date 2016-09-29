@@ -76,8 +76,8 @@
 	<script src="__PUBLIC__/js/jquery-1.11.1.min.js"></script>
 	<script src="__PUBLIC__/js/bootstrap.min.js"></script>
 	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<!-- 	<script src="__PUBLIC__/assets/ie10-viewport-bug-workaround.js"></script>
-	<script src="__PUBLIC__/js/master/fixiframe.js"></script> -->
+	<script src="__PUBLIC__/assets/ie10-viewport-bug-workaround.js"></script>
+	<script src="__PUBLIC__/js/master/fixiframe.js"></script>
 
 	<script src="__PUBLIC__/js/jquery.form.min.js"></script>
 	<js href="__PUBLIC__/ueditor/ueditor.config.js" />
@@ -86,7 +86,7 @@
 		$(document).ready(function() {
 			window.UEDITOR_CONFIG.initialFrameHeight = $(document).width()*0.3;
 			window.UEDITOR_CONFIG.initialFrameWidth = $(document).width()*0.7;
-			window.UEDITOR_CONFIG.toolbars = [['fullscreen', 'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|', 'undo', 'redo', '|', 'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc', '|', 'rowspacingtop', 'rowspacingbottom', 'lineheight', '|', 'indent', '|', 'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|', 'link', 'unlink',/* '|', 'imagenone', 'imageleft', 'imageright', 'imagecenter', '|', 'simpleupload', 'insertimage', 'attachment', 'pagebreak', 'background',*/ '|', 'horizontal', 'date', 'time', /*'wordimage',*/ '|', 'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', 'charts', '|', 'prng eview', 'searchreplace']];
+			window.UEDITOR_CONFIG.toolbars = [['fullscreen', 'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|', 'undo', 'redo', '|', 'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc', '|', 'rowspacingtop', 'rowspacingbottom', 'lineheight', '|', 'indent', '|', 'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|', 'link', 'unlink', '|', 'imagenone', 'imageleft', 'imageright', 'imagecenter', '|', 'simpleupload', 'insertimage', 'attachment', 'pagebreak', 'background', '|', 'horizontal', 'date', 'time', 'wordimage', '|', 'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', 'charts', '|', 'prng eview', 'searchreplace']];
 			window.UEDITOR_CONFIG.elementPathEnabled = false;
 			// window.UEDITOR_CONFIG.maximumWords = 1000;
 			var ue = UE.getEditor('content',{serverUrl :'{:U('Master/Index/ueditor')}'});
