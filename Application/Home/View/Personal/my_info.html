@@ -12,7 +12,6 @@
 			margin: 0 auto;
 			margin-top: 20px;
 			padding-bottom: 20px;
-			border-bottom: 2px dotted #bbb;
 			overflow: hidden;
 		}
 
@@ -99,7 +98,7 @@
 			cursor: pointer;
 		}
 	</style>
-	<!-- [if IE lt 10] -->
+	<!-- [if IE lt 8] -->
         <link rel="stylesheet" href="__PUBLIC__/css/home/ltIE8.css">
     <!-- [endif] -->
 </head>
@@ -187,6 +186,17 @@
 	<script type="text/javascript" src="__PUBLIC__/js/jquery.min.js"></script>
 </body>
 <script>
+
+	(function(){
+	    var bodyHeight = document.body.clientHeight;
+	    var bottombox = document.getElementById('bottombox');
+	    var content = document.getElementsByClassName('myInfo');
+	    
+	    if((bodyHeight-content[0].clientHeight-content[1].clientHeight-210)>60){
+	        bottombox.className="buttom_fixed";
+	    }
+	})();
+
 	$(function(){
 
         $('#personal_info').addClass('focus').siblings().removeClass('focus');

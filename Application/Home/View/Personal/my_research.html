@@ -95,11 +95,15 @@
 		
 	</div>
     <include file="Public/footer" />
-    <script src="__PUBLIC__/js/jquery.min.js"></script>
+    <script src="__PUBLIC__/js/personal_id_body.js"></script>
+    
 	<script>
-		$(function(){
-        	$('#my_research_result').addClass('focus').siblings().removeClass('focus');
-		});
+		var hereNode = document.getElementById('my_research_result');
+	  	// 去除同级元素的被选中样式
+	   	hereNode.parentNode.childNodes.className = "";
+	    hereNode.className = "focus";
+
+
 		function del_research(obj) {
 			if (confirm("确定删除这条研究成果吗?")) {
 				var id = document.getElementById(obj.id).getAttribute("value");

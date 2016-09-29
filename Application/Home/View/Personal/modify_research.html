@@ -74,10 +74,20 @@
     </div>
  
     <include file="Public/footer" />
+    <script src="__PUBLIC__/js/personal_calss_main.js"></script>
     <script src="__PUBLIC__/js/jquery.min.js"></script>
-    
 </body>
 <script>
+
+    (function(){
+        var bodyHeight = document.body.clientHeight;
+        var bottombox = document.getElementById('bottombox');
+        var contentHeight = document.getElementsByClassName('main')[0].clientHeight;
+        if((bodyHeight-contentHeight-210)>60){
+            bottombox.className="buttom_fixed";
+        }
+    })();
+
     $(function($){
 
          $('#my_research_result').addClass('focus').siblings().removeClass('focus');

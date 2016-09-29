@@ -72,6 +72,12 @@
     </div>
 
     <include file="Public/footer"/>
+    <script src="__PUBLIC__/js/personal_id_body.js"></script>
 </body>
-
+<script>
+	var hereNode = document.getElementById('my_research_result');
+  	// 去除同级元素的被选中样式
+   	hereNode.parentNode.childNodes.className = "";
+    hereNode.className = "focus";
+</script>
 </html>

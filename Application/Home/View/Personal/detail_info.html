@@ -7,12 +7,11 @@
 	
 	<link rel="stylesheet" href="__PUBLIC__/css/home/personal.css">
 	<style>
-		.myInfo{
+		#body{
 			width: 1000px;
 			margin: 0 auto;
 			margin-top: 20px;
 			padding-bottom: 20px;
-			border-bottom: 2px dotted #bbb;
 			overflow: hidden;
 		}
 
@@ -108,7 +107,7 @@
 	<include file = "Public/person_nav" />
 
 	<!-- 显示详细信息 -->
-	<div class="myInfo">
+	<div id="body">
 		<div>
 			<img src="__PUBLIC__/images/detailInfo.png" alt="">
 		</div>
@@ -268,6 +267,8 @@
 		</div>
 	</div>
     <include file = "Public/footer" />
+    <script src="__PUBLIC__/js/personal_id_body.js"></script>
+    
 	<script type="text/javascript" src="__PUBLIC__/js/jquery.min.js"></script>
 </body>
 <script>

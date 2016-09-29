@@ -43,7 +43,7 @@
 			color: #1B8DEF;
 		}
 	</style>
-	<!-- [if IE lt 10] -->
+	<!-- [if IE lt 8] -->
         <link rel="stylesheet" href="__PUBLIC__/css/home/ltIE8.css">
     <!-- [endif] -->
 </head>
@@ -88,11 +88,14 @@
 	</div>
     <include file="Public/footer" />
     
-	<script src="__PUBLIC__/js/jquery.min.js"></script>
+    <script src="__PUBLIC__/js/personal_id_body.js"></script>
+    
 	<script>
-		$(function(){
-        	$('#my_team').addClass('focus').siblings().removeClass('focus');
-		});
+
+		var hereNode = document.getElementById('my_team');
+	  	// 去除同级元素的被选中样式
+	   	hereNode.parentNode.childNodes.className = "";
+	    hereNode.className = "focus";
 
 		function del_my_team(obj) {
 			if(confirm("确定解散团队？")){

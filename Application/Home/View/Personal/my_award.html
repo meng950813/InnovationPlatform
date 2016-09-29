@@ -46,86 +46,7 @@
 	</style>
 </head>
 <body>
-	<div id="header">
-    	<div id="header_box">
-    		<a href="__ROOT__">
-    			<img src="__PUBLIC__/images/背景.png" alt="">
-    		</a>
-    		<a class="index" href="__ROOT__">回到首页</a>
-    	</div>
-    </div>
-    <div id="nav">
-    	<div id="nav_box">
-    		<ul>
-    			<li>
-    				<a href="{:U('Personal/index')}">个人中心</a>
-    			</li>
-    			<?php if(session('uid') && session('type') == 1) :?>
-	    			<li>
-	    				<a href="{:U('Personal/my_team')}">我的团队</a>
-	    			</li>
-	    		<?php endif?>
-    			<li>
-    				<a href="{:U('Personal/my_research')}">研究成果</a>
-    			</li>
-    			<li class="focus">
-    				<a href="{:U('Personal/my_award')}">我的成就</a>
-    			</li>
-    			<li>
-    				<a href="{:U('Personal/my_info')}">个人信息</a>
-    			</li>
-    			<?php if(session('type') != 0):?>
-	    			<li>
-	    				<a href="{:U('Personal/detail_info')}">详细信息</a>
-	    			</li>
-	    		<?php endif?>
-    		</ul>
-    	</div>
-    </div>
-    <div id="link_img">
-		<!-- 各种找专家，找团队的图片链接 -->
-		<ul>
-			<li>
-				<a href="{:U('Expert/expertlist')}">
-					找专家	
-				</a>
-			</li>
-			<li>
-				<a href="{:U('Team/teamlist')}">
-					找专家团队	
-				</a>
-			</li>
-			<li>
-				<a href="{:U('Result/resultlist')}">
-					找科技成果	
-				</a>
-			</li>
-			<li>
-				<a href="{:U('Demand/demandlist')}">
-					找企业需求	
-				</a>
-			</li>
-			<?php if (session('type') == 1): ?>
-				<li>
-					<a href="{:U('Team/add')}">
-						组建团队	
-					</a>
-				</li>
-			<?php endif ?>
-			<li>
-				<a href="{:U('Result/add')}">
-					发布科技成果	
-				</a>
-			</li>
-			<?php if (session('type') == 2): ?>
-				<li>
-					<a href="{:U('Demand/add')}">
-						发布企业需求	
-					</a>
-				</li>
-			<?php endif ?>
-		</ul>
-    </div>
+	<include file="Public/person_nav">
 	
 	<div id="body">
 		<!-- 显示个人成就 -->
@@ -165,7 +86,10 @@
 			</div>
 		</div>
 	</div>
+
     <include file="Public/footer" />
+    <script src="__PUBLIC__/js/personal_id_body.js"></script>
+
 	<script>
 		function del(obj) {
 			if(confirm("确定删除这条成就信息？")){
@@ -174,6 +98,12 @@
 				window.location.href="__URL__/del_award/id/"+id;
 			}
 		}
+
+		var hereNode = document.getElementById('my_research_result');
+	  	// 去除同级元素的被选中样式
+	   	hereNode.parentNode.childNodes.className = "";
+	    hereNode.className = "focus";
+
 	</script>
 </body>
 </html>

@@ -7,7 +7,7 @@
 
 	<link rel="stylesheet" href="__PUBLIC__/css/home/personal.css">
 	<style>
-		.link-main{
+		#body{
 		    width:800px;
 		    min-height: 500px;
 		    margin:0 auto;
@@ -68,7 +68,7 @@
 <body>
     <include file = "Public/person_nav" />
 	
-	<div class="link-main">
+	<div id="body">
 		<div class="line">
 			<span for="title">联系人</span>
 			<?php if ($linkInfo['type'] == 1): ?>
@@ -110,13 +110,17 @@
 		</div>		
 	</div>
 	<include file="Public/footer"/>
+    
+    <script src="__PUBLIC__/js/personal_id_body.js"></script>
 	
-	<script src="__PUBLIC__/js/jquery.min.js"></script>
 	<script>
-		$(function(){
-	        $('#personal_center').addClass('focus').siblings().removeClass('focus');
-	   });
 		
+		var hereNode = document.getElementById('personal_center');
+	  	// 去除同级元素的被选中样式
+	   	hereNode.parentNode.childNodes.className = "";
+	    hereNode.className = "focus";
+
+
 		function sub (argument) {
 			var id = document.getElementById('link_id').getAttribute("value");
 			if (argument == 1) {
