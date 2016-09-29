@@ -24,6 +24,7 @@
 		    width:400px;
 		    height:30px;
             line-height: 30px;
+            padding: 0 10px;
 		}
 		.sub{
 			width: 500px;
@@ -40,8 +41,27 @@
 		    background: #146FBD;
 		    color: #fff;
 		}
+		#addAward{
+            outline: none;
+            height: 30px;
+            width: 30px;
+            border: 1px solid #a9a9a9;
+            border-radius: 50%;
+            font-size: 20px;
+            background-color: transparent;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        #addAward:hover{
+            background-color: #a9a9a9;
+        }
+        .waring{
+        	width: 100%;
+        	text-align: center;
+        	color: red;
+        }
 	</style>
-	 <!-- [if IE lt 10] -->
+	 <!-- [if IE lt 9] -->
         <link rel="stylesheet" href="__PUBLIC__/css/home/ltIE8.css">
     <!-- [endif] -->
 </head>
@@ -54,16 +74,15 @@
                 <label for="research_name">研究名称</label>
                 <input class="line-input" type="text" id="research_name" readonly value="{$research.result_name}">
             </div>
-            <div class="line">
-                <label for="award_name">专利/奖励名称</label>
-                <input class="line-input" type="text" id="award_name" name="award_name" required >
-            </div>
-            <div class="line">
-                <label for="get_time">获得时间</label>
-                <input type="date" id="get_time" name="get_time" required >
+            <div class="line award">
+                <label>专利/奖励名称</label>
+                <input class="line-input" type="text" name="award_name[]" required > <button type="button" id="addAward">+</button><br>
+                <label>获得时间</label>
+                <input class="line-input" type="text" name="get_time[]" placeholder="2016-08-09" required ><p class="waring">格式'2015-06-09'</p>
             </div>
             <input type="hidden" name="id" value="{$research.result_id}">
             <input type="hidden" name="isteam" value="{$research.isteam}">
+            <input type="hidden" name="owner_id" value="{$research.owner_id}">
             <div class="sub">
             	<input type="submit" value="提交">
             </div>
@@ -73,11 +92,41 @@
 
     <include file="Public/footer"/>
     <script src="__PUBLIC__/js/personal_id_body.js"></script>
+    <script src="__PUBLIC__/js/jquery.min.js"></script>
 </body>
 <script>
-	var hereNode = document.getElementById('my_research_result');
-  	// 去除同级元素的被选中样式
-   	hereNode.parentNode.childNodes.className = "";
-    hereNode.className = "focus";
+
+    $(function(){
+    	$("#my_research_result").addClass('focue').siblings().removeClass('focus');
+
+    	$("#addAward").on('click', function(event) {
+    		event.preventDefault();
+    		/* Act on the event */
+    		// 获取最后一个部分的两个 input 的值，判断是否为空
+    		// 如果两个都不为空,可以添加新内容
+    		if( $('.award:last>input:eq(1)').val() != "" 
+    			&& $('.award:last>input:eq(1)').val() != ""){
+    			$(".award:last").after("<div class='line award'><label>专利/奖励名称</label> <input class='line-input' type='text' name='award_name[]'><br><label>获得时间</label> <input class='line-input' type='text' name='get_time[]'><p class='waring'></p></div>");
+    		}
+    	});
+
+    	$(".award").on('change', 'input:last', function(event) {
+    		event.preventDefault();
+    		$get_time = $(event.target);
+
+    		// 如果 输入内容，判断是否符合标准
+    		// 如果符合标准,设置边框颜色和提示语不显示
+    		if ($get_time.val() == "" || 
+    			/^\d{4}(-|\/)([01]?\d)(-|\/)(0?\d|[123]\d)/.test($get_time.val())) {
+    			
+    			$("input[type=submit]").show("400");
+    			$get_time.css('border-color', '#a9a9a9').next(".waring").text("");
+    		}
+    		else{
+    			$("input[type=submit]").hide("400");
+    			$get_time.css('border-color', 'red').next(".waring").text("请按格式'2015-06-09'填写");
+    		}
+    	});
+    });
 </script>
 </html>

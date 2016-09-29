@@ -471,7 +471,7 @@ class PersonalController extends Controller {
     public function addAward(){
         // 获取要添加 成就的研究成果信息
         $research['result_id'] = I('get.id');
-        $info = M('ResearchResult')->where($where)->field('result_id,result_name,isteam')->find();
+        $info = M('ResearchResult')->where($research)->field('result_id,owner_id,result_name,isteam')->find();
         $this->assign('research',$info);
         $this->display();
     }
@@ -480,16 +480,34 @@ class PersonalController extends Controller {
     * 处理添加数据
     */
     public function do_addAward(){
-        $info['isteam'] = I('post.isteam');
-        $info['research_id'] = I('post.id');
-        $info['award_title'] = I('post.award_name');
-        $info['get_time'] = I('post.get_time');
-        $result = M('Award')->data($info)->add();
+        $isteam = I('post.isteam');
+        $research_id = I('post.id');
+        $owner_id = I("post.owner_id");
+
+        $award_title = I('post.award_name');
+        $get_time = I('post.get_time');
+
+        $count = min(count($award_title),count($get_time));
+
+        for ($i=0; $i < $count; $i++) {
+            if($get_time[$i] == ""){
+                break;
+            }
+            $info[] = array(
+                    "award_owner"   =>  $owner_id,
+                    "research_id"   =>  $research_id,
+                    "isteam"        =>  $isteam,
+                    "award_title"   =>  $award_title[$i],
+                    "get_time"      =>  $get_time[$i]
+                );
+        }
+
+        $result = M('Award')->addAll($info);
         if($result){
-            $this->success("发布成功",U('Personal/my_award'));
+            $this->success("添加成功",U('Personal/my_research'));
         }
         else{
-            $this->error("发布失败，请稍后重试");
+            $this->error("添加失败，请稍后重试");
         }
     }
 
@@ -514,7 +532,7 @@ class PersonalController extends Controller {
             $this->success("修改成功");
         }
         else{
-            $this->error("修改失败，请稍后重试",U('Personal/my_award'));
+            $this->error("修改失败，请稍后重试",U('Personal/my_research'));
         }
     }
     /**
