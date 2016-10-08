@@ -46,9 +46,6 @@
         <div class="nav-tip" id="nav_expert">
             <a href="{:U('Team/teamlist')}">专家团队</a>
             <div class="nav-list">
-                 <p>
-                    <a href="{:U('Expert/expertlist')}">团队信息</a>
-                </p>
                 <p>
                     <a href="{:U('Expert/expertlist')}">专家信息</a>
                 </p>
@@ -123,12 +120,12 @@
     </div>
 </div>
 <script>
-    var login_btn = document.getElementById('login_bg');
-
     function showLogin() {
-        login_btn.className="login_show";
+        login_bg.style.top = "0";
+        login_container.style.top = "20%";
     }
     function hiddenLogin(){
-        login_btn.className="";
+        login_bg.style.top = "-100%";
+        login_container.style.top = "-100%";
     }
 </script>
