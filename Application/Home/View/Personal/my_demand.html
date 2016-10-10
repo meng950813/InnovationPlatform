@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- create by cm -->
+	<meta charset="UTF-8">
+	<title>个人中心——我的成果</title>
+	
+    <link rel="stylesheet" href="__PUBLIC__/css/home/personal.css">
+	<style>
+		.my_list{
+			margin-bottom: 20px;
+		}
+		.list{
+			height: 40px;
+			line-height: 40px;
+			border-bottom: 2px dotted #52A8DE;
+		}
+		.list >a{
+			float: right;
+			color: #1B8DEF;
+			padding: 0 20px;
+			margin: 0 10px;
+			background: #E4F1F9;
+			border-radius: 10px;
+		}
+		.list>a:hover{
+			background: #1B8DEF;
+			color: #fff;
+		}
+		.list a.free:hover{
+			color: #f00;
+		}
+		.name{
+			margin-left: 20px;
+		}
+		.name>a{
+			color: #101010;
+			display: inline-block;
+			max-width: 700px;
+			white-space: nowrap;
+		    overflow: hidden;
+		    text-overflow:ellipsis;
+		}
+		.name>a:hover{
+			color: #1B8DEF;
+		}
+	</style>
+	<!-- [if IE lt 9] -->
+        <link rel="stylesheet" href="__PUBLIC__/css/home/ltIE8.css">
+    <!-- [endif] -->
+</head>
+<body>
+    <include file = "Public/person_nav" />
+	
+	<div id="body">
+		<!-- 显示我的科研成果 -->
+		<img src="__PUBLIC__/images/my_demand.png" alt="">
+		<div class="my_list">
+			<volist id="my_demand" name="my_demand">
+				<div class="list">
+					<span class="name">
+						<a href="{:U('Demand/demand',array('id'=>$my_demand['demand_id'],'com'=>$my_demand['demand_com']))}">{$my_demand.title}</a>
+					</span>
+					<a href="{:U('Personal/modify_demand',array('id'=>$my_demand['demand_id']))}">修改信息</a>
+					<a href="javascript:void(0);" class="free" id="my_demand-{$my_demand.demand_id}" value="{$my_demand.demand_id}" onclick="del_demand(this)">删除需求</a>
+				</div>
+			</volist>
+			<?php if(!$my_demand):?>
+				<div class="list" style="overflow:hidden;">
+					<h3 style="float:left;">暂未发布需求</h3>
+					<a href="{:U('Demand/add')}">发布需求</a>
+				</div>
+			<?php endif?>
+		</div>
+	</div>
+    <include file="Public/footer" />
+    <script src="__PUBLIC__/js/personal_id_body.js"></script>
+    
+	<script>
+		var hereNode = document.getElementById('my_demand');
+	  	// 去除同级元素的被选中样式
+	   	hereNode.parentNode.childNodes.className = "";
+	    hereNode.className = "focus";
+
+
+		function del_demand(obj) {
+			if (confirm("确定删除这条需求吗?")) {
+				var id = document.getElementById(obj.id).getAttribute("value");
+				window.location.href="__URL__/del_demand/id/"+id;
+			}
+		}
+	</script>	
+</body>
+</html>

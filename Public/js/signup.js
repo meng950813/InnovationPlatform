@@ -8,6 +8,8 @@ $(function(){
         if(fileObj && fileObj.files && fileObj.files[0]){
             var path = windowURL.createObjectURL(fileObj.files[0]);
             $('#preview').attr('src',path);
+
+            $("#bottombox").removeClass("buttom_fixed");
         }else{
             console.log($file.val());
             var dataURL = $file.val();

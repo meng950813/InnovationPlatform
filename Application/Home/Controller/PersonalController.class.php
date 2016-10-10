@@ -185,6 +185,20 @@ class PersonalController extends Controller {
         }
     }
 
+    
+    /**
+    * 显示 我发布的所有需求
+    */
+    public function my_demand(){ 
+        if(session('type') == 2){
+            $Demand = M("Demand");
+            $where['demand_com'] = session('uid');
+            $list = $Demand->where($where)->order('sort desc')->select();
+            $this->assign("my_demand",$list);
+        }
+        $this->display();
+    }
+
     /**
     * 显示 与我有关的研究成果
     */
@@ -562,6 +576,68 @@ class PersonalController extends Controller {
         }
         else{
             $this->error("脱离失败，请稍后重试");
+        }
+    }
+
+     /**
+     * 显示修改需求界面
+     *
+     * @return [type] [description]
+     */
+    public function modify_demand(){
+        $where['demand_id'] = I('get.id');
+        $info = M('Demand')->where($where)->find();
+        $this->assign("info",$info);
+        $this->display();
+    }
+
+    /**
+     * 处理修改逻辑
+     *
+     * @return [type] [description]
+     */
+    public function do_modify_demand(){
+
+        $info['demand_id'] = $_POST['demand_id'];
+
+        $info['title'] = $_POST['demand_title'];
+        $info['total_info'] = I('post.total_info',"");
+        $info['tech_target'] = I('post.tech_target',"");
+        $info['other_info'] = I('post.other_info',"");
+        $info['publish_time'] = date('Y-m-d');
+        $info['end_time'] = I('post.end_time');
+
+        if(!empty(I('post.demand_type'))){
+            $demand_type = getResearchType(I('post.demand_type'));
+            $info['demand_type'] = $demand_type;
+        }
+
+        if (!empty($_FILES)) {//有图片上传
+            // 返回值不为null -> 上传成功
+            if(($result = uploadPicture($_FILES,'demand_logo'))){
+                $info['demand_logo'] = $result;
+            }
+        }
+        $result = M('Demand')->save($info);
+        if($result){
+            $this->success("信息修改成功",U('Personal/my_demand'));
+        }else{
+            $this->error("修改失败",U('Personal/my_demand'));
+        }
+        
+    }
+
+    /**
+    * 删除某条成果
+    */
+    public function del_demand(){
+        $where['demand_id'] = I('get.id');
+        $result = M('Demand')->where($where)->delete();
+        if($result){
+            $this->success("删除成功");
+        }
+        else{
+            $this->error("删除失败，请稍后重试");
         }
     }
 

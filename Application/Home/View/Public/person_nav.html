@@ -10,17 +10,27 @@
 <div id="nav">
 	<div id="nav_box">
 		<ul>
-			<li id="personal_center">
-				<a href="{:U('Personal/index')}">个人中心</a>
-			</li>
-			<?php if(session('uid') && session('type') == 1) :?>
+			<?php if(session('uid') && session('type') != 2) :?>
+				<li id="personal_center">
+					<a href="{:U('Personal/index')}">个人中心</a>
+				</li>
     			<li id="my_team">
     				<a href="{:U('Personal/my_team')}">我的团队</a>
     			</li>
-    		<?php endif?>
-			<li id="my_research_result">
+    			<li id="my_research_result">
 				<a href="{:U('Personal/my_research')}">我的成果</a>
 			</li>
+    		<?php else :?>
+    			<li id="personal_center">
+					<a href="{:U('Personal/index')}">企业中心</a>
+				</li>
+    			<li id="my_demand">
+    				<a href="{:U('Personal/my_demand')}">企业需求</a>
+    			</li>
+    			<li id="my_research_result">
+				<a href="{:U('Personal/my_research')}">企业成果</a>
+			</li>
+    		<?php endif?>
 			<li id="personal_info">
 				<a href="{:U('Personal/my_info')}">基本信息</a>
 			</li>

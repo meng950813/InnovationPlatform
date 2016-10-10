@@ -12,7 +12,7 @@
                <span style="font-size:16px;">欢迎你，</span>
                <span style="font-size:16px;color:#0749E2;"> <?php echo session('realname');?></span>  |
                 <a href="{:U('Personal/index')}" style="color:#0749E2;">
-                   个人中心 
+                   <?php echo session('type') == 2?"企业":"个人"; ?>中心 
                 </a>|
                 <a href="{:U('Public/logout')}">退出</a>
             <?php }?>

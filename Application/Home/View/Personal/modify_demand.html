@@ -3,8 +3,8 @@
 <head>
     <!-- create by cm -->
     <meta charset="UTF-8">
-    <title>个人中心——修改成果</title>
-
+    <title>个人中心——修改需求</title>
+    
     <link rel="stylesheet" href="__PUBLIC__/css/home/personal.css">
     <link rel="stylesheet" href="__PUBLIC__/css/home/signup.css">
 
@@ -13,50 +13,37 @@
     <!-- [endif] -->
 </head>
 <body>
-    <include file = "Public/person_nav" />
+    <include file="Public/person_nav" />
     
     <div class="main">
-        <form id="demand_form" action="{:U('Personal/do_modify_research')}" method="post" enctype="multipart/form-data">
+        <form id="demand_form" action="{:U('Personal/do_modify_demand')}" method="post" enctype="multipart/form-data">
             <div class="line">
-                <label for="research_title">课题名称 </label>
-                <input class="line-input" type="text" id="research_title" name="research_title" required value="{$info.result_name}">
+                <label for="demand_title">需求标题 </label>
+                <input class="line-input" type="text" id="demand_title" name="demand_title" value="{$info.title}">
             </div>
             <div class="line">
-                <label for="research_title">研究领域 </label>
-                <input class="line-input" type="text" readonly value="{$info.research_type}" >
+                <label for="demand_type">需求领域 </label>
+                <input class="line-input" type="text" readonly="readonly" value="{$info.demand_type}">
             </div>
             <div class="line">
-                <label for="research_type" style="float:left;">重新选择</label>
-                <input type="checkbox" name="research_type[]" value="1">结构工程
-                <input type="checkbox" name="research_type[]" value="2">市政工程
-                <input type="checkbox" name="research_type[]" value="3">防震减灾及防护工程<br/>
-                <input type="checkbox" name="research_type[]" value="4">桥梁与隧道公程
-                <input type="checkbox" name="research_type[]" value="5">岩土工程
-                <input type="checkbox" name="research_type[]" value="7">其他
+                <label for="demand_type" style="float:left;">重新选择</label>
+                <input type="checkbox" name="demand_type[]" value="1">结构工程
+                <input type="checkbox" name="demand_type[]" value="2">市政工程
+                <input type="checkbox" name="demand_type[]" value="3">防震减灾及防护工程<br/>
+                <input type="checkbox" name="demand_type[]" value="4">桥梁与隧道公程
+                <input type="checkbox" name="demand_type[]" value="5">岩土工程
+                <input type="checkbox" name="demand_type[]" value="7">其他
             </div>
             <div class="line">
-                <label for="end_time">完成日期 </label>
-                <input class="line-input" type="text" placeholder="计划完成年份，示例：2016" id="end_time" name="end_time" value="{$info.end_time}">
+                <label for="end_time">截止日期 </label>
+                <input class="line-input" type="text" placeholder="示例：2016-08-15" id="end_time" name="end_time" value="{$info.end_time}">
             </div>
             <div class="line" style="text-align:center">
-                <p>研究课题图片 (建议尺寸： 456 × 342 像素 仅限上传一张)</p>
+                <p>需求标题图片 (建议尺寸： 456 × 342 像素 仅限上传一张)</p>
                 <input type="file" name="img" id="logo" accept="image/*" />
                 <div class="upload">
-                    <img id="preview" src="__ROOT__/{$info.result_picture}" alt="">
+                    <img id="preview" src="__ROOT__/{$info.demand_logo}" alt="">
                 </div>
-            </div>
-             <div class="line">
-                <label for="research_level">课题级别 </label>
-                <select class="line-input" name="research_level" id="research_level">
-                    <option value="{$info.research_level}">{$info.research_level}</option>
-                    <option value="国家级项目">国家级项目</option>
-                    <option value="省级项目">省级项目</option>
-                    <option value="市级项目">市级项目</option>
-                    <option value="校级项目">校级项目</option>
-                    <option value="院级项目">院级项目</option>
-                    <option value="个人项目">个人项目</option>
-                    <option value="其他">其他</option>
-                </select>
             </div>
             <div class="line textarea">
                 <label for="totalInfo">综合介绍</label>
@@ -66,20 +53,24 @@
                 <label for="techTarget">技术指标</label>
                 <textarea name="tech_target" id="techTarget">{$info.tech_target}</textarea>
             </div>
-            <input type="hidden" name="id" value="{$info.result_id}">
+            <div class="line textarea">
+                <label for="otherInfo">其他介绍</label>
+                <textarea name="other_info" id="otherInfo">{$info.other_info}</textarea>
+            </div>
+            <input type="hidden" name="demand_id" value="{$info.demand_id}">
             <div class="sub" >
                 <input type="submit" value="提交" />
             </div>
         </form>
     </div>
- 
+
     <include file="Public/footer" />
-    <script src="__PUBLIC__/js/personal_calss_main.js"></script>
+    
+    <script src="__PUBLIC__/js/personal_class_main.js"></script>
     <script src="__PUBLIC__/js/jquery.min.js"></script>
     <script>
         $(function($){
-
-            $('#my_research_result').addClass('focus').siblings().removeClass('focus');
+            $('#my_demand').addClass('focus').siblings().removeClass("focus");
 
             $('#logo').change(function(event) {
                 event.preventDefault();
@@ -91,6 +82,7 @@
                     var path = windowURL.createObjectURL(fileObj.files[0]);
                     $('#preview').attr('src',path);
                     $("#bottombox").removeClass("buttom_fixed");
+
                 }else{
                     // console.log($file.val());
                     var dataURL = $file.val();
@@ -102,8 +94,8 @@
                     imgObj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
                 }
             });
+
         });
-        
     </script>
 </body>
 </html>
