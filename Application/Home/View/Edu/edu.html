@@ -47,7 +47,7 @@
         <div class="right_content">
             <div class="title">
                  <h2>{$info.title}</h2>
-                 <span>发布时间：{$info.publis_htime}</span>&nbsp;&nbsp;
+                 <span>发布时间：{$info.publish_time}</span>&nbsp;&nbsp;
                  <span>点击量：{$info.click}次</span>
             </div>
             <pre> {$info.content} </pre><!--显示内容-->
@@ -75,20 +75,13 @@
     </div>
     
     <include file="Public/footer"/>
+    <script src="__PUBLIC__/js/content_main.js"></script>
+
 </body>
 <script>
     
     var hereNode = document.getElementById('nav_edu');
     var childnode = hereNode.parentNode.childNodes.className = "nav-tip";
     hereNode.className = " nav-tip nav_active ";
-
-    (function(){
-        var bodyHeight = document.body.innerHeight;
-        var bottombox = document.getElementById('bottombox');
-        var contentHeight = document.getElementById('main').innerHeight;
-        if((bodyHeight-contentHeight-130)>60){
-            bottombox.className="buttom_fixed";
-        }
-    })();
 </script>
 </html>

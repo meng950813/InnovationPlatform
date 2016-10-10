@@ -41,14 +41,14 @@ class ClassicCaseController extends Controller {
         $info = $ClassicCase->where($where)->find();
 
         // 下一个
-        $next_info['type'] = $info['type'];
+        // $next_info['type'] = $info['type'];
         $next_info['case_id'] = array('gt',$info['case_id']);
         $next = $ClassicCase->order('case_id desc')->where($next_info)->field('case_id,case_title')->find();
         // 转变换行符
         
         // 上一个
         $next_info['case_id'] = array('lt',$info['case_id']);
-        $past = $ClassicCase->order('case_id desc')->where($next_info)->field('case_id,case_title')->find();
+        $past = $ClassicCase->order('case_id')->where($next_info)->field('case_id,case_title')->find();
 
         $this->assign('info',$info);
         $this->assign('next',$next);

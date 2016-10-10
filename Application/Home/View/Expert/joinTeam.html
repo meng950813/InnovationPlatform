@@ -20,17 +20,20 @@
 			margin-top:20px;
 		    margin-bottom:5px;
 		}
-		#teamname{
-			width: 300px;
-			height: 20px;
-			border: 2px solid #A9A9A9;
-			margin-left: 4px;
-			padding: 2px;
-		}
-		div>span{
+		div.line>span{
 		    width:100px;
 		    font-size:14px;
 		    display: inline-block;
+		}
+		#teamname{
+			width: 400px;
+			height: 30px;
+			line-height: 30px;
+			padding: 0 10px;
+		}
+		#tnameError{
+			color: red;
+			text-align: center;
 		}
 		.textarea{
 		    position: relative;
@@ -43,8 +46,9 @@
 		.textarea textarea{
 		    width:400px;
 		    height:120px;
-		    margin-left:108px;
-		    border-width: 2px;
+		    font-size: 16px;
+		    padding: 10px;
+		    margin-left:105px;
 		}
 		.sub{
 		    margin-top:10px;
@@ -69,43 +73,9 @@
 			<p align="center">注意：<span style="color:#e4393c;">只有团队创建人有权限邀请新成员</span></p>
 			<div class="line">
 				<span for="teamname">团队名</span>
-				<input type="text" id="teamname" name="teamname"><span id="tnameError" style="color:red;">*</span>
+				<input type="text" id="teamname" name="teamname" required="required"><b style="color:red;">*</b>
+				<p id="tnameError"></p>
 			</div>
-			<script>
-                $(function() {
-                    $('#teamname').change(function(event){
-                    	console.log("into change");
-                        if($('#teamname').val().trim() != ""){
-                            var teamname = $('#teamname').val();
-                            $.ajax({
-                                type:"post",
-                                url:"__ROOT__/index.php/Public/checkName",
-                                dataType:'json',
-                                data:{
-                                	teamname:teamname,
-                                	leader:<?php echo session('uid'); ?> 
-                                }
-                                })
-                            .done(function(data) {
-                                console.log("success",data);
-                                if(data.code == 0){
-                                    $('#tnameError').html("团队名不正确");
-                                }else{
-                                    $("#tnameError").html("*");
-                                }
-                            })
-                            .fail(function(XMLHttpRequest, textStatus, errorThrown){
-                                console.log("status = "+XMLHttpRequest.status);  // 200
-                                console.log("readyState = "+XMLHttpRequest.readyState); //4
-                                console.log("textStatus = "+textStatus);  //parsererror
-                            })
-                            .always(function() {
-                                console.log("complete");
-                            });
-                        }
-                    });
-                });
-            </script>
 			<div class="textarea">
 				<span for="content">邀请说明</span>
 				<textarea name="content" id="content"></textarea>
@@ -123,15 +93,50 @@
 	</div>
 	<include file="Public/footer"/>
 	<script src="__PUBLIC__/js/jquery.min.js"></script>
+	<script>
+        $(function() {
+            $('#teamname').change(function(event){
+            	console.log("into change");
+                if($('#teamname').val().trim() != ""){
+                    var teamname = $('#teamname').val();
+                    $.ajax({
+                        type:"post",
+                        url:"__ROOT__/index.php/Public/checkName",
+                        dataType:'json',
+                        data:{
+                        	teamname:teamname,
+                        	leader:<?php echo session('uid'); ?> 
+                        }
+                        })
+                    .done(function(data) {
+                        console.log("success",data);
+                        if(data.code == 0){
+                            $('#tnameError').html("团队名不正确或您不是该团队创始人");
+                        }else{
+                            $("#tnameError").html("");
+                        }
+                    })
+                    .fail(function(XMLHttpRequest, textStatus, errorThrown){
+                        // console.log("status = "+XMLHttpRequest.status);  // 200
+                        // console.log("readyState = "+XMLHttpRequest.readyState); //4
+                        // console.log("textStatus = "+textStatus);  //parsererror
+                    })
+                    .always(function() {
+                        // console.log("complete");
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 <script>
 	$(function(){
         $('#nav_expert').addClass('nav_active').siblings().removeClass('nav_active');
     });
 	(function(){
-	    var bodyHeight = document.body.innerHeight;
+	    var bodyHeight = document.body.clientHeight;
 	    var bottombox = document.getElementById('bottombox');
-	    var contentHeight = document.getElementsByClassName('link-main')[0].innerHeight;
+	    var contentHeight = document.getElementsByClassName('link-main')[0].clientHeight;
 	    if((bodyHeight-contentHeight-130)>60){
 	        bottombox.className="buttom_fixed";
 	    }

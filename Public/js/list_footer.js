@@ -6,7 +6,7 @@
     // console.log(banner);
     var contentHeight = document.getElementsByClassName('infolist-main')[0].clientHeight;
     // console.log(contentHeight);
-    if((bodyHeight-banner-contentHeight-130)>60){
+    if((bodyHeight-banner-contentHeight-130)>80){
         bottombox.className="buttom_fixed";
     }
 })();

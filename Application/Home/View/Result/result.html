@@ -7,23 +7,7 @@
 
     <link rel="stylesheet" href="__PUBLIC__/css/home/research.css">
     <link rel="stylesheet" href="__PUBLIC__/css/home/nav.css">
-    <style>
-        button.result_link{
-            background: #72CEDD;
-            color: #FAFDFD;
-            font-weight: 700;
-            border: 2px solid #0999B1;
-            border-radius: 5px;
-            padding: 5px 10px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-        button.result_link:hover{
-            background: #0F93A9;
-            color: white;
-        }
-    </style>
-    <!-- [if IE lt 10] -->
+    <!-- [if IE lt 8] -->
         <link rel="stylesheet" href="__PUBLIC__/css/home/ltIE8.css">
     <!-- [endif] -->
 </head>
@@ -181,7 +165,7 @@
                 <!-- 团队成果 -->
                 <?php if($resultInfo['isteam'] == 1):?>
                     <tr>
-                        <td class="tip">姓名</td>
+                        <td class="tip">姓名 isteam</td>
                         <td class="owner_info">{$ownerInfo.realname}</td>
                       
                         <td class="tip">办公电话</td>
@@ -202,7 +186,7 @@
                 <?php else: ?>
                     <?php if($title['type'] == 1):?>
                         <tr>
-                            <td class="tip">姓名</td>
+                            <td class="tip">姓名type == 1</td>
                             <td class="owner_info">{$title.realname}</td>
                           
                             <td class="tip">办公电话</td>

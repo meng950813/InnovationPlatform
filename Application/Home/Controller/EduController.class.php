@@ -57,16 +57,16 @@ class EduController extends Controller {
         $info = $Edu->where($where)->find();
 
         // 下一个
-        $next_info['type'] = $info['type'];
+        // $next_info['type'] = $info['type'];
         $next_info['edu_id'] = array('lt',$info['edu_id']);
-        $next = $Edu->where($next_info)->field('edu_id,title')->find();
+        $next = $Edu->order("edu_id desc")->where($next_info)->field('edu_id,title')->find();
         // 转变换行符
         // $next['content'] = replace_br($info['content']);
 
         // 上一个
-        $past_info['type'] = $info['type'];
+        // $past_info['type'] = $info['type'];
         $past_info['edu_id'] = array('gt',$info['edu_id']);
-        $past = $Edu->where($past_info)->field('edu_id,title')->find();
+        $past = $Edu->order("edu_id")->where($past_info)->field('edu_id,title')->find();
 
         $this->assign('info',$info);
         $this->assign('next',$next);

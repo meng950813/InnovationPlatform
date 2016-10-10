@@ -14,7 +14,7 @@ body{
     padding:10px 5px;
 }
 #position *{
-    color: grey;
+    color: #000;
 }
 .caption{
     background-color: #69e2f8;
@@ -75,9 +75,22 @@ h3{
     width: 490px;
     text-align: center;
 }
-.link_img img{
-    max-width: 200px;
+.link_img button.result_link{
+    margin-top: 10px;
+    padding: 10px 30px;
+    background: #72CEDD;
+    color: #FAFDFD;
+    font-weight: 700;
+    font-size: 20px;
+    border: 2px solid #0999B1;
+    border-radius: 5px;
+    cursor: pointer;
 }
+.link_img button.result_link:hover{
+    background: #0F93A9;
+    color: white;
+}
+
 
 .owner_info{
     width: 400px;

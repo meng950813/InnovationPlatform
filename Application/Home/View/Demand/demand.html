@@ -3,32 +3,17 @@
 <head>
     <!-- create by cm -->
     <meta charset="UTF-8">
+    <title>张家港工程项目协同创新服务平台</title>
     <link rel="stylesheet" href="__PUBLIC__/css/home/research.css">
     <link rel="stylesheet" href="__PUBLIC__/css/home/nav.css">
-    <!-- [if IE lt 10] -->
+    <!-- [if IE lt 9] -->
         <link rel="stylesheet" href="__PUBLIC__/css/home/ltIE8.css">
     <!-- [endif] -->
-    <title>张家港工程项目协同创新服务平台</title>
-    <style>
-        .link_img button{
-            background: #72CEDD;
-            color: #FAFDFD;
-            font-weight: 700;
-            border: 2px solid #0999B1;
-            border-radius: 5px;
-            padding: 5px 10px;
-            cursor: pointer;
-        }
-        .link_img button:hover{
-            background: #0F93A9;
-            color: white;
-        }
-    </style>
 </head>
 <body>
     <include file="Public/nav"/>
     <div class="main">
-        <div>
+        <div id="position">
             <img src="__PUBLIC__/images/download_06.png">
             <span>您的位置：</span>
             <a href="__ROOT__">首页</a>
@@ -77,11 +62,11 @@
                     <!-- <a href=""><img src="__PUBLIC/images/" alt="点击收藏"></a> -->
                     <?php if (session('uid')): ?>
                         <a href="{:U('Public/link',array('id'=>$demandInfo['demand_id'],'linkType'=>3))}" target="_black">
-                            <button>我要联系</button>
+                            <button class="result_link">我要联系</button>
                         </a>
                     <?php else: ?>
                         <a onclick="showLogin()" >
-                            <button>我要联系</button>
+                            <button class="result_link">我要联系</button>
                         </a>
                     <?php endif ?>
                    

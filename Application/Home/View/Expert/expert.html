@@ -34,19 +34,6 @@
             padding: 10px;
             vertical-align: middle;
         }
-        .link_img button{
-            background: #72CEDD;
-            color: #FAFDFD;
-            font-weight: 700;
-            border: 2px solid #0999B1;
-            border-radius: 5px;
-            padding: 5px 10px;
-            cursor: pointer;
-        }
-        .link_img button:hover{
-            background: #0F93A9;
-            color: white;
-        }
         .tip>a{
             color: #000;
         }
@@ -107,19 +94,19 @@
                     <!--我要联系  +邀请进入团队 -->
                     <?php if (session('uid')): ?>
                         <a href="{:U('Public/link',array('id'=> $expertInfo['id'],'linkType'=>1))}" target="_black">
-                            <button>我要联系</button>
+                            <button  class="result_link">我要联系</button>
                         </a>
                         <?php if (session('type') == 1): ?>
-                            <a href="{:U('Public/joinTeam',array('id'=>$expertInfo['uid']))}">
-                                <button>邀请加入团队</button>
+                            <a href="{:U('Expert/joinTeam',array('id'=>$expertInfo['uid']))}">
+                                <button  class="result_link">邀请加入团队</button>
                             </a>
                         <?php else: ?>
-                            <button onclick="waring()">邀请加入团队</button>
+                            <button onclick="waring()"  class="result_link">邀请加入团队</button>
                         <?php endif ?>
                     <?php else: ?>
                         <a onclick="showLogin()">
-                            <button>我要联系</button>
-                            <button>邀请加入团队</button>
+                            <button   class="result_link">我要联系</button>
+                            <button   class="result_link">邀请加入团队</button>
                         </a>
                     <?php endif ?>
                    

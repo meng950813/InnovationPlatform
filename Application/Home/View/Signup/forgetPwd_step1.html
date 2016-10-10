@@ -6,40 +6,7 @@
     <title>张家港工程项目协同创新服务平台</title>
 
     <link rel="stylesheet" href="__PUBLIC__/css/home/nav.css">
-    <style>
-        .main{
-            width:350px;
-            margin:0 auto;
-            margin-top: 30px;            
-        }
-        .line{
-            text-align:center;
-        }
-        label{
-            width:100px;
-            padding:5px 10px;
-            font-size:20px;
-            display:inline-block;
-        }
-        .line-input{
-            width:200px;
-            height:20px;
-        }
-        .next{
-            text-align:right;
-            font-size:16px;
-        }
-        a{
-            text-decoration: none;
-            color:black;
-            float:left;
-        }
-        .next input{
-            margin-right:20px;
-            margin-bottom:10px;
-            font-size:16px;
-        }
-    </style>
+    <link rel="stylesheet" href="__PUBLIC__/css/home/forgetPwd.css">
     <!-- [if IE lt 10] -->
         <link rel="stylesheet" href="__PUBLIC__/css/home/ltIE8.css">
     <!-- [endif] -->
@@ -59,7 +26,7 @@
             </div>
             <br>
             <div class="next">
-                <a href="{:U('Public/login')}">返回登录</a>
+                <a href="javascript:showLogin()" id="back">返回登录</a>
                 <input type="submit" value="下一步">
             </div>
         </div>

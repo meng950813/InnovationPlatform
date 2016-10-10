@@ -1,5 +1,5 @@
 /*  create by cm  */
-a, abbr, acronym, address, applet, article, aside, audio, b,body, 
+a, abbr, acronym, address, applet, article, aside, audio, b,body,button, 
 canvas, caption, cite, code,datalist, dd, del, details, dl, div, dt, 
 em, embed, fieldset,footer, form, 
 h1, h2, h3, h4, h5, h6, header, html, 
@@ -166,6 +166,8 @@ a{
     height: 45px;
     line-height: 45px;
     width: 135px;
+    margin: 0;
+    padding: 0;
     color: #fff;
 	font-size: 20px;
 	font-weight: bold;
@@ -174,6 +176,7 @@ a{
 	background-image: linear-gradient(to bottom,#5dc3fe,#0574c1);
 	border-radius: 5px;
 	cursor: pointer;
+
 }
 #signup-btn{
     display: inline-block;
