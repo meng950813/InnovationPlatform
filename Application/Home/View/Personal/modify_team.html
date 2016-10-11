@@ -109,8 +109,9 @@
             console.log("logo ");
             if(fileObj && fileObj.files && fileObj.files[0]){
                 var path = windowURL.createObjectURL(fileObj.files[0]);
-                console.log(path);
+                // console.log(path);
                 $('#preview').attr('src',path);
+                $("#bottombox").removeClass("bottom_fixed");
             }else{
                 console.log($file.val());
                 var dataURL = $file.val();

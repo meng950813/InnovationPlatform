@@ -143,7 +143,7 @@
 					<input type="email" class="line-input" id="email" name="email" value="{$basicInfo.email}">
 				</div>
 				<div class="sub" style="width:420px; margin-top:20px;">
-					<input type="submit" value="确认修改">
+					<input type="submit" id="modify_sub" value="确认修改">
 				</div>
 			</form>
 			
@@ -222,7 +222,7 @@
 	    	}
 	    });
 
-	    $('#pwd3').change(function(event){
+	    $('#pwd3').blur(function(event){
 	        if($('#pwd2').val() == $('#pwd3').val()){
 	            $('#pwdError').html("");
 	        }else{
@@ -230,11 +230,13 @@
 	        }
 	    });
 
-	    $('#phone').change(function(event){
+	    $('#phone').blur(function(event){
 	        if(/^\d{11}$/.test($('#phone').val())){
 	            $('#phoneError').html('*');
+	            $("#modify_sub").show("normal");
 	        }else{
 	            $('#phoneError').html('手机号码格式错误');
+	            $("#modify_sub").hidden("normal");
 	        }
 	    });
 	    $('.verfiy').on('click', function(event) {
