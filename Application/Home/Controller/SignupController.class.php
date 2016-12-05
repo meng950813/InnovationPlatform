@@ -53,7 +53,7 @@ class SignupController extends Controller {
 			$where['username'] = $loginInfo['username'];
 			$uid = M('Login')->where($where)->getField('id');
 			session('uid',$uid);
-			session('type',2);
+			session('type',1);
 			session('realname',$loginInfo['realname']);
 			
 			$expertInfo['uid'] = $uid;

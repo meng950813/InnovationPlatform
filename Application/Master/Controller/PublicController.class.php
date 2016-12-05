@@ -23,9 +23,11 @@ class PublicController extends Controller {
 		}
 		echo json_encode($pic);
 	}
+
 	public function login(){
 		$this->display();
 	}
+	
 	public function dologin(){
 		$info['master_name'] = I('post.name');
 		$info['master_pwd'] = md5(I('post.pass'));

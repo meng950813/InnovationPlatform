@@ -1,0 +1,63 @@
+.info-list{
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+.info-list>img{
+    float: left; 
+    max-width:120px;
+    max-height: 160px; 
+}
+.team-info{
+    float: left; 
+    margin-top: 10px;
+}
+.team-info *{
+    vertical-align: middle;
+}
+.team-info h4{
+    margin: 5px;
+}
+.control-title-width{
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow:ellipsis;
+}
+h4 a{
+    max-width: 465px;
+}
+h4 a:hover{
+    color: #e4393c;
+}
+.team-info span{
+    max-width: 440px;
+}
+p{
+    font-size: 14px;
+    margin: 5px;
+}
+.other-info{
+    float: right;
+    margin-top: 10px;
+}
+ button{
+    background: #72CEDD;
+    color: #FAFDFD;
+    font-weight: 700;
+    border: 2px solid #0999B1;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+button:hover{
+    background: #0F93A9;
+    color: white;
+}
+div.add{
+    text-align: center;
+}
+div.add img{
+    width: 200px;
+    height: 44px;
+}

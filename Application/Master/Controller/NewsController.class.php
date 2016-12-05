@@ -71,8 +71,7 @@ class NewsController extends MasterController {
 		// 获取当前日期
 		$news['publish_time'] = date('Y-m-d');
 		/* 获取当前时间 */
-	    $news['sort'] = date('Y-m-d H:i:s',time());
-
+	  $news['sort'] = date('Y-m-d H:i:s',time());
 
 		// 传值有id ，修改数据
 		if(!empty(I('post.news_id'))){
@@ -81,27 +80,28 @@ class NewsController extends MasterController {
 			$NewsPicture =  M('NewsPicture');
 
 			if (!empty($_FILES)) {//有图片上传
-	            // 返回值不为null -> 上传成功
-	            if(($result = newsPicture($_FILES,'news_picture',300,200))){
-	            	$picture['news_id'] = $news['news_id'];
+        // 返回值不为null -> 上传成功
+        if(($result = newsPicture($_FILES,'news_picture',300,200))){
 
-	            	/* 判断之前是否已有图片 */
-	            	if($NewsPicture->where($picture)->find()){
-	            		/* 上传过图片，更新 */
-	            		$pictureInfo['picture'] = $result;
-	            		
-	                	$pictureResult = $NewsPicture->where($picture)->data($pictureInfo)->save();
-	            	}
-	            	else{
-	            		/* 没上传过，添加 */
-	            		$picture['picture'] = $result;
-	                	$pictureResult = $NewsPicture->data($picture)->add();
-	            	}
-	                if(!$pictureResult){
-	                	$this->error("图片上传失败，请稍后重试");
-	                }
-	            }
+        	$picture['news_id'] = $news['news_id'];
+
+        	/* 判断之前是否已有图片 */
+        	if($NewsPicture->where($picture)->find()){
+        		/* 上传过图片，更新 */
+        		$pictureInfo['picture'] = $result;
+        		
+            $pictureResult = $NewsPicture->where($picture)->data($pictureInfo)->save();
         	}
+        	else{
+        		/* 没上传过，添加 */
+        		$picture['picture'] = $result;
+            	$pictureResult = $NewsPicture->data($picture)->add();
+        	}
+          if(!$pictureResult){
+          	$this->error("图片上传失败，请稍后重试");
+          }
+        }
+    	}
 
 			$result = M('News')->data($news)->save();
 			/* 修改内容或修改图片成功一个，即显示修改成功 */
@@ -115,30 +115,32 @@ class NewsController extends MasterController {
 		// 添加数据
 		else{
 			if(!empty($news['type']) || $news['type'] == 0){
+				$news_id = M('News')->data($news)->add();
 
-				if (!empty($_FILES)) {//有图片上传
-		            // 返回值不为null -> 上传成功
-		            if(($result = newsPicture($_FILES,'news_picture',300,200))){
-		            	$picture['news_id'] = $news['news_id'];
-		                $picture['picture'] = $result;
-		                $pictureResult = M('NewsPicture')->data($picture)->add();
-		                if(!$pictureResult){
-		                	$this->error("图片上传失败，请稍后重试");
-		                }
-		            }
-	        	}
+				if($news_id){
+					if (!empty($_FILES)) {//有图片上传
+	          // 返回值不为null -> 上传成功
+	          if(($result = newsPicture($_FILES,'news_picture',300,200))){
 
-				$result = M('News')->data($news)->add();
-				if($result){
-					($news['type'] == 0)&&($news['type'] = 3);
-					$this->success("发布成功",U('Master/News/news_list/type/'.$news['type']));
+	          	$picture['news_id'] = $news_id;
+
+	            $picture['picture'] = $result;
+	            
+	            $pictureResult = M('NewsPicture')->data($picture)->add();
+	            if(!$pictureResult){
+	            	$this->error("图片上传失败，请稍后重试");
+	            }
+	          }
+	      	}
+
+					$this->success("发布成功",U('Master/News/news_list'));
 				}
 				else{
 					$this->error("发布失败，请稍后重试");
 				}
 			}
 			else{
-				$this->error("请选择类型");
+				$this->error("请选择资讯类型");
 			}
 		}
 		

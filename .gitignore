@@ -2,3 +2,5 @@
 
 /Uploads/*
 .svn
+innovation_platform.sql
+config.yaml
